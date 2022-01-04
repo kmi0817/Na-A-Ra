@@ -9,19 +9,23 @@ const server = app.listen(3000, () => {
     // port: 3000 app success
     console.log("localhost:3000 OK");
 })
+
 // views (HTML)
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
+
 // routes
 app.get("/", (req, res) => {
     // req.query 객체에 input 내용 있음
-    var sido = req.query.sidoCdNm;
-    if (sido) {
+    var emdong = req.query.emdong;
+    console.log(`emdong: ${emdong}`);
+    
+    if (typeof emdong != "undefined") {
         var url = 'http://apis.data.go.kr/B551182/hospInfoService1/getHospBasisList1';
         const myServiceKey = "JtIV8PCzx8%2BLWnp%2F07kxb%2FL4%2Fglq9W6WGZN2AQwOBG%2B9fIRQEA%2F12X%2F2ONTYaEFLDPxdBzqz1CWa6%2FRDwcMxRA%3D%3D";
         var queryParams = '?' + encodeURIComponent('serviceKey') + '='  + myServiceKey; /* Service Key*/
-        queryParams += '&' + encodeURIComponent('sidoCdNm') + '=' + encodeURIComponent(sido);
+        queryParams += '&' + encodeURIComponent('emdongNm') + '=' + encodeURIComponent(emdong);
 
         res_list = []
         request({
@@ -44,11 +48,17 @@ app.get("/", (req, res) => {
                     "좌표": [hospital["XPos"], hospital["YPos"]]
                 })
             });
-    
-            res.send(JSON.stringify(res_list, null, 4));
+            console.log(res_list);
+            res.render("index.ejs", {"data": res_list}, (err, html) => {
+                if (err) {
+                    console.error(err);
+                } else {
+                    res.end(html);
+                }
+            })
+            // res.send(JSON.stringify(res_list, null, 4));
         }
         );
-        res.send(JSON.stringify(res_list, null, 4));
     } else {
         res.render("index.html");
     }

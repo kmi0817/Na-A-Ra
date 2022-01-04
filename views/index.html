@@ -8,19 +8,55 @@
 
     <style>
         body {
-            max-width: 500px;
+            width: 60%;
+            min-width: 750px;
             margin: 0 auto;
             background-color: aliceblue;
+            color: rgb(63, 63, 63);
         }
         a {
             text-decoration: none;
-            color: black;
+            color: rgb(63, 63, 63);
+        }
+        #search_input {
+            width: 80%;
+            height: 23px;
+        }
+        .btn {
+            background-color: white;
+            border: 1px solid gray;
+            padding: 5px;
+            width: 70px;
+            font-weight: 600;
         }
         .search_result {
             border: 1px solid gray;
-            max-width: 500px;
+            width: 100%;
             min-height: 300px;
-            margin-top: 10px;
+            margin: 10px 0;
+            background-color: white;
+            font-size: 13px;
+        }
+        .hospital_table {
+            border: 1px solid gray;
+            border-collapse: collapse;
+            width: 100%;
+            min-width: 500px;
+        }
+        .hospital_table tr {
+            border: 1px solid gray;
+            height: 50px;
+        }
+        .hospital_table .index {
+            width: 30px;
+        }
+        .hospital_table .name {
+            width: 200px;
+            border-right: 1px solid gray;
+            border-left: 1px solid gray;
+        }
+        .hospihospital_tabletal .addr {
+            width: auto;
         }
     </style>
 </head>
@@ -33,12 +69,13 @@
     </ul>
 
     <form method="GET" action="/">
-        <input type="text" name="emdong" id="emdong" placeholder="시도명을 입력하세요." required>
-        <input type="submit" value="검색">
+        <input type="text" name="emdong" id="search_input" placeholder="읍/면/동을 입력하세요." required>
+        <input type="submit" class="btn" value="검색">
     </form>
 
     <div class="search_result">
-
+        <table class="hospital_table">
+        </table>
     </div>
 </body>
 

@@ -19,7 +19,6 @@ app.engine("html", require("ejs").renderFile);
 app.get("/", (req, res) => {
     // req.query 객체에 input 내용 있음
     var search_type = req.query.search_type;
-    console.log(search_type);
     if (typeof search_type == "undefined") {
         res.render("index.html");
     } else {

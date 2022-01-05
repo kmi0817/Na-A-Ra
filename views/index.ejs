@@ -61,7 +61,11 @@
     </ul>
 
     <form method="GET" action="/">
-        <input type="text" name="emdong" id="search_input" placeholder="읍/면/동을 입력하세요." required>
+        <select name="search_type">
+            <option value="yadmNm">병원명</option>
+            <option value="emdongNm">읍/면/동</option>
+        </select>
+        <input type="text" name="seacrh_input" id="search_input" placeholder="읍/면/동을 입력하세요." required>
         <input type="submit" class="btn" value="검색">
     </form>
 

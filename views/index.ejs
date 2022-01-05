@@ -74,7 +74,7 @@
         <% for(var i = 0; i < data.length; i++) { %>
                 <tr>
                     <td class="index"><%= data[i].인덱스 %></td>
-                    <td class="name"><%= data[i].병원명 %></td>
+                    <td class="name"><%= data[i].병원명 %> (<%= data[i].종별코드명 %>)</td>
                     <td class="addr" colspan="2"><%= data[i].주소 %></td>
                 </tr>
         <% } %>

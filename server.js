@@ -2,6 +2,7 @@ const express = require("express");
 const request = require("request");
 const mypageRouter = require('./routes/mypage');
 const adminRouter = require("./routes/admin");
+const Hospitals = require("./models/hospitals");
 const methodOverride = require("method-override");
 const app = express();
 
@@ -14,49 +15,18 @@ app.use(methodOverride('_method'));
 app.engine("html", require("ejs").renderFile);
 
 // routes
-app.get("/", (req, res) => {
-    var search_type = req.query.search_type; // req.query Object has "input"
-    if (typeof search_type == "undefined") {
-        res.render("index", {"results": ""});
+app.get("/", async (req, res) => {
+    var seacrh_input = req.query.seacrh_input; // req.query Object has "input"
+
+    if (typeof seacrh_input == "undefined") {
+        res.render("index", { results: "" });
     } else {
-        var url = 'http://apis.data.go.kr/B551182/hospInfoService1/getHospBasisList1';
-        const myServiceKey = "JtIV8PCzx8%2BLWnp%2F07kxb%2FL4%2Fglq9W6WGZN2AQwOBG%2B9fIRQEA%2F12X%2F2ONTYaEFLDPxdBzqz1CWa6%2FRDwcMxRA%3D%3D";
-        var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + myServiceKey; /* Service Key*/
-        queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('5');
-        
-        var seacrh_input = req.query.seacrh_input;
-
-        if (search_type == "yadmNm") {
-            queryParams += '&' + encodeURIComponent('yadmNm') + '=' + encodeURIComponent(seacrh_input);
-        } else if (search_type == "emdongNm") {
-            queryParams += '&' + encodeURIComponent('emdongNm') + '=' + encodeURIComponent(seacrh_input);
+        const results = await Hospitals.find({ name : seacrh_input }).exec();
+        if (results.length === 0) {
+            res.render("index", { results: "검색 결과가 없습니다." });
+        } else {
+            res.render("index", { results: results });
         }
-
-        request({
-                // 응답표준은 XML이며, JSON을 요청할 경우 “&_type=json”을 추가하여 요청합니다.
-                url: url + queryParams + "&_type=json",
-                method: "GET"
-            }, (err, response, body) => {
-                parsed_body = JSON.parse(body);
-                hospitals_list = parsed_body["response"]["body"]["items"]["item"];
-
-                search_result = [];
-                hospitals_list.forEach((hospital, index) => {
-                    search_result.push({
-                        "index": index + 1,
-                        "name": hospital["yadmNm"],
-                        "addr": hospital["addr"],
-                        "code": hospital["clCdNm"],
-                        "tel": hospital["telno"],
-                        "cnt_doctor": hospital["drTotCnt"],
-                        "coord": [hospital["XPos"], hospital["YPos"]]
-                    })
-                });
-
-                res.render("index", {"results": search_result});
-
-            }
-        );
     }
 });
 
@@ -80,6 +50,7 @@ app.get("/openapi", (req, res) => {
         hospitals_list.forEach((hospital, index) => {
             res_list.push({
                 "인덱스": index,
+                "emdongNm": hospital["emdongNm"],
                 "병원명": hospital["yadmNm"],
                 "주소": hospital["addr"],
                 "종별코드명": hospital["clCdNm"],

@@ -3,86 +3,77 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- <link rel="stylesheet" href="views/style.css"> -->
-    <title>나아라</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>admin</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <style>
-        body {
-            width: 60%;
-            min-width: 750px;
-            margin: 0 auto;
-            background-color: aliceblue;
-            color: rgb(63, 63, 63);
-        }
         a {
             text-decoration: none;
             color: rgb(63, 63, 63);
-        }
-        #search_input {
-            width: 80%;
-            height: 23px;
-        }
-        .btn {
-            background-color: white;
-            border: 1px solid gray;
-            padding: 5px;
-            width: 70px;
-            font-weight: 600;
-        }
-        .hospital_table {
-            border: 1px solid gray;
-            border-collapse: collapse;
-            width: 100%;
-            min-width: 500px;
-            min-height: 300px;
-            background-color: white;
-        }
-        .hospital_table tr {
-            border: 1px solid gray;
-            height: 50px;
-        }
-        .hospital_table .index {
-            width: 30px;
-        }
-        .hospital_table .name {
-            width: 200px;
-            border-right: 1px solid gray;
-            border-left: 1px solid gray;
-        }
-        .hospihospital_tabletal .addr {
-            width: auto;
         }
     </style>
 </head>
 
 <body>
-    <h3><a href="/">나아라</a></h3>
-    <hr>
-    <ul>
-        <li><a href="/openapi">건강보험심사평가원 OpenAPI</a></li>
-    </ul>
+    <div class="container">
+        <h2 class="mb-4"><a href="/">나아라</a></h2>
 
-    <form method="GET" action="/">
-        <select name="search_type">
-            <option value="emdongNm">읍/면/동</option>
-            <option value="yadmNm">병원명</option>
-        </select>
-        <input type="text" name="seacrh_input" id="search_input" placeholder="읍/면/동을 입력하세요." required>
-        <input type="submit" class="btn" value="검색">
-    </form>
+        <a href="/" class="btn btn-dark">로그인</a>
+        <a href="/" class="btn btn-outline-dark">회원가입</a>
+        <a href="/openapi" class="btn btn-light">건강보험심사평가원 OpenAPI</a>
 
-    <div class="search_result">
-        <table class="hospital_table">
-            <% if (results) { %>
-                <% for(var i = 0; i < results.length; i++) { %>
-                    <tr>
-                        <td class="index"><%= results[i].index %></td>
-                        <td class="name"><%= results[i].name %> (<%= results[i].code %>)</td>
-                        <td class="addr" colspan="2"><%= results[i].addr %></td>
-                    </tr>
-                <% } %>
-            <% } %>
-        </table>
+        <div class="card mt-4">
+            <div class="card-body">
+                <form action="" method="GET">
+                    <!-- <div class="form-group">
+                        <select name="search_type">
+                            <option value="name">병원명</option>
+                        </select>
+                    </div> -->
+                    <div class="form-group">
+                        <button type="submit" class="d-inline btn btn-info">검색</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="search_input">병원이름</label>
+                        <input required value="<%= results.title %>" type="text" name="seacrh_input" id="seacrh_input" class="form-control">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <% if (results) { %>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <% if (Array.isArray(results)) { %>
+                        <% results.forEach((result) => { %>
+                            <div class="row">
+                                <h4 class="col-md-8 card-title"><%= result.name %></h4>
+                                <a href="/admin/hospitals/<%= result._id %>" class="col-md-4 btn btn-outline-primary">자세히 보기</a>
+                            </div>
+                        
+                            <div class="card-subtitle text-muted mb-2">
+                                <%= result.type_code %>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 card-text mb-2">
+                                    주소: <%= result.addr %>
+                                </div>
+                                <div class="col-md-4 card-text mb-2">
+                                    번호: <%= result.telno %>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="card-text mb-2">
+                            <h4>일치하는 검색 결과가 없습니다.</h4>
+                        </div>
+                    <% } %>
+                </div>
+            </div>                
+        <% } %>
     </div>
 </body>
 

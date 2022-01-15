@@ -23,7 +23,10 @@
                         <%= result.createdAt.toLocaleDateString() %>
                     </div>
                     <div class="card-text mb-2"><%= result.description %></div>
-                    <a href="/mypage/pages/<%= result.slug %>" class="btn btn-primary">Read More</a>
+                    <a href="/mypage/show/<%= result.slug %>" class="btn btn-primary">Read More</a>
+                    <form action="/mypage/del/<%= result.id %>?_method=DELETE" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </div>
             </div>
         <% }) %>

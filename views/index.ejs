@@ -34,6 +34,8 @@
             border-collapse: collapse;
             width: 100%;
             min-width: 500px;
+            min-height: 300px;
+            background-color: white;
         }
         .hospital_table tr {
             border: 1px solid gray;
@@ -62,8 +64,8 @@
 
     <form method="GET" action="/">
         <select name="search_type">
-            <option value="yadmNm">병원명</option>
             <option value="emdongNm">읍/면/동</option>
+            <option value="yadmNm">병원명</option>
         </select>
         <input type="text" name="seacrh_input" id="search_input" placeholder="읍/면/동을 입력하세요." required>
         <input type="submit" class="btn" value="검색">
@@ -71,13 +73,15 @@
 
     <div class="search_result">
         <table class="hospital_table">
-        <% for(var i = 0; i < data.length; i++) { %>
-                <tr>
-                    <td class="index"><%= data[i].인덱스 %></td>
-                    <td class="name"><%= data[i].병원명 %> (<%= data[i].종별코드명 %>)</td>
-                    <td class="addr" colspan="2"><%= data[i].주소 %></td>
-                </tr>
-        <% } %>
+            <% if (results) { %>
+                <% for(var i = 0; i < results.length; i++) { %>
+                    <tr>
+                        <td class="index"><%= results[i].index %></td>
+                        <td class="name"><%= results[i].name %> (<%= results[i].code %>)</td>
+                        <td class="addr" colspan="2"><%= results[i].addr %></td>
+                    </tr>
+                <% } %>
+            <% } %>
         </table>
     </div>
 </body>

@@ -1,6 +1,7 @@
 const express = require("express");
 const request = require("request");
 const mypageRouter = require('./routes/mypage');
+const adminRouter = require("./routes/admin");
 const methodOverride = require("method-override");
 const app = express();
 
@@ -97,6 +98,7 @@ app.get("/openapi", (req, res) => {
 
 
 app.use('/mypage', mypageRouter);
+app.use("/admin", adminRouter);
 
 // web server
 const server = app.listen(3000, () => {

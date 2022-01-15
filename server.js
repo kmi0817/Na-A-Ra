@@ -1,6 +1,7 @@
 const express = require("express");
 const request = require("request");
 const mypageRouter = require('./routes/mypage');
+const methodOverride = require("method-override");
 const app = express();
 
 app.use(express.urlencoded({ extended: false })); // enable to use req.body.(input field)
@@ -8,6 +9,7 @@ app.use(express.urlencoded({ extended: false })); // enable to use req.body.(inp
 // views engine (convert ejs code to HTML)
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
+app.use(methodOverride('_method'));
 app.engine("html", require("ejs").renderFile);
 
 // routes

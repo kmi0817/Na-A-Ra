@@ -3,7 +3,7 @@ const request = require("request");
 const mypageRouter = require('./routes/mypage');
 const app = express();
 
-app.use('/mypage', mypageRouter)
+app.use(express.urlencoded({ extended: false })); // enable to use req.body.(input field)
 
 // views engine (convert ejs code to HTML)
 app.set("views", __dirname + "/views");
@@ -92,6 +92,9 @@ app.get("/openapi", (req, res) => {
     }
     );
 });
+
+
+app.use('/mypage', mypageRouter);
 
 // web server
 const server = app.listen(3000, () => {

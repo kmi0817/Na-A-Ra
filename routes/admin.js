@@ -14,30 +14,26 @@ router.get("/", (req, res) => {
 });
 
 router.get("/hospitals", async (req, res) => {
-    // res.send("hospital data from DB");
-    const _url = 'http://apis.data.go.kr/B551182/hospInfoService1/getHospBasisList1';
-    const myServiceKey = "JtIV8PCzx8%2BLWnp%2F07kxb%2FL4%2Fglq9W6WGZN2AQwOBG%2B9fIRQEA%2F12X%2F2ONTYaEFLDPxdBzqz1CWa6%2FRDwcMxRA%3D%3D";
-    let queryParams = '?' + encodeURIComponent('serviceKey') + '='  + myServiceKey;
-    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('2');
-    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('5');
-    queryParams += "&_type=json"; // To change XML (default response data type) to JSON, append "&_type=json"
+    const results = await Hospitals.find();
+    res.render("admin/hospitals", { results: results });
+});
 
-    const options = {
-        url: _url + queryParams,
-        method: "GET"
-    }
+router.get("/hospitals/:id", async(req, res) => {
+    const results = await Hospitals.findOne({ _id: req.params.id });
+    if (results == null)
+        res.redirect("/admin");
 
-    const response = await request(options);
-    const results = JSON.parse(response)["response"]["body"]["items"]["item"]
-    
-    results.forEach((result) => {
-        console.log(result);
-    })
+    res.render("admin/hospital", { results: results });
+});
 
-    res.send(JSON.stringify(results, null, 4));
+router.delete("/hospitals/:id", async(req, res) => {
+    await Hospitals.findByIdAndDelete({ _id: req.params.id });
+    res.redirect("/admin/hospitals");
 });
 
 router.post("/hospitals", async (req, res) => {
+    await Hospitals.deleteMany({});
+
     const _url = 'http://apis.data.go.kr/B551182/hospInfoService1/getHospBasisList1';
     const myServiceKey = "JtIV8PCzx8%2BLWnp%2F07kxb%2FL4%2Fglq9W6WGZN2AQwOBG%2B9fIRQEA%2F12X%2F2ONTYaEFLDPxdBzqz1CWa6%2FRDwcMxRA%3D%3D";
     let queryParams = '?' + encodeURIComponent('serviceKey') + '='  + myServiceKey;
@@ -85,7 +81,7 @@ router.post("/hospitals", async (req, res) => {
             console.log("DB 저장 문제: " + error);
         }
     });
-    res.redirect("/admin");
+    res.redirect("/admin/hospitals");
 });
 
 module.exports = router

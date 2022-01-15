@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const mypage = require("./../models/mypage");
 const Article = require("./../models/mypage");
 const router = express.Router();
 
@@ -15,7 +14,7 @@ router.get("/", async (req, res) => {
     res.render("mypage/mypage", { results: results});
 });
 
-router.get("/pages/:slug", async (req, res) => {
+router.get("/show/:slug", async (req, res) => {
     const result = await Article.findOne({ slug: req.params.slug });
     if (result == null)
         res.redirect('/');
@@ -33,15 +32,18 @@ router.post("/process-write", async (req, res) => {
         description: req.body.description,
         markdown: req.body.markdown
     });
-    console.log(result);
     try {
         result = await result.save();
         console.log(result.id);
-        res.redirect(`/mypage/pages/${result.slug}`);
+        res.redirect(`/mypage/show/${result.slug}`);
     } catch (err) {
-        console.log(err);
         res.render('mypage/write', { results: result});
     }
+});
+
+router.delete("/del/:id", async (req, res) => {
+    await Article.findByIdAndDelete(req.params.id);
+    res.redirect("/mypage");
 });
 
 module.exports = router

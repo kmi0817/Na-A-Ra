@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const marked = require("marked");
+const slugify = require("slugify");
 
 const mypageSchema = new mongoose.Schema({
     title: {
@@ -15,7 +17,20 @@ const mypageSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: new Date
+    },
+    slug: {
+        type: String,
+        required: true,
+        unique: true
     }
+});
+
+mypageSchema.pre('validate', function(next) {
+    if (this.title) {
+        this.slug = slugify(this.title, {lower:true, strict: true });
+    }
+
+    next();
 });
 
 module.exports = mongoose.model('Mypage', mypageSchema);

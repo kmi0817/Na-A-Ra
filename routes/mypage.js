@@ -15,8 +15,8 @@ router.get("/", async (req, res) => {
     res.render("mypage/mypage", { results: results});
 });
 
-router.get("/pages/:id", async (req, res) => {
-    const result = await Article.findById(req.params.id);
+router.get("/pages/:slug", async (req, res) => {
+    const result = await Article.findOne({ slug: req.params.slug });
     if (result == null)
         res.redirect('/');
 
@@ -33,12 +33,13 @@ router.post("/process-write", async (req, res) => {
         description: req.body.description,
         markdown: req.body.markdown
     });
-
+    console.log(result);
     try {
         result = await result.save();
         console.log(result.id);
-        res.redirect(`/mypage/pages/${result.id}`);
+        res.redirect(`/mypage/pages/${result.slug}`);
     } catch (err) {
+        console.log(err);
         res.render('mypage/write', { results: result});
     }
 });

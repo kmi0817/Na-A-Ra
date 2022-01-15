@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>admin</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="mb-4"><a href="/admin">Admin</a></h2>
+        <a href="/" class="btn btn-dark">메인 페이지</a>
+        <a href="/admin/hospitals" class="btn btn-info">데이터베이스</a>
+        <form action="/admin/hospitals" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">Open API Reload</button>
+        </form>
+
+        <% results.forEach((result) => { %>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4 class="card-title"><%= result.name %></h4>
+                    <div class="card-subtitle text-muted mb-2">
+                        <span><%= result.type_code %></span>
+                        <span><%= result.hospUrl %></span>
+                    </div>
+                    <div class="card-text mb-2"><%= result.addr %></div>
+                    <a href="/admin/hospitals/<%= result._id %>" class="btn btn-outline-primary">자세히 보기</a>
+                    <!-- <a href="/admin/hospitals/<%= result._id %>" class="btn btn-outline-info">수정</a> -->
+                    <form action="/admin/hospitals/<%= result._id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="if(!confirm('해당 병원 데이터를 삭제하시겠습니까?')){return false;}">
+                        <button type="submit" class="btn btn-outline-danger">삭제</button>
+                    </form>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</body>
+
+</html>

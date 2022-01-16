@@ -18,6 +18,7 @@
         <form action="/admin/hospitals" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
             <button type="submit" class="btn btn-danger">Open API Reload</button>
         </form>
+        <a href="/admin/json" class="btn btn-primary">JSON 형태로 보기</a>
 
         <% results.forEach((result) => { %>
             <div class="card mt-4">

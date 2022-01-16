@@ -13,6 +13,11 @@ router.get("/", (req, res) => {
     res.render("admin/index");
 });
 
+router.get("/json", async (req, res) => {
+    const results = await Hospitals.find();
+    res.send(results);
+})
+
 router.get("/hospitals", async (req, res) => {
     const results = await Hospitals.find();
     res.render("admin/hospitals", { results: results });

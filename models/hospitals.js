@@ -78,6 +78,11 @@ const hostpitalsSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    reports_cnt: {
+        type: Number,
+        required: true,
+        default: 0
     }
 });
 

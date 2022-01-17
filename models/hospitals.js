@@ -3,11 +3,13 @@ const mongoose = require("mongoose");
 const hostpitalsSchema = new mongoose.Schema({
     addr: {
         type: String,
-        required: true
+        required: true,
+        default: ""
     },
     type_code: {
         type: String,
-        required: true
+        required: true,
+        default: 99
     },
     cmdcGdrCnt: {
         type: Number
@@ -37,12 +39,10 @@ const hostpitalsSchema = new mongoose.Schema({
         type: Number
     },
     estbDd: {
-        type: Number,
-        required: true
+        type: Number
     },
     hospUrl: {
         type: String,
-        required: true
     },
     mdeptGdrCnt: {
         type: Number
@@ -61,15 +61,16 @@ const hostpitalsSchema = new mongoose.Schema({
     },
     sgguCdNm: {
         type: String,
-        required: true
+        required: true,
+        default: ""
     },
     sidoCdNm: {
         type: String,
-        required: true
+        required: true,
+        default: ""
     },
     telno: {
-        type: String,
-        required: true
+        type: String
     },
     coord: {
         type: Array,

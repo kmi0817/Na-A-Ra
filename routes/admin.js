@@ -96,11 +96,11 @@ router.post("/hospitals/:dgsbjtCd", async (req, res) => {
     } else if (dgsbjtCd == "20") {
         totalCount =310; // 결핵과
     } else if (dgsbjtCd == "21") {
-        totalCount =6425; // 재활의학과
+        totalCount = 6425; // 재활의학과
     } else if (dgsbjtCd == "22") {
-        totalCount =231; // 핵의학과
+        totalCount = 231; // 핵의학과
     } else if (dgsbjtCd == "23") {
-        totalCount =9348; // 가정의학과
+        totalCount = 9348; // 가정의학과
     } else if (dgsbjtCd == "24") {
         totalCount = 797; // 응급의학과
     }
@@ -111,28 +111,30 @@ router.post("/hospitals/:dgsbjtCd", async (req, res) => {
     }
     
     else if (dgsbjtCd == "50") {
-        queryParams += '&' + encodeURIComponent('dgsbjtCd') + '=' + encodeURIComponent('50'); // 구강악안면외과
+        totalCount = 7799; // 구강악안면외과
     } else if (dgsbjtCd == "51") {
-        queryParams += '&' + encodeURIComponent('dgsbjtCd') + '=' + encodeURIComponent('51'); // 치과보철과
+        totalCount = 8357; // 치과보철과
     } else if (dgsbjtCd == "52") {
-        queryParams += '&' + encodeURIComponent('dgsbjtCd') + '=' + encodeURIComponent('52'); // 치아교정과
+        totalCount = 7201; // 치아교정과
     } else if (dgsbjtCd == "53") {
-        queryParams += '&' + encodeURIComponent('dgsbjtCd') + '=' + encodeURIComponent('53'); // 소아치과
+        totalCount =7830; // 소아치과
     } else if (dgsbjtCd == "54") {
-        queryParams += '&' + encodeURIComponent('dgsbjtCd') + '=' + encodeURIComponent('54'); // 치주과
+        totalCount = 8165; // 치주과
     } else if (dgsbjtCd == "55") {
-        queryParams += '&' + encodeURIComponent('dgsbjtCd') + '=' + encodeURIComponent('55'); // 치과보존과
+        totalCount = 7918; // 치과보존과
     } else if (dgsbjtCd == "56") {
-        queryParams += '&' + encodeURIComponent('dgsbjtCd') + '=' + encodeURIComponent('56'); // 구강내과
+        totalCount = 7261; // 구강내과
     } else if (dgsbjtCd == "57") {
-        queryParams += '&' + encodeURIComponent('dgsbjtCd') + '=' + encodeURIComponent('57'); // 영상치의학과
+        totalCount = 6398; // 영상치의학과
     } else if (dgsbjtCd == "58") {
-        queryParams += '&' + encodeURIComponent('dgsbjtCd') + '=' + encodeURIComponent('58'); // 구강병리과
+        totalCount = 4931; // 구강병리과
     } else if (dgsbjtCd == "59") {
-        queryParams += '&' + encodeURIComponent('dgsbjtCd') + '=' + encodeURIComponent('59'); // 예방치과
+        totalCount = 7298; // 예방치과
     } else if (dgsbjtCd == "61") {
-        queryParams += '&' + encodeURIComponent('dgsbjtCd') + '=' + encodeURIComponent('61'); // 통합치의학과
-    } else if (dgsbjtCd == "80") {
+        totalCount = 2116; // 통합치의학과
+    }
+    
+    else if (dgsbjtCd == "80") {
         queryParams += '&' + encodeURIComponent('dgsbjtCd') + '=' + encodeURIComponent('80'); // 한방내과
     } else if (dgsbjtCd == "81") {
         queryParams += '&' + encodeURIComponent('dgsbjtCd') + '=' + encodeURIComponent('81'); // 한방부인과

@@ -42,8 +42,8 @@ router.post("/hospitals", async (req, res) => {
     const _url = 'http://apis.data.go.kr/B551182/hospInfoService1/getHospBasisList1';
     const myServiceKey = "JtIV8PCzx8%2BLWnp%2F07kxb%2FL4%2Fglq9W6WGZN2AQwOBG%2B9fIRQEA%2F12X%2F2ONTYaEFLDPxdBzqz1CWa6%2FRDwcMxRA%3D%3D";
     let queryParams = '?' + encodeURIComponent('serviceKey') + '='  + myServiceKey;
-    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('2');
-    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('5');
+    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');
+    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('74822');
     queryParams += "&_type=json"; // To change XML (default response data type) to JSON, append "&_type=json"
 
     const options = {

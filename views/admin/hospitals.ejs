@@ -15,10 +15,95 @@
         <h2 class="mb-4"><a href="/admin">Admin</a></h2>
         <a href="/" class="btn btn-dark">메인 페이지</a>
         <a href="/admin/hospitals" class="btn btn-info">데이터베이스</a>
-        <form action="/admin/hospitals" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
-            <button type="submit" class="btn btn-danger">Open API Reload</button>
-        </form>
         <a href="/admin/json" class="btn btn-primary">JSON 형태로 보기</a>
+
+        <br><br>
+        <!-- <form action="/admin/hospitals/00" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">일반의 Reload</button>
+        </form>
+        <form action="/admin/hospitals/01" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">내과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/02" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">신경과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/03" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">정신건강의학과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/04" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">외과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/05" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">정형외과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/06" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">신경외과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/07" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">흉부외과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/08" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">성형외과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/09" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">마취통증의학과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/10" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">산부인과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/11" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">소아청소년과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/12" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">안과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/13" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">이비인후과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/14" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">피부과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/15" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">비뇨의학과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/16" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">영상의학과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/17" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">방사선종양학과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/18" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">병리과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/19" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">진단검사의학과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/20" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">결핵과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/21" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">재활의학과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/22" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">핵의학과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/23" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">가정의학과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/24" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">응급의학과 Reload</button>
+        </form>
+            <form action="/admin/hospitals/25" method="POST" class="d-inline" onsubmit="if(!confirm('병원API를 새로 불러오시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-danger">직업환경의학과 Reload</button>
+        </form>
+        <form action="/admin/hospitals/26" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger">예방의학과 Reload</button>
+        </form> -->
+
+        <!-- 여기서부터 시작 -->
+        <form action="/admin/hospitals/5" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger"> Reload</button>
+        </form>
 
         <% results.forEach((result) => { %>
             <div class="card mt-4">

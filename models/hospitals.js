@@ -85,7 +85,7 @@ const hospitalsSchema = new mongoose.Schema({
         required: true,
         default: 0
     },
-    dgsbjtCd: {
+    zipCd: {
         type: "String",
         required: true,
         default: "-1"

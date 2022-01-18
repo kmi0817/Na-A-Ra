@@ -16,17 +16,43 @@ app.engine("html", require("ejs").renderFile);
 
 // routes
 app.get("/", async (req, res) => {
-    var seacrh_input = req.query.seacrh_input; // req.query Object has "input"
+    const symptom_level = req.query.symptom_level; // req.query Object has "input"
+    const symptom = req.query.symptom;
 
-    if (typeof seacrh_input == "undefined") {
+    if (typeof symptom_level == "undefined" || typeof symptom == "undefined") {
         res.render("index", { results: "" });
     } else {
-        const results = await Hospitals.find({ name : seacrh_input }).exec();
-        if (results.length === 0) {
-            res.render("index", { results: "검색 결과가 없습니다." });
-        } else {
-            res.render("index", { results: results });
-        }
+        console.log(`증상 정도: ${symptom_level}, 증상: ${symptom}`);
+
+        const symptoms = [
+            {
+                "2010": [
+                    "headache", "eye", "tongue_inflammation", "cough", "kneel", "stuffy_nose"
+                ],
+                "2030": [
+                    "headache", "eye", "tongue_inflammation", "cough", "kneel", "stuffy_nose"
+                ],
+                "2040": [
+
+                ],
+                "2050": [
+                    "toothache"
+                ],
+                "2060": [
+
+                ],
+                "2070": [
+
+                ],
+                "2080": [
+
+                ],
+                "2090": [
+
+                ]
+            }
+        ]
+        res.render("index", { results: "검색 결과가 없습니다." });
     }
 });
 

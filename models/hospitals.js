@@ -1,15 +1,10 @@
 const mongoose = require("mongoose");
 
-const hostpitalsSchema = new mongoose.Schema({
+const hospitalsSchema = new mongoose.Schema({
     addr: {
         type: String,
         required: true,
         default: ""
-    },
-    type_code: {
-        type: String,
-        required: true,
-        default: 99
     },
     cmdcGdrCnt: {
         type: Number
@@ -72,6 +67,11 @@ const hostpitalsSchema = new mongoose.Schema({
     telno: {
         type: String
     },
+    type_code: {
+        type: String,
+        required: true,
+        default: "-1"
+    },
     coord: {
         type: Array,
         required: true
@@ -84,7 +84,12 @@ const hostpitalsSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0
+    },
+    dgsbjtCd: {
+        type: "String",
+        required: true,
+        default: "-1"
     }
 });
 
-module.exports = mongoose.model("Hospitals", hostpitalsSchema);
+module.exports = mongoose.model("Hospitals", hospitalsSchema);

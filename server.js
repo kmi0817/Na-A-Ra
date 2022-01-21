@@ -4,7 +4,10 @@ const mypageRouter = require('./routes/mypage');
 const adminRouter = require("./routes/admin");
 const Hospitals = require("./models/hospitals");
 const methodOverride = require("method-override");
+const http = require("http");
+
 const app = express();
+const server = http.createServer(app);
 
 app.use(express.urlencoded({ extended: false })); // enable to use req.body.(input field)
 
@@ -111,7 +114,11 @@ app.use('/mypage', mypageRouter);
 app.use("/admin", adminRouter);
 
 // web server
-const server = app.listen(3000, () => {
+server.listen(3000, () => {
     // port: 3000 app success
     console.log("localhost:3000 OK");
 })
+// const server = app.listen(3000, () => {
+//     // port: 3000 app success
+//     console.log("localhost:3000 OK");
+// })

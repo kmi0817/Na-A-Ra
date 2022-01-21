@@ -24,22 +24,40 @@ app.get("/", async (req, res) => {
     } else {
         console.log(`증상 정도: ${symptom_level}, 증상: ${symptom}`);
 
-        // Read hospital data from DB
+        /*
+            0 - 내과
+            1 - 안과
+            2 - 정형외과
+            3 - 외과
+            4 - 치과
+        */
+        let rules = {
+            0: [ "머리", "울려", "두통", "골", "코", "막힘", "막혀", "콧물", "훌쩍" ],
+            1: [ "눈", "충혈", "시력", "흐릿" ],
+            2: [ "뼈", "골절", "삐었", "금", "절뚝", "뚝", "관절", "무릎", "손목", "발목" ],
+            3: [ "항문", "상처", "꼬매" ],
+            4: [ "치아", "이", "치통", "썩었", "썩음", "썩어" ]
+        }
+        let response = {
+            0: { zipCd: "2070", name: { $regex: "내과" } },
+            1: { zipCd: "2070", name: { $regex: "안과" } },
+            2: { zipCd: "", name: { $regex: "" } },
+            3: { zipCd: "", name: { $regex: "" } },
+            4: { zipCd: "2050", name: { $regex: "의원" } }
+        }
         let results;
-        if (symptom === "head") {
-
-        } else if (symptom === "eye") {
-
-        } else if (symptom === "bone") {
-
-        } else if (symptom === "nose") {
-
-        } else if (symptom === "tooth") {
-            results = await Hospitals.find({
-                "zipCd": "2050", // 치과
-                "name": { $regex: "의원" },
-                "sidoCdNm": "경기", // Temp
-            }).limit(20).sort({ "detySdrCnt": -1 });
+        for (rule in rules) {
+            flag = false
+            let words = rules[rule];
+            for (word in words) {
+                if (symptom.includes(words[word])) {
+                    flag = true
+                    break
+                }
+            }
+            if (flag) {
+                results = await Hospitals.find(response[rule]).limit(20);
+            }
         }
 
         // Send index.ejs data

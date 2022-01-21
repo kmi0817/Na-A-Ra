@@ -62,7 +62,8 @@
                         <% results.forEach((result) => { %>
                             <div class="row">
                                 <h4 class="col-md-8 card-title"><%= result.name %></h4>
-                                <a href="/admin/hospitals/<%= result._id %>" class="col-md-4 btn btn-outline-primary">자세히 보기</a>
+                                <a href="/admin/hospitals/<%= result._id %>" class="col-md-2 btn btn-outline-primary">자세히 보기</a>
+                                <button class="col-md-2 btn btn-outline-success" onclick="copyHospitalName_naverAPI_popup('<%= result.name %>')">길찾기</button>
                             </div>
                         
                             <div class="card-subtitle text-muted mb-2">
@@ -86,6 +87,20 @@
             </div>                
         <% } %>
     </div>
+
+    <script>
+        function copyHospitalName_naverAPI_popup(hospital_name) {
+            navigator.clipboard.writeText(hospital_name);
+
+            let width = 1000;
+            let height = 600;
+            let top = (window.innerHeight - height) / 2 + screenY;
+            let left = (window.innerWidth - width) / 2 + screenX;
+
+            let spec = `width=${width}, height=${height}, top=${top}, left=${left}`;
+            window.open('https://map.naver.com/v5/directions/-/-/-/transit?c=14105669.4948920,4517401.3924641,9,0,0,0,dh', '네이버 지도', spec);
+        }
+    </script>
 </body>
 
 </html>

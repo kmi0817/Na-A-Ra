@@ -16,7 +16,7 @@ app.engine("html", require("ejs").renderFile);
 
 // routes
 app.get("/", async (req, res) => {
-    const symptom_level = req.query.symptom_level; // req.query Object has "input"
+    const symptom_level = req.query.symptom_level;
     const symptom = req.query.symptom;
 
     if (typeof symptom_level == "undefined" || typeof symptom == "undefined") {
@@ -24,35 +24,30 @@ app.get("/", async (req, res) => {
     } else {
         console.log(`증상 정도: ${symptom_level}, 증상: ${symptom}`);
 
-        const symptoms = [
-            {
-                "2010": [
-                    "headache", "eye", "tongue_inflammation", "cough", "kneel", "stuffy_nose"
-                ],
-                "2030": [
-                    "headache", "eye", "tongue_inflammation", "cough", "kneel", "stuffy_nose"
-                ],
-                "2040": [
+        // Read hospital data from DB
+        let results;
+        if (symptom === "head") {
 
-                ],
-                "2050": [
-                    "toothache"
-                ],
-                "2060": [
+        } else if (symptom === "eye") {
 
-                ],
-                "2070": [
+        } else if (symptom === "bone") {
 
-                ],
-                "2080": [
+        } else if (symptom === "nose") {
 
-                ],
-                "2090": [
+        } else if (symptom === "tooth") {
+            results = await Hospitals.find({
+                "zipCd": "2050", // 치과
+                "name": { $regex: "의원" },
+                "sidoCdNm": "경기", // Temp
+            }).limit(20).sort({ "detySdrCnt": -1 });
+        }
 
-                ]
-            }
-        ]
-        res.render("index", { results: "검색 결과가 없습니다." });
+        // Send index.ejs data
+        if (typeof results != "undefined") {
+            res.render("index", { results: results });
+        } else {
+            res.render("index", { results: 'no' });
+        }
     }
 });
 
@@ -60,7 +55,7 @@ app.get("/openapi", (req, res) => {
     // OpenAPI
     var url = 'http://apis.data.go.kr/B551182/hospInfoService1/getHospBasisList1';
     const myServiceKey = "JtIV8PCzx8%2BLWnp%2F07kxb%2FL4%2Fglq9W6WGZN2AQwOBG%2B9fIRQEA%2F12X%2F2ONTYaEFLDPxdBzqz1CWa6%2FRDwcMxRA%3D%3D";
-    var queryParams = '?' + encodeURIComponent('serviceKey') + '='  + myServiceKey; /* Service Key*/
+    var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + myServiceKey; /* Service Key*/
     queryParams += '&' + encodeURIComponent('sidoCd') + '=' + encodeURIComponent("110000");
 
     request({

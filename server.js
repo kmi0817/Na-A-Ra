@@ -44,8 +44,8 @@ app.get("/", async (req, res) => {
         let response = {
             0: { zipCd: "2070", name: { $regex: "내과" } },
             1: { zipCd: "2070", name: { $regex: "안과" } },
-            2: { zipCd: "", name: { $regex: "" } },
-            3: { zipCd: "", name: { $regex: "" } },
+            2: { zipCd: "2070", name: { $regex: "정형외과"} },
+            3: { zipCd: "2070", $and : [{name : {$regex : "외과"}}, {name : {$not : {$regex : "정형"}}}] },
             4: { zipCd: "2050", name: { $regex: "의원" } }
         }
         let results;

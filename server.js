@@ -3,6 +3,7 @@ const request = require("request");
 const mypageRouter = require('./routes/mypage');
 const adminRouter = require("./routes/admin");
 const Hospitals = require("./models/hospitals");
+const Users = require("./models/users");
 const methodOverride = require("method-override");
 const http = require("http");
 
@@ -70,6 +71,31 @@ app.get("/", async (req, res) => {
             res.render("index", { results: 'no' });
         }
     }
+});
+
+app.post("/process/:type", async(req, res) => {
+    const type = req.params.type;
+
+    if (type == "signup") {
+        let user = new Users();
+        user.user_id = req.body.createId;
+        user.user_password = req.body.createPassword;
+
+        try {
+            user = await user.save();
+        } catch (error) {
+            console.log("*** DB 저장 문제: " + error);
+        }
+
+    } else if (type == "login") {
+        const results = await Users.findOne({ user_id: req.body.inputId });
+
+        if (results != null && results['user_password'] == req.body.inputPassword) {
+            console.log("** 로그인OK : 세션 처리 필요");
+        }
+    }
+
+    res.redirect("/");
 });
 
 app.get("/openapi", (req, res) => {

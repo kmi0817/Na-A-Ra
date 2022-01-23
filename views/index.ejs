@@ -7,10 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <title>admin</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <style>
         a {
             text-decoration: none;
@@ -24,8 +31,88 @@
     <div class="container">
         <h2 class="mb-4"><a href="/">나아라</a></h2>
 
-        <a href="/" class="btn btn-dark">로그인</a>
-        <a href="/" class="btn btn-outline-dark">회원가입</a>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+            로그인
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">로그인</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/process/login" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="inputID" class="col-sm-2 col-form-label">아이디</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="inputID" class="form-control" id="inputID" placeholder="ID">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="inputPassword" class="form-control" id="inputPassword"
+                                        placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                            <button type="submit" class="btn btn-primary">완료</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#signupModal">
+            회원가입
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="signupModalLabel">회원가입</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/process/signup" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="createId" class="col-sm-2 col-form-label">아이디</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="createId" class="form-control" id="createId" placeholder="ID">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="createPassword" class="col-sm-2 col-form-label">비밀번호</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="createPassword" class="form-control" id="createPassword"
+                                        placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                            <button type="submit" class="btn btn-primary">완료</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <a href="/openapi" class="btn btn-light">건강보험심사평가원 OpenAPI</a>
 
         <div class="card mt-4">
@@ -60,13 +147,17 @@
             <div class="card mt-4">
                 <div class="card-body">
                     <% if (Array.isArray(results)) { %>
-                        <% results.forEach((result) => { %>
+                        <% results.forEach((result)=> { %>
                             <div class="row">
-                                <h4 class="col-md-8 card-title"><%= result.name %></h4>
-                                <a href="/admin/hospitals/<%= result._id %>" class="col-md-2 btn btn-outline-primary">자세히 보기</a>
-                                <button class="col-md-2 btn btn-outline-success" onclick="copyHospitalName_naverAPI_popup('<%= result.name %>')">길찾기</button>
+                                <h4 class="col-md-8 card-title">
+                                    <%= result.name %>
+                                </h4>
+                                <a href="/admin/hospitals/<%= result._id %>"
+                                    class="col-md-2 btn btn-outline-primary">자세히 보기</a>
+                                <button class="col-md-2 btn btn-outline-success"
+                                    onclick="copyHospitalName_naverAPI_popup('<%= result.name %>')">길찾기</button>
                             </div>
-                        
+
                             <div class="card-subtitle text-muted mb-2">
                                 <%= result.type_code %>
                             </div>
@@ -78,15 +169,15 @@
                                     번호: <%= result.telno %>
                                 </div>
                             </div>
-                        <% }); %>
-                    <% } else { %>
-                        <div class="card-text mb-2">
-                            <h4>일치하는 검색 결과가 없습니다.</h4>
-                        </div>
-                    <% } %>
+                            <% }); %>
+                                <% } else { %>
+                                    <div class="card-text mb-2">
+                                        <h4>일치하는 검색 결과가 없습니다.</h4>
+                                    </div>
+                                    <% } %>
                 </div>
-            </div>                
-        <% } %>
+            </div>
+            <% } %>
     </div>
     <br>
 

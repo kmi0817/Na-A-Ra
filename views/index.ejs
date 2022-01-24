@@ -52,14 +52,15 @@
                             <div class="form-group row">
                                 <label for="inputId" class="col-sm-2 col-form-label">아이디</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required name="inputId" class="form-control" id="inputId" placeholder="ID">
+                                    <input type="text" required name="inputId" class="form-control" id="inputId"
+                                        placeholder="ID">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
                                 <div class="col-sm-10">
-                                    <input type="password" required name="inputPassword" class="form-control" id="inputPassword"
-                                        placeholder="Password">
+                                    <input type="password" required name="inputPassword" class="form-control"
+                                        id="inputPassword" placeholder="Password">
                                 </div>
                             </div>
                         </div>
@@ -93,14 +94,15 @@
                             <div class="form-group row">
                                 <label for="createId" class="col-sm-2 col-form-label">아이디</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required name="createId" class="form-control" id="createId" placeholder="ID">
+                                    <input type="text" required name="createId" class="form-control" id="createId"
+                                        placeholder="ID">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="createPassword" class="col-sm-2 col-form-label">비밀번호</label>
                                 <div class="col-sm-10">
-                                    <input type="password" required name="createPassword" class="form-control" id="createPassword"
-                                        placeholder="Password">
+                                    <input type="password" required name="createPassword" class="form-control"
+                                        id="createPassword" placeholder="Password">
                                 </div>
                             </div>
                         </div>
@@ -118,27 +120,120 @@
         <div class="card mt-4">
             <div class="card-body">
                 <form action="" method="GET">
-                    <div class="input-group mb-3">
-                        <select name="symptom_level" lass="custom-select" id="inputGroupSelect01">
-                            <option selected>증상 정도</option>
-                            <option value="1">매우 아픔</option>
-                            <option value="2">조금 아픔</option>
-                            <option value="3">보통</option>
-                            <option value="4">약한 증상</option>
-                            <option value="5">의심 증상</option>
-                        </select>
-                        <select name="symptom" class="custom-select" id="inputGroupSelect01">
-                            <option selected>증상 선택</option>
-                            <option>머리 아픔</option>
-                            <option>눈 이상</optiond>
-                            <option>뼈 부러짐</option>
-                            <option>코 막힘</option>
-                            <option>이 아픔</option>
-                        </select>
+                    <!-- Kakao API start -->
+                    <div class="form-group row">
+                        <label for="sample4_roadAddress" class="col-sm-2 col-form-label">도로명 주소</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="inputAddr" class="form-control" id="sample4_roadAddress" placeholder="도로명주소">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="button" class="btn btn-outline-info" onclick="sample4_execDaumPostcode()"
+                                value="우편번호 찾기"><br>
+
+                        </div>
                     </div>
+                    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                    <script>
+                        //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+                        function sample4_execDaumPostcode() {
+                            new daum.Postcode({
+                                oncomplete: function (data) {
+                                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                                    // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                    var roadAddr = data.roadAddress; // 도로명 주소 변수
+                                    var extraRoadAddr = ''; // 참고 항목 변수
+
+                                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                                        extraRoadAddr += data.bname;
+                                    }
+                                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                                        extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                                    }
+                                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                    if (extraRoadAddr !== '') {
+                                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+                                    }
+
+                                    // 주소 정보를 해당 필드에 넣는다.
+                                    document.getElementById("sample4_roadAddress").value = roadAddr;
+                                }
+                            }).open();
+                        }
+                    </script>
+                    <!-- Kakao API end -->
                     <div class="form-group">
-                        <button type="submit" class="d-inline btn btn-info">검색</button>
+                        <div class="row">
+                            <legend class="col-form-label col-sm-2 pt-0">병원 종류</legend>
+                            <div class="col-sm-8">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="inputZipCd" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                        value="2010">
+                                    <label class="form-check-label" for="inlineRadio1">종합병원</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="inputZipCd" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                        value="2030">
+                                    <label class="form-check-label" for="inlineRadio2">병원</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="inputZipCd" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                        value="2040">
+                                    <label class="form-check-label" for="inlineRadio3">요양병원</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="inputZipCd" type="radio" name="inlineRadioOptions" id="inlineRadio4"
+                                        value="2050">
+                                    <label class="form-check-label" for="inlineRadio4">치과</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="inputZipCd" type="radio" name="inlineRadioOptions" id="inlineRadio5"
+                                        value="2060">
+                                    <label class="form-check-label" for="inlineRadio5">한방</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="inputZipCd" type="radio" name="inlineRadioOptions" id="inlineRadio6"
+                                        value="2070">
+                                    <label class="form-check-label" for="inlineRadio6">의원</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="inputZipCd" type="radio" name="inlineRadioOptions" id="inlineRadio7"
+                                        value="2080">
+                                    <label class="form-check-label" for="inlineRadio7">보건기관</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="inputZipCd" type="radio" name="inlineRadioOptions" id="inlineRadio8"
+                                        value="2090">
+                                    <label class="form-check-label" for="inlineRadio8">조산원</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-2 pt-0">검색 필터</legend>
+                            <div class="col-sm-8">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="inputFilter" type="checkbox" id="inlineCheckbox1"
+                                        value="all" checked>
+                                    <label class="form-check-label" for="inlineCheckbox1">전체보기</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="inputFilter" type="checkbox" id="inlineCheckbox2"
+                                        value="clinic">
+                                    <label class="form-check-label" for="inlineCheckbox2">의원만 보기</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <button type="submit" class="d-inline btn btn-info">검색</button>
+                            </div>
+                        </div>
+                    </fieldset>
                 </form>
             </div>
         </div>
@@ -153,11 +248,11 @@
                                     <%= result.name %>
                                 </h4>
                                 <a href="/admin/hospitals/<%= result._id %>"
-                                    class="col-md-2 btn btn-outline-primary">자세히 보기</a>
+                                    class="col-md-2 btn btn-outline-primary">자세히
+                                    보기</a>
                                 <button class="col-md-2 btn btn-outline-success"
                                     onclick="copyHospitalName_naverAPI_popup('<%= result.name %>')">길찾기</button>
                             </div>
-
                             <div class="card-subtitle text-muted mb-2">
                                 <%= result.type_code %>
                             </div>
@@ -169,12 +264,12 @@
                                     번호: <%= result.telno %>
                                 </div>
                             </div>
-                            <% }); %>
-                                <% } else { %>
-                                    <div class="card-text mb-2">
-                                        <h4>일치하는 검색 결과가 없습니다.</h4>
-                                    </div>
-                                    <% } %>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="card-text mb-2">
+                            <h4>일치하는 검색 결과가 없습니다.</h4>
+                        </div>
+                    <% } %>
                 </div>
             </div>
             <% } %>

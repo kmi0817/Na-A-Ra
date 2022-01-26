@@ -211,9 +211,9 @@
                                     <label class="form-check-label" for="inlineRadio8">한의원</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio8"
+                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio9"
                                         value="가정의학">
-                                    <label class="form-check-label" for="inlineRadio8">가정의학과</label>
+                                    <label class="form-check-label" for="inlineRadio9">가정의학과</label>
                                 </div>
                             </div>
                         </div>
@@ -224,12 +224,12 @@
                             <legend class="col-form-label col-sm-2 pt-0">검색 필터</legend>
                             <div class="col-sm-8">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputFilter" type="checkbox" id="inlineCheckbox1"
-                                        value="all" checked required>
+                                    <input class="form-check-input" name="inputFilter" type="radio" id="inlineCheckbox1"
+                                        value="all" required>
                                     <label class="form-check-label" for="inlineCheckbox1">전체보기</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputFilter" type="checkbox" id="inlineCheckbox2"
+                                    <input class="form-check-input" name="inputFilter" type="radio" id="inlineCheckbox2"
                                         value="infant">
                                     <label class="form-check-label" for="inlineCheckbox2">소아과 보기</label>
                                 </div>
@@ -293,6 +293,22 @@
             let spec = `width=${width}, height=${height}, top=${top}, left=${left}`;
             window.open('https://map.naver.com/v5/directions/-/-/-/transit?c=14105669.4948920,4517401.3924641,9,0,0,0,dh', '네이버 지도', spec);
         }
+
+        // get querystring and set form values as searched
+        const URLSearch = new URLSearchParams(location.search); // get querystring
+        document.getElementById("sample4_roadAddress").value=URLSearch.get("inputAddr"); // set Addr
+            // set inputType checked
+        let inputTypes = document.getElementsByName("inputType");
+        inputTypes.forEach((el) => {
+            if (el.value === URLSearch.get("inputType"))
+                el.checked = true;
+        });
+            // set inputFilter checked
+        let inputFilters = document.getElementsByName("inputFilter");
+        inputFilters.forEach((el) => {
+            if (el.value === URLSearch.get("inputFilter"))
+                el.checked = true;
+        });
     </script>
 </body>
 

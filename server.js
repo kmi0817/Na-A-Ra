@@ -21,42 +21,74 @@ app.engine("html", require("ejs").renderFile);
 // routes
 app.get("/", async (req, res) => {
     const inputAddr = req.query.inputAddr;
-    const inputZipCd = req.query.inputZipCd;
+    const inputType = req.query.inputType;
     const inputFilter = req.query.inputFilter;
 
-    if (typeof inputAddr == "undefined" || typeof inputZipCd == "undefined" || typeof inputFilter == "undefined") {
+    if (typeof inputAddr == "undefined" || typeof inputType == "undefined" || typeof inputFilter == "undefined") {
         res.render("index", { results: "" });
     } else {
         console.log(`입력 주소: ${inputAddr}`);
-        console.log(`병원종류: ${inputZipCd}, 필터: ${inputFilter}`);
+        console.log(`병원종류: ${inputType}, 필터: ${inputFilter}`);
         
         let searchAddr;
         if (inputAddr.includes("서울")) {
             let listAddr = inputAddr.split(" ");
             let road = listAddr[2].substr(0, listAddr[2].indexOf("로") + 1);
-
             searchAddr = `${listAddr[0]}특별시 ${listAddr[1]} ${road}`;
-            console.log(searchAddr);
         } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
             let listAddr = inputAddr.split(" ");
             searchAddr = `${listAddr[0]}광역시 ${listAddr[1]} ${listAddr[2]}`;
-            console.log(searchAddr);
         } else {
             let listAddr = inputAddr.split(" ");
             let road = listAddr[3].substr(0, listAddr[3].indexOf("로") + 1);
-            
             searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${listAddr[2]} ${road}`;
-            console.log(searchAddr);
         }
-
-        let conditions = { zipCd: inputZipCd, addr: {$regex: searchAddr}}
+        
+        let conditions;
+        if (inputFilter == "all") {
+            if (inputType == "외과") {
+                conditions = {
+                    addr: {$regex: searchAddr},
+                    $and : [
+                        {name : {$regex : "외과"}},
+                        {name : {$not : {$regex : "정형"}}}
+                    ]
+                }
+            } else {
+                conditions = {
+                    name: {$regex: inputType},
+                    addr: {$regex: searchAddr}
+                }
+            }
+        }
+        
+        else if (inputFilter == "infant") {
+            if (inputType == "외과") {
+                conditions = {
+                    addr: {$regex: searchAddr},
+                    $and : [
+                        {name : {$regex : "외과"}},
+                        {name : {$not : {$regex : "정형"}}},
+                        {name: {$regex: "소아"}}
+                    ]
+                }
+            } else {
+                conditions = {
+                    $and : [
+                        {name : {$regex : inputType}},
+                        {name : {$regex : "소아"}}
+                    ],
+                    addr: {$regex: searchAddr}
+                }
+            }
+        }
+        console.log(conditions);
         let results = await Hospitals.find(conditions).limit(20);
-
         // Send index.ejs data
-        if (typeof results != "undefined") {
+        if (results.lenght > 0) {
             res.render("index", { results: results });
         } else {
-            res.render("index", { results: 'no' });
+            res.render("index", { results: '일치하는 검색 결과가 없습니다.' });
         }
     }
 });

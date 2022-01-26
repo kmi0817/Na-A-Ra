@@ -210,6 +210,11 @@
                                         value="한의원">
                                     <label class="form-check-label" for="inlineRadio8">한의원</label>
                                 </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio8"
+                                        value="가정의학">
+                                    <label class="form-check-label" for="inlineRadio8">가정의학과</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -225,13 +230,8 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="inputFilter" type="checkbox" id="inlineCheckbox2"
-                                        value="clinic">
-                                    <label class="form-check-label" for="inlineCheckbox2">의원만 보기</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputFilter" type="checkbox" id="inlineCheckbox3"
                                         value="infant">
-                                    <label class="form-check-label" for="inlineCheckbox3">소아과 보기</label>
+                                    <label class="form-check-label" for="inlineCheckbox2">소아과 보기</label>
                                 </div>
                             </div>
                             <div class="form-group col-sm-2">
@@ -272,7 +272,7 @@
                         <% }); %>
                     <% } else { %>
                         <div class="card-text mb-2">
-                            <h4>일치하는 검색 결과가 없습니다.</h4>
+                            <h4><%= results %></h4>
                         </div>
                     <% } %>
                 </div>

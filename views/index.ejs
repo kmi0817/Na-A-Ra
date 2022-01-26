@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>admin</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        a {
+            text-decoration: none;
+            color: rgb(63, 63, 63);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="mb-4"><a href="/">나아라</a></h2>
+
+        <a href="/" class="btn btn-dark">로그인</a>
+        <a href="/" class="btn btn-outline-dark">회원가입</a>
+        <a href="/openapi" class="btn btn-light">건강보험심사평가원 OpenAPI</a>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <form action="" method="GET">
+                    <div class="input-group mb-3">
+                        <select name="symptom_level" lass="custom-select" id="inputGroupSelect01">
+                            <option selected>증상 정도</option>
+                            <option value="1">매우 아픔</option>
+                            <option value="2">조금 아픔</option>
+                            <option value="3">보통</option>
+                            <option value="4">약한 증상</option>
+                            <option value="5">의심 증상</option>
+                        </select>
+                        <select name="symptom" class="custom-select" id="inputGroupSelect01">
+                            <option selected>증상 선택</option>
+                            <option>머리 아픔</option>
+                            <option>눈 이상</optiond>
+                            <option>뼈 부러짐</option>
+                            <option>코 막힘</option>
+                            <option>이 아픔</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="d-inline btn btn-info">검색</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <% if (results) { %>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <% if (Array.isArray(results)) { %>
+                        <% results.forEach((result) => { %>
+                            <div class="row">
+                                <h4 class="col-md-8 card-title"><%= result.name %></h4>
+                                <a href="/admin/hospitals/<%= result._id %>" class="col-md-2 btn btn-outline-primary">자세히 보기</a>
+                                <button class="col-md-2 btn btn-outline-success" onclick="copyHospitalName_naverAPI_popup('<%= result.name %>')">길찾기</button>
+                            </div>
+                        
+                            <div class="card-subtitle text-muted mb-2">
+                                <%= result.type_code %>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 card-text mb-2">
+                                    주소: <%= result.addr %>
+                                </div>
+                                <div class="col-md-4 card-text mb-2">
+                                    번호: <%= result.telno %>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="card-text mb-2">
+                            <h4>일치하는 검색 결과가 없습니다.</h4>
+                        </div>
+                    <% } %>
+                </div>
+            </div>                
+        <% } %>
+    </div>
+
+    <script>
+        function copyHospitalName_naverAPI_popup(hospital_name) {
+            navigator.clipboard.writeText(hospital_name);
+            let width = 1000;
+            let height = 600;
+            let top = (window.innerHeight - height) / 2 + screenY;
+            let left = (window.innerWidth - width) / 2 + screenX;
+            let spec = `width=${width}, height=${height}, top=${top}, left=${left}`;
+            window.open('https://map.naver.com/v5/directions/-/-/-/transit?c=14105669.4948920,4517401.3924641,9,0,0,0,dh', '네이버 지도', spec);
+        }
+    </script>
+</body>
+
+</html>

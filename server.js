@@ -48,11 +48,11 @@ app.get("/", async (req, res) => {
         if (inputFilter == "all") {
             if (inputType == "외과") {
                 conditions = {
-                    addr: {$regex: searchAddr},
                     $and : [
                         {name : {$regex : "외과"}},
                         {name : {$not : {$regex : "정형"}}}
-                    ]
+                    ],
+                    addr: {$regex: searchAddr}
                 }
             } else {
                 conditions = {
@@ -82,10 +82,11 @@ app.get("/", async (req, res) => {
                 }
             }
         }
-        console.log(conditions);
+        console.log(JSON.stringify(conditions));
         let results = await Hospitals.find(conditions).limit(20);
+
         // Send index.ejs data
-        if (results.lenght > 0) {
+        if (results.length > 0) {
             res.render("index", { results: results });
         } else {
             res.render("index", { results: '일치하는 검색 결과가 없습니다.' });

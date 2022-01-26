@@ -119,12 +119,12 @@
 
         <div class="card mt-4">
             <div class="card-body">
-                <form action="" method="GET">
+                <form method="GET">
                     <!-- Kakao API start -->
                     <div class="form-group row">
                         <label for="sample4_roadAddress" class="col-sm-2 col-form-label">도로명 주소</label>
                         <div class="col-sm-8">
-                            <input type="text" name="inputAddr" class="form-control" id="sample4_roadAddress" placeholder="도로명주소">
+                            <input type="text" name="inputAddr" class="form-control" id="sample4_roadAddress" placeholder="도로명주소" required>
                         </div>
                         <div class="col-sm-2">
                             <input type="button" class="btn btn-outline-info" onclick="sample4_execDaumPostcode()"
@@ -172,7 +172,7 @@
                             <div class="col-sm-8">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="inputZipCd" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                        value="2010">
+                                        value="2010" required>
                                     <label class="form-check-label" for="inlineRadio1">종합병원</label>
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -220,7 +220,7 @@
                             <div class="col-sm-8">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="inputFilter" type="checkbox" id="inlineCheckbox1"
-                                        value="all" checked>
+                                        value="all" checked required>
                                     <label class="form-check-label" for="inlineCheckbox1">전체보기</label>
                                 </div>
                                 <div class="form-check form-check-inline">

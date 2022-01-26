@@ -50,7 +50,8 @@ app.get("/", async (req, res) => {
                 conditions = {
                     $and : [
                         {name : {$regex : "외과"}},
-                        {name : {$not : {$regex : "정형"}}}
+                        {name : {$not : {$regex : "정형"}}},
+                        {name : {$not : {$regex : "치과"}}}
                     ],
                     addr: {$regex: searchAddr}
                 }
@@ -69,6 +70,7 @@ app.get("/", async (req, res) => {
                     $and : [
                         {name : {$regex : "외과"}},
                         {name : {$not : {$regex : "정형"}}},
+                        {name : {$not : {$regex : "치과"}}},
                         {name: {$regex: "소아"}}
                     ]
                 }

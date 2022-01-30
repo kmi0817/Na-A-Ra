@@ -1,11 +1,10 @@
 const express = require("express");
 const request = require("request");
-const path = require("path");
-const cors = require("cors");
-const bodyParser = require("body-parser");
 const adminRouter = require("./routes/admin");
 const Hospitals = require("./models/hospitals");
 const methodOverride = require("method-override");
+const http = require("http");
+
 const app = express();
 const port = process.env.PORT || 3001;
 
@@ -16,67 +15,87 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 app.use(methodOverride('_method'));
 app.engine("html", require("ejs").renderFile);
-app.use(express.static(path.join(__dirname, 'public')));
 
 // admin routes
 app.use("/admin", adminRouter);
 
 // routes
 app.get("/", async (req, res) => {
-    const symptom_level = req.query.symptom_level;
-    const symptom = req.query.symptom;
+    const inputAddr = req.query.inputAddr;
+    const inputType = req.query.inputType;
+    const inputFilter = req.query.inputFilter;
 
-    if (typeof symptom_level == "undefined" || typeof symptom == "undefined") {
+    if (typeof inputAddr == "undefined" || typeof inputType == "undefined" || typeof inputFilter == "undefined") {
         res.render("index", { results: "" });
     } else {
-        console.log(`증상 정도: ${symptom_level}, 증상: ${symptom}`);
-
-        /*
-            0 - 내과
-            1 - 안과
-            2 - 정형외과
-            3 - 외과
-            4 - 치과
-        */
-        let rules = {
-            0: [ "머리", "울려", "두통", "골", "코", "막힘", "막혀", "콧물", "훌쩍" ],
-            1: [ "눈", "충혈", "시력", "흐릿" ],
-            2: [ "뼈", "골절", "삐었", "금", "절뚝", "뚝", "관절", "무릎", "손목", "발목" ],
-            3: [ "항문", "상처", "꼬매" ],
-            4: [ "치아", "이", "치통", "썩었", "썩음", "썩어" ]
+        console.log(`입력 주소: ${inputAddr}`);
+        console.log(`병원종류: ${inputType}, 필터: ${inputFilter}`);
+        
+        let searchAddr;
+        if (inputAddr.includes("서울")) {
+            let listAddr = inputAddr.split(" ");
+            let road = listAddr[2].substr(0, listAddr[2].indexOf("로") + 1);
+            searchAddr = `${listAddr[0]}특별시 ${listAddr[1]} ${road}`;
+        } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
+            let listAddr = inputAddr.split(" ");
+            searchAddr = `${listAddr[0]}광역시 ${listAddr[1]} ${listAddr[2]}`;
+        } else {
+            let listAddr = inputAddr.split(" ");
+            let road = listAddr[3].substr(0, listAddr[3].indexOf("로") + 1);
+            searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${listAddr[2]} ${road}`;
         }
-        let response = {
-            0: { zipCd: "2070", name: { $regex: "내과" } },
-            1: { zipCd: "2070", name: { $regex: "안과" } },
-            2: { zipCd: "2070", name: { $regex: "정형외과"} },
-            3: { zipCd: "2070", $and : [{name : {$regex : "외과"}}, {name : {$not : {$regex : "정형"}}}] },
-            4: { zipCd: "2050", name: { $regex: "의원" } }
-        }
-        let results;
-        for (rule in rules) {
-            flag = false
-            let words = rules[rule];
-            for (word in words) {
-                if (symptom.includes(words[word])) {
-                    flag = true
-                    break
+        
+        let conditions;
+        if (inputFilter == "all") {
+            if (inputType == "외과") {
+                conditions = {
+                    $and : [
+                        {name : {$regex : "외과"}},
+                        {name : {$not : {$regex : "정형"}}},
+                        {name : {$not : {$regex : "치과"}}}
+                    ],
+                    addr: {$regex: searchAddr}
+                }
+            } else {
+                conditions = {
+                    name: {$regex: inputType},
+                    addr: {$regex: searchAddr}
                 }
             }
-            if (flag) {
-                results = await Hospitals.find(response[rule]).limit(20);
+        }
+        
+        else if (inputFilter == "infant") {
+            if (inputType == "외과") {
+                conditions = {
+                    addr: {$regex: searchAddr},
+                    $and : [
+                        {name : {$regex : "외과"}},
+                        {name : {$not : {$regex : "정형"}}},
+                        {name : {$not : {$regex : "치과"}}},
+                        {name: {$regex: "소아"}}
+                    ]
+                }
+            } else {
+                conditions = {
+                    $and : [
+                        {name : {$regex : inputType}},
+                        {name : {$regex : "소아"}}
+                    ],
+                    addr: {$regex: searchAddr}
+                }
             }
         }
+        console.log(JSON.stringify(conditions));
+        let results = await Hospitals.find(conditions).limit(20);
 
         // Send index.ejs data
-        if (typeof results != "undefined") {
-            //res.render("index", { results: results });
-            res.json(results);
+        if (results.length > 0) {
+            res.render("index", { results: results });
         } else {
-            res.render("index", { results: 'no' });
+            res.render("index", { results: '일치하는 검색 결과가 없습니다.' });
         }
     }
 });
-
 
 app.get("/openapi", (req, res) => {
     // OpenAPI

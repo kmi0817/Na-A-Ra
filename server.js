@@ -20,7 +20,7 @@ app.engine("html", require("ejs").renderFile);
 app.use("/admin", adminRouter);
 
 // routes
-app.get("/", async (req, res) => {
+app.get("/newapi", async (req, res) => {
     const inputAddr = req.query.inputAddr;
     const inputType = req.query.inputType;
     const inputFilter = req.query.inputFilter;
@@ -87,14 +87,35 @@ app.get("/", async (req, res) => {
         }
         console.log(JSON.stringify(conditions));
         let results = await Hospitals.find(conditions).limit(20);
-
         // Send index.ejs data
-        if (results.length > 0) {
-            res.render("index", { results: results });
-        } else {
-            res.render("index", { results: '일치하는 검색 결과가 없습니다.' });
+        console.log("!!: " + results);
+        //res.send(results);
+    }
+});
+
+app.post("/process/:type", async(req, res) => {
+    const type = req.params.type;
+
+    if (type == "signup") {
+        let user = new Users();
+        user.user_id = req.body.createId;
+        user.user_password = req.body.createPassword;
+
+        try {
+            user = await user.save();
+        } catch (error) {
+            console.log("*** DB 저장 문제: " + error);
+        }
+
+    } else if (type == "login") {
+        const results = await Users.findOne({ user_id: req.body.inputId });
+
+        if (results != null && results['user_password'] == req.body.inputPassword) {
+            console.log("** 로그인OK : 세션 처리 필요");
         }
     }
+
+    res.redirect("/");
 });
 
 app.get("/openapi", (req, res) => {

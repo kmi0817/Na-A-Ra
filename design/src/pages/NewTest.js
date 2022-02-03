@@ -14,6 +14,10 @@ function NewTest() {
     const [address, setAddress] = useState();
     const [popup, setPopup] = useState(false);
 
+    const [inputAddr, setinputAddr] = useState('경기 남양주시 불암로 336');
+    const [inputType, setinputType] = useState('내과');
+    const [inputFilter, setinputFilter] = useState('all');
+
 
     
     
@@ -32,8 +36,6 @@ function NewTest() {
 
     const AfterSubmit = (e) => {
         e.preventDefault(); //redirect 방지
-        //console.log('출력: ' + e.target[0].value);
-        //console.log('출력2: ' + e.target[1].value);
 
         const symptom_level = e.target[0].value;
         const symptom = e.target[1].value;
@@ -44,15 +46,12 @@ function NewTest() {
         }
         else if (symptom_level != 0 && symptom == '증상') {
             alert("증상을 선택해주세요.");
-            //console.log("증상 선택 안됨")
         }
         else if (symptom_level == 0 && symptom != '증상') {
             alert("증상 정도를 선택해주세요.");
-            //console.log("증상 정도 선택 안됨")
         }
         else {
             alert("증상 정도와 증상을 선택해주세요.");
-            //console.log("둘 다 선택 안됨.")
         }
     }
 
@@ -65,7 +64,15 @@ function NewTest() {
         console.log(address);
     }
 
-
+    const TestApi = (e) => {
+        axios( {
+            method: 'get',
+            url: 'newapi?inputAddr=' + inputAddr + '&inputType=' + inputType + '&inputFilter=' + inputFilter,
+        })
+        .then(response => {
+            console.log("!!!!새로운 데이터!!!!! : " + response.data);
+        })
+    }
     
 
 
@@ -90,7 +97,7 @@ function NewTest() {
 
             <button onClick={CheckAddr}>잘 들어갔는지 확인</button>
 
-
+            <button onClick={TestApi}>새로운 API확인</button>
             <p className="SearchMainText">증상을 입력해주세요</p>
             <form onSubmit={AfterSubmit} >
                     <div className="SearchSection">

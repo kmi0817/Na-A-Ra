@@ -96,6 +96,9 @@ app.get("/", async (req, res) => {
     }
 });
 
+app.get("/test", (req, res) => {
+    res.render("test");
+})
 app.post("/process/:type", async(req, res) => {
     const type = req.params.type;
 

@@ -6,6 +6,7 @@ const Hospitals = require("./models/hospitals");
 const Users = require("./models/users");
 const methodOverride = require("method-override");
 const http = require("http");
+const crypto = require("crypto");
 
 const app = express();
 const server = http.createServer(app);
@@ -103,25 +104,42 @@ app.post("/process/:type", async(req, res) => {
     const type = req.params.type;
 
     if (type == "signup") {
-        let user = new Users();
-        user.user_id = req.body.createId;
-        user.user_password = req.body.createPassword;
-
         try {
-            user = await user.save();
-        } catch (error) {
-            console.log("*** DB 저장 문제: " + error);
-        }
+            const salt = crypto.randomBytes(64).toString("base64");
+            console.log("typeof(salt): " + typeof(salt));
+            const hashed_password = crypto.pbkdf2Sync(req.body.createPassword, salt, 190481, 64, "sha512").toString("base64");
+            console.log(`salt: ${salt}, hashed: ${hashed_password}`);
 
+            let user = new Users();
+            user.user_id = req.body.createId;
+            user.user_salt = salt;
+            user.user_hashedPassword = hashed_password;
+
+            user = await user.save();
+            res.redirect("/");
+        } catch (error) {
+            if (error.code === 11000) {
+                res.send(`<script>alert("이미 존재하는 아이디입니다."); history.go(-1);</script>`);
+            } else {
+                res.send(`<script>alert("회원가입에 문제가 발생했습니다. 관리자에게 문의하세요."); history.go(-1);</script>`);
+                console.log("*** DB 저장 문제: " + error);
+            }
+        }
     } else if (type == "login") {
         const results = await Users.findOne({ user_id: req.body.inputId });
 
-        if (results != null && results['user_password'] == req.body.inputPassword) {
-            console.log("** 로그인OK : 세션 처리 필요");
+        if (results != null) {
+            const computed_password = crypto.pbkdf2Sync(req.body.inputPassword, results["user_salt"], 190481, 64, "sha512").toString("base64");
+
+            if (computed_password == results['user_hashedPassword']) {
+                console.log("** 로그인OK : 세션 처리 필요");
+            }
+        } else {
+            console.log("일치하는 회원 정보가 없습니다.");
         }
+        res.redirect("/");
     }
 
-    res.redirect("/");
 });
 
 app.get("/openapi", (req, res) => {

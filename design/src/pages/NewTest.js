@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
-import DaumPostcode from 'react-daum-postcode';
 import MenuBar from "../components/MenuBar";
 import '../Test2.css'
 import Post from './AddrPopup';
+import Modal from './Modal';
 
 function NewTest() {
     const [jsondata, setJsondata] = useState([{}]);
@@ -14,44 +14,58 @@ function NewTest() {
     const [address, setAddress] = useState();
     const [popup, setPopup] = useState(false);
 
-    const [inputAddr, setinputAddr] = useState('경기 남양주시 불암로 336');
-    const [inputType, setinputType] = useState('내과');
+    const [inputAddr, setinputAddr] = useState('서울 송파구 백제고분로 2');
+    const [inputType, setinputType] = useState('외과');
     const [inputFilter, setinputFilter] = useState('all');
 
-
+    const [modalOpen, setModalOpen] = useState(false);
+    const openModal = () => {
+        setModalOpen(true);
+    };
+    const closeModal = () => {
+        setModalOpen(false);
+    };
     
     
     useEffect( () => {
         axios( {
             method: 'get',
-            url: 'testapi?symptom_level=' + symptom_level + '&symptom=' + symptom,
+            url: 'newapi?inputAddr=' + inputAddr + '&inputType=' + inputType + '&inputFilter=' + inputFilter,
         })
         .then(response => {
             console.log("데이터 받아왔어요! : " + response.data);
             setJsondata(response.data);
             console.log("데이터 길이: " + response.data.length);
+            setLength(response.data.length)
 
         })
-    }, [symptom, symptom_level]);
+    }, [inputAddr, inputType, inputFilter]);
 
     const AfterSubmit = (e) => {
         e.preventDefault(); //redirect 방지
+        console.log(e.target[0].value);
+        console.log(e.target[1].value); //이건 뭐지?
+        console.log(e.target[2].value);
+        console.log(e.target[3].value);
 
-        const symptom_level = e.target[0].value;
-        const symptom = e.target[1].value;
 
-        if (symptom_level != 0 && symptom != '증상') {
-            setSymptom_level(e.target[0].value)
-            setSymptom(e.target[1].value)
+        const addr = e.target[0].value;
+        const type = e.target[2].value;
+        const filter = e.target[3].value;
+
+        if (addr != '' && type != '증상') {
+            setinputAddr(addr)
+            setinputType(type)
+            setinputFilter(filter);
         }
-        else if (symptom_level != 0 && symptom == '증상') {
-            alert("증상을 선택해주세요.");
+        else if (addr != '' && type == '병원종류') {
+            alert("주소를 입력해주세요.");
         }
-        else if (symptom_level == 0 && symptom != '증상') {
-            alert("증상 정도를 선택해주세요.");
+        else if (addr == '' && type != '병원종류') {
+            alert("병원 종류를 선택해주세요.");
         }
         else {
-            alert("증상 정도와 증상을 선택해주세요.");
+            alert("주소, 병원 종류, 보기 종류를 선택해주세요.");
         }
     }
 
@@ -64,64 +78,44 @@ function NewTest() {
         console.log(address);
     }
 
-    const TestApi = (e) => {
-        axios( {
-            method: 'get',
-            url: 'newapi?inputAddr=' + inputAddr + '&inputType=' + inputType + '&inputFilter=' + inputFilter,
-        })
-        .then(response => {
-            console.log("!!!!새로운 데이터!!!!! : " + response.data);
-        })
-    }
-    
-
-
-
-
-    //const inputAddr = req.query.inputAddr;
-    //const inputType = req.query.inputType;
-    //const inputFilter = req.query.inputFilter;
-    //위와 같이 3개 값 넘겨줘야 함.
     return (
         <div className="BackgroundDiv">
             <MenuBar />
+
             
 
-            <input value={address}></input>
-            <button onClick={()=> {setPopup(!popup)}}>주소 검색</button>
-            {
-                popup && 
-                <Post address={address} setAddress={setAddress}></Post>
-            }
 
 
-            <button onClick={CheckAddr}>잘 들어갔는지 확인</button>
 
-            <button onClick={TestApi}>새로운 API확인</button>
+
+
             <p className="SearchMainText">증상을 입력해주세요</p>
             <form onSubmit={AfterSubmit} >
                     <div className="SearchSection">
-                        <select name="symptom_level" className="symptom_level">
-                            <option value="0">증상 정도</option>
-                            <option value="1">매우 아픔</option>
-                            <option value="2">조금 아픔</option>
-                            <option value="3">보통</option>
-                            <option value="4">약한 증상</option>
-                            <option value="5">의심 증상</option>
+                        <input value={address} className="inputAddr"></input>
+                        <button type="button" className="AddrBtn" onClick={openModal}>주소 검색</button>
+                        <Modal open={modalOpen} close={closeModal} header="주소 검색" address={address} setAddress={setAddress} autoClose></Modal>
+                        <select name="inputType" className="symptom_level">
+                            <option value="병원종류">병원종류</option>
+                            <option value="이비인후과">이비인후과</option>
+                            <option value="내과">내과</option>
+                            <option value="외과">외과</option>
+                            <option value="정형외과">정형외과</option>
+                            <option value="안과">안과</option>
+                            <option value="치과">치과</option>
+                            <option value="피부과">피부과</option>
+                            <option value="한의원">한의원</option>
+                            <option value="가정의학과">가정의학과</option>
                         </select>
-                        <select name="symptom" className="symptom">
-                            <option>증상</option>
-                            <option>머리 아픔</option>
-                            <option>눈 이상</option>
-                            <option>뼈 부러짐</option>
-                            <option>코 막힘</option>
-                            <option>이 아픔</option>
+                        <select name="inputFilter" className="symptom">
+                            <option value="all">전체보기</option>
+                            <option value="infant">소아과 보기</option>
                         </select>
                         <button type="submit" className="formBtn">검색</button>
                     </div>
             </form>
             
-
+            <p>검색 결과는 <strong>{datalength}</strong>건입니다.</p>
             <div className="cardDiv">
                 {jsondata.map((data, index) => (
                     <div className="card1">
@@ -132,9 +126,7 @@ function NewTest() {
                     </div>
                 ))}
                 {
-                    datalength === 0
-                    ? <p className="noneResultText">검색 결과가 없습니다.</p>
-                    : null
+                    datalength === 0 ? <p className="noneResultText">검색 결과가 없습니다</p> : <p className="noneResultText">- END -</p>
                 }
             </div>
         </div>

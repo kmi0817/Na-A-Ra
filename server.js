@@ -88,8 +88,7 @@ app.get("/newapi", async (req, res) => {
         console.log(JSON.stringify(conditions));
         let results = await Hospitals.find(conditions).limit(20);
         // Send index.ejs data
-        console.log("!!: " + results);
-        //res.send(results);
+        res.send(results);
     }
 });
 

@@ -7,17 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <title>admin</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style>
         a {
             text-decoration: none;
@@ -37,8 +30,7 @@
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -52,15 +44,13 @@
                             <div class="form-group row">
                                 <label for="inputId" class="col-sm-2 col-form-label">아이디</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required name="inputId" class="form-control" id="inputId"
-                                        placeholder="ID">
+                                    <input type="text" required name="inputId" class="form-control" id="inputId" placeholder="ID">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
                                 <div class="col-sm-10">
-                                    <input type="password" required name="inputPassword" class="form-control"
-                                        id="inputPassword" placeholder="Password">
+                                    <input type="password" required name="inputPassword" class="form-control" id="inputPassword" placeholder="Password">
                                 </div>
                             </div>
                         </div>
@@ -79,8 +69,7 @@
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -94,15 +83,13 @@
                             <div class="form-group row">
                                 <label for="createId" class="col-sm-2 col-form-label">아이디</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required name="createId" class="form-control" id="createId"
-                                        placeholder="ID">
+                                    <input type="text" required name="createId" class="form-control" id="createId" placeholder="ID">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="createPassword" class="col-sm-2 col-form-label">비밀번호</label>
                                 <div class="col-sm-10">
-                                    <input type="password" required name="createPassword" class="form-control"
-                                        id="createPassword" placeholder="Password">
+                                    <input type="password" required name="createPassword" class="form-control" id="createPassword" placeholder="Password">
                                 </div>
                             </div>
                         </div>
@@ -127,9 +114,7 @@
                             <input type="text" name="inputAddr" class="form-control" id="sample4_roadAddress" placeholder="도로명주소" required>
                         </div>
                         <div class="col-sm-2">
-                            <input type="button" class="btn btn-outline-info" onclick="sample4_execDaumPostcode()"
-                                value="우편번호 찾기"><br>
-
+                            <input type="button" class="btn btn-outline-info" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
                         </div>
                     </div>
                     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -171,48 +156,39 @@
                             <legend class="col-form-label col-sm-2 pt-0">병원 종류</legend>
                             <div class="col-sm-8">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                        value="이비인후과" required>
+                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="이비인후과" required>
                                     <label class="form-check-label" for="inlineRadio1">이비인후과</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                        value="내과">
+                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="내과">
                                     <label class="form-check-label" for="inlineRadio2">내과</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio3"
-                                        value="외과">
+                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="외과">
                                     <label class="form-check-label" for="inlineRadio3">외과</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio4"
-                                        value="정형외과">
+                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="정형외과">
                                     <label class="form-check-label" for="inlineRadio4">정형외과</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio5"
-                                        value="안과">
+                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="안과">
                                     <label class="form-check-label" for="inlineRadio5">안과</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio6"
-                                        value="치과">
+                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio6" value="치과">
                                     <label class="form-check-label" for="inlineRadio6">치과</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio7"
-                                        value="피부과">
+                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio7" value="피부과">
                                     <label class="form-check-label" for="inlineRadio7">피부과</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio8"
-                                        value="한의원">
+                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio8" value="한의원">
                                     <label class="form-check-label" for="inlineRadio8">한의원</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio9"
-                                        value="가정의학">
+                                    <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio9" value="가정의학">
                                     <label class="form-check-label" for="inlineRadio9">가정의학과</label>
                                 </div>
                             </div>
@@ -224,13 +200,11 @@
                             <legend class="col-form-label col-sm-2 pt-0">검색 필터</legend>
                             <div class="col-sm-8">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputFilter" type="radio" id="inlineCheckbox1"
-                                        value="all" required>
+                                    <input class="form-check-input" name="inputFilter" type="radio" id="inlineCheckbox1" value="all" required>
                                     <label class="form-check-label" for="inlineCheckbox1">전체보기</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputFilter" type="radio" id="inlineCheckbox2"
-                                        value="infant">
+                                    <input class="form-check-input" name="inputFilter" type="radio" id="inlineCheckbox2" value="infant">
                                     <label class="form-check-label" for="inlineCheckbox2">소아과 보기</label>
                                 </div>
                             </div>
@@ -250,17 +224,59 @@
                         <% results.forEach((result)=> { %>
                             <div class="row">
                                 <h4 class="col-md-8 card-title">
-                                    <%= result.name %>
+                                    <a href="/test/?left=<%= result.coord[1] %>&right=<%= result.coord[0] %>"><%= result.name %></a>
+                                    <a data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer"> /모달:<%= result.name %></a>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div id="map" style="width:100%;height:350px;"></div>
+                                                    
+                                                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9366bbe70b91ad10596a2fbc0e5fc13b"></script>
+                                                    <script>
+                                                        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                                                            mapOption = {
+                                                                center: new kakao.maps.LatLng(<%= result.coord[1] %>, <%= result.coord[0] %>), // 지도의 중심좌표
+                                                                level: 1 // 지도의 확대 레벨
+                                                            };
+
+                                                        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+                                                        // 마커가 표시될 위치입니다 
+                                                        var markerPosition = new kakao.maps.LatLng(<%= result.coord[1] %>, <%= result.coord[0] %>);
+                                                        // 마커를 생성합니다
+                                                        var marker = new kakao.maps.Marker({
+                                                            position: markerPosition
+                                                        });
+
+                                                        // 마커가 지도 위에 표시되도록 설정합니다
+                                                        marker.setMap(map);
+
+                                                    // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+                                                    // marker.setMap(null);    
+                                                    </script>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </h4>
-                                <a href="/admin/hospitals/<%= result._id %>"
-                                    class="col-md-2 btn btn-outline-primary">자세히
-                                    보기</a>
-                                <button class="col-md-2 btn btn-outline-success"
-                                    onclick="copyHospitalName_naverAPI_popup('<%= result.name %>')">길찾기</button>
+                                <a href="/admin/hospitals/<%= result._id %>" class="col-md-2 btn btn-outline-primary">자세히 보기</a>
+                                <button class="col-md-2 btn btn-outline-success" onclick="copyHospitalName_naverAPI_popup('<%= result.name %>')">길찾기</button>
                             </div>
-                            <div class="card-subtitle text-muted mb-2">
-                                <%= result.type_code %>
-                            </div>
+                            <div class="card-subtitle text-muted mb-2"><%= result.type_code %></div>
                             <div class="row">
                                 <div class="col-md-8 card-text mb-2">
                                     주소: <%= result.addr %>
@@ -269,15 +285,15 @@
                                     번호: <%= result.telno %>
                                 </div>
                             </div>
-                        <% }); %>
-                    <% } else { %>
-                        <div class="card-text mb-2">
-                            <h4><%= results %></h4>
-                        </div>
-                    <% } %>
+                            <% }); %>
+                        <% } else { %>
+                            <div class="card-text mb-2">
+                                <h4><%= results %></h4>
+                            </div>
+                        <% } %>
                 </div>
             </div>
-            <% } %>
+        <% } %>
     </div>
     <br>
 
@@ -296,14 +312,14 @@
 
         // get querystring and set form values as searched
         const URLSearch = new URLSearchParams(location.search); // get querystring
-        document.getElementById("sample4_roadAddress").value=URLSearch.get("inputAddr"); // set Addr
-            // set inputType checked
+        document.getElementById("sample4_roadAddress").value = URLSearch.get("inputAddr"); // set Addr
+        // set inputType checked
         let inputTypes = document.getElementsByName("inputType");
         inputTypes.forEach((el) => {
             if (el.value === URLSearch.get("inputType"))
                 el.checked = true;
         });
-            // set inputFilter checked
+        // set inputFilter checked
         let inputFilters = document.getElementsByName("inputFilter");
         inputFilters.forEach((el) => {
             if (el.value === URLSearch.get("inputFilter"))

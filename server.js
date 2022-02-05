@@ -133,11 +133,11 @@ app.post("/process/:type", async(req, res) => {
 
             if (computed_password == results['user_hashedPassword']) {
                 console.log("** 로그인OK : 세션 처리 필요");
+                res.redirect("/");
             }
         } else {
-            console.log("일치하는 회원 정보가 없습니다.");
+            res.send(`<script>alert("일치하는 회원 정보가 없습니다."); history.go(-1);</script>`);
         }
-        res.redirect("/");
     }
 
 });

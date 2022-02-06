@@ -216,11 +216,11 @@
                             <legend class="col-form-label col-sm-2 pt-0">주소 필터</legend>
                             <div class="col-sm-8">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputFilter" type="radio" id="inlineCheckbox3" value="lo" required>
+                                    <input class="form-check-input" name="addrFilter" type="radio" id="inlineCheckbox3" value="lo" required>
                                     <label class="form-check-label" for="inlineCheckbox3">-로 단위</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="inputFilter" type="radio" id="inlineCheckbox4" value="gu">
+                                    <input class="form-check-input" name="addrFilter" type="radio" id="inlineCheckbox4" value="gu">
                                     <label class="form-check-label" for="inlineCheckbox4">-구 단위</label>
                                 </div>
                             </div>
@@ -341,6 +341,12 @@
             if (el.value === URLSearch.get("inputFilter"))
                 el.checked = true;
         });
+
+        let addrFilters = document.getElementsByName("addrFilter");
+        addrFilters.forEach((el) => {
+            if (el.value === URLSearch.get("addrFilter"))
+                el.checked = true;
+        })
     </script>
 </body>
 

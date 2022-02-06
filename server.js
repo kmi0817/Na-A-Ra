@@ -24,25 +24,38 @@ app.get("/", async (req, res) => {
     const inputAddr = req.query.inputAddr;
     const inputType = req.query.inputType;
     const inputFilter = req.query.inputFilter;
+    const addrFilter = req.query.addrFilter;
 
     if (typeof inputAddr == "undefined" || typeof inputType == "undefined" || typeof inputFilter == "undefined") {
         res.render("index", { results: "" });
-    } else {
-        console.log(`입력 주소: ${inputAddr}`);
-        console.log(`병원종류: ${inputType}, 필터: ${inputFilter}`);
-        
+    } else {        
         let searchAddr;
-        if (inputAddr.includes("서울")) {
-            let listAddr = inputAddr.split(" ");
-            let road = listAddr[2].substr(0, listAddr[2].indexOf("로") + 1);
-            searchAddr = `${listAddr[0]}특별시 ${listAddr[1]} ${road}`;
-        } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
-            let listAddr = inputAddr.split(" ");
-            searchAddr = `${listAddr[0]}광역시 ${listAddr[1]} ${listAddr[2]}`;
-        } else {
-            let listAddr = inputAddr.split(" ");
-            let road = listAddr[3].substr(0, listAddr[3].indexOf("로") + 1);
-            searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${listAddr[2]} ${road}`;
+        if (addrFilter === "lo") {
+            if (inputAddr.includes("서울")) {
+                let listAddr = inputAddr.split(" ");
+                let road = listAddr[2].substr(0, listAddr[2].indexOf("로") + 1);
+                searchAddr = `${listAddr[0]}특별시 ${listAddr[1]} ${road}`;
+            } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
+                let listAddr = inputAddr.split(" ");
+                searchAddr = `${listAddr[0]}광역시 ${listAddr[1]} ${listAddr[2]}`;
+            } else {
+                let listAddr = inputAddr.split(" ");
+                let road = listAddr[3].substr(0, listAddr[3].indexOf("로") + 1);
+                searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${listAddr[2]} ${road}`;
+            }
+        } else if (addrFilter === "gu") {
+            if (inputAddr.includes("서울")) {
+                let listAddr = inputAddr.split(" ");
+                let gu = listAddr[1].substr(0, listAddr[1].indexOf("구") + 1);
+                searchAddr = `${listAddr[0]}특별시 ${gu}`;
+            } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
+                let listAddr = inputAddr.split(" ");
+                searchAddr = `${listAddr[0]}광역시 ${listAddr[1]}`;
+            } else {
+                let listAddr = inputAddr.split(" ");
+                let gu = listAddr[2].substr(0, listAddr[2].indexOf("구") + 1);
+                searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${gu}`;
+            }
         }
         
         let conditions;
@@ -85,6 +98,8 @@ app.get("/", async (req, res) => {
                 }
             }
         }
+        console.log(`입력 주소: ${inputAddr}`);
+        console.log(`병원종류: ${inputType}, 필터: ${inputFilter} & ${addrFilter}`);
         console.log(JSON.stringify(conditions));
         let results = await Hospitals.find(conditions).limit(20);
 

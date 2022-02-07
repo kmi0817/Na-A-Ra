@@ -13,6 +13,16 @@ const usersSchema = new mongoose.Schema({
     user_salt: {
         type: String,
         required: true
+    },
+    created_at: {
+        type: Date,
+        required: true,
+        default: new Date
+    },
+    is_admin: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 });
 

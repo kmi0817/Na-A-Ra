@@ -170,55 +170,64 @@
                             <div class="row">
                                 <h4 class="col-md-8 card-title">
                                     <a href="/test/?left=<%= result.coord[1] %>&right=<%= result.coord[0] %>"><%= result.name %></a>
-                                    <a data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer"> /모달:<%= result.name %></a>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+                                </h4>
+                                <a class="col-md-2 btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer">자세히 보기</a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle"><%= result.name %> &#9888; <span class="text-muted" style="font-size: 0.75rem">신고횟수</span></h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-2">주소</div>
+                                                    <div class="col-md-10"><%= result.addr %></div>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <div id="map" style="width:100%;height:350px;"></div>
-                                                    
-                                                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9366bbe70b91ad10596a2fbc0e5fc13b"></script>
-                                                    <script>
-                                                        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-                                                            mapOption = {
-                                                                center: new kakao.maps.LatLng(<%= result.coord[1] %>, <%= result.coord[0] %>), // 지도의 중심좌표
-                                                                level: 1 // 지도의 확대 레벨
-                                                            };
-
-                                                        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-                                                        // 마커가 표시될 위치입니다 
-                                                        var markerPosition = new kakao.maps.LatLng(<%= result.coord[1] %>, <%= result.coord[0] %>);
-                                                        // 마커를 생성합니다
-                                                        var marker = new kakao.maps.Marker({
-                                                            position: markerPosition
-                                                        });
-
-                                                        // 마커가 지도 위에 표시되도록 설정합니다
-                                                        marker.setMap(map);
-
-                                                    // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-                                                    // marker.setMap(null);    
-                                                    </script>
+                                                <div class="row">
+                                                    <div class="col-md-2">번호</div>
+                                                    <div class="col-md-4"><%= result.telno %></div>
+                                                    <div class="col-md-2">의사 수</div>
+                                                    <div class="col-md-4"><%= result.drTotCnt %>명</div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
+                                                <div id="map" style="width:100%;height:350px;"></div>
+                                                
+                                                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9366bbe70b91ad10596a2fbc0e5fc13b"></script>
+                                                <script>
+                                                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                                                        mapOption = {
+                                                            center: new kakao.maps.LatLng(<%= result.coord[1] %>, <%= result.coord[0] %>), // 지도의 중심좌표
+                                                            level: 1 // 지도의 확대 레벨
+                                                        };
+
+                                                    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+                                                    // 마커가 표시될 위치입니다 
+                                                    var markerPosition = new kakao.maps.LatLng(<%= result.coord[1] %>, <%= result.coord[0] %>);
+                                                    // 마커를 생성합니다
+                                                    var marker = new kakao.maps.Marker({
+                                                        position: markerPosition
+                                                    });
+
+                                                    // 마커가 지도 위에 표시되도록 설정합니다
+                                                    marker.setMap(map);
+
+                                                // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+                                                // marker.setMap(null);    
+                                                </script>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
                                             </div>
                                         </div>
                                     </div>
-                                </h4>
-                                <a href="/admin/hospitals/<%= result._id %>" class="col-md-2 btn btn-outline-primary">자세히 보기</a>
+                                </div>
                                 <button class="col-md-2 btn btn-outline-success" onclick="copyHospitalName_naverAPI_popup('<%= result.name %>')">길찾기</button>
                             </div>
                             <div class="card-subtitle text-muted mb-2"><%= result.type_code %></div>

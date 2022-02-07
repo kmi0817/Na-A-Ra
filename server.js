@@ -7,11 +7,17 @@ const Users = require("./models/users");
 const methodOverride = require("method-override");
 const http = require("http");
 const crypto = require("crypto");
+const expressSession = require("express-session");
 
 const app = express();
 const server = http.createServer(app);
 
 app.use(express.urlencoded({ extended: false })); // enable to use req.body.(input field)
+app.use(expressSession({
+    secret: "secretKey",
+    resave: true,
+    saveUninitialized: true
+}));
 
 // views engine (convert ejs code to HTML)
 app.set("views", __dirname + "/views");
@@ -27,7 +33,13 @@ app.get("/", async (req, res) => {
     const addrFilter = req.query.addrFilter;
 
     if (typeof inputAddr == "undefined" || typeof inputType == "undefined" || typeof inputFilter == "undefined") {
-        res.render("index", { results: "" });
+        if (req.session.user) {
+            res.render("index_user", { results: "" });
+        } else if (req.session.admin) {
+            res.render("index_admin", { results: "" });
+        } else {
+            res.render("index", { results: "" });
+        }
     } else {        
         let searchAddr;
         if (addrFilter === "lo") {
@@ -105,9 +117,21 @@ app.get("/", async (req, res) => {
 
         // Send index.ejs data
         if (results.length > 0) {
-            res.render("index", { results: results });
+            if (req.session.user) {
+                res.render("index_user", { results: results });
+            } else if (req.session.admin) {
+                res.render("index_admin", { results: results });
+            } else {
+                res.render("index", { results: results });
+            }
         } else {
-            res.render("index", { results: '일치하는 검색 결과가 없습니다.' });
+            if (req.session.user) {
+                res.render("index_user", { results: '일치하는 검색 결과가 없습니다.' });
+            } else if (req.session.admin) {
+                res.render("index_admin", { results: '일치하는 검색 결과가 없습니다.' });
+            }else {
+                res.render("index", { results: '일치하는 검색 결과가 없습니다.' });
+            }
         }
     }
 });
@@ -147,12 +171,30 @@ app.post("/process/:type", async(req, res) => {
             const computed_password = crypto.pbkdf2Sync(req.body.inputPassword, results["user_salt"], 190481, 64, "sha512").toString("base64");
 
             if (computed_password == results['user_hashedPassword']) {
-                console.log("** 로그인OK : 세션 처리 필요");
+                if (results["is_admin"]) {
+                    req.session.admin = {
+                        id: req.body.inputId,
+                        name: req.body.inputId,
+                        authorized: true
+                    };
+                } else {
+                    // session save
+                    req.session.user = {
+                        id: req.body.inputId,
+                        name: req.body.inputId,
+                        authorized: true
+                    };
+                }
                 res.redirect("/");
             }
         } else {
             res.send(`<script>alert("일치하는 회원 정보가 없습니다."); history.go(-1);</script>`);
         }
+    } else if (type == "logout") {
+        req.session.destroy((error) => {
+            console.log("** logout");
+            res.redirect("/");
+        })
     }
 
 });

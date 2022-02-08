@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import MenuBar from "../components/MenuBar";
 import '../Test2.css'
-import Post from './AddrPopup';
-import Modal from './Modal';
+import AddrModal from './AddrModal';
+import HospitalsModal from './HospitalsModal';
 
 function NewTest() {
     const [jsondata, setJsondata] = useState([{}]);
@@ -73,10 +73,13 @@ function NewTest() {
         alert("전화번호: " + value);
     }
 
-    //주소가 state에 잘 들어갔는지 확인
-    const CheckAddr = (e) => {
-        console.log(address);
+    const showModal = (e) => {
+        alert("모달");
     }
+
+
+
+
 
     return (
         <div className="BackgroundDiv">
@@ -94,7 +97,7 @@ function NewTest() {
                     <div className="SearchSection">
                         <input value={address} className="inputAddr"></input>
                         <button type="button" className="AddrBtn" onClick={openModal}>주소 검색</button>
-                        <Modal open={modalOpen} close={closeModal} header="주소 검색" address={address} setAddress={setAddress} autoClose></Modal>
+                        <AddrModal open={modalOpen} close={closeModal} header="주소 검색" address={address} setAddress={setAddress} autoClose></AddrModal>
                         <select name="inputType" className="symptom_level">
                             <option value="병원종류">병원종류</option>
                             <option value="이비인후과">이비인후과</option>
@@ -118,7 +121,7 @@ function NewTest() {
             <p>검색 결과는 <strong>{datalength}</strong>건입니다.</p>
             <div className="cardDiv">
                 {jsondata.map((data, index) => (
-                    <div className="card1">
+                    <div className="card1" onClick={showModal}>
                         <p key={index} className="Hname">{data.name}</p>
                         <p key={index} className="Haddr">{data.addr}</p>
                         <p key={index} className="Htelno">{data.telno}</p>

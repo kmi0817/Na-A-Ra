@@ -18,6 +18,7 @@ function NewTest() {
     const [inputType, setinputType] = useState('외과');
     const [inputFilter, setinputFilter] = useState('all');
 
+    //주소 모달 관련
     const [modalOpen, setModalOpen] = useState(false);
     const openModal = () => {
         setModalOpen(true);
@@ -26,7 +27,15 @@ function NewTest() {
         setModalOpen(false);
     };
     
-    
+    //상세정보 모달 관련
+    const [DmodalOpen, setDModalOpen] = useState(false);
+    const openDModal = () => {
+        setDModalOpen(true);
+    };
+    const closeDModal = () => {
+        setDModalOpen(false);
+    };
+
     useEffect( () => {
         axios( {
             method: 'get',
@@ -73,10 +82,6 @@ function NewTest() {
         alert("전화번호: " + value);
     }
 
-    const showModal = (e) => {
-        alert("모달");
-    }
-
 
 
 
@@ -84,14 +89,6 @@ function NewTest() {
     return (
         <div className="BackgroundDiv">
             <MenuBar />
-
-            
-
-
-
-
-
-
             <p className="SearchMainText">증상을 입력해주세요</p>
             <form onSubmit={AfterSubmit} >
                     <div className="SearchSection">
@@ -121,11 +118,13 @@ function NewTest() {
             <p>검색 결과는 <strong>{datalength}</strong>건입니다.</p>
             <div className="cardDiv">
                 {jsondata.map((data, index) => (
-                    <div className="card1" onClick={showModal}>
+                    <div className="card1">
                         <p key={index} className="Hname">{data.name}</p>
                         <p key={index} className="Haddr">{data.addr}</p>
                         <p key={index} className="Htelno">{data.telno}</p>
                         <button type="button" className="CallBtn" onClick={e => Call(data.telno, e)}>전화 걸기</button>
+                        <button type="button" className="DetailBtn" onClick={openDModal}>상세정보</button>
+                        <HospitalsModal open={DmodalOpen} close={closeDModal} header="주소 검색" autoClose></HospitalsModal>
                     </div>
                 ))}
                 {

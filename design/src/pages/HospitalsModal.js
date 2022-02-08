@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import DaumPostcode from "react-daum-postcode";
 import './modal.css';
 
 const Post = (props) => {
@@ -17,7 +16,9 @@ const Post = (props) => {
             </button>
           </header>
           <main>
-            close를 눌러주세요.
+            {
+              open ? <p>close를 눌러주세요</p> : null
+            }
           </main>
           <footer>
             <button className="close" onClick={close}>

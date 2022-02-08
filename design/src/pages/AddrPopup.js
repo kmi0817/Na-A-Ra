@@ -11,7 +11,6 @@ const Post = (props) => {
   };
 
   const postCodeStyle = {
-   
     display: "block",
     position: "absolute",
     top: "20%",

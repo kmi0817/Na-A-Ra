@@ -222,15 +222,42 @@
                                                 </script>
                                                 <br>
                                                 <div class="card">
-                                                    <div class="card-header">writer</div>
+                                                    <div class="card-header">리뷰</div>
                                                     <div class="card-body">
-                                                        <p class="card-text">댓글 내용</p>
+                                                        <!-- Comment form-->
+                                                        <form class="mb-4" action="/process/comment" method="POST">
+                                                            <div class="form-group">
+                                                                <textarea name="comment" class="form-control" id="comment" rows="3" placeholder="한 번 작성한 리뷰는 삭제 및 수정이 불가합니다."></textarea>
+                                                            </div>
+                                                            <div class="d-flex justify-content-end">
+                                                                <button type="submit" class="btn btn-sm btn-outline-info justify-content-center">완료</button>
+                                                                <input type="hidden" name="writer_id" value="<%= admin_id %>">
+                                                                <input type="hidden" name="hospital_id" value="<%= result._id %>">
+                                                            </div>
+                                                        </form>
+                                                        
+                                                        <hr>
+                                                        
+                                                        <!-- Single comment-->
+                                                        <!-- {% if comments %}
+                                                        {% for comment in comments %} -->
+                                                        <div class="d-flex" style="margin-top: 1rem">
+                                                            <div class="ms-3">
+                                                                <div class="fw-bold">{{ comment.writer }}</div>
+                                                                {{ comment.comment }}
+                                                            </div>
+                                                        </div>
+                                                        <!-- {% if login == comment.writer %} -->
+                                                        <form class="d-flex justify-content-end" action="/comment/{{ comment._id }}" method="POST"
+                                                            onsubmit="if(!confirm('삭제하시겠습니까?')){return false;}">
+                                                            <button class="btn btn-sm btn-outline-danger" type="submit">삭제</button>
+                                                            <input type="hidden" name="posting_slug" value="{{ posting.slug }}">
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                                             </div>
                                         </div>
                                     </div>

@@ -4,6 +4,7 @@ const mypageRouter = require('./routes/mypage');
 const adminRouter = require("./routes/admin");
 const Hospitals = require("./models/hospitals");
 const Users = require("./models/users");
+const Comments = require("./models/comments");
 const methodOverride = require("method-override");
 const http = require("http");
 const crypto = require("crypto");
@@ -34,9 +35,9 @@ app.get("/", async (req, res) => {
 
     if (typeof inputAddr == "undefined" || typeof inputType == "undefined" || typeof inputFilter == "undefined") {
         if (req.session.user) {
-            res.render("index_user", { results: "" });
+            res.render("index_user", { results: "", user_id: req.session.user['id'] });
         } else if (req.session.admin) {
-            res.render("index_admin", { results: "" });
+            res.render("index_admin", { results: "", admin_id: req.session.admin['id'] });
         } else {
             res.render("index", { results: "" });
         }
@@ -113,22 +114,27 @@ app.get("/", async (req, res) => {
         console.log(`입력 주소: ${inputAddr}`);
         console.log(`병원종류: ${inputType}, 필터: ${inputFilter} & ${addrFilter}`);
         console.log(JSON.stringify(conditions));
-        let results = await Hospitals.find(conditions).limit(20);
+        let results = await Hospitals.find(conditions);
 
         // Send index.ejs data
         if (results.length > 0) {
+            let comments = {};
+            results.forEach(async (result) => {
+                comments += await Comments.find({_id: result['_id']});
+            });
+            console.log("** comments: " + comments);
             if (req.session.user) {
-                res.render("index_user", { results: results });
+                res.render("index_user", { results: results, user_id: req.session.user['id'] });
             } else if (req.session.admin) {
-                res.render("index_admin", { results: results });
+                res.render("index_admin", { results: results, admin_id: req.session.admin['id'] });
             } else {
                 res.render("index", { results: results });
             }
         } else {
             if (req.session.user) {
-                res.render("index_user", { results: '일치하는 검색 결과가 없습니다.' });
+                res.render("index_user", { results: '일치하는 검색 결과가 없습니다.', user_id: req.session.user['id'] });
             } else if (req.session.admin) {
-                res.render("index_admin", { results: '일치하는 검색 결과가 없습니다.' });
+                res.render("index_admin", { results: '일치하는 검색 결과가 없습니다.', admin_id: req.session.admin['id'] });
             }else {
                 res.render("index", { results: '일치하는 검색 결과가 없습니다.' });
             }
@@ -195,6 +201,14 @@ app.post("/process/:type", async(req, res) => {
             console.log("** logout");
             res.redirect("/");
         })
+    } else if (type == "comment") {
+        let comment = new Comments();
+        comment.writer_id = req.body.writer_id;
+        comment.hospital_id = req.body.hospital_id;
+        comment.comment = req.body.comment;
+
+        comment = await comment.save();
+        res.send(`<script>history.go(-1); location.reload();</script>`);
     }
 
 });

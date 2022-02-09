@@ -111,18 +111,18 @@ app.get("/", async (req, res) => {
                 }
             }
         }
-        console.log(`입력 주소: ${inputAddr}`);
-        console.log(`병원종류: ${inputType}, 필터: ${inputFilter} & ${addrFilter}`);
-        console.log(JSON.stringify(conditions));
         let results = await Hospitals.find(conditions);
 
         // Send index.ejs data
         if (results.length > 0) {
-            let comments = {};
-            results.forEach(async (result) => {
-                comments += await Comments.find({_id: result['_id']});
+            let comment_conditions = [];
+            results.forEach((result, index) => {
+                console.log(result);
+                console.log(index);
+                comment_conditions.push(String(result['_id']));
             });
-            console.log("** comments: " + comments);
+            
+            // let comments = await Comments.find({hospital_id: {$elemMatch: {comment_conditions}}})
             if (req.session.user) {
                 res.render("index_user", { results: results, user_id: req.session.user['id'] });
             } else if (req.session.admin) {
@@ -151,9 +151,7 @@ app.post("/process/:type", async(req, res) => {
     if (type == "signup") {
         try {
             const salt = crypto.randomBytes(64).toString("base64");
-            console.log("typeof(salt): " + typeof(salt));
             const hashed_password = crypto.pbkdf2Sync(req.body.createPassword, salt, 190481, 64, "sha512").toString("base64");
-            console.log(`salt: ${salt}, hashed: ${hashed_password}`);
 
             let user = new Users();
             user.user_id = req.body.createId;

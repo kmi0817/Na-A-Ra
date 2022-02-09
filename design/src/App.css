@@ -46,6 +46,7 @@ header {
 .menu #HeaderSignin, #HeaderSignup {
   margin: 1.5vh 2.5vh 1.5vh 2.5vh;
   display: inline-block;
+  cursor: pointer;
 }
 
 ul, li {
@@ -89,6 +90,7 @@ ul, li {
   background: white;
   color: #809FFF;
   border-radius: 2vh;
+  cursor: pointer;
 }
 
 .MainTopSearchDiv {
@@ -191,6 +193,7 @@ ul, li {
   border: none;
   margin: 0 30vh 0 0;
   box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+  cursor: pointer;
 }
 
 .MainMidDiv button:active {
@@ -209,11 +212,19 @@ ul, li {
 
 .MoveBtn {
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .1);
+  cursor: pointer;
 }
 
 .MoveBtn:hover {
   box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, .1);
 }
+
+.mainPageLink {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
 
 
 

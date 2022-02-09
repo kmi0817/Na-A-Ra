@@ -151,8 +151,7 @@ ul, li {
   border-radius: 1vh;
   margin-left: 0.5vh;
   color: #809FFF;
-  font-weight: bold;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, .1);
+  box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, .1);
 }
 
 .MainMidDiv {
@@ -205,12 +204,16 @@ ul, li {
   border-radius: 1vh;
   border: none;
   margin: 0 30vh 0 0;
-  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .3);
+  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
 }
 
+.MoveBtn {
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .1);
+}
 
-
-
+.MoveBtn:hover {
+  box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, .1);
+}
 
 
 

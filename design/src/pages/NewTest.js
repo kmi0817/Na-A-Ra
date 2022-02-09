@@ -124,7 +124,7 @@ function NewTest() {
                         <p key={index} className="Htelno">{data.telno}</p>
                         <button type="button" className="CallBtn" onClick={e => Call(data.telno, e)}>전화 걸기</button>
                         <button type="button" className="DetailBtn" onClick={openDModal}>상세정보</button>
-                        <HospitalsModal open={DmodalOpen} close={closeDModal} header="주소 검색" autoClose></HospitalsModal>
+                        <HospitalsModal open={DmodalOpen} close={closeDModal} header="상세 정보 확인" key={data.id} data={data} autoClose></HospitalsModal>
                     </div>
                 ))}
                 {

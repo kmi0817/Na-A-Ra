@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 import MenuBar from '../components/MenuBar'
 
 function MainPage({ location, history }) {
@@ -9,18 +10,13 @@ function MainPage({ location, history }) {
           <div className="MainTopDiv">
             <span className="MainTopSpan">어떤 증상을 겪고 계신가요?</span>
             <button className="MainTopBtn">서비스 소개</button>
-            <span className="MainTopSpan2">아래에서 겪고 계신 증상을 선택해주세요</span>
+            <span className="MainTopSpan2">증상에 따른 병원을 추천받고 싶다면 아래 버튼을 클릭해 이동해주세요.</span>
           </div>
         </div>
         <div className="MainTopSearchDiv">
-          <select name="percent" className="MainTopSelect">
-            <option value="1">아주 나쁨</option>
-            <option value="2">나쁨</option>
-            <option value="3">보통</option>
-            <option value="4">약함</option>
-            <option value="5">아주 약함</option>
-          </select>
-          <div className="MainTopSubDiv"><input></input><button>검색</button></div>
+          <Link to="/newtest">
+            <button className="MoveBtn" href="/newtest">이동하기</button>
+          </Link>
         </div>
 
         <div className="MainMidDiv">

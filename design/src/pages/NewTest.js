@@ -14,9 +14,11 @@ function NewTest() {
     const [address, setAddress] = useState();
     const [popup, setPopup] = useState(false);
 
-    const [inputAddr, setinputAddr] = useState('서울 송파구 백제고분로 2');
-    const [inputType, setinputType] = useState('외과');
-    const [inputFilter, setinputFilter] = useState('all');
+    const [inputAddr, setinputAddr] = useState('');
+    const [inputType, setinputType] = useState('');
+    const [inputFilter, setinputFilter] = useState('');
+    
+    const [listText, setlistText] = useState('');
 
     //주소 모달 관련
     const [modalOpen, setModalOpen] = useState(false);
@@ -66,6 +68,7 @@ function NewTest() {
             setinputAddr(addr)
             setinputType(type)
             setinputFilter(filter);
+            setlistText('검색 결과가 없습니다.')
         }
         else if (addr != '' && type == '병원종류') {
             alert("주소를 입력해주세요.");
@@ -115,9 +118,13 @@ function NewTest() {
                     </div>
             </form>
             
-            <p>검색 결과는 <strong>{datalength}</strong>건입니다.</p>
+            {
+            datalength === 0 ? null : <p>검색 결과는 <strong>{datalength}</strong>건입니다.</p>
+            }
             <div className="cardDiv">
-                {jsondata.map((data, index) => (
+                {
+                datalength === 0 ? null :
+                jsondata.map((data, index) => (
                     <div className="card1">
                         <p key={index} className="Hname">{data.name}</p>
                         <p key={index} className="Haddr">{data.addr}</p>
@@ -126,10 +133,9 @@ function NewTest() {
                         <button type="button" className="DetailBtn" onClick={openDModal}>상세정보</button>
                         <HospitalsModal open={DmodalOpen} close={closeDModal} header="상세 정보 확인" key={data.id} data={data} autoClose></HospitalsModal>
                     </div>
-                ))}
-                {
-                    datalength === 0 ? <p className="noneResultText">검색 결과가 없습니다</p> : <p className="noneResultText">- END -</p>
+                ))
                 }
+                <p className="noneResultText">{listText}</p>
             </div>
         </div>
     )

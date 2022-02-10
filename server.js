@@ -115,14 +115,12 @@ app.get("/", async (req, res) => {
 
         // Send index.ejs data
         if (results.length > 0) {
-            let comment_conditions = [];
-            results.forEach((result, index) => {
-                console.log(result);
-                console.log(index);
-                comment_conditions.push(String(result['_id']));
+            let hospital_ids = [];
+            let comments;
+            results.forEach((result) => { hospital_ids.push(String(result['_id'])); });
+            hospital_ids.forEach(async (id) => {
+                const temp = await Comments.find({hospital_id: id});
             });
-            
-            // let comments = await Comments.find({hospital_id: {$elemMatch: {comment_conditions}}})
             if (req.session.user) {
                 res.render("index_user", { results: results, user_id: req.session.user['id'] });
             } else if (req.session.admin) {
@@ -206,7 +204,7 @@ app.post("/process/:type", async(req, res) => {
         comment.comment = req.body.comment;
 
         comment = await comment.save();
-        res.send(`<script>history.go(-1); location.reload();</script>`);
+        res.send(`<script>history.go(-1); location.reload(true);</script>`);
     }
 
 });

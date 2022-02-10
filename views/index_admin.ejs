@@ -166,20 +166,19 @@
             <div class="card mt-4">
                 <div class="card-body">
                     <% if (Array.isArray(results)) { %>
-                        <% results.forEach((result)=> { %>
+                        <% results.forEach((result, index)=> { %>
                             <div class="row">
                                 <h4 class="col-md-8 card-title">
                                     <a href="/test/?left=<%= result.coord[1] %>&right=<%= result.coord[0] %>"><%= result.name %></a>
-
                                 </h4>
-                                <a class="col-md-2 btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer">자세히 보기</a>
+                                <a class="col-md-2 btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter<%= index %>" style="cursor: pointer">자세히 보기</a>
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                <div class="modal fade" id="exampleModalCenter<%= index %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle<%= index %>"
                                     aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle"><%= result.name %> &#9888; <span class="text-muted" style="font-size: 0.75rem">신고횟수</span></h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle<%= index %>"><%= result.name %> &#9888; <span class="text-muted" style="font-size: 0.75rem">신고횟수</span></h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>

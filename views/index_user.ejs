@@ -169,20 +169,21 @@
             <div class="card mt-4">
                 <div class="card-body">
                     <% if (Array.isArray(results)) { %>
-                        <% results.forEach((result)=> { %>
+                        <% results.forEach((result, index)=> { %>
                             <div class="row">
                                 <h4 class="col-md-8 card-title">
                                     <a href="/test/?left=<%= result.coord[1] %>&right=<%= result.coord[0] %>"><%= result.name %></a>
-
                                 </h4>
-                                <a class="col-md-2 btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer">자세히 보기</a>
+                                <a class="col-md-2 btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter<%= index %>" style="cursor: pointer">자세히 보기</a>
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                <div class="modal fade" id="exampleModalCenter<%= index %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle<%= index %>"
                                     aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle"><%= result.name %> &#9888; <span class="text-muted" style="font-size: 0.75rem">신고횟수</span></h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle<%= index %>">
+                                                    <%= result.name %> &#9888; <span class="text-muted" style="font-size: 0.75rem">신고횟수</span>
+                                                </h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -190,17 +191,24 @@
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-md-2">주소</div>
-                                                    <div class="col-md-10"><%= result.addr %></div>
+                                                    <div class="col-md-10">
+                                                        <%= result.addr %>
+                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-2">번호</div>
-                                                    <div class="col-md-4"><%= result.telno %></div>
+                                                    <div class="col-md-4">
+                                                        <%= result.telno %>
+                                                    </div>
                                                     <div class="col-md-2">의사 수</div>
-                                                    <div class="col-md-4"><%= result.drTotCnt %>명</div>
+                                                    <div class="col-md-4">
+                                                        <%= result.drTotCnt %>명
+                                                    </div>
                                                 </div>
                                                 <div id="map" style="width:100%;height:350px;"></div>
-                                                
-                                                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9366bbe70b91ad10596a2fbc0e5fc13b"></script>
+                                
+                                                <script type="text/javascript"
+                                                    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9366bbe70b91ad10596a2fbc0e5fc13b"></script>
                                                 <script>
                                                     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                                                         mapOption = {
@@ -220,13 +228,49 @@
                                                     // 마커가 지도 위에 표시되도록 설정합니다
                                                     marker.setMap(map);
 
-                                                // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-                                                // marker.setMap(null);    
+                                                    // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+                                                    // marker.setMap(null);    
                                                 </script>
+                                                <br>
+                                                <div class="card">
+                                                    <div class="card-header">리뷰</div>
+                                                    <div class="card-body">
+                                                        <!-- Comment form-->
+                                                        <form class="mb-4" action="/process/comment" method="POST">
+                                                            <div class="form-group">
+                                                                <textarea name="comment" class="form-control" id="comment" rows="3"
+                                                                    placeholder="한 번 작성한 리뷰는 삭제 및 수정이 불가합니다."></textarea>
+                                                            </div>
+                                                            <div class="d-flex justify-content-end">
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-outline-info justify-content-center">완료</button>
+                                                                <input type="hidden" name="writer_id" value="<%= user_id %>">
+                                                                <input type="hidden" name="hospital_id" value="<%= result._id %>">
+                                                            </div>
+                                                        </form>
+                                
+                                                        <hr>
+                                
+                                                        <!-- Single comment-->
+                                                        <!-- {% if comments %}
+                                                        {% for comment in comments %} -->
+                                                        <div class="d-flex" style="margin-top: 1rem">
+                                                            <div class="ms-3">
+                                                                <div class="fw-bold">{{ comment.writer }}</div>
+                                                                {{ comment.comment }}
+                                                            </div>
+                                                        </div>
+                                                        <!-- {% if login == comment.writer %} -->
+                                                        <form class="d-flex justify-content-end" action="/comment/{{ comment._id }}" method="POST"
+                                                            onsubmit="if(!confirm('삭제하시겠습니까?')){return false;}">
+                                                            <button class="btn btn-sm btn-outline-danger" type="submit">삭제</button>
+                                                            <input type="hidden" name="posting_slug" value="{{ posting.slug }}">
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                                             </div>
                                         </div>
                                     </div>

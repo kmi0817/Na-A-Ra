@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <title>admin</title>
+    <title>나아라</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -174,7 +174,7 @@
                                 <h4 class="col-md-8 card-title">
                                     <a href="/test/?left=<%= result.coord[1] %>&right=<%= result.coord[0] %>"><%= result.name %></a>
                                 </h4>
-                                <a class="col-md-2 btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter<%= index %>" style="cursor: pointer">자세히 보기</a>
+                                <button class="col-md-2 btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter<%= index %>" style="cursor: pointer">자세히 보기</button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleModalCenter<%= index %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle<%= index %>"
                                     aria-hidden="true">
@@ -234,7 +234,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                                <a href="/comments/<%= result._id %>"><button type="button" class="btn btn-primary">리뷰 보기</button></a>
+                                                <a href="/comments/<%= result._id %>" target="_blank"><button type="button" class="btn btn-primary">리뷰 보기</button></a>
                                             </div>
                                         </div>
                                     </div>

@@ -4,7 +4,9 @@ const usersSchema = new mongoose.Schema({
     user_id: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        minLength: 5,
+        maxLength: 20
     },
     user_hashedPassword: {
         type: String,

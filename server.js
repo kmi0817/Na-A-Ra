@@ -5,7 +5,6 @@ const adminRouter = require("./routes/admin");
 const commentsRouter = require("./routes/comments");
 const Hospitals = require("./models/hospitals");
 const Users = require("./models/users");
-const Comments = require("./models/comments");
 const methodOverride = require("method-override");
 const http = require("http");
 const crypto = require("crypto");
@@ -117,11 +116,6 @@ app.get("/", async (req, res) => {
         // Send index.ejs data
         if (results.length > 0) {
             let hospital_ids = [];
-            let comments;
-            results.forEach((result) => { hospital_ids.push(String(result['_id'])); });
-            hospital_ids.forEach(async (id) => {
-                const temp = await Comments.find({hospital_id: id});
-            });
             if (req.session.user) {
                 res.render("index_user", { results: results, user_id: req.session.user['id'] });
             } else if (req.session.admin) {
@@ -198,14 +192,6 @@ app.post("/process/:type", async(req, res) => {
             console.log("** logout");
             res.redirect("/");
         })
-    } else if (type == "comment") {
-        let comment = new Comments();
-        comment.writer_id = req.body.writer_id;
-        comment.hospital_id = req.body.hospital_id;
-        comment.comment = req.body.comment;
-
-        comment = await comment.save();
-        res.send(`<script>history.go(-1); location.reload(true);</script>`);
     }
 
 });

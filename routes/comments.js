@@ -25,4 +25,9 @@ router.post("/write", async(req, res) => {
     res.redirect(`/comments/${req.body.hospital_id}`);
 });
 
+router.delete("/delete/:id", async(req, res) => {
+    await Comments.findByIdAndDelete(req.params.id);
+    res.redirect(`/comments/${req.body.hospital_id}`);
+});
+
 module.exports = router;

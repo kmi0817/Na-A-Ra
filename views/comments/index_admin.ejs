@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <title>나아라 - 리뷰</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -28,13 +28,24 @@
                     <div class=" d-flex justify-content-end">
                         <input type="hidden" name="writer_id" value="<%= admin_id %>">
                         <input type="hidden" name="hospital_id" value="<%= hospital._id %>">
-                        <button type="submit" class="btn btn-primary">완료</button>
+                        <span id="description_cnt">(0 / 500)&nbsp;&nbsp;</span>
+                        <button type="submit" class="btn btn-primary btn-sm">완료</button>
                     </div>
                 </form>
-
             </div>
         </div>
-
+        <script>
+            // Check if description is less than or equal to 500 characters
+            $(document).ready(function () {
+                $('#description').on('keyup', function () {
+                    $('#description_cnt').html("(" + $(this).val().length + " / 500)");
+                    if ($(this).val().length > 500) {
+                        $(this).val($(this).val().substring(0, 500));
+                        $('#description_cnt').html("(500 / 500)");
+                    }
+                });
+            });
+        </script>
         <% comments.forEach((comment)=> { %>
             <div class="card mt-4">
                 <div class="card-body">

@@ -1,6 +1,5 @@
 const express = require("express");
 const request = require("request");
-const mypageRouter = require('./routes/mypage');
 const adminRouter = require("./routes/admin");
 const commentsRouter = require("./routes/comments");
 const Hospitals = require("./models/hospitals");
@@ -234,7 +233,6 @@ app.get("/openapi", (req, res) => {
 });
 
 
-app.use('/mypage', mypageRouter);
 app.use("/admin", adminRouter);
 app.use("/comments", commentsRouter);
 

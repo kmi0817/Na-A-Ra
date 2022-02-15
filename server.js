@@ -1,6 +1,7 @@
 const express = require("express");
 const adminRouter = require("./routes/admin");
 const commentsRouter = require("./routes/comments");
+const mypageRouter = require("./routes/mypage");
 const Hospitals = require("./models/hospitals");
 const Users = require("./models/users");
 const methodOverride = require("method-override");
@@ -191,6 +192,7 @@ app.post("/process/:type", async(req, res) => {
 
 app.use("/admin", adminRouter);
 app.use("/comments", commentsRouter);
+app.use("/mypage", mypageRouter);
 
 // web server
 server.listen(3000, () => {

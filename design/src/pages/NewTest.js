@@ -6,21 +6,20 @@ import AddrModal from './AddrModal';
 import HospitalsModal from './HospitalsModal';
 
 function NewTest() {
+    //요청 데이터 관련
     const [jsondata, setJsondata] = useState([{}]);
     const [datalength, setLength] = useState(0);
-    const [symptom_level, setSymptom_level] = useState(1);
-    const [symptom, setSymptom] = useState('이+아픔');
 
-    const [address, setAddress] = useState();
-    const [popup, setPopup] = useState(false);
-
+    //요청 폼 관련
     const [inputAddr, setinputAddr] = useState('');
     const [inputType, setinputType] = useState('');
     const [inputFilter, setinputFilter] = useState('');
     
+    //조건부 텍스트 렌더링
     const [listText, setlistText] = useState('');
 
     //주소 모달 관련
+    const [address, setAddress] = useState();
     const [modalOpen, setModalOpen] = useState(false);
     const openModal = () => {
         setModalOpen(true);
@@ -31,12 +30,18 @@ function NewTest() {
     
     //상세정보 모달 관련
     const [DmodalOpen, setDModalOpen] = useState(false);
-    const openDModal = () => {
+    const [modalData, setmodalData] = useState();
+    const openDModal = (value, e) => {
+        //모달 열기
         setDModalOpen(true);
+        //value는 JSON 데이터이므로 value.name 식으로 접근
+        setmodalData(value);
     };
     const closeDModal = () => {
         setDModalOpen(false);
     };
+
+    
 
     useEffect( () => {
         axios( {
@@ -48,7 +53,6 @@ function NewTest() {
             setJsondata(response.data);
             console.log("데이터 길이: " + response.data.length);
             setLength(response.data.length)
-
         })
     }, [inputAddr, inputType, inputFilter]);
 
@@ -130,11 +134,11 @@ function NewTest() {
                         <p key={index} className="Haddr">{data.addr}</p>
                         <p key={index} className="Htelno">{data.telno}</p>
                         <button type="button" className="CallBtn" onClick={e => Call(data.telno, e)}>전화 걸기</button>
-                        <button type="button" className="DetailBtn" onClick={openDModal}>상세정보</button>
-                        <HospitalsModal open={DmodalOpen} close={closeDModal} header="상세 정보 확인" key={data.id} data={data} autoClose></HospitalsModal>
+                        <button type="button" className="DetailBtn" onClick={e => openDModal(data, e)}>상세정보</button>
                     </div>
                 ))
                 }
+                <HospitalsModal open={DmodalOpen} close={closeDModal} data={modalData} autoClose></HospitalsModal>
                 <p className="noneResultText">{listText}</p>
             </div>
         </div>

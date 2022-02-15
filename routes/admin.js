@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const request = require("request-promise-native");
 const Hospitals = require("../models/hospitals");
 const router = express.Router();
-const expressSession = require("express-session");
 
 mongoose.connect("mongodb://localhost/app", {
     useNewUrlParser: true,

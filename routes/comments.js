@@ -24,6 +24,16 @@ router.get("/:id", async (req, res) => {
 
 router.post("/write", async(req, res) => {
     if (req.session.admin || req.session.user) {
+        const banned_words = ["시발", "씨발", "씨팔", "ㅅㅂ", "썅", "등신", "병신", "븅신", "븅딱", "좆", "개새끼", "년", "애미", "애비",
+            "간나", "쌍간나", "종간나", "개새", "개돼지", "씹", "걸레", "고자", "남창", "느개비", "느금마", "니미", "뒤져", "또라이", "똘추",
+            "맘충", "머저리", "지랄", "엠창", "호모" ]
+
+        for (index in banned_words) {
+            if (req.body.description.includes(banned_words[index])) {
+                return res.send(`<script>alert("금칙어를 포함한 댓글입니다."); history.go(-1);</script>`);
+            }
+        }
+
         let comment = new Comments();
         comment.writer_id = req.body.writer_id;
         comment.hospital_id = req.body.hospital_id;

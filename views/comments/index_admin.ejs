@@ -23,13 +23,13 @@
             <div class="card-body">
                 <form action="/comments/write" method="POST" onsubmit="if(!confirm('한 번 작성한 리뷰는 삭제 및 수정이 불가합니다.')) {return false; }">
                     <div class="form-group">
-                        <textarea name="description" id="description" cols="30" rows="5" class="form-control" placeholder="한 번 작성한 리뷰는 삭제 및 수정이 불가합니다."></textarea>
+                        <textarea name="description" id="description" cols="30" rows="5" class="form-control" placeholder="한 번 작성한 리뷰는 삭제 및 수정이 불가합니다. (5글자 이상부터 등록 가능)"></textarea>
                     </div>
                     <div class=" d-flex justify-content-end">
                         <input type="hidden" name="writer_id" value="<%= admin_id %>">
                         <input type="hidden" name="hospital_id" value="<%= hospital._id %>">
                         <span id="description_cnt">(0 / 500)&nbsp;&nbsp;</span>
-                        <button type="submit" class="btn btn-primary btn-sm">완료</button>
+                        <button id="submit_btn" type="submit" class="btn btn-primary btn-sm" disabled>완료</button>
                     </div>
                 </form>
             </div>
@@ -39,6 +39,14 @@
             $(document).ready(function () {
                 $('#description').on('keyup', function () {
                     $('#description_cnt').html("(" + $(this).val().length + " / 500)");
+                    if ($(this).val().length < 5) {
+                        const btn = document.getElementById("submit_btn");
+                        btn.disabled = true;
+                    } else if ($(this).val().length >= 5) {
+                        // $("#submit_btn").disabled = false;
+                        const btn = document.getElementById("submit_btn");
+                        btn.disabled = false;
+                    }
                     if ($(this).val().length > 500) {
                         $(this).val($(this).val().substring(0, 500));
                         $('#description_cnt').html("(500 / 500)");
@@ -62,7 +70,8 @@
                     </form>
                 </div>
             </div>
-            <% }) %>
+        <% }) %>
+        <br>
     </div>
 </body>
 

@@ -7,7 +7,6 @@ router.get("/", async(req, res) => {
     if (req.session.user) {
         const home_results = await Users.findOne({ user_id: req.session.user.id });
         const comments_results = await Comments.find({ writer_id: req.session.user.id }).sort({ _id: -1 });
-        console.log(comments_results)
         res.render("mypage", { home_results: home_results, comments_results: comments_results });
     } else {
         res.status(404).send("not found");

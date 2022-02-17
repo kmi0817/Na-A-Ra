@@ -8,10 +8,6 @@ mongoose.connect("mongodb://localhost/app", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
-const connection = mongoose.connection;
-connection.once("open", () => {
-    console.log("MongoDB OK");
-});
 
 router.get("/", (req, res) => {
     if (req.session.admin) {

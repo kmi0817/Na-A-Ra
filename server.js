@@ -202,8 +202,11 @@ app.post("/process/:type", async(req, res) => {
         } else {
             res.send(`<script>alert("일치하는 회원 정보가 없습니다."); history.go(-1);</script>`);
         }
+    } else if (type == "report") {
+        const hospital = await Hospitals.findById(req.body.hospital_id);
+        await Hospitals.findByIdAndUpdate({ _id: req.body.hospital_id }, { reports_cnt: hospital["reports_cnt"] + 1 });
+        res.send(`<script>history.go(-1);`);
     }
-
 });
 
 app.use("/admin", adminRouter);

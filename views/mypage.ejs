@@ -31,52 +31,11 @@
     <div class="container">
         <h2 class="mb-4"><a href="/">나아라</a></h2>
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">
-            비밀번호 변경
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">로그인</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="/process/login" method="POST">
-                        <div class="modal-body">
-                            <div class="form-group row">
-                                <label for="inputId" class="col-sm-2 col-form-label">아이디</label>
-                                <div class="col-sm-10">
-                                    <input type="text" required name="inputId" class="form-control" id="inputId"
-                                        placeholder="ID" minlength="5" maxlength="20">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
-                                <div class="col-sm-10">
-                                    <input type="password" required name="inputPassword" class="form-control"
-                                        id="inputPassword" placeholder="Password" minlength="7">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                            <button type="submit" class="btn btn-primary">완료</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#signupModal">
-            회원가입
-        </button>
+        <form class="d-inline" action="/process/logout" method="POST">
+            <button type="submit" class="btn btn-outline-success">
+                로그아웃
+            </button>
+        </form>
 
         <!-- Modal -->
         <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
@@ -115,22 +74,136 @@
             </div>
         </div>
         <br>
-                <ul class="nav nav-tabs px-3 mt-3" id="myTab" role="tablist">
-                    <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">댓글내역</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">신고내역</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+        <div id="accordion" class="my-4">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            기본정보
+                        </button>
+                    </h5>
                 </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label for="created_at" class="col-sm-2 col-form-label">가입일시</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" id="created_at" value="<%= home_results.created_at %>">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="user_id" class="col-sm-2 col-form-label">아이디</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" id="user_id" value="<%= home_results.user_id %>">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="user_password" class="col-sm-2 col-form-label">비밀번호</label>
+                            <!-- Button trigger modal -->
+                            <button type="button" id="user_password" class="btn btn-success" data-toggle="modal" data-target="#passwordModal">
+                                비밀번호 변경
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="passwordModalLabel">비밀번호 변경</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="/process/change-password" method="POST">
+                                            <div class="modal-body">
+                                                <div class="form-group row">
+                                                    <label for="input_id" class="col-sm-4 col-form-label">아이디</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" required name="input_id" class="form-control" id="input_id" placeholder="ID" minlength="5" maxlength="20">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="old_password" class="col-sm-4 col-form-label">기존 비밀번호</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="password" required name="old_password" class="form-control" id="old_password" minlength="7">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="new_password" class="col-sm-4 col-form-label">새 비밀번호</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="password" required name="new_password" class="form-control" id="new_password" minlength="7">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="new_password_check" class="col-sm-4 col-form-label">새 비밀번호 확인</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="password" required name="new_password_check" class="form-control" id="new_password_check" minlength="7">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                                                <button type="submit" id="submit_btn" class="btn btn-primary" disabled>완료</button>
+                                            </div>
+                                        </form>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $("#new_password_check").on("keyup", function () {
+                                                    if ($("#new_password").val() === $(this).val()) {
+                                                        document.getElementById("submit_btn").disabled = false;
+                                                    } else {
+                                                        document.getElementById("submit_btn").disabled = true;
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            내가 단 댓글
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+                        moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
+                        shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                        aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                            aria-expanded="false" aria-controls="collapseThree">
+                            내가 신고한 병원
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+                        moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
+                        shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                        aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

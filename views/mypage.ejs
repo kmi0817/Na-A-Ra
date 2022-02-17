@@ -174,12 +174,26 @@
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-                        moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
-                        shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-                        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
-                        aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">병원이름</th>
+                                    <th scope="col">내용</th>
+                                    <th scope="col">날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% comments_results.forEach((comment, index) => { %>
+                                <tr>
+                                    <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
+                                    <td style="font-size: 0.8rem"><a href="/comments/<%= comment.hospital_id %>"><%= comment.hospital_id %></a></td>
+                                    <td style="font-size: 0.8rem"><%= comment.description %></td>
+                                    <td style="font-size: 0.8rem"><%= comment.created_at.toLocaleDateString() %></td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -178,7 +178,8 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle<%= index %>"><%= result.name %> &#9888; <span class="text-muted" style="font-size: 0.75rem">신고횟수</span></h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle<%= index %>"><%= result.name %></h5>
+                                                <div class="text-danger" style="font-size: 0.75rem">&#9888; 신고횟수 <%= result.reports_cnt %></div>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -222,6 +223,10 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                                <form class="d-inline" action="/process/report" method="POST" onsubmit="if(!confirm('한 번 신고한 내역은 취소할 수 없습니다.')) { return false; }">
+                                                    <input type="hidden" name="hospital_id" value="<%= result._id %>">
+                                                    <button type="submit" class="btn btn-warning text-white">신고하기</button>
+                                                </form>
                                                 <a href="/comments/<%= result._id %>" target="_blank"><button type="button" class="btn btn-primary">리뷰 보기</button></a>
                                             </div>
                                         </div>

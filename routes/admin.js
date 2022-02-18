@@ -13,7 +13,8 @@ mongoose.connect("mongodb://localhost/app", {
 router.get("/", async (req, res) => {
     if (req.session.admin) {
         const users = await Users.find().sort({ _id: -1 });
-        res.render("admin/index", { users: users });
+        const hospitals = await Hospitals.find({ reports_cnt: { $ne: 0 }}, { sgguCdNm: 1, sidoCdNm: 1, reports_cnt: 1, name: 1}).sort({ reports_cnt: -1 });
+        res.render("admin/index", { users: users, hospitals: hospitals });
     } else {
         res.status(404).send("not found");
     }

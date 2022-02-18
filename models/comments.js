@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
 
 const commentsSchema = new mongoose.Schema({
-    writer_id: {
+    writer_id: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Users",
         required: true,
-    },
-    hospital_id: {
+    }],
+    hospital_id: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Hospitals",
         required: true
-    },
+    }],
     description: {
         type: String,
         required: true,

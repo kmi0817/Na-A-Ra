@@ -167,14 +167,14 @@ app.post("/process/:type", async(req, res) => {
             if (computed_password == results['user_hashedPassword']) {
                 if (results["is_admin"]) {
                     req.session.admin = {
-                        id: req.body.inputId,
+                        id: results["_id"],
                         name: req.body.inputId,
                         authorized: true
                     };
                 } else {
                     // session save
                     req.session.user = {
-                        id: req.body.inputId,
+                        id: results["_id"],
                         name: req.body.inputId,
                         authorized: true
                     };

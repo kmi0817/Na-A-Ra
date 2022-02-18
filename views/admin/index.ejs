@@ -46,7 +46,7 @@
                                 <tr>
                                     <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
                                     <td style="font-size: 0.8rem"><%= user.user_id %></td>
-                                    <td style="font-size: 0.8rem"><%= user.created_at.toLocaleDateString() %></td>
+                                    <td style="font-size: 0.8rem"><%= user.created_at %></td>
                                     <td style="font-size: 0.8rem"><%= user.is_admin %></td>
                                 </tr>
                                 <% }) %>
@@ -58,46 +58,13 @@
             <div class="card">
                 <div class="card-header" id="headingTwo">
                     <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            병원관리
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                    <div class="card-body">
-                        <!-- <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">아이디</th>
-                                    <th scope="col">가입일시</th>
-                                    <th scope="col">관리자 여부</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% users.forEach((user, index) => { %>
-                                <tr>
-                                    <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
-                                    <td style="font-size: 0.8rem"><%= user.user_id %></td>
-                                    <td style="font-size: 0.8rem"><%= user.created_at.toLocaleDateString() %></td>
-                                    <td style="font-size: 0.8rem"><%= user.is_admin %></td>
-                                </tr>
-                                <% }) %>
-                            </tbody>
-                        </table> -->
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
                         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
                             aria-expanded="false" aria-controls="collapseThree">
                             병원 신고 관리
                         </button>
                     </h5>
                 </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>
@@ -105,6 +72,7 @@
                                     <th scope="col">#신고횟수</th>
                                     <th scope="col">병원이름</th>
                                     <th scope="col">위치</th>
+                                    <th scope="col">#리뷰수</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -113,6 +81,7 @@
                                     <th scope="row" style="font-size: 0.8rem"><%= hospital.reports_cnt %></th>
                                     <th style="font-size: 0.8rem"><a href="/admin/hospitals/<%= hospital._id %>"><%= hospital.name %></a></th>
                                     <th style="font-size: 0.8rem"><%= hospital.sidoCdNm %> <%= hospital.sgguCdNm %></th>
+                                    <th style="font-size: 0.8rem">리뷰수 달면 좋은데 어려울 듯...</th>
                                 </tr>
                                 <% }) %>
                             </tbody>

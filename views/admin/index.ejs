@@ -8,44 +8,108 @@
     <title>나아라 - admin</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <br>
     <div class="container">
         <h2 class="mb-4"><a href="/admin">관리자 페이지</a></h2>
         <a href="/" class="btn btn-dark">메인 페이지</a>
         <a href="/admin/hospitals" class="btn btn-info">데이터베이스</a>
 
-        <div class="card mt-4">
-            <div class="card-header"><h4 class="mb-0">회원관리</h4></div>
-            <div class="card-body">
-                <div class="card-subtitle text-muted mb-2">
-                    2022.01.16
+        <br>
+        <div id="accordion" class="my-4">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            회원관리
+                        </button>
+                    </h5>
                 </div>
-                <div class="card-text mb-2">description</div>
-                <a href="/mypage/show/" class="btn btn-primary">Read More</a>
-                <a href="/mypage/edit/" class="btn btn-info">Edit</a>
-                <form action="/mypage/del/" method="POST" class="d-inline">
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">아이디</th>
+                                    <th scope="col">가입일시</th>
+                                    <th scope="col">관리자 여부</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% users.forEach((user, index) => { %>
+                                <tr>
+                                    <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
+                                    <td style="font-size: 0.8rem"><%= user.user_id %></td>
+                                    <td style="font-size: 0.8rem"><%= user.created_at.toLocaleDateString() %></td>
+                                    <td style="font-size: 0.8rem"><%= user.is_admin %></td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card mt-4">
-            <div class="card-header"><h4 class="mb-0">병원 신고 관리</h4></div>
-            <div class="card-body">
-                <div class="card-subtitle text-muted mb-2">
-                    2022.01.16
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            병원 신고 관리
+                        </button>
+                    </h5>
                 </div>
-                <div class="card-text mb-2">description</div>
-                <a href="/mypage/show/" class="btn btn-primary">Read More</a>
-                <a href="/mypage/edit/" class="btn btn-info">Edit</a>
-                <form action="/mypage/del/" method="POST" class="d-inline">
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                        <!-- <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">아이디</th>
+                                    <th scope="col">가입일시</th>
+                                    <th scope="col">관리자 여부</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% users.forEach((user, index) => { %>
+                                <tr>
+                                    <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
+                                    <td style="font-size: 0.8rem"><%= user.user_id %></td>
+                                    <td style="font-size: 0.8rem"><%= user.created_at.toLocaleDateString() %></td>
+                                    <td style="font-size: 0.8rem"><%= user.is_admin %></td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table> -->
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                            aria-expanded="false" aria-controls="collapseThree">
+                            내가 신고한 병원
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+                        moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
+                        shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                        aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <br>
 </body>
-
 </html>

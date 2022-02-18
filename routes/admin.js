@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const request = require("request-promise-native");
 const Hospitals = require("../models/hospitals");
+const Users = require("../models/users");
 const router = express.Router();
 
 mongoose.connect("mongodb://localhost/app", {
@@ -9,9 +10,10 @@ mongoose.connect("mongodb://localhost/app", {
     useUnifiedTopology: true
 });
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
     if (req.session.admin) {
-        res.render("admin/index");
+        const users = await Users.find().sort({ _id: -1 });
+        res.render("admin/index", { users: users });
     } else {
         res.status(404).send("not found");
     }

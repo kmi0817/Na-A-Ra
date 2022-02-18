@@ -10,7 +10,7 @@ mongoose.connect("mongodb://localhost/app", {
 });
 
 router.get("/:id", async (req, res) => {
-    const comments = await Comments.find({ hospital_id: req.params.id }).sort({ _id: -1 }); // sorting collection by date (created_at)
+    const comments = await Comments.find({ hospital_id: req.params.id }).populate({ path: "writer_id", select: { user_id: 1 } }).sort({ _id: -1 }); // sorting collection by date (created_at)
     const hospital = await Hospitals.findById(req.params.id);
 
     if (req.session.admin) {

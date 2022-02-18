@@ -37,7 +37,7 @@
             <div class="card mt-4">
                 <div class="card-body">
                     <div class="card-subtitle text-muted mb-2 row">
-                        <div class="col-md-1 font-weight-bold"><%= comment.writer_id %></div>
+                        <div class="col-md-2 font-weight-bold"><%= comment.writer_id[0].user_id %></div>
                         <div class="col-md-2"><%= comment.created_at.toLocaleDateString() %></div>
                     </div>
                     <div class="card-text mb-2">

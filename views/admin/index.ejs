@@ -99,7 +99,34 @@
                 </div>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">병원이름</th>
+                                    <th scope="col">위치</th>
+                                    <th scope="col">신고정보</th>
+                                    <th scope="col">영수증 인증</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% reports.forEach((report, index) => { %>
+                                <tr>
+                                    <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
+                                    <th style="font-size: 0.8rem"><a href="/admin/hospitals/<%= report.hospital_id[0]._id %>"><%= report.hospital_id[0].name %></a></th>
+                                    <th style="font-size: 0.8rem"><%= report.hospital_id[0].sidoCdNm %> <%= report.hospital_id[0].sgguCdNm %></th>
+                                    <th style="font-size: 0.8rem"><%= report.writer_id[0].user_id %> <span class="text-muted"><%= report.created_at.toLocaleString() %></span></th>
+                                    <th style="font-size: 0.8rem">
+                                        <form class="d-inline" action="/admin/report-confirmed" method="POST">
+                                            <input type="hidden" name="report_id" value="<%= report._id %>">
+                                            <input type="hidden" name="hospital_id" value="<%= report.hospital_id[0]._id %>">
+                                            <button class="btn btn-outline-danger btn-sm" type="submit">인증하기</button>
+                                        </form>
+                                    </th>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

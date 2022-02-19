@@ -16,7 +16,7 @@ const reportsSchema = new mongoose.Schema({
         required: true,
         default: new Date
     },
-    is_comfirmed: {
+    is_confirmed: {
         type: Boolean,
         required: true,
         default: false

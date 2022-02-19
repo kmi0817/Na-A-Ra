@@ -4,6 +4,7 @@ const commentsRouter = require("./routes/comments");
 const mypageRouter = require("./routes/mypage");
 const Hospitals = require("./models/hospitals");
 const Users = require("./models/users");
+const Reports = require("./models/reports");
 const methodOverride = require("method-override");
 const http = require("http");
 const crypto = require("crypto");
@@ -203,9 +204,12 @@ app.post("/process/:type", async(req, res) => {
             res.send(`<script>alert("일치하는 회원 정보가 없습니다."); history.go(-1);</script>`);
         }
     } else if (type == "report") {
-        const hospital = await Hospitals.findById(req.body.hospital_id);
-        await Hospitals.findByIdAndUpdate({ _id: req.body.hospital_id }, { reports_cnt: hospital["reports_cnt"] + 1 });
-        res.send(`<script>history.go(-1);`);
+        let report = new Reports();
+        report.writer_id = req.body.writer_id;
+        report.hospital = req.body.hospital_id;
+
+        report = await report.save();
+        res.send(`<script>alert("신고가 접수되었습니다. 관리자 확인 후 신고횟수에 반영됩니다."); history.go(-1);</script>`);
     }
 });
 

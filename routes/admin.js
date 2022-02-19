@@ -14,9 +14,20 @@ mongoose.connect("mongodb://localhost/app", {
 router.get("/", async (req, res) => {
     if (req.session.admin) {
         const users = await Users.find().sort({ _id: -1 });
-        const hospitals = await Hospitals.find({ reports_cnt: { $ne: 0 }}, { sgguCdNm: 1, sidoCdNm: 1, reports_cnt: 1, name: 1}).sort({ reports_cnt: -1 });
-        const reports = await Reports.find({ is_confirmed: false }).sort({ _id: -1 });
+        const hospitals = await Hospitals.find({ reports_cnt: { $ne: 0 }}, { sgguCdNm: 1, sidoCdNm: 1, reports_cnt: 1, name: 1 }).sort({ reports_cnt: -1 });
+        const reports = await Reports.find({ is_confirmed: false }).populate({ path: "writer_id", select: { user_id: 1 } }).populate({ path: "hospital_id", select: { sgguCdNm: 1, sidoCdNm: 1, name: 1 }});
         res.render("admin/index", { users: users, hospitals: hospitals, reports: reports });
+    } else {
+        res.status(404).send("not found");
+    }
+});
+
+router.post("/report-confirmed", async(req, res) => {
+    if (req.session.admin) {
+        await Reports.findByIdAndUpdate(req.body.report_id, { is_confirmed: true });
+        const hospital = await Hospitals.findById(req.body.hospital_id, { reports_cnt: 1 });
+        await Hospitals.findByIdAndUpdate(req.body.hospital_id, { reports_cnt: hospital["reports_cnt"] + 1 });
+        res.redirect("/admin");
     } else {
         res.status(404).send("not found");
     }

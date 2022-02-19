@@ -206,7 +206,7 @@ app.post("/process/:type", async(req, res) => {
     } else if (type == "report") {
         let report = new Reports();
         report.writer_id = req.body.writer_id;
-        report.hospital = req.body.hospital_id;
+        report.hospital_id = req.body.hospital_id;
 
         report = await report.save();
         res.send(`<script>alert("신고가 접수되었습니다. 관리자 확인 후 신고횟수에 반영됩니다."); history.go(-1);</script>`);

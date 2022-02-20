@@ -265,11 +265,11 @@
                                                     <div class="col-md-2">의사 수</div>
                                                     <div class="col-md-4"><%= result.drTotCnt %>명</div>
                                                 </div>
-                                                <div id="map" style="width:100%;height:350px;"></div>
+                                                <div id="map<%= index %>" style="width:100%;height:350px;"></div>
                                                 
                                                 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9366bbe70b91ad10596a2fbc0e5fc13b"></script>
                                                 <script>
-                                                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                                                    var mapContainer = document.getElementById('map<%= index %>'), // 지도를 표시할 div 
                                                         mapOption = {
                                                             center: new kakao.maps.LatLng(<%= result.coord[1] %>, <%= result.coord[0] %>), // 지도의 중심좌표
                                                             level: 1 // 지도의 확대 레벨

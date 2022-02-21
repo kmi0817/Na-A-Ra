@@ -180,9 +180,9 @@
                                 <% comments_results.forEach((comment, index) => { %>
                                 <tr>
                                     <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
-                                    <td style="font-size: 0.8rem"><a href="/comments/<%= comment.hospital_id %>"><%= comment.hospital_id %></a></td>
+                                    <td style="font-size: 0.8rem"><a href="/comments/<%= comment.hospital_id[0]._id %>"><%= comment.hospital_id[0].name %></a></td>
                                     <td style="font-size: 0.8rem"><%= comment.description %></td>
-                                    <td style="font-size: 0.8rem"><%= comment.created_at.toLocaleDateString() %></td>
+                                    <td style="font-size: 0.8rem"><%= comment.created_at.toLocaleString() %></td>
                                 </tr>
                                 <% }) %>
                             </tbody>
@@ -214,7 +214,7 @@
                                 <% reports_results.forEach((report, index) => { %>
                                 <tr>
                                     <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
-                                    <td style="font-size: 0.8rem"><%= report.hospital_id[0].name %></td>
+                                    <td style="font-size: 0.8rem"><a href="/comments/<%= report.hospital_id[0]._id %>"><%= report.hospital_id[0].name %></a></td>
                                     <td style="font-size: 0.8rem"><%= report.created_at.toLocaleString() %></td>
                                     <td style="font-size: 0.8rem"><%= report.is_confirmed %></td>
                                 </tr>

@@ -45,7 +45,7 @@ router.post("/write", async(req, res) => {
 });
 
 router.delete("/delete/:id", async(req, res) => {
-    if (req.session.admin) { await Comments.findByIdAndDelete(req.params.id); }
+    if (req.session.admin) { await Comments.findByIdAndUpdate(req.params.id, { is_deleted: true }); }
     res.redirect(`/comments/${req.body.hospital_id}`);
 });
 

@@ -10,9 +10,13 @@ class Header extends Component {
           </Link>
           <nav>
             <ul className="menu">
+              <Link to="/signin">
               <li id="HeaderSignin">로그인</li>
+              </Link>
               <li>|</li>
+              <Link to="/signup">
               <li id="HeaderSignup">회원가입</li>
+              </Link>
             </ul>
           </nav>
         </header>

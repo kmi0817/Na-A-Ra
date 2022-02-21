@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './modal.css';
 
 const Post = (props) => {
   const { open, close, data } = props;
+  const navigate = useNavigate;
   
+  const onClickMove = () => {
+    navigate(`/detail/${data._id}`, { data: data});
+  }
 
   return (
     <div className={open ? 'openModal modal' : 'modal'}>
@@ -42,8 +46,9 @@ const Post = (props) => {
               {' '}
               close{' '}
             </button>
-            <button className="DetailBtn">상세페이지
-            </button>
+            <Link to={"/${data._id}"} state={{ data: data }}>
+            <button className="DetailMoveBtn">상세페이지</button>
+            </Link>
           </footer>
         </section>
       ) : null}

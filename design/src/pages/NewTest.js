@@ -43,42 +43,36 @@ function NewTest() {
 
     
 
-    useEffect( () => {
-        axios( {
-            method: 'get',
-            url: 'newapi?inputAddr=' + inputAddr + '&inputType=' + inputType + '&inputFilter=' + inputFilter,
-        })
-        .then(response => {
-            console.log("데이터 받아왔어요! : " + response.data);
-            setJsondata(response.data);
-            console.log("데이터 길이: " + response.data.length);
-            setLength(response.data.length)
-        })
-    }, [inputAddr, inputType, inputFilter]);
-
     const AfterSubmit = (e) => {
         e.preventDefault(); //redirect 방지
         console.log(e.target[0].value);
-        console.log(e.target[1].value); //이건 뭐지?
         console.log(e.target[2].value);
         console.log(e.target[3].value);
+        console.log(e.target[4].value);
 
 
         const addr = e.target[0].value;
         const type = e.target[2].value;
         const filter = e.target[3].value;
+        const filter_addr = e.target[4].value;
 
-        if (addr != '' && type != '증상') {
-            setinputAddr(addr)
-            setinputType(type)
+        if (addr != '' && type != '병원종류') {
+            setinputAddr(addr);
+            setinputType(type);
             setinputFilter(filter);
-            setlistText('검색 결과가 없습니다.')
-        }
-        else if (addr != '' && type == '병원종류') {
-            alert("주소를 입력해주세요.");
-        }
-        else if (addr == '' && type != '병원종류') {
-            alert("병원 종류를 선택해주세요.");
+            setlistText('검색 결과가 없습니다.');
+
+            //요청
+            axios( {
+                method: 'get',
+                url: '/newapi?inputAddr=' + inputAddr + '&inputType=' + inputType + '&inputFilter=' + inputFilter,
+            })
+            .then(response => {
+                console.log("데이터 받아왔어요! : " + response.data[0].addr);
+                setJsondata(response.data);
+                console.log("데이터 길이: " + response.data.length);
+                setLength(response.data.length)
+            })
         }
         else {
             alert("주소, 병원 종류, 보기 종류를 선택해주세요.");
@@ -118,6 +112,10 @@ function NewTest() {
                             <option value="all">전체보기</option>
                             <option value="infant">소아과 보기</option>
                         </select>
+                        <select name="AddrFilter" className="symptom">
+                            <option value="lo">-로 단위</option>
+                            <option value="gu">-구 단위</option>
+                        </select>
                         <button type="submit" className="formBtn">검색</button>
                     </div>
             </form>
@@ -128,13 +126,13 @@ function NewTest() {
             <div className="cardDiv">
                 {
                 datalength === 0 ? null :
-                jsondata.map((data, index) => (
+                jsondata.map((data) => (
                     <div className="card1">
-                        <p key={index} className="Hname">{data.name}</p>
-                        <p key={index} className="Haddr">{data.addr}</p>
-                        <p key={index} className="Htelno">{data.telno}</p>
-                        <button type="button" className="CallBtn" onClick={e => Call(data.telno, e)}>전화 걸기</button>
-                        <button type="button" className="DetailBtn" onClick={e => openDModal(data, e)}>상세정보</button>
+                        <p key={data._id} className="Hname">{data.name}</p>
+                        <p key={data._id} className="Haddr">{data.addr}</p>
+                        <p key={data._id} className="Htelno">{data.telno}</p>
+                        <button type="button" className="CallBtn" key={data._id} onClick={e => Call(data.telno, e)}>전화 걸기</button>
+                        <button type="button" className="DetailBtn" key={data._id} onClick={e => openDModal(data, e)}>상세정보</button>
                     </div>
                 ))
                 }

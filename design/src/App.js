@@ -3,9 +3,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import MainPage from './pages/MainPage';
 import Notfound from './pages/Notfound';
-import Test2 from "./pages/Test2";
 import NewTest from "./pages/NewTest";
 import HospitalDetail from "./pages/HospitalDetail";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
+
+import TestSign from "./pages/TestSign";
 
 
 class App extends Component {
@@ -15,10 +18,14 @@ class App extends Component {
         <Router>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/test2" element={<Test2 />} />
           <Route path="/newtest" element={<NewTest />} />
           <Route path="/detail" element={<HospitalDetail />} />
-          <Route path="/detail/:id" element={<HospitalDetail />} />
+          <Route path="/:id" element={<HospitalDetail />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
+
+          <Route path="/testSign" element={<TestSign />} />
+
           <Route path="*" element={<Notfound/>} />
         </Routes>
       </Router>

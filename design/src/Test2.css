@@ -174,3 +174,25 @@
     border-radius: 1vh;
     box-shadow: 1px 1px 7px 3px rgba(0, 0, 0, .1);
 }
+
+.commentsForm {
+    text-align: center;
+    margin: 5vw;
+}
+
+#description {
+    border: none;
+    box-shadow: 1px 1px 7px 3px rgba(0, 0, 0, .1);
+    padding: 1.5vh;
+}
+
+#submitBtn {
+    width: 10vw;
+    height: 4vh;
+    border: none;
+    background-color: #809FFF;
+    color: white;
+    border-radius: 1vw;
+    margin: 3vw;
+    max-width: 70px;
+}

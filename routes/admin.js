@@ -65,7 +65,8 @@ router.get("/hospitals/:id", async(req, res) => {
 
 router.delete("/hospitals/:id", async(req, res) => {
     if (req.session.admin) {
-        await Hospitals.findByIdAndDelete({ _id: req.params.id });
+        await Hospitals.findByIdAndUpdate(req.params.id, { is_deleted: true });
+        // await Hospitals.findByIdAndDelete({ _id: req.params.id }); // real deletion
         res.redirect("/admin/hospitals");
     } else {
         res.status(404).send("not found");

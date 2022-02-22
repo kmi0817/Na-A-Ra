@@ -8,8 +8,6 @@ import HospitalDetail from "./pages/HospitalDetail";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 
-import TestSign from "./pages/TestSign";
-
 
 class App extends Component {
   render() {
@@ -23,8 +21,6 @@ class App extends Component {
           <Route path="/:id" element={<HospitalDetail />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
-
-          <Route path="/testSign" element={<TestSign />} />
 
           <Route path="*" element={<Notfound/>} />
         </Routes>

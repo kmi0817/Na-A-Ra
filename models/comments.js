@@ -5,13 +5,11 @@ const commentsSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Users",
         required: true,
-        default: 'hyj3463@naver.com',
     }],
     hospital_id: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Hospitals",
         required: true,
-        default: '620db9835a15e00c2e60a3ba',
     }],
     description: {
         type: String,

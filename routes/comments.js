@@ -10,22 +10,19 @@ mongoose.connect("mongodb://localhost/app", {
 });
 
 router.get("/:id", async (req, res) => {
-    const comments = await Comments.find({ hospital_id: req.params.id }).sort({ _id: -1 });
+    //const comments = await Comments.find({ hospital_id: req.params.id, is_deleted: false }).sort({ _id: -1 });
+    const comments = await Comments.find({ hospital_id: req.params.id, is_deleted: false }).populate({ path: "writer_id", select: { user_id: 1 } }).sort({ _id: -1 });
     const hospital = await Hospitals.findById(req.params.id);
-
     if (req.session.admin) {
         res.send({comments: comments, hospital: hospital, admin_id: req.session.admin['id']})
     } else if (req.session.user) {
-        res.send({comments: comments, hospital: hospital, user_id: req.session.user['id'], text: "유저 있음"})
+        res.send({comments: comments, hospital: hospital, user_id: req.session.user['name'], text: "유저 있음"})
     } else {
         res.send({comments: comments, hospital: hospital, text: "유저 없음"})
     }
 });
 
 router.post("/write", async(req, res) => {
-    console.log(req.body.writer_id)
-    console.log(req.body.hospital_id)
-    console.log(req.body.description)
     const writer_id = String(req.body.writer_id);
     const hospital_id = String(req.body.hospital_id);
     const description = String(req.body.description);
@@ -44,7 +41,6 @@ router.post("/write", async(req, res) => {
         comment.writer_id = writer_id;
         comment.hospital_id = hospital_id;
         comment.description = description;
-        console.log("저장 전 : " + comment)
         comment = await comment.save();
 
         const comments = await Comments.find({ hospital_id: req.body.hospital_id }).sort({ _id: -1 });
@@ -56,7 +52,7 @@ router.post("/write", async(req, res) => {
 });
 
 router.delete("/delete/:id", async(req, res) => {
-    if (req.session.admin) { await Comments.findByIdAndDelete(req.params.id); }
+    if (req.session.admin) { await Comments.findByIdAndUpdate(req.params.id, { is_deleted: true }); }
     res.redirect(`/comments/${req.body.hospital_id}`);
 });
 

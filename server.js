@@ -35,21 +35,6 @@ app.use("/admin", adminRouter);
 
 
 
-//testingd
-app.get("/testSign", async (req, res) => {
-    if (req.session.user) {
-        res.send({text: "유저 있음"});
-    }
-    else if (req.session.admin) {
-        res.send({text: "관리자 있음"});
-    }
-    else {
-        res.send({text: "없음"});
-    }
-})
-
-
-
 // routes
 app.get("/newapi", async (req, res) => {
     const inputAddr = req.query.inputAddr;
@@ -157,7 +142,6 @@ app.post("/process/:type", async(req, res) => {
 
         if (results != null) {
             const computed_password = crypto.pbkdf2Sync(req.body.inputPassword, results["user_salt"], 190481, 64, "sha512").toString("base64");
-
             if (computed_password == results['user_hashedPassword']) {
                 if (results["is_admin"]) {
                     req.session.admin = {

@@ -20,8 +20,8 @@ const HospitalDetail = () => {
       alert(response.data.text + "   " + response.data.user_id);
       setUserId(response.data.user_id);
       setcomments(response.data.comments);
-      console.log(response.data)
       setLength(response.data.comments.length);
+      console.log(response.data.comments)
     })
     .catch(function (error) {
       alert("회원 아이디 가져오기 요청 실패");
@@ -49,7 +49,6 @@ const HospitalDetail = () => {
       })
       .then(function (response) {
         alert(response.data.text);
-        //console.log(response.data.comments[0].writer_id[0].user_id)
         console.log(response.data.comments)
       })
       .catch(function (error) {
@@ -78,10 +77,10 @@ const HospitalDetail = () => {
           
           {
               commentsLength === 0 ? null :
-              comments.map((data, index) => (
+              comments.map((data, id) => (
                   <div>
-                      <p key={data._id} className="Hname">{data.writer_id}</p>
-                      <p key={data._id} className="Haddr">{data.description}</p>
+                      <p key={id} className="Hname">{data.writer_id[0].user_id}</p>
+                      <p key={id} className="Haddr">{data.description}</p>
                   </div>
               ))
           }

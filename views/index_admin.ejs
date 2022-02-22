@@ -223,10 +223,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                                <form class="d-inline" action="/process/report" method="POST" onsubmit="if(!confirm('한 번 신고한 내역은 취소할 수 없습니다.')) { return false; }">
-                                                    <input type="hidden" name="hospital_id" value="<%= result._id %>">
-                                                    <button type="submit" class="btn btn-warning text-white">신고하기</button>
-                                                </form>
+                                                <button type="button" class="btn btn-warning text-white" onclick="alert('관리자는 병원을 신고할 수 없습니다.')">신고하기</button>
                                                 <a href="/comments/<%= result._id %>" target="_blank"><button type="button" class="btn btn-primary">리뷰 보기</button></a>
                                             </div>
                                         </div>

@@ -69,19 +69,19 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">#신고횟수</th>
+                                    <th scope="col">#</th>
                                     <th scope="col">병원이름</th>
                                     <th scope="col">위치</th>
-                                    <th scope="col">#리뷰수</th>
+                                    <th scope="col">#신고횟수</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <% hospitals.forEach((hospital) => { %>
+                                <% hospitals.forEach((hospital, index) => { %>
                                 <tr>
-                                    <th scope="row" style="font-size: 0.8rem"><%= hospital.reports_cnt %></th>
+                                    <th style="font-size: 0.8rem"><%= index + 1 %></th>
                                     <th style="font-size: 0.8rem"><a href="/admin/hospitals/<%= hospital._id %>"><%= hospital.name %></a></th>
                                     <th style="font-size: 0.8rem"><%= hospital.sidoCdNm %> <%= hospital.sgguCdNm %></th>
-                                    <th style="font-size: 0.8rem">리뷰수 달면 좋은데 어려울 듯...</th>
+                                    <th scope="row" style="font-size: 0.8rem"><%= hospital.reports_cnt %></th>
                                 </tr>
                                 <% }) %>
                             </tbody>

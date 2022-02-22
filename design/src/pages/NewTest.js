@@ -4,6 +4,7 @@ import MenuBar from "../components/MenuBar";
 import '../Test2.css'
 import AddrModal from './AddrModal';
 import HospitalsModal from './HospitalsModal';
+import Footer from "../components/Footer";
 
 function NewTest() {
     //요청 데이터 관련
@@ -60,8 +61,6 @@ function NewTest() {
             setinputAddr(addr);
             setinputType(type);
             setinputFilter(filter);
-            setlistText('검색 결과가 없습니다.');
-
             //요청
             axios( {
                 method: 'get',
@@ -72,6 +71,12 @@ function NewTest() {
                 setJsondata(response.data.results);
                 console.log("데이터 길이: " + response.data.results.length);
                 setLength(response.data.results.length)
+                if (response.data.results.length === 0) {
+                    setlistText('검색 결과가 없습니다.');
+                }
+                else {
+                    setlistText('');
+                }
             })
         }
         else {
@@ -139,6 +144,7 @@ function NewTest() {
                 <HospitalsModal open={DmodalOpen} close={closeDModal} data={modalData} autoClose></HospitalsModal>
                 <p className="noneResultText">{listText}</p>
             </div>
+            <Footer></Footer>
         </div>
     )
 }

@@ -123,6 +123,8 @@
 
 .noneResultText {
     color: #777777;
+    height: 30vh;
+    min-height: 350px;
 }
 
 .CallBtn {

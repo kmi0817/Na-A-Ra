@@ -8,6 +8,7 @@ const HospitalDetail = () => {
   const [comments, setcomments] = useState();
   const [commentsLength, setLength] = useState(0);
   const [user_id, setUserId] = useState();
+  const [admin_id, setAdminId] = useState(null);
   
   const location = useLocation();
   console.log(location.state)
@@ -20,6 +21,12 @@ const HospitalDetail = () => {
     .then(function (response) {
       alert(response.data.text + "   " + response.data.user_id);
       setUserId(response.data.user_id);
+      if (response.data.admin_id) {
+        setAdminId(response.data.admin_id);
+      }
+      else {
+        setAdminId(null);
+      }
       setcomments(response.data.comments);
       setLength(response.data.comments.length);
       console.log(response.data.comments)
@@ -70,16 +77,25 @@ const HospitalDetail = () => {
             <textarea name="description" id="description" cols="30" rows="5" placeholder="한 번 작성한 리뷰는 삭제 및 수정이 불가합니다. (5글자 이상부터 등록 가능)"></textarea>
             <input type="hidden" name="writer_id" value={user_id}></input>
             <input type="hidden" name="hospital_id" value={data._id}></input>
+            <div className="SubmitBtnDiv">
             <button id="submitBtn" type="submit">완료</button>
+            </div>
           </form>
         
           
           {
-              commentsLength === 0 ? null :
+              commentsLength === 0 ? 
+                <p className="commentsNoneText">등록된 리뷰가 없습니다.</p>
+              :
               comments.map((data, id) => (
                   <div>
-                      <p key={id} className="Hname">{data.writer_id[0].user_id}</p>
-                      <p key={id} className="Haddr">{data.description}</p>
+                      <p key={id} className="writer_id">{data.writer_id[0].user_id}</p>
+                      <p key={id} className="description">{data.description}</p>
+                      {admin_id !== null ?
+                        <button>삭제</button>
+                      :
+                        null
+                      }
                   </div>
               ))
           }

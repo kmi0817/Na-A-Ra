@@ -16,7 +16,7 @@ function NewTest() {
     const [inputFilter, setinputFilter] = useState('');
     
     //조건부 텍스트 렌더링
-    const [listText, setlistText] = useState('');
+    const [listText, setlistText] = useState('아직 검색하지 않았어요!');
 
     //주소 모달 관련
     const [address, setAddress] = useState();

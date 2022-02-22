@@ -10,10 +10,7 @@ function Intro({ location, history }) {
           <MenuBar></MenuBar>
           <div className="MainTopDiv">
             <span className="MainTopSpan">병원 검색 서비스</span>
-            <span className="MainTopSpan2">증상에 따른 병원을 추천받고 싶다면 아래 버튼을 클릭해 이동해주세요.</span>
-            <Link to="1">
-              <p>아래로</p>
-            </Link>
+            <span className="MainTopSpan2">단국대학교 소프트웨어학과 박경미, 황예진</span>
           </div>
         </div>
         

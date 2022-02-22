@@ -16,7 +16,7 @@ router.get("/:id", async (req, res) => {
     if (req.session.admin) {
         res.send({comments: comments, hospital: hospital, admin_id: req.session.admin['id']})
     } else if (req.session.user) {
-        res.send({comments: comments, hospital: hospital, user_id: req.session.user['name'], text: "유저 있음"})
+        res.send({comments: comments, hospital: hospital, user_id: req.session.user['id'], text: "유저 있음"})
     } else {
         res.send({comments: comments, hospital: hospital, text: "유저 없음"})
     }

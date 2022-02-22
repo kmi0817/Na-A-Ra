@@ -181,18 +181,41 @@
 }
 
 #description {
+    display: inline-block;
+    width: 60vw;
+    height: 10vh;
     border: none;
     box-shadow: 1px 1px 7px 3px rgba(0, 0, 0, .1);
     padding: 1.5vh;
 }
 
+#description:focus {
+    outline: none;
+    box-shadow: 1px 1px 7px 3px rgba(0, 0, 0, .15);
+}
+
+.SubmitBtnDiv {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
 #submitBtn {
     width: 10vw;
-    height: 4vh;
+    height: 5vh;
     border: none;
     background-color: #809FFF;
     color: white;
     border-radius: 1vw;
-    margin: 3vw;
+    margin: 1vw;
     max-width: 70px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .1);
+}
+
+#submitBtn:active {
+    box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, .1);
+}
+
+.commentsNoneText {
+    color: #777777;
 }

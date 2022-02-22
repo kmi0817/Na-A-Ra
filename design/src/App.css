@@ -221,7 +221,7 @@ ul, li {
 }
 
 .footer {
-  position: fixed;
+  /*position: fixed;*/
   bottom: 0;
   left: 0;
   right: 0;
@@ -237,6 +237,8 @@ ul, li {
   align-items: center;
   z-index: 1000;
   border-radius: 3vh 3vh 0 0;
+
+  margin-top: 20vw;
 }
 
 .footerText {
@@ -252,7 +254,7 @@ ul, li {
 /* Intro css */
 .IntroBtnDiv {
   text-align: center;
-  margin: 10vh 0 20vh 0;
+  margin: 10vh 0 10vh 0;
 }
 
 .IntroBtnDiv button {
@@ -278,7 +280,7 @@ ul, li {
 .IntroMainDiv {
   display: inline-block;
   width: 70%;
-  height: 30vh;
+  height: 40vh;
   background-color: #f8f8f8;
   text-align: center;
   margin-top: 10vh;

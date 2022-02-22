@@ -7,6 +7,7 @@ import NewTest from "./pages/NewTest";
 import HospitalDetail from "./pages/HospitalDetail";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import Intro from './pages/Intro';
 
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
           <Route path="/:id" element={<HospitalDetail />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
+          <Route path="/intro" element={<Intro />} />
 
           <Route path="*" element={<Notfound/>} />
         </Routes>

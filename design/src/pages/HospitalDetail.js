@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation, useNavigation } from "react-router";
 import MenuBar from '../components/MenuBar'
+import Footer from "../components/Footer";
 
 const HospitalDetail = () => {
   const [comments, setcomments] = useState();
@@ -12,7 +13,7 @@ const HospitalDetail = () => {
   console.log(location.state)
   const data = location.state.data;
   const path = "/comments/" + data._id;
-
+//
   useEffect(() => {
     axios.get(path, {
     })
@@ -27,8 +28,6 @@ const HospitalDetail = () => {
       alert("회원 아이디 가져오기 요청 실패");
     })
   }, []);
-
-
 
 
   const AfterSubmit = (e) => {
@@ -85,7 +84,7 @@ const HospitalDetail = () => {
               ))
           }
 
-
+          <Footer></Footer>
         </div>
     );
 }

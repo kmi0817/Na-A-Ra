@@ -1,5 +1,6 @@
 html {
   scroll-behavior: smooth;
+  text-align: center;
 }
 
 body {
@@ -47,6 +48,7 @@ header {
   margin: 1.5vh 2.5vh 1.5vh 2.5vh;
   display: inline-block;
   cursor: pointer;
+  color: #5f87ff;
 }
 
 ul, li {
@@ -136,7 +138,7 @@ ul, li {
 }
 
 .MainTopSearchDiv button {
-  width: 10vh;
+  width: 20vh;
   height: 5vh;
   border: none;
   background: white;
@@ -146,13 +148,6 @@ ul, li {
 }
 
 .MainTopSearchDiv button:active {
-  width: 10vh;
-  height: 5vh;
-  border: none;
-  background: white;
-  border-radius: 1vh;
-  margin-left: 0.5vh;
-  color: #809FFF;
   box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, .1);
 }
 
@@ -225,10 +220,72 @@ ul, li {
   cursor: pointer;
 }
 
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10vh;
+  padding: 0 2rem 0 2rem;
 
+  font-size: max(1vw, 12px);
+  color: white;
+  background: #809FFF;
 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  border-radius: 3vh 3vh 0 0;
+}
+
+.footerText {
+  font-size: max(1vw, 10px);
+}
 
 /* Error Page css */
 .errorsection {
   text-align: center;
+}
+
+
+/* Intro css */
+.IntroBtnDiv {
+  text-align: center;
+  margin: 10vh 0 20vh 0;
+}
+
+.IntroBtnDiv button {
+  width: 20vh;
+  height: 5vh;
+  border: none;
+  background: white;
+  border-radius: 1vh;
+  margin-left: 0.5vh;
+  color: #809FFF;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .1);
+  cursor: pointer;
+}
+
+.IntroBtnDiv button:active {
+  box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, .1);
+}
+
+.IntroMoveText {
+  color: #809FFF;
+}
+
+.IntroMainDiv {
+  display: inline-block;
+  width: 70%;
+  height: 30vh;
+  background-color: #f8f8f8;
+  text-align: center;
+  margin-top: 10vh;
+  border-radius: 3vh;
+  padding: 3vh;
+}
+
+.IntroMainText {
+  
 }

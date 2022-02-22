@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom'
 import MenuBar from '../components/MenuBar'
+import Footer from "../components/Footer";
 
 function MainPage({ location, history }) {
     return (
@@ -9,7 +10,9 @@ function MainPage({ location, history }) {
           <MenuBar></MenuBar>
           <div className="MainTopDiv">
             <span className="MainTopSpan">어떤 증상을 겪고 계신가요?</span>
+            <Link to="/intro">
             <button className="MainTopBtn">서비스 소개</button>
+            </Link>
             <span className="MainTopSpan2">증상에 따른 병원을 추천받고 싶다면 아래 버튼을 클릭해 이동해주세요.</span>
           </div>
         </div>
@@ -26,7 +29,7 @@ function MainPage({ location, history }) {
           <span className="MidTextEnd">※ 전문가가 아니더라도 서비스 향상과 관련한 피드백도 환영합니다!</span>
           <button>도움주기</button>
         </div>
-        
+        <Footer></Footer>
         </>
     );
 }

@@ -65,13 +65,13 @@ function NewTest() {
             //요청
             axios( {
                 method: 'get',
-                url: '/newapi?inputAddr=' + inputAddr + '&inputType=' + inputType + '&inputFilter=' + inputFilter,
+                url: '/newapi?inputAddr=' + inputAddr + '&inputType=' + inputType + '&inputFilter=' + inputFilter + '&addrFilter=' + filter_addr,
             })
             .then(response => {
-                console.log("데이터 받아왔어요! : " + response.data[0].addr);
-                setJsondata(response.data);
-                console.log("데이터 길이: " + response.data.length);
-                setLength(response.data.length)
+                console.log("데이터 받아왔어요! : " + response.data.results);
+                setJsondata(response.data.results);
+                console.log("데이터 길이: " + response.data.results.length);
+                setLength(response.data.results.length)
             })
         }
         else {

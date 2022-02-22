@@ -1,8 +1,28 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from 'react-router-dom';
 
-class Header extends Component {
-    render() {
+const Header = () => {
+  const [iflogin, setIflogin] = useState(false);
+
+  useEffect(() => {
+    axios.get('/checkUser', {
+    })
+    .then(function (response) {
+      if( response.data.user_id !== null) {
+        alert("로그인 상태입니다.");
+        setIflogin(true);
+      }
+      else {
+        alert("로그아웃 상태입니다.");
+        setIflogin(false);
+      }
+    })
+    .catch(function (error) {
+    })
+  }, []);
+
+
       return (
         <header>
           <Link to="/">
@@ -11,17 +31,30 @@ class Header extends Component {
           <nav>
             <ul className="menu">
               <Link to="/signin">
+              {
+              iflogin === false ? 
               <li id="HeaderSignin">로그인</li>
+              :
+              <li id="HeaderSignin">로그아웃</li>
+              }
               </Link>
               <li>|</li>
               <Link to="/signup">
+              {
+              iflogin === false ? 
               <li id="HeaderSignup">회원가입</li>
+              :
+              <li id="HeaderSignin">MYPAGE</li>
+              }
               </Link>
             </ul>
           </nav>
+
+
+
+          
         </header>
       )
-    }
 }
 
 export default Header;

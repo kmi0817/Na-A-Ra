@@ -30,8 +30,9 @@ app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 //app.engine("html", require("ejs").renderFile);
 
-// admin routes
+// other routes
 app.use("/admin", adminRouter);
+app.use("/comments", commentsRouter);
 
 
 
@@ -40,25 +41,44 @@ app.get("/newapi", async (req, res) => {
     const inputAddr = req.query.inputAddr;
     const inputType = req.query.inputType;
     const inputFilter = req.query.inputFilter;
+    const addrFilter = req.query.addrFilter;
 
     if (typeof inputAddr == "undefined" || typeof inputType == "undefined" || typeof inputFilter == "undefined") {
-        res.render("index", { results: "" });
-    } else {
-        console.log(`입력 주소: ${inputAddr}`);
-        console.log(`병원종류: ${inputType}, 필터: ${inputFilter}`);
-        
-        let searchAddr;
-        if (inputAddr.includes("서울")) {
-            let listAddr = inputAddr.split(" ");
-            let road = listAddr[2].substr(0, listAddr[2].indexOf("로") + 1);
-            searchAddr = `${listAddr[0]}특별시 ${listAddr[1]} ${road}`;
-        } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
-            let listAddr = inputAddr.split(" ");
-            searchAddr = `${listAddr[0]}광역시 ${listAddr[1]} ${listAddr[2]}`;
+        if (req.session.user) {
+            res.send({ results: "", user_id: req.session.user['id'], text: "유저긴 한데 결과 없음" });
+        } else if (req.session.admin) {
+            res.send({ results: "", admin_id: req.session.admin['id'], text: "관리자긴한데 결과 없음" });
         } else {
-            let listAddr = inputAddr.split(" ");
-            let road = listAddr[3].substr(0, listAddr[3].indexOf("로") + 1);
-            searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${listAddr[2]} ${road}`;
+            res.send({ results: "", text: "아무것도 없음" });
+        }
+    } else {        
+        let searchAddr;
+        if (addrFilter === "lo") {
+            if (inputAddr.includes("서울")) {
+                let listAddr = inputAddr.split(" ");
+                let road = listAddr[2].substr(0, listAddr[2].indexOf("로") + 1);
+                searchAddr = `${listAddr[0]}특별시 ${listAddr[1]} ${road}`;
+            } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
+                let listAddr = inputAddr.split(" ");
+                searchAddr = `${listAddr[0]}광역시 ${listAddr[1]} ${listAddr[2]}`;
+            } else {
+                let listAddr = inputAddr.split(" ");
+                let road = listAddr[3].substr(0, listAddr[3].indexOf("로") + 1);
+                searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${listAddr[2]} ${road}`;
+            }
+        } else if (addrFilter === "gu") {
+            if (inputAddr.includes("서울")) {
+                let listAddr = inputAddr.split(" ");
+                let gu = listAddr[1].substr(0, listAddr[1].indexOf("구") + 1);
+                searchAddr = `${listAddr[0]}특별시 ${gu}`;
+            } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
+                let listAddr = inputAddr.split(" ");
+                searchAddr = `${listAddr[0]}광역시 ${listAddr[1]}`;
+            } else {
+                let listAddr = inputAddr.split(" ");
+                let gu = listAddr[2].substr(0, listAddr[2].indexOf("구") + 1);
+                searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${gu}`;
+            }
         }
         
         let conditions;
@@ -101,10 +121,26 @@ app.get("/newapi", async (req, res) => {
                 }
             }
         }
-        console.log(JSON.stringify(conditions));
-        let results = await Hospitals.find(conditions).limit(20);
+        let results = await Hospitals.find(conditions);
+
         // Send index.ejs data
-        res.send(results);
+        if (results.length > 0) {
+            if (req.session.user) {
+                res.send({ results: results, user_id: req.session.user['id'], text: "결과, 관리자"});
+            } else if (req.session.admin) {
+                res.send({ results: results, admin_id: req.session.admin['id'], text: "결과, 유저" });
+            } else {
+                res.send({ results: results, text: "결과만" });
+            }
+        } else {
+            if (req.session.user) {
+                res.send({ results: "", user_id: req.session.user['id'], text: '일치하는 검색 결과가 없습니다.'});
+            } else if (req.session.admin) {
+                res.send({ results: "", admin_id: req.session.admin['id'], text: '일치하는 검색 결과가 없습니다.' });
+            }else {
+                res.send({ results: "", text: '일치하는 검색 결과가 없습니다.' });
+            }
+        }
     }
 });
 
@@ -226,9 +262,14 @@ app.get("/openapi", (req, res) => {
     );
 });
 
-app.use("/comments", commentsRouter);
-
-
+app.get("/checkUser", (req, res) => {
+    if (req.session.admin || req.session.user) {
+        res.send({user_id: req.session.user['name']});
+    }
+    else {
+        res.send({user_id: null});
+    }
+})
 
 
 

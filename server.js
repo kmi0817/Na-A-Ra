@@ -160,7 +160,7 @@ app.post("/process/:type", async(req, res) => {
             }
         }
     } else if (type == "login") {
-        const results = await Users.findOne({ user_id: req.body.inputId });
+        const results = await Users.findOne({ user_id: req.body.inputId, is_withdrawn: false });
 
         if (results != null) {
             const computed_password = crypto.pbkdf2Sync(req.body.inputPassword, results["user_salt"], 190481, 64, "sha512").toString("base64");

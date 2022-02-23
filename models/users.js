@@ -25,6 +25,11 @@ const usersSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    is_withdrawn: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 });
 

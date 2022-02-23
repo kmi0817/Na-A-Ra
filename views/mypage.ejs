@@ -171,26 +171,27 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form action="/process/withdrawal" method="POST" onsubmit="if(!confirm('회원을 탈퇴하시겠습니까?')) {return false; }">
+                                        <form action="/mypage/withdrawal" method="POST" onsubmit="if(!confirm('회원을 탈퇴하시겠습니까?')) {return false; }">
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <p>회원 탈퇴를 희망하시면 아래 본인 아이디와 비밀번호를 입력해주세요.</p>
                                                     <p>회원 탈퇴 시 동일한 아이디로 가입이 불가능합니다.</p>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="input_id" class="col-sm-3 col-form-label">아이디</label>
+                                                    <label for="withdrawal_id" class="col-sm-3 col-form-label">아이디</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" required name="input_id" class="form-control" id="input_id" placeholder="ID" minlength="5" maxlength="20">
+                                                        <input type="text" required name="withdrawal_id" class="form-control" id="withdrawal_id" placeholder="ID" minlength="5" maxlength="20">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="withdrawal" class="col-sm-3 col-form-label">비밀번호</label>
+                                                    <label for="withdrawal_password" class="col-sm-3 col-form-label">비밀번호</label>
                                                     <div class="col-sm-9">
-                                                        <input type="password" required name="withdrawal" class="form-control" id="withdrawal" minlength="7">
+                                                        <input type="password" required name="withdrawal_password" class="form-control" id="withdrawal_password" minlength="7">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
+                                                <input type="hidden" name="_id" value="<%= home_results._id %>">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
                                                 <button type="submit" class="btn btn-primary">완료</button>
                                             </div>

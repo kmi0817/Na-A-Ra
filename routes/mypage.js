@@ -2,6 +2,7 @@ const express = require("express");
 const Users = require("../models/users");
 const Comments = require("../models/comments");
 const Reports = require("../models/reports");
+const crypto = require("crypto");
 const router = express.Router();
 
 router.get("/", async(req, res) => {
@@ -15,4 +16,20 @@ router.get("/", async(req, res) => {
     }
 });
 
+router.post("/withdrawal", async(req, res) => {
+    if (req.session.user) {
+        const user = await Users.findById(req.body._id);
+        if (user['user_id'] === req.body.withdrawal_id) {
+            const computed_password = crypto.pbkdf2Sync(req.body.withdrawal_password, user["user_salt"], 190481, 64, "sha512").toString("base64");
+            if (computed_password === user["user_hashedPassword"]) {
+                await Users.findByIdAndUpdate(req.body._id, { is_withdrawn: true });
+                req.session.destroy((error) => { res.redirect("/"); });
+            } else {
+                res.send(`<script>alert("일치하는 회원 정보가 없습니다."); history.go(-1);</script>`);
+            }
+        } else {
+            res.send(`<script>alert("일치하는 회원 정보가 없습니다."); history.go(-1);</script>`);
+        }
+    }
+});
 module.exports = router;

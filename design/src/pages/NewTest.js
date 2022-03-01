@@ -89,9 +89,6 @@ function NewTest() {
     }
 
 
-
-
-
     return (
         <div className="BackgroundDiv">
             <MenuBar />

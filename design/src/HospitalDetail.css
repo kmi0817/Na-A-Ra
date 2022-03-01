@@ -1,0 +1,20 @@
+.commentsDiv0 {
+    margin: 3vh;
+    background-color: #f5f5f5;
+    border-radius: 1vh;
+    border: 1vh solid #f5f5f5;
+}
+
+.commentsDiv1 {
+    margin: 3vh;
+    border-radius: 1vh;
+    border: 1vh solid white;
+}
+
+.commentsDiv0:hover {
+    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+}
+
+.commentsDiv1:hover {
+    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+}

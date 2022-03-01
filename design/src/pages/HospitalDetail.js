@@ -88,7 +88,7 @@ const HospitalDetail = () => {
                 <p className="commentsNoneText">등록된 리뷰가 없습니다.</p>
               :
               comments.map((data, id) => (
-                  <div>
+                  <div className={id % 2 == 0 ? 'commentsDiv'+ 0 : 'commentsDiv'+ 1}>
                       <p key={id} className="writer_id">{data.writer_id[0].user_id}</p>
                       <p key={id} className="description">{data.description}</p>
                       {admin_id !== null ?

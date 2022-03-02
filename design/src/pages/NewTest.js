@@ -97,7 +97,7 @@ function NewTest() {
                     <div className="SearchSection">
                         <input value={address} className="inputAddr"></input>
                         <button type="button" className="AddrBtn" onClick={openModal}>주소 검색</button>
-                        <AddrModal open={modalOpen} close={closeModal} header="주소 검색" address={address} setAddress={setAddress} autoClose></AddrModal>
+                        <AddrModal open={modalOpen} close={closeModal} header="주소 검색" address={address} setAddress={setAddress} setModalOpen={setModalOpen} autoClose></AddrModal>
                         <select name="inputType" className="symptom_level">
                             <option value="병원종류">병원종류</option>
                             <option value="이비인후과">이비인후과</option>

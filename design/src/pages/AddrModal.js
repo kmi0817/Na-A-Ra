@@ -6,10 +6,12 @@ const Post = (props) => {
   const address = props.address;
   const setAddress = props.setAddress;
   const { open, close, header } = props;
+  const setModalOpen = props.setModalOpen;
 
   const onCompletePost = (data) => {
     console.log(data.address);
     setAddress(data.address);
+    setModalOpen(false);
   };
 
   return (
@@ -18,23 +20,16 @@ const Post = (props) => {
         <section>
           <header>
             {header}
-            <button className="close" onClick={close}>
-              {' '}
-              &times;{' '}
-            </button>
+            <button className="close" onClick={close}>&times;</button>
           </header>
           <main>
             <DaumPostcode
             autoClose
             onComplete={onCompletePost}
             />
-            close를 눌러주세요.
           </main>
           <footer>
-            <button className="close" onClick={close}>
-              {' '}
-              close{' '}
-            </button>
+            <button className="close" onClick={close}>close</button>
           </footer>
         </section>
       ) : null}

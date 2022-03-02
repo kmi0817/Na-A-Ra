@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import SigninModal from '../pages/SigninModal';
 
 const Header = () => {
   const [iflogin, setIflogin] = useState(false);
@@ -22,6 +23,15 @@ const Header = () => {
     })
   }, []);
 
+  const [modalOpen, setModalOpen] = useState(false);
+    const openModal = (e) => {
+        //모달 열기
+        setModalOpen(true);
+    };
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
 
       return (
         <header>
@@ -33,7 +43,10 @@ const Header = () => {
               <Link to="/signin">
               {
               iflogin === false ? 
-              <li id="HeaderSignin">로그인</li>
+              <>
+              <li id="HeaderSignin" onClick={e => openModal(e)}>로그인</li>
+              <SigninModal open={modalOpen} close={closeModal} autoClose></SigninModal>
+              </>
               :
               <li id="HeaderSignin">로그아웃</li>
               }
@@ -49,9 +62,6 @@ const Header = () => {
               </Link>
             </ul>
           </nav>
-
-
-
           
         </header>
       )

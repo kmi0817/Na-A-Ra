@@ -1,6 +1,7 @@
 import axios from "axios";
 //import React, { useState } from "react";
 import MenuBar from '../components/MenuBar'
+import Footer from "../components/Footer";
 
 const Signup= () => {
   const AfterSubmit = (e) => {
@@ -39,6 +40,7 @@ const Signup= () => {
             <input type="password" required name="createPassword" id="createPassword" placeholder="Password" minLength="7"></input>
             <button id="submitBtn" type="submit">완료</button>
           </form>
+          <Footer></Footer>
         </div>
     );
 }

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import './comments.css';
 import './HospitalDetail.css';
+import './sign.css';
 import MainPage from './pages/MainPage';
 import Notfound from './pages/Notfound';
 import NewTest from "./pages/NewTest";

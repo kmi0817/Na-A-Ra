@@ -1,7 +1,7 @@
 .writer_id {
     font-weight: bold;
     font-size: calc(14px + 0.3vw);
-    min-height: 4vw;
+    /*min-height: 4vw;*/
     margin: 1vw;
 }
 

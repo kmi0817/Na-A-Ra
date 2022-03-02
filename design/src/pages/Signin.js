@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useParams, useLocation, useNavigation } from "react-router";
-import MenuBar from '../components/MenuBar'
+import MenuBar from '../components/MenuBar';
+import Footer from "../components/Footer";
 
 const HospitalDetail = () => {
   const AfterSubmit = (e) => {
@@ -37,10 +38,11 @@ const HospitalDetail = () => {
           </div>
           
           <form onSubmit={AfterSubmit} className="commentsForm">
-            <input type="text" required name="inputId" class="form-control" id="inputId" placeholder="ID" minlength="5" maxlength="20"></input>
-            <input type="password" required name="inputPassword" class="form-control" id="inputPassword" placeholder="Password" minlength="7"></input>
+            <input type="text" required name="inputId" id="inputId" placeholder="ID" minlength="5" maxlength="20"></input>
+            <input type="password" required name="inputPassword" id="inputPassword" placeholder="Password" minlength="7"></input>
             <button id="submitBtn" type="submit">완료</button>
           </form>
+          <Footer></Footer>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import { useParams, useLocation, useNavigation, useNavigate } from "react-router
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import SigninModal from '../pages/SigninModal';
-import SignupModal from '../pages/Signup';
+import SignupModal from '../pages/SignupModal';
 
 const Header = () => {
   const [iflogin, setIflogin] = useState(false);
@@ -38,6 +38,15 @@ const Header = () => {
     navigate('/mypage');
   }
 
+  const [modalOpen2, setModalOpen2] = useState(false);
+    const openModal2 = (e) => {
+        setModalOpen2(true);
+    };
+    const closeModal2 = () => {
+        setModalOpen2(false);
+    };
+
+
 
       return (
         <header>
@@ -60,8 +69,8 @@ const Header = () => {
               {
               iflogin === false ? 
               <>
-              <li id="HeaderSignup" onClick={e => openModal(e)}>회원가입</li>
-              <SigninModal open={modalOpen} close={closeModal} header="회원가입" setModalOpen={setModalOpen} autoClose></SigninModal>
+              <li id="HeaderSignup" onClick={e => openModal2(e)}>회원가입</li>
+              <SignupModal open={modalOpen2} close={closeModal2} header="회원가입" setModalOpen={setModalOpen2} autoClose></SignupModal>
               </>
               :
               <li id="HeaderSignup" onClick={moveMypage}>MYPAGE</li>

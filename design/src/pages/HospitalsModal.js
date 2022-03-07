@@ -8,14 +8,15 @@ const Post = (props) => {
   const { open, close, data } = props;
   const [modalOpen, setModalOpen] = useState(false);
   const [modalData, setmodalData] = useState();
+  const [modalData2, setmodalData2] = useState();
     const openModal = (value, e) => {
       axios.get('/checkUser', {
       })
       .then(function (response) {
-        if( response.data.user_id !== null) {
-          console.log(value);
+        if( response.data.user_id_id !== null) {
           setModalOpen(true);
           setmodalData(value);
+          setmodalData2(response.data.user_id_id);
         }
         else {
           alert("로그인 후 다시 진행해주세요.");
@@ -95,7 +96,7 @@ const Post = (props) => {
             <button className="DetailMoveBtn">상세페이지</button>
             </Link>
             <button className="ReportsBtn" onClick={e => openModal(data._id, e)}>신고</button>
-            <ReportsModal open={modalOpen} close={closeModal} header="신고" setModalOpen={setModalOpen} data={modalData} autoClose></ReportsModal>
+            <ReportsModal open={modalOpen} close={closeModal} header="신고" setModalOpen={setModalOpen} data={modalData} data2={modalData2} autoClose></ReportsModal>
           </footer>
         </section>
       ) : null}

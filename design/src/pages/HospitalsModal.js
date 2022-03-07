@@ -1,54 +1,101 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom'
+import axios from "axios";
 import './modal.css';
+import ReportsModal from './ReportsModal';
 
 const Post = (props) => {
   const { open, close, data } = props;
-  const navigate = useNavigate;
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalData, setmodalData] = useState();
+    const openModal = (value, e) => {
+      axios.get('/checkUser', {
+      })
+      .then(function (response) {
+        if( response.data.user_id !== null) {
+          console.log(value);
+          setModalOpen(true);
+          setmodalData(value);
+        }
+        else {
+          alert("로그인 후 다시 진행해주세요.");
+        }
+      })
+      .catch(function (error) {
+      })
+    };
+    const closeModal = () => {
+        setModalOpen(false);
+    };
   
-  const onClickMove = () => {
-    navigate(`/detail/${data._id}`, { data: data});
-  }
-
   return (
     <div className={open ? 'openModal modal' : 'modal'}>
       {open ? (
         <section>
           <header>
-            {data.name}
+            <span>{data.name}
+            {
+              data.reports_cnt == 0 ? 
+              <span className="repostsCnt_green">누적신고: {data.reports_cnt}</span>
+              : 
+              <span className="repostsCnt_red">누적신고: {data.reports_cnt}</span>
+            }
+            </span>
             <button className="close" onClick={close}>
               {' '}
               &times;{' '}
             </button>
           </header>
           <main>
-            <span>{data.type_code}</span>
-            <p>{data.addr}</p>
-            <p>{data.coord}</p>
-            <p>{data.postNo}</p>
-            <p>{data.telno}</p>
-            <p>{data.hospUrl}</p>
-            <p>{data.estbed}</p>
-            <p>{data.drTotCnt}</p>
+            <span className="Hmodal_type_code">분류: {data.type_code}</span>
+            <span className="Hmodal_addr">위치: {data.addr} ({data.postNo})</span>
+            <span className="Hmodal_telno">{data.telno}</span>
+            <span className="Hmodal_url">홈페이지: {data.hospUrl ? data.hospUrl : <span className="noneAddr">(주소 미입력)</span>}</span>
+            <span className="Hmodal_estbDd">{data.estbDd}</span>
+            <span className="Hmodal_drTotCnt">총: {data.drTotCnt}</span>
 
-            <span>치과일반의: {data.detyGdrCnt} </span>
-            <span>치과인턴: {data.detyIntnCnt} </span>
-            <span>치과레지던트: {data.detyResdntCnt} </span>
-            <span>치과전문의: {data.detySdrCnt} </span>
-            <p></p>
-            <span>의과일반의: {data.mdeptGdrCnt} </span>
-            <span>의과인턴: {data.mdeptIntnCnt} </span>
-            <span>의과레지던트: {data.mdeptResdntCnt} </span>
-            <span>의과전문의: {data.mdeptSdrCnt} </span>
+
+            <table className="Hmodal_table" border="1">
+              <th>명칭</th>
+              <th>인원</th>
+              <th>명칭</th>
+              <th>인원</th>
+              <th>명칭</th>
+              <th>인원</th>
+              <th>명칭</th>
+              <th>인원</th>
+              <tr>
+                <td>치과일반의</td>
+                <td>{data.detyGdrCnt}</td>
+                <td>치과인턴</td>
+                <td>{data.detyIntnCnt}</td>
+                <td>치과레지던트</td>
+                <td>{data.detyResdntCnt}</td>
+                <td>치과전문의</td>
+                <td>{data.detySdrCnt}</td>
+              </tr>
+              <tr>
+                <td>의과일반의</td>
+                <td>{data.mdeptGdrCnt}</td>
+                <td>의과인턴</td>
+                <td>{data.mdeptIntnCnt}</td>
+                <td>의과레지던트</td>
+                <td>{data.mdeptResdntCnt}</td>
+                <td>의과전문의</td>
+                <td>{data.mdeptSdrCnt}</td>
+              </tr>
+            </table>
           </main>
           <footer>
             <button className="close" onClick={close}>
               {' '}
               close{' '}
             </button>
-            <Link to={"/${data._id}"} state={{ data: data }}>
+            <Link to={"/{data._id}"} state={{ data: data }}>
             <button className="DetailMoveBtn">상세페이지</button>
             </Link>
+            <button className="ReportsBtn" onClick={e => openModal(data._id, e)}>신고</button>
+            <ReportsModal open={modalOpen} close={closeModal} header="신고" setModalOpen={setModalOpen} data={modalData} autoClose></ReportsModal>
           </footer>
         </section>
       ) : null}

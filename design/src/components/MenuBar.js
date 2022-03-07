@@ -9,23 +9,6 @@ const Header = () => {
   const [iflogin, setIflogin] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios.get('/checkUser', {
-    })
-    .then(function (response) {
-      if( response.data.user_id !== null) {
-        alert("로그인 상태입니다.");
-        setIflogin(true);
-      }
-      else {
-        alert("로그아웃 상태입니다.");
-        setIflogin(false);
-      }
-    })
-    .catch(function (error) {
-    })
-  }, []);
-
   const [modalOpen, setModalOpen] = useState(false);
     const openModal = (e) => {
         setModalOpen(true);

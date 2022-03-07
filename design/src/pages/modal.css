@@ -18,7 +18,7 @@
   
   .modal > section {
     width: 90%;
-    max-width: 450px;
+    max-width: 500px;
     margin: 0 auto;
     border-radius: 0.3rem;
     background-color: white;
@@ -75,6 +75,15 @@
     margin: 1vw;
   }
 
+  .ReportsBtn {
+    padding: 6px 12px;
+    color: #fff;
+    background-color: #e94848;;
+    border-radius: 5px;
+    font-size: 13px;
+    margin: 1vw;
+  }
+
   .modal.openModal {
     display: flex;
     align-items: center;
@@ -97,4 +106,62 @@
     to {
       opacity: 1;
     }
+  }
+
+
+  .Hmodal_type_code {
+    display: block;
+  }
+
+  .Hmodal_addr {
+    display: block;
+    color: #636363;
+  }
+
+  .noneAddr {
+    font-size: 1.5vh;
+    color: #636363;
+  }
+
+  .Hmodal_telno {
+    display: block;
+  }
+
+  .Hmodal_url {
+    display: block;
+  }
+
+  .Hmodal_estbDd {
+    display: block;
+  }
+
+  .Hmodal_drTotCnt {
+    display: block;
+  }
+
+  table {
+    border: none;
+    display: inline-block;
+  }
+
+  table td{
+    border: none;
+    background-color: white;
+  }
+
+  table th {
+    border: none;
+    background-color: #e4e4e4;
+  }
+
+  .repostsCnt_green {
+    font-size: 1vh;
+    margin: 1vh;
+    color: rgb(58, 179, 58);
+  }
+
+  .repostsCnt_red {
+    font-size: 1vh;
+    margin: 1vh;
+    color: rgb(219, 0, 0);
   }

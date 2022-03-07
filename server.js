@@ -7,11 +7,13 @@ const methodOverride = require("method-override");
 const http = require("http");
 const crypto = require("crypto");
 const expressSession = require("express-session");
+const ObjectId = require('mongodb').ObjectId;
 
 
 //model
 const Users = require("./models/users");
 const Hospitals = require("./models/hospitals");
+const Reports = require("./models/reports");
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -151,10 +153,6 @@ app.get("/newapi", async (req, res) => {
 app.post("/process/:type", async(req, res) => {
     const type = req.params.type;
     console.log(type)
-    console.log(req.body.createPassword)
-    console.log(req.body.createId)
-    console.log(req.body.inputId)
-    console.log(req.body.inputPassword)
 
     if (type == "signup") {
         try {
@@ -223,7 +221,7 @@ app.post("/process/:type", async(req, res) => {
         report.hospital_id = req.body.hospital_id;
 
         report = await report.save();
-        res.send(`<script>alert("신고가 접수되었습니다. 관리자 확인 후 신고횟수에 반영됩니다."); history.go(-1);</script>`);
+        res.send({text: "신고가 접수되었습니다. 관리자 확인 후 신고횟수에 반영됩니다."});
     }
 });
 
@@ -266,7 +264,7 @@ app.get("/openapi", (req, res) => {
 
 app.get("/checkUser", (req, res) => {
     if (req.session.admin || req.session.user) {
-        res.send({user_id: req.session.user['name']});
+        res.send({user_id: req.session.user['name'], user_id_id: req.session.user['id']});
     }
     else {
         res.send({user_id: null});

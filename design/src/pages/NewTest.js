@@ -42,29 +42,20 @@ function NewTest() {
         setDModalOpen(false);
     };
 
-    
+
 
     const AfterSubmit = (e) => {
         e.preventDefault(); //redirect 방지
-        console.log(e.target[0].value);
-        console.log(e.target[2].value);
-        console.log(e.target[3].value);
-        console.log(e.target[4].value);
 
-
-        const addr = e.target[0].value;
+        const addr = address;
         const type = e.target[2].value;
         const filter = e.target[3].value;
         const filter_addr = e.target[4].value;
 
         if (addr != '' && type != '병원종류') {
-            setinputAddr(addr);
-            setinputType(type);
-            setinputFilter(filter);
-            //요청
             axios( {
                 method: 'get',
-                url: '/newapi?inputAddr=' + inputAddr + '&inputType=' + inputType + '&inputFilter=' + inputFilter + '&addrFilter=' + filter_addr,
+                url: '/newapi?inputAddr=' + addr + '&inputType=' + type + '&inputFilter=' + filter + '&addrFilter=' + filter_addr,
             })
             .then(response => {
                 console.log("데이터 받아왔어요! : " + response.data.results);
@@ -77,6 +68,9 @@ function NewTest() {
                 else {
                     setlistText('');
                 }
+            })
+            .catch(function(err) {
+                console.log(err);
             })
         }
         else {
@@ -92,7 +86,7 @@ function NewTest() {
     return (
         <div className="BackgroundDiv">
             <MenuBar />
-            <p className="SearchMainText">증상을 입력해주세요</p>
+            <p className="SearchMainText">Search</p>
             <form onSubmit={AfterSubmit} >
                     <div className="SearchSection">
                         <input value={address} className="inputAddr"></input>

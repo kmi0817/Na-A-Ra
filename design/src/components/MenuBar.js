@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useLocation, useNavigation, useNavigate } from "react-router";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import SigninModal from '../pages/SigninModal';
+import SignupModal from '../pages/Signup';
 
 const Header = () => {
   const [iflogin, setIflogin] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('/checkUser', {
@@ -25,12 +28,15 @@ const Header = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
     const openModal = (e) => {
-        //모달 열기
         setModalOpen(true);
     };
     const closeModal = () => {
         setModalOpen(false);
     };
+
+  const moveMypage = () => {
+    navigate('/mypage');
+  }
 
 
       return (
@@ -40,26 +46,26 @@ const Header = () => {
           </Link>
           <nav>
             <ul className="menu">
-              <Link to="/signin">
+
               {
               iflogin === false ? 
               <>
               <li id="HeaderSignin" onClick={e => openModal(e)}>로그인</li>
-              <SigninModal open={modalOpen} close={closeModal} autoClose></SigninModal>
+              <SigninModal open={modalOpen} close={closeModal} header="로그인" setModalOpen={setModalOpen} autoClose></SigninModal>
               </>
               :
               <li id="HeaderSignin">로그아웃</li>
               }
-              </Link>
               <li>|</li>
-              <Link to="/signup">
               {
               iflogin === false ? 
-              <li id="HeaderSignup">회원가입</li>
+              <>
+              <li id="HeaderSignup" onClick={e => openModal(e)}>회원가입</li>
+              <SigninModal open={modalOpen} close={closeModal} header="회원가입" setModalOpen={setModalOpen} autoClose></SigninModal>
+              </>
               :
-              <li id="HeaderSignin">MYPAGE</li>
+              <li id="HeaderSignup" onClick={moveMypage}>MYPAGE</li>
               }
-              </Link>
             </ul>
           </nav>
           

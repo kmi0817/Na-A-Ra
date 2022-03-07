@@ -1,9 +1,12 @@
 import axios from "axios";
 //import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import MenuBar from '../components/MenuBar'
 import Footer from "../components/Footer";
 
 const Signup= () => {
+  const navigate = useNavigate();
+
   const AfterSubmit = (e) => {
     e.preventDefault(); //redirect 방지
     const createId = e.target[0].value;
@@ -17,7 +20,16 @@ const Signup= () => {
         createPassword: createPassword,
       })
       .then(function (response) {
-        alert(response.data.text);
+        if (response.data.text == "exist") {
+          alert("이미 존재하는 아이디입니다.");
+        }
+        else if (response.data.text == "success") {
+          alert("회원가입에 성공했습니다. \n로그인 화면으로 이동합니다.");
+          navigate('/signin');
+        }
+        else {
+          alert("회원가입에 문제가 발생했습니다. 관리자에게 문의하세요.");
+        }
       })
       .catch(function (error) {
         alert("요청 실패");

@@ -14,7 +14,7 @@ const HospitalDetail = () => {
   console.log(location.state)
   const data = location.state.data;
   const path = "/comments/" + data._id;
-//
+
   useEffect(() => {
     axios.get(path, {
     })

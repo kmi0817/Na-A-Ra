@@ -2,6 +2,7 @@ const express = require("express");
 const request = require("request");
 const adminRouter = require("./routes/admin");
 const commentsRouter = require("./routes/comments");
+const mypageRouter = require("./routes/mypage");
 const methodOverride = require("method-override");
 const http = require("http");
 const crypto = require("crypto");
@@ -33,6 +34,7 @@ app.use(methodOverride('_method'));
 // other routes
 app.use("/admin", adminRouter);
 app.use("/comments", commentsRouter);
+app.use("/mypage", mypageRouter);
 
 
 
@@ -164,12 +166,12 @@ app.post("/process/:type", async(req, res) => {
             user.user_salt = salt;
             user.user_hashedPassword = hashed_password;
             user = await user.save();
-            res.send({text: "회원가입 성공"});
+            res.send({text: "success"});
         } catch (error) {
             if (error.code === 11000) {
-                res.send({text: "이미 존재하는 아이디입니다."});
+                res.send({text: "exist"});
             } else {
-                res.send({text: "회원가입에 문제가 발생했습니다. 관리자에게 문의하세요."});
+                res.send({text: "error"});
                 console.log("*** DB 저장 문제: " + error);
             }
         }

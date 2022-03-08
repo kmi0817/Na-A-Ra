@@ -46,7 +46,7 @@
   }
   
   .modal > section > main {
-    padding: 16px;
+    padding: 30px;
     border-bottom: 1px solid #dee2e6;
     border-top: 1px solid #dee2e6;
   }
@@ -108,6 +108,11 @@
     }
   }
 
+  main > span {
+    margin: 1vh;
+    text-align: left;
+  }
+
 
   .Hmodal_type_code {
     display: block;
@@ -115,7 +120,6 @@
 
   .Hmodal_addr {
     display: block;
-    color: #636363;
   }
 
   .noneAddr {
@@ -142,6 +146,7 @@
   table {
     border: none;
     display: inline-block;
+    margin-top: 2vh;
   }
 
   table td{

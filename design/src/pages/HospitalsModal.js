@@ -6,9 +6,19 @@ import ReportsModal from './ReportsModal';
 
 const Post = (props) => {
   const { open, close, data } = props;
+
   const [modalOpen, setModalOpen] = useState(false);
   const [modalData, setmodalData] = useState();
   const [modalData2, setmodalData2] = useState();
+
+  if (data != null) {
+    var date = data.estbDd;
+    date = "20220325";
+    var opendate_year = date.substr(0,4);
+    var opendate_month = date.substr(4,2);
+    var opendate_day = date.substr(6,2);
+  }
+
     const openModal = (value, e) => {
       axios.get('/checkUser', {
       })
@@ -50,10 +60,10 @@ const Post = (props) => {
           <main>
             <span className="Hmodal_type_code">분류: {data.type_code}</span>
             <span className="Hmodal_addr">위치: {data.addr} ({data.postNo})</span>
-            <span className="Hmodal_telno">{data.telno}</span>
+            <span className="Hmodal_telno">전화번호: {data.telno}</span>
             <span className="Hmodal_url">홈페이지: {data.hospUrl ? data.hospUrl : <span className="noneAddr">(주소 미입력)</span>}</span>
-            <span className="Hmodal_estbDd">{data.estbDd}</span>
-            <span className="Hmodal_drTotCnt">총: {data.drTotCnt}</span>
+            <span className="Hmodal_estbDd">개설일자: {data.estbDd}</span>
+            <span className="Hmodal_drTotCnt">총 의사수: {data.drTotCnt}</span>
 
 
             <table className="Hmodal_table" border="1">

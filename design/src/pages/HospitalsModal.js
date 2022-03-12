@@ -23,7 +23,8 @@ const Post = (props) => {
       axios.get('/checkUser', {
       })
       .then(function (response) {
-        if( response.data.user_id_id !== null) {
+        if( response.data.user_id_id !== undefined || response.data.user_id_id !== null) {
+          console.log("user_id_id: " + response.data.user_id_id)
           setModalOpen(true);
           setmodalData(value);
           setmodalData2(response.data.user_id_id);

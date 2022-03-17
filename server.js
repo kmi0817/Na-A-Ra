@@ -28,12 +28,9 @@ app.engine("html", require("ejs").renderFile);
 
 // routes
 app.get("/", async (req, res) => {
-    const inputAddr = req.query.inputAddr;
-    const inputType = req.query.inputType;
-    const inputFilter = req.query.inputFilter;
-    const addrFilter = req.query.addrFilter;
+    const search_type = req.query.search_type;
 
-    if (typeof inputAddr == "undefined" || typeof inputType == "undefined" || typeof inputFilter == "undefined") {
+    if (typeof search_type == "undefined") {
         if (req.session.user) {
             res.render("index_user", { results: "", user_id: req.session.user['id'] });
         } else if (req.session.admin) {
@@ -41,86 +38,111 @@ app.get("/", async (req, res) => {
         } else {
             res.render("index", { results: "" });
         }
-    } else {        
-        let searchAddr;
-        if (addrFilter === "lo") {
-            if (inputAddr.includes("서울")) {
-                let listAddr = inputAddr.split(" ");
-                let road = listAddr[2].substr(0, listAddr[2].indexOf("로") + 1);
-                searchAddr = `${listAddr[0]}특별시 ${listAddr[1]} ${road}`;
-            } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
-                let listAddr = inputAddr.split(" ");
-                searchAddr = `${listAddr[0]}광역시 ${listAddr[1]} ${listAddr[2]}`;
-            } else {
-                let listAddr = inputAddr.split(" ");
-                let road = listAddr[3].substr(0, listAddr[3].indexOf("로") + 1);
-                searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${listAddr[2]} ${road}`;
-            }
-        } else if (addrFilter === "gu") {
-            if (inputAddr.includes("서울")) {
-                let listAddr = inputAddr.split(" ");
-                let gu = listAddr[1].substr(0, listAddr[1].indexOf("구") + 1);
-                searchAddr = `${listAddr[0]}특별시 ${gu}`;
-            } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
-                let listAddr = inputAddr.split(" ");
-                searchAddr = `${listAddr[0]}광역시 ${listAddr[1]}`;
-            } else {
-                let listAddr = inputAddr.split(" ");
-                let gu = listAddr[2].substr(0, listAddr[2].indexOf("구") + 1);
-                searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${gu}`;
-            }
-        }
-        
-        let conditions;
-        if (inputFilter == "all") {
-            if (inputType == "외과") {
-                conditions = {
-                    $and : [
-                        {name : {$regex : "외과"}},
-                        {name : {$not : {$regex : "정형"}}},
-                        {name : {$not : {$regex : "치과"}}}
-                    ],
-                    addr: {$regex: searchAddr}
-                }
-            } else {
-                conditions = {
-                    name: {$regex: inputType},
-                    addr: {$regex: searchAddr}
-                }
-            }
-        }
-        
-        else if (inputFilter == "infant") {
-            if (inputType == "외과") {
-                conditions = {
-                    addr: {$regex: searchAddr},
-                    $and : [
-                        {name : {$regex : "외과"}},
-                        {name : {$not : {$regex : "정형"}}},
-                        {name : {$not : {$regex : "치과"}}},
-                        {name: {$regex: "소아"}}
-                    ]
-                }
-            } else {
-                conditions = {
-                    $and : [
-                        {name : {$regex : inputType}},
-                        {name : {$regex : "소아"}}
-                    ],
-                    addr: {$regex: searchAddr}
-                }
-            }
-        }
-        let results = await Hospitals.find(conditions);
+    } else if (search_type == "road_search") {
+    const inputAddr = req.query.inputAddr;
+    const inputType = req.query.inputType;
+    const inputFilter = req.query.inputFilter;
+    const addrFilter = req.query.addrFilter;
 
-        // Send index.ejs data
-        if (results.length > 0) {
-            if (req.session.user) {
-                res.render("index_user", { results: results, user_id: req.session.user['id'] });
-            } else if (req.session.admin) {
-                res.render("index_admin", { results: results, admin_id: req.session.admin['id'] });
+            let searchAddr;
+            if (addrFilter === "lo") {
+                if (inputAddr.includes("서울")) {
+                    let listAddr = inputAddr.split(" ");
+                    let road = listAddr[2].substr(0, listAddr[2].indexOf("로") + 1);
+                    searchAddr = `${listAddr[0]}특별시 ${listAddr[1]} ${road}`;
+                } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
+                    let listAddr = inputAddr.split(" ");
+                    searchAddr = `${listAddr[0]}광역시 ${listAddr[1]} ${listAddr[2]}`;
+                } else {
+                    let listAddr = inputAddr.split(" ");
+                    let road = listAddr[3].substr(0, listAddr[3].indexOf("로") + 1);
+                    searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${listAddr[2]} ${road}`;
+                }
+            } else if (addrFilter === "gu") {
+                if (inputAddr.includes("서울")) {
+                    let listAddr = inputAddr.split(" ");
+                    let gu = listAddr[1].substr(0, listAddr[1].indexOf("구") + 1);
+                    searchAddr = `${listAddr[0]}특별시 ${gu}`;
+                } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
+                    let listAddr = inputAddr.split(" ");
+                    searchAddr = `${listAddr[0]}광역시 ${listAddr[1]}`;
+                } else {
+                    let listAddr = inputAddr.split(" ");
+                    let gu = listAddr[2].substr(0, listAddr[2].indexOf("구") + 1);
+                    searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${gu}`;
+                }
+            }
+            
+            let conditions;
+            if (inputFilter == "all") {
+                if (inputType == "외과") {
+                    conditions = {
+                        $and : [
+                            {name : {$regex : "외과"}},
+                            {name : {$not : {$regex : "정형"}}},
+                            {name : {$not : {$regex : "치과"}}}
+                        ],
+                        addr: {$regex: searchAddr}
+                    }
+                } else {
+                    conditions = {
+                        name: {$regex: inputType},
+                        addr: {$regex: searchAddr}
+                    }
+                }
+            }
+            
+            else if (inputFilter == "infant") {
+                if (inputType == "외과") {
+                    conditions = {
+                        addr: {$regex: searchAddr},
+                        $and : [
+                            {name : {$regex : "외과"}},
+                            {name : {$not : {$regex : "정형"}}},
+                            {name : {$not : {$regex : "치과"}}},
+                            {name: {$regex: "소아"}}
+                        ]
+                    }
+                } else {
+                    conditions = {
+                        $and : [
+                            {name : {$regex : inputType}},
+                            {name : {$regex : "소아"}}
+                        ],
+                        addr: {$regex: searchAddr}
+                    }
+                }
+            }
+            let results = await Hospitals.find(conditions);
+
+            // Send index.ejs data
+            if (results.length > 0) {
+                if (req.session.user) {
+                    res.render("index_user", { results: results, user_id: req.session.user['id'] });
+                } else if (req.session.admin) {
+                    res.render("index_admin", { results: results, admin_id: req.session.admin['id'] });
+                } else {
+                    res.render("index", { results: results });
+                }
             } else {
-                res.render("index", { results: results });
+                if (req.session.user) {
+                    res.render("index_user", { results: '일치하는 검색 결과가 없습니다.', user_id: req.session.user['id'] });
+                } else if (req.session.admin) {
+                    res.render("index_admin", { results: '일치하는 검색 결과가 없습니다.', admin_id: req.session.admin['id'] });
+                }else {
+                    res.render("index", { results: '일치하는 검색 결과가 없습니다.' });
+                }
+            }
+    } else if (search_type == "name_search") {
+        const hospital_name = req.query.hospital_name;
+        let hospitals = await Hospitals.find({ name: {$regex : hospital_name} });
+        if (hospitals.length > 0) {
+            if (req.session.user) {
+                res.render("index_user", { results: hospitals, user_id: req.session.user['id'] });
+            } else if (req.session.admin) {
+                res.render("index_admin", { results: hospitals, admin_id: req.session.admin['id'] });
+            } else {
+                res.render("index", { results: hospitals });
             }
         } else {
             if (req.session.user) {

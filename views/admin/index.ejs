@@ -46,7 +46,7 @@
                                 <% users.forEach((user, index) => { %>
                                 <tr>
                                     <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
-                                    <td style="font-size: 0.8rem"><%= user.user_id %></td>
+                                    <td style="font-size: 0.8rem"><a href="#" onclick="window.open('/admin/member/<%= user._id %>', '_blank', 'width=600 height=600')"><%= user.user_id %></a></td>
                                     <td style="font-size: 0.8rem"><%= user.created_at %></td>
                                     <td style="font-size: 0.8rem"><%= user.is_admin %></td>
                                 </tr>

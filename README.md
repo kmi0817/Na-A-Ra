@@ -79,3 +79,15 @@ npm install express-session --save
 > README.md
 >
 > server.js
+
+### 4. **💡 Functions**
+##### 1) user
+* search hospitals by address or hospital name
+* read the details of the searched hospital
+* read reviews and cumulative reports of the searched hospital
+
+##### 2) member
+* search hospitals by address or hospital name
+* read the details of the searched hospital
+* read & **make** reviews and cumulative reports of the searched hospital
+* check the total activity log in 'mypage'

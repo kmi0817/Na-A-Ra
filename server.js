@@ -19,6 +19,7 @@ app.use(expressSession({
     resave: true,
     saveUninitialized: true
 }));
+app.use(express.static("public"));
 
 // views engine (convert ejs code to HTML)
 app.set("views", __dirname + "/views");
@@ -26,6 +27,9 @@ app.set("view engine", "ejs");
 app.use(methodOverride('_method'));
 app.engine("html", require("ejs").renderFile);
 
+app.get("/index2", async(req, res) => {
+    res.render("index2")
+})
 // routes
 app.get("/", async (req, res) => {
     const search_type = req.query.search_type;

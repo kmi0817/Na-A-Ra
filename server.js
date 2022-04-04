@@ -1,6 +1,7 @@
 const express = require("express");
 const adminRouter = require("./routes/admin");
 const commentsRouter = require("./routes/comments");
+const communityRouter = require("./routes/community");
 const mypageRouter = require("./routes/mypage");
 const Hospitals = require("./models/hospitals");
 const Users = require("./models/users");
@@ -25,7 +26,7 @@ app.use(express.static("public"));
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 app.use(methodOverride('_method'));
-// app.engine("html", require("ejs").renderFile);
+app.engine("html", require("ejs").renderFile);
 
 // routes
 app.get("/", async (req, res) => {
@@ -238,6 +239,7 @@ app.post("/process/:type", async(req, res) => {
 
 app.use("/admin", adminRouter);
 app.use("/comments", commentsRouter);
+app.use("/community", communityRouter);
 app.use("/mypage", mypageRouter);
 
 // web server

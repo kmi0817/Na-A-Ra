@@ -10,11 +10,23 @@ mongoose.connect("mongodb://localhost/app", {
 });
 
 router.get("/clinics", async (req, res) => {
-    res.render("community/clinics")
+    try {
+        const postings = await Communities.find({ is_deleted: false, community: "clinics" });
+        res.render("community/clinics", { postings: postings })
+    } catch (error) {
+        console.log("*** " + error);
+    }
+
 });
 
 router.get("/clinics/:id", async (req, res) => {
-    res.render("community/post")
+    try {
+        const posting = await Communities.findById(req.params.id);
+        console.log(posting);
+        res.render("community/post", { posting: posting })
+    } catch (error) {
+        console.log("*** " + error);
+    }
 });
 
 router.get("/clinics-write", async (req, res) => {

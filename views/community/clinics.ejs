@@ -148,7 +148,6 @@
             </div>
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
-                    <!-- Post preview-->
                     <div class="post-preview">
                         <a href="/community/clinics/12">
                             <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
@@ -160,8 +159,21 @@
                             on September 24, 2022
                         </p>
                     </div>
+                    <% postings.forEach((posting, index)=> { %>
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="/community/clinics/<%= posting._id %>">
+                            <h2 class="post-title"><%= posting.title %></h2>
+                        </a>
+                        <p class="post-meta">
+                            Posted by
+                            <a href="#!"><%= posting.writer %></a>
+                            <%= posting.created_at.toLocaleString() %>
+                        </p>
+                    </div>
                     <!-- Divider-->
                     <hr class="my-4" />
+                    <% }) %>
                     <!-- Pager-->
                     <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase"
                             href="#!">Older Posts →</a></div>

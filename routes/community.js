@@ -31,7 +31,7 @@ router.get("/clinics/:id", async (req, res) => {
 
 router.get("/clinics-write", async (req, res) => {
     res.render("community/write");
-})
+});
 
 router.post("/clinics-post", async (req, res) => {
     try {
@@ -46,7 +46,7 @@ router.post("/clinics-post", async (req, res) => {
         res.send(`<script>alert("게시글 작성에 문제가 발생했습니다. 관리자에게 문의하세요."); history.go(-1);</script>`);
         console.log("*** DB 저장 문제: " + error);
     }
-})
+});
 
 router.get("/questions", async (req, res) => {
     res.render("community/questions")

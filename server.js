@@ -34,9 +34,9 @@ app.get("/", async (req, res) => {
 
     if (typeof search_type == "undefined") {
         if (req.session.user) {
-            res.render("index_user", { results: "", user_id: req.session.user['id'] });
+            res.render("index", { results: "", user: req.session.user['id'] });
         } else if (req.session.admin) {
-            res.render("index_admin", { results: "", admin_id: req.session.admin['id'] });
+            res.render("index", { results: "", admin: req.session.admin['id'] });
         } else {
             res.render("index", { results: "" });
         }
@@ -120,17 +120,17 @@ app.get("/", async (req, res) => {
             // Send index.ejs data
             if (results.length > 0) {
                 if (req.session.user) {
-                    res.render("index_user", { results: results, user_id: req.session.user['id'] });
+                    res.render("index", { results: results, user: req.session.user['id'] });
                 } else if (req.session.admin) {
-                    res.render("index_admin", { results: results, admin_id: req.session.admin['id'] });
+                    res.render("index", { results: results, admin: req.session.admin['id'] });
                 } else {
                     res.render("index", { results: results });
                 }
             } else {
                 if (req.session.user) {
-                    res.render("index_user", { results: '일치하는 검색 결과가 없습니다.', user_id: req.session.user['id'] });
+                    res.render("index", { results: '일치하는 검색 결과가 없습니다.', user: req.session.user['id'] });
                 } else if (req.session.admin) {
-                    res.render("index_admin", { results: '일치하는 검색 결과가 없습니다.', admin_id: req.session.admin['id'] });
+                    res.render("index", { results: '일치하는 검색 결과가 없습니다.', admin: req.session.admin['id'] });
                 }else {
                     res.render("index", { results: '일치하는 검색 결과가 없습니다.' });
                 }
@@ -140,17 +140,17 @@ app.get("/", async (req, res) => {
         let hospitals = await Hospitals.find({ name: {$regex : hospital_name} });
         if (hospitals.length > 0) {
             if (req.session.user) {
-                res.render("index_user", { results: hospitals, user_id: req.session.user['id'] });
+                res.render("index", { results: hospitals, user: req.session.user['id'] });
             } else if (req.session.admin) {
-                res.render("index_admin", { results: hospitals, admin_id: req.session.admin['id'] });
+                res.render("index", { results: hospitals, admin: req.session.admin['id'] });
             } else {
                 res.render("index", { results: hospitals });
             }
         } else {
             if (req.session.user) {
-                res.render("index_user", { results: '일치하는 검색 결과가 없습니다.', user_id: req.session.user['id'] });
+                res.render("index", { results: '일치하는 검색 결과가 없습니다.', user: req.session.user['id'] });
             } else if (req.session.admin) {
-                res.render("index_admin", { results: '일치하는 검색 결과가 없습니다.', admin_id: req.session.admin['id'] });
+                res.render("index", { results: '일치하는 검색 결과가 없습니다.', admin: req.session.admin['id'] });
             }else {
                 res.render("index", { results: '일치하는 검색 결과가 없습니다.' });
             }

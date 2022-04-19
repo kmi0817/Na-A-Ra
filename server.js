@@ -33,6 +33,7 @@ app.get("/", async (req, res) => {
     const search_type = req.query.search_type;
 
     if (typeof search_type == "undefined") {
+        // 처음 시작 페이지 (입력된 검색어가 없으므로 undefiend)
         if (req.session.user) {
             res.render("index", { results: "", user: req.session.user['id'] });
         } else if (req.session.admin) {
@@ -41,104 +42,128 @@ app.get("/", async (req, res) => {
             res.render("index", { results: "" });
         }
     } else if (search_type == "road_search") {
-    const inputAddr = req.query.inputAddr;
-    const inputType = req.query.inputType;
-    const inputFilter = req.query.inputFilter;
-    const addrFilter = req.query.addrFilter;
+        /* *************************
+                주소명 검색
+        ************************* */
 
-            let searchAddr;
-            if (addrFilter === "lo") {
-                if (inputAddr.includes("서울")) {
-                    let listAddr = inputAddr.split(" ");
-                    let road = listAddr[2].substr(0, listAddr[2].indexOf("로") + 1);
-                    searchAddr = `${listAddr[0]}특별시 ${listAddr[1]} ${road}`;
-                } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
-                    let listAddr = inputAddr.split(" ");
-                    searchAddr = `${listAddr[0]}광역시 ${listAddr[1]} ${listAddr[2]}`;
-                } else {
-                    let listAddr = inputAddr.split(" ");
-                    let road = listAddr[3].substr(0, listAddr[3].indexOf("로") + 1);
-                    searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${listAddr[2]} ${road}`;
-                }
-            } else if (addrFilter === "gu") {
-                if (inputAddr.includes("서울")) {
-                    let listAddr = inputAddr.split(" ");
-                    let gu = listAddr[1].substr(0, listAddr[1].indexOf("구") + 1);
-                    searchAddr = `${listAddr[0]}특별시 ${gu}`;
-                } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
-                    let listAddr = inputAddr.split(" ");
-                    searchAddr = `${listAddr[0]}광역시 ${listAddr[1]}`;
-                } else {
-                    let listAddr = inputAddr.split(" ");
-                    let gu = listAddr[2].substr(0, listAddr[2].indexOf("구") + 1);
-                    searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${gu}`;
-                }
-            }
-            
-            let conditions;
-            if (inputFilter == "all") {
-                if (inputType == "외과") {
-                    conditions = {
-                        $and : [
-                            {name : {$regex : "외과"}},
-                            {name : {$not : {$regex : "정형"}}},
-                            {name : {$not : {$regex : "치과"}}}
-                        ],
-                        addr: {$regex: searchAddr}
-                    }
-                } else {
-                    conditions = {
-                        name: {$regex: inputType},
-                        addr: {$regex: searchAddr}
-                    }
-                }
-            }
-            
-            else if (inputFilter == "infant") {
-                if (inputType == "외과") {
-                    conditions = {
-                        addr: {$regex: searchAddr},
-                        $and : [
-                            {name : {$regex : "외과"}},
-                            {name : {$not : {$regex : "정형"}}},
-                            {name : {$not : {$regex : "치과"}}},
-                            {name: {$regex: "소아"}}
-                        ]
-                    }
-                } else {
-                    conditions = {
-                        $and : [
-                            {name : {$regex : inputType}},
-                            {name : {$regex : "소아"}}
-                        ],
-                        addr: {$regex: searchAddr}
-                    }
-                }
-            }
-            let results = await Hospitals.find(conditions);
+        // 검색 필터 내용 가져오기
+        const inputAddr = req.query.inputAddr;
+        const inputType = req.query.inputType;
+        const inputFilter = req.query.inputFilter;
+        const addrFilter = req.query.addrFilter;
 
-            // Send index.ejs data
-            if (results.length > 0) {
-                if (req.session.user) {
-                    res.render("index", { results: results, user: req.session.user['id'] });
-                } else if (req.session.admin) {
-                    res.render("index", { results: results, admin: req.session.admin['id'] });
-                } else {
-                    res.render("index", { results: results });
+        let searchAddr;
+        if (addrFilter === "lo") {
+            // 주소 필터가 "-로" 단위일 때
+            if (inputAddr.includes("서울")) {
+                let listAddr = inputAddr.split(" ");
+                let road = listAddr[2].substr(0, listAddr[2].indexOf("로") + 1);
+                searchAddr = `${listAddr[0]}특별시 ${listAddr[1]} ${road}`;
+            } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
+                let listAddr = inputAddr.split(" ");
+                searchAddr = `${listAddr[0]}광역시 ${listAddr[1]} ${listAddr[2]}`;
+            } else {
+                let listAddr = inputAddr.split(" ");
+                let road = listAddr[3].substr(0, listAddr[3].indexOf("로") + 1);
+                searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${listAddr[2]} ${road}`;
+            }
+        } else if (addrFilter === "gu") {
+            // 주소 필터가 "-구" 단위일 때
+            if (inputAddr.includes("서울")) {
+                let listAddr = inputAddr.split(" ");
+                let gu = listAddr[1].substr(0, listAddr[1].indexOf("구") + 1);
+                searchAddr = `${listAddr[0]}특별시 ${gu}`;
+            } else if (inputAddr.includes("인천")  || inputAddr.includes("부산") || inputAddr.includes("울산") || inputAddr.includes("대구") || inputAddr.includes("광주") || inputAddr.includes("대전")) {
+                let listAddr = inputAddr.split(" ");
+                searchAddr = `${listAddr[0]}광역시 ${listAddr[1]}`;
+            } else {
+                let listAddr = inputAddr.split(" ");
+                let gu = listAddr[2].substr(0, listAddr[2].indexOf("구") + 1);
+                searchAddr = `${listAddr[0]}도 ${listAddr[1]} ${gu}`;
+            }
+        }
+        
+        // DB 검색에 사용할 필터링 문장 생성
+        let conditions;
+        if (inputFilter == "all") {
+            // 검색 필터가 "전체보기"일 때
+            if (inputType == "외과") {
+                conditions = {
+                    $and : [
+                        {name : {$regex : "외과"}},
+                        {name : {$not : {$regex : "정형"}}},
+                        {name : {$not : {$regex : "치과"}}}
+                    ],
+                    addr: {$regex: searchAddr}
                 }
             } else {
-                if (req.session.user) {
-                    res.render("index", { results: '일치하는 검색 결과가 없습니다.', user: req.session.user['id'] });
-                } else if (req.session.admin) {
-                    res.render("index", { results: '일치하는 검색 결과가 없습니다.', admin: req.session.admin['id'] });
-                }else {
-                    res.render("index", { results: '일치하는 검색 결과가 없습니다.' });
+                conditions = {
+                    name: {$regex: inputType},
+                    addr: {$regex: searchAddr}
                 }
             }
+        }
+            
+        else if (inputFilter == "infant") {
+            // 검색 필터가 "소아과 보기"일 때
+            if (inputType == "외과") {
+                conditions = {
+                    addr: {$regex: searchAddr},
+                    $and : [
+                        {name : {$regex : "외과"}},
+                        {name : {$not : {$regex : "정형"}}},
+                        {name : {$not : {$regex : "치과"}}},
+                        {name: {$regex: "소아"}}
+                    ]
+                }
+            } else {
+                conditions = {
+                    $and : [
+                        {name : {$regex : inputType}},
+                        {name : {$regex : "소아"}}
+                    ],
+                    addr: {$regex: searchAddr}
+                }
+            }
+        }
+
+        // DB에서 병원 데이터 가져오기
+        let results = await Hospitals.find(conditions);
+
+        // index.ejs로 병원 데이터 내보내기
+        if (results.length > 0) {
+            // 병원 데이터가 있다면 DB로 받은 병원 데이터를 내보낸다
+            if (req.session.user) {
+                res.render("index", { results: results, user: req.session.user['id'] });
+            } else if (req.session.admin) {
+                res.render("index", { results: results, admin: req.session.admin['id'] });
+            } else {
+                res.render("index", { results: results });
+            }
+        } else {
+            // 병원 데이터가 없다면 "일치하는 검색 결과가 없다"는 내용을 내보낸다
+            if (req.session.user) {
+                res.render("index", { results: '일치하는 검색 결과가 없습니다.', user: req.session.user['id'] });
+            } else if (req.session.admin) {
+                res.render("index", { results: '일치하는 검색 결과가 없습니다.', admin: req.session.admin['id'] });
+            }else {
+                res.render("index", { results: '일치하는 검색 결과가 없습니다.' });
+            }
+        }
     } else if (search_type == "name_search") {
+        /* *************************
+                병원명 검색
+        ************************* */
+
+        // 입력된 병원 이름 가져오기
         const hospital_name = req.query.hospital_name;
+
+        // DB에서 병원 데이터 가져오기
         let hospitals = await Hospitals.find({ name: {$regex : hospital_name} });
+
+        // index.ejs로 병원 데이터 내보내기
         if (hospitals.length > 0) {
+            // 병원 데이터가 있다면 DB로 받은 병원 데이터를 내보낸다
             if (req.session.user) {
                 res.render("index", { results: hospitals, user: req.session.user['id'] });
             } else if (req.session.admin) {
@@ -147,6 +172,7 @@ app.get("/", async (req, res) => {
                 res.render("index", { results: hospitals });
             }
         } else {
+            // 병원 데이터가 없다면 "일치하는 검색 결과가 없다"는 내용을 내보낸다
             if (req.session.user) {
                 res.render("index", { results: '일치하는 검색 결과가 없습니다.', user: req.session.user['id'] });
             } else if (req.session.admin) {
@@ -164,6 +190,9 @@ app.post("/process/:type", async(req, res) => {
     const type = req.params.type;
 
     if (type == "signup") {
+        /* *************************
+                회원가입
+        ************************* */
         try {
             const salt = crypto.randomBytes(64).toString("base64");
             const hashed_password = crypto.pbkdf2Sync(req.body.createPassword, salt, 190481, 64, "sha512").toString("base64");
@@ -184,6 +213,9 @@ app.post("/process/:type", async(req, res) => {
             }
         }
     } else if (type == "login") {
+        /* *************************
+                로그인
+        ************************* */
         const results = await Users.findOne({ user_id: req.body.inputId, is_withdrawn: false });
 
         if (results != null) {
@@ -210,8 +242,14 @@ app.post("/process/:type", async(req, res) => {
             res.send(`<script>alert("일치하는 회원 정보가 없습니다."); history.go(-1);</script>`);
         }
     } else if (type == "logout") {
+        /* *************************
+                로그아웃
+        ************************* */
         req.session.destroy((error) => { res.redirect("/"); });
     } else if (type == "change-password") {
+        /* *************************
+                비밀번호 변경
+        ************************* */
         const user = await Users.findOne({ user_id: req.body.input_id });
         if (user != null) {
             const computed_password = crypto.pbkdf2Sync(req.body.old_password, user["user_salt"], 190481, 64, "sha512").toString("base64");
@@ -228,6 +266,9 @@ app.post("/process/:type", async(req, res) => {
             res.send(`<script>alert("일치하는 회원 정보가 없습니다."); history.go(-1);</script>`);
         }
     } else if (type == "report") {
+        /* *************************
+                회원의 병원신고 접수
+        ************************* */
         let report = new Reports();
         report.writer_id = req.body.writer_id;
         report.hospital_id = req.body.hospital_id;

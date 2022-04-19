@@ -16,7 +16,7 @@
         href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
         rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
+    <link href="../css/styles.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -41,7 +41,7 @@
     <br>
     <div class="container">
         <nav class="navbar navbar-light bg-light justify-content-between">
-            <a class="navbar-brand" href="/">나아라</a>
+            <a class="navbar-brand" href="/">나아라 <%= category %></a>
             <form class="form-inline">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="button"><a href="/">검색하기</a></button>
                 <div class="btn-group">
@@ -141,12 +141,14 @@
             </div>
         </div>
         <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
+        <div class="container px-4 px-lg-5 my-4">
+            <div class="d-flex justify-content-end">
+                <a href="/community/<%= category %>-write" class="btn btn-outline-dark">작성</a>
+            </div>
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
-                    <!-- Post preview-->
                     <div class="post-preview">
-                        <a href="/community/questions/12">
+                        <a href="#">
                             <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
                             <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
                         </a>
@@ -156,8 +158,21 @@
                             on September 24, 2022
                         </p>
                     </div>
+                    <% postings.forEach((posting, index)=> { %>
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="/community/<%= category %>/<%= posting._id %>">
+                            <h2 class="post-title"><%= posting.title %></h2>
+                        </a>
+                        <p class="post-meta">
+                            Posted by
+                            <a href="#!"><%= posting.writer %></a>
+                            <%= posting.created_at.toLocaleString() %>
+                        </p>
+                    </div>
                     <!-- Divider-->
                     <hr class="my-4" />
+                    <% }) %>
                     <!-- Pager-->
                     <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase"
                             href="#!">Older Posts →</a></div>

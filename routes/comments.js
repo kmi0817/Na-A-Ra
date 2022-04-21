@@ -14,11 +14,11 @@ router.get("/:id", async (req, res) => {
     const hospital = await Hospitals.findById(req.params.id);
 
     if (req.session.admin) {
-        res.render("comments/index", { comments: comments, hospital: hospital, admin: req.session.admin['id'] });
+        res.render("comments", { comments: comments, hospital: hospital, admin: req.session.admin['id'] });
     } else if (req.session.user) {
-        res.render("comments/index", { comments: comments, hospital: hospital, user: req.session.user['id'] });
+        res.render("comments", { comments: comments, hospital: hospital, user: req.session.user['id'] });
     } else {
-        res.render("comments/index", { comments: comments, hospital: hospital });
+        res.render("comments", { comments: comments, hospital: hospital });
     }
 });
 

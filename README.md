@@ -56,9 +56,14 @@ npm install express-session --save
 >
 > ##### views (directory)
 >
-> > index.ejs (3 versions: user, member, admin)
+> > comments.ejs
+> > 
+> >  index.ejs
+> >
+> > mypage.ejs
 > >
 > > test.ejs (using Kakao map API)
+> >
 >
 > > ###### admin (directory)
 > >
@@ -68,9 +73,13 @@ npm install express-session --save
 > > >
 > > > index.ejs
 >
-> > ###### comments (directory)
+> > ###### community (directory)
 > >
-> > > index.ejs (3 versions: user, member, admin)
+> > > board.ejs
+> > >
+> > > post.ejs
+> > >
+> > > write.ejs
 >
 > package-lock.json
 >

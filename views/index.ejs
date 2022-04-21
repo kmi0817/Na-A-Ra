@@ -234,7 +234,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <fieldset class="form-group">
                                 <div class="row">
                                     <legend class="col-form-label col-sm-2 pt-0">검색 필터</legend>
@@ -250,7 +249,6 @@
                                     </div>
                                 </div>
                             </fieldset>
-
                             <fieldset class="form-group">
                                 <div class="row">
                                     <legend class="col-form-label col-sm-2 pt-0">주소 필터</legend>
@@ -272,7 +270,6 @@
                             </fieldset>
                         </form>
                     </div>
-
                 </div>
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="card-body">
@@ -291,7 +288,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <% if (results) { %>
@@ -316,11 +312,10 @@
                                     <h5 class="modal-title" id="exampleModalLongTitle<%= index %>">
                                         <%= result.name %>
                                     </h5>
-                                    <div class="text-danger" style="font-size: 0.75rem">&#9888; 신고횟수 <%=
-                                            result.reports_cnt %>
+                                    <div class="text-danger" style="font-size: 0.75rem">
+                                        &#9888; 신고횟수 <%= result.reports_cnt %>
                                     </div>
-                                    <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -361,8 +356,7 @@
                                     </script>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">닫기</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                                     <% if (locals.admin) { %>
                                     <button type="button" class="btn btn-warning text-white" onclick="alert('관리자는 병원을 신고할 수 없습니다.')">신고하기</button>
                                     <% } else if (locals.user) { %>

@@ -100,3 +100,6 @@ npm install express-session --save
 * read the details of the searched hospital
 * read & **make** reviews and cumulative reports of the searched hospital
 * check the total activity log in 'mypage'
+
+##### 3) admin
+* To be continue...

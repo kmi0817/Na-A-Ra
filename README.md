@@ -102,4 +102,8 @@ npm install express-session --save
 * check the total activity log in 'mypage'
 
 ##### 3) admin
-* To be continue...
+* search hospitals by address or hospital name
+* read the details of the searched hospital
+* read & **delete** reviews
+* manage member & reviews & community in 'admin page'
+* reject and confirm reports by members

@@ -221,3 +221,25 @@
 .commentsNoneText {
     color: #777777;
 }
+
+.SearchBtnActive {
+    width: 8vw;
+    height: 2vw;
+    margin: 0.5vw;
+    border: none;
+    text-align: center;
+    border-radius: 1vh;
+    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+    background-color: #809FFF;
+    color: white;
+}
+
+.SearchBtnNonActive {
+    width: 8vw;
+    height: 2vw;
+    margin: 0.5vw;
+    border: none;
+    text-align: center;
+    border-radius: 1vh;
+    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+}

@@ -151,6 +151,37 @@ app.get("/newapi", async (req, res) => {
     }
 });
 
+//병원명 검색
+app.get("/name-search", async(req, res) => {
+        // 입력된 병원 이름 가져오기
+        const hospital_name = req.query.hospital_name;
+        // DB에서 병원 데이터 가져오기
+        let hospitals = await Hospitals.find({ name: {$regex : hospital_name} });
+
+        // index.ejs로 병원 데이터 내보내기
+        if (hospitals.length > 0) {
+            // 병원 데이터가 있다면 DB로 받은 병원 데이터를 내보낸다
+            if (req.session.user) {
+                res.send({ results: hospitals, user: req.session.user['id'] });
+            } else if (req.session.admin) {
+                res.send({ results: hospitals, admin: req.session.admin['id'] });
+            } else {
+                res.send({ results: hospitals });
+            }
+        } else {
+            // 병원 데이터가 없다면 "일치하는 검색 결과가 없다"는 내용을 내보낸다
+            if (req.session.user) {
+                res.send({ results: '일치하는 검색 결과가 없습니다.', user: req.session.user['id'] });
+            } else if (req.session.admin) {
+                res.send({ results: '일치하는 검색 결과가 없습니다.', admin: req.session.admin['id'] });
+            }else {
+                res.send({ results: '일치하는 검색 결과가 없습니다.' });
+            }
+        }
+});
+
+
+
 
 //회원가입 로그인
 app.post("/process/:type", async(req, res) => {

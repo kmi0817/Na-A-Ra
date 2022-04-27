@@ -21,10 +21,10 @@ function MainPage({ location, history }) {
           <button className="community_btn">커뮤니티</button>
           </Link>
           <Link to="/search">
-          <button className="search_btn">검색</button>
+          <button className="search_btn">주소명 검색</button>
           </Link>
-          <Link to="/intro">
-          <button className="intro_btn">서비스 소개</button>
+          <Link to="/search-name">
+          <button className="intro_btn">병원명 검색</button>
           </Link>
         </div>
 

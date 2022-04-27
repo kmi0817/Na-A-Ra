@@ -8,6 +8,7 @@ import './community.css';
 import MainPage from './pages/MainPage';
 import Notfound from './pages/Notfound';
 import NewTest from "./pages/NewTest";
+import SearchNmae from "./pages/SearchName";
 import HospitalDetail from "./pages/HospitalDetail";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
@@ -29,6 +30,7 @@ class App extends Component {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/search" element={<NewTest />} />
+          <Route path="/search-name" element={<SearchNmae />} />
           <Route path="/detail" element={<HospitalDetail />} />
           <Route path="/:id" element={<HospitalDetail />} />
           <Route path="/signup" element={<Signup />} />

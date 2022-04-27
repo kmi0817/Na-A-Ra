@@ -2,6 +2,7 @@ const express = require("express");
 const request = require("request");
 const adminRouter = require("./routes/admin");
 const commentsRouter = require("./routes/comments");
+const communityRouter = require("./routes/community");
 const mypageRouter = require("./routes/mypage");
 const methodOverride = require("method-override");
 const http = require("http");
@@ -28,14 +29,15 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // views engine (convert ejs code to HTML)
-//app.set("views", __dirname + "/views");
-//app.set("view engine", "ejs");
+app.set("views", __dirname + "/views");
+app.set("view engine", "ejs");
 app.use(methodOverride('_method'));
-//app.engine("html", require("ejs").renderFile);
+app.engine("html", require("ejs").renderFile);
 
 // other routes
 app.use("/admin", adminRouter);
 app.use("/comments", commentsRouter);
+app.use("/community", communityRouter);
 app.use("/mypage", mypageRouter);
 
 
@@ -46,6 +48,7 @@ app.get("/newapi", async (req, res) => {
     const inputType = req.query.inputType;
     const inputFilter = req.query.inputFilter;
     const addrFilter = req.query.addrFilter;
+    const search_type = req.query.search_type;
 
     if (typeof inputAddr == "undefined" || typeof inputType == "undefined" || typeof inputFilter == "undefined") {
         if (req.session.user) {
@@ -270,6 +273,10 @@ app.get("/checkUser", (req, res) => {
         res.send({user_id: null});
     }
 })
+
+
+
+
 
 
 

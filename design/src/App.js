@@ -4,6 +4,7 @@ import './App.css';
 import './comments.css';
 import './HospitalDetail.css';
 import './sign.css';
+import './community.css';
 import MainPage from './pages/MainPage';
 import Notfound from './pages/Notfound';
 import NewTest from "./pages/NewTest";
@@ -12,7 +13,13 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Intro from './pages/Intro';
 import Mypage from './pages/Mypage';
-
+import Community from './pages/Communities/community';
+import Consulting from './pages/Communities/Consulting';
+import Question from './pages/Communities/Question';
+import QuestionWrite from './pages/Communities/QuestionWrite';
+import ConsultingWrite from './pages/Communities/ConsultingWrite';
+import QuestionDetail from './pages/Communities/QuestionDetail';
+import ConsultingDetail from './pages/Communities/ConsultingDetail';
 
 class App extends Component {
   render() {
@@ -21,7 +28,7 @@ class App extends Component {
         <Router>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/newtest" element={<NewTest />} />
+          <Route path="/search" element={<NewTest />} />
           <Route path="/detail" element={<HospitalDetail />} />
           <Route path="/:id" element={<HospitalDetail />} />
           <Route path="/signup" element={<Signup />} />
@@ -29,6 +36,14 @@ class App extends Component {
           <Route path="/intro" element={<Intro />} />
           <Route path="/mypage" element={<Mypage />} />
 
+          <Route path="/community" element={<Community />} />
+          <Route path="/community/consulting" element={<Consulting />} />
+          <Route path="/community/consulting-write" element={<ConsultingWrite />} />
+          <Route path="/community/consulting/:id" element={<ConsultingDetail />} />
+          <Route path="/community/question" element={<Question />} />
+          <Route path="/community/question-write" element={<QuestionWrite />} />
+          <Route path="/community/question/:id" element={<QuestionDetail />} />
+          
           <Route path="*" element={<Notfound/>} />
         </Routes>
       </Router>

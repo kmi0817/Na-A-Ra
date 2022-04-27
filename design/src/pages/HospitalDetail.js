@@ -16,6 +16,10 @@ const HospitalDetail = () => {
   const path = "/comments/" + data._id;
 
   useEffect(() => {
+    GetData();
+  }, []);
+
+  const GetData = (e) => {
     axios.get(path, {
     })
     .then(function (response) {
@@ -34,8 +38,7 @@ const HospitalDetail = () => {
     .catch(function (error) {
       alert("회원 아이디 가져오기 요청 실패");
     })
-  }, []);
-
+  }
 
   const AfterSubmit = (e) => {
     e.preventDefault(); //redirect 방지
@@ -56,6 +59,7 @@ const HospitalDetail = () => {
       .then(function (response) {
         alert(response.data.text);
         console.log(response.data.comments)
+        GetData();
       })
       .catch(function (error) {
         alert("실패");

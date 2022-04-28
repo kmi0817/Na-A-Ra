@@ -1,4 +1,4 @@
-﻿# NaARa :thumbsup:
+﻿# NaARa裸芽羅 :thumbsup:
 
 ### 1. **Infomation :eyes:**
 

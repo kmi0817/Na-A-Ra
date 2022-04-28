@@ -45,8 +45,9 @@ function NewTest() {
     const [boolAddr, setBoolAddr] = useState(true);
     const [boolName, setBoolName] = useState(false);
 
-    const AfterSubmit_Addr = (e) => {
+    const AfterSubmit_Addr = async (e) => {
         e.preventDefault(); //redirect 방지
+        setJsondata()
 
         const addr = address;
         const type = e.target[2].value;
@@ -59,7 +60,7 @@ function NewTest() {
                 url: '/newapi?inputAddr=' + addr + '&inputType=' + type + '&inputFilter=' + filter + '&addrFilter=' + filter_addr,
             })
             .then(response => {
-                console.log("데이터 받아왔어요! : " + response.data.results);
+                console.log("데이터 : " + response.data.results);
                 setJsondata(response.data.results);
                 console.log("데이터 길이: " + response.data.results.length);
                 setLength(response.data.results.length)
@@ -79,13 +80,11 @@ function NewTest() {
         }
     }
 
-    const AfterSubmit_Name = (e) => {
+    const AfterSubmit_Name = async (e) => {
         e.preventDefault(); //redirect 방지
-
         const hospital_name = e.target[0].value;
-
         console.log(e.target[0].value);
-
+        setJsondata()
 
         if (hospital_name != '') {
             axios( {

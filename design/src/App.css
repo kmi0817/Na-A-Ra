@@ -36,7 +36,7 @@ header {
   color: #809FFF;
   text-align: center;
   border-radius: 1vh;
-  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .2);
 }
 
 .menu li {
@@ -65,6 +65,7 @@ ul, li {
   text-align: center;
   vertical-align: middle;
   border-radius: 0 0 3vh 3vh;
+  box-shadow: 3px 3px 7px 3px rgba(0, 0, 0, .1);
 }
 
 .MainTopSpan {
@@ -185,11 +186,14 @@ ul, li {
 
 .MainMidDiv {
   position: relative;
+  display: inline-block;
   top: 4vh;
-  width: 100%;
-  height: 40vh;
-  background: #f8f8f8;
+  width: 80%;
+  height: 45vh;
+  background: #f7f7f7;
   text-align: center;
+  border-radius: 2vh;
+  box-shadow: 3px 4px 10px 3px rgb(0 0 0 / 10%);
 }
 
 .MainMidDiv span {
@@ -269,7 +273,7 @@ ul, li {
   z-index: 1000;
   border-radius: 3vh 3vh 0 0;
 
-  margin-top: 45vh;
+  margin-top: 20vh;
 }
 
 .footerText {
@@ -322,10 +326,4 @@ ul, li {
 
 .IntroMainText {
   
-}
-
-.MainImg {
-  position: relative;
-  top: 8vh;
-  width: 3vw;
 }

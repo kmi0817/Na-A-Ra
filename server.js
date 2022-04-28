@@ -171,11 +171,11 @@ app.get("/name-search", async(req, res) => {
         } else {
             // 병원 데이터가 없다면 "일치하는 검색 결과가 없다"는 내용을 내보낸다
             if (req.session.user) {
-                res.send({ results: '일치하는 검색 결과가 없습니다.', user: req.session.user['id'] });
+                res.send({ results: "", user: req.session.user['id'] });
             } else if (req.session.admin) {
-                res.send({ results: '일치하는 검색 결과가 없습니다.', admin: req.session.admin['id'] });
+                res.send({ results: "", admin: req.session.admin['id'] });
             }else {
-                res.send({ results: '일치하는 검색 결과가 없습니다.' });
+                res.send({ results: "" });
             }
         }
 });
@@ -229,7 +229,7 @@ app.post("/process/:type", async(req, res) => {
                 res.send({text: "로그인 성공"});
             }
         } else {
-            res.send({text: "일치하는 회원 정보가 없습니다."});
+            res.send({results: "", text: "일치하는 회원 정보가 없습니다."});
         }
     } else if (type == "logout") {
         req.session.destroy((error) => { res.send({text: "로그아웃"}); });

@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 function MainPage({ location, history }) {
     return (
         <>
+        <img className="MainBackImg" src="mainBackground.jpg" />
         <div className="App">
           <MenuBar></MenuBar>
           <div className="MainTopDiv">
@@ -18,13 +19,13 @@ function MainPage({ location, history }) {
 
         <div className="MainSelection">
           <Link to="/community">
-          <button className="community_btn">커뮤니티</button>
+          <button className="community_btn"><img className="MainBtnImg_color" src="/svg/fi-rr-users-alt.svg"></img>커뮤니티</button>
           </Link>
           <Link to="/search">
-          <button className="search_btn">주소명 검색</button>
+          <button className="search_btn"><img className="MainBtnImg_white" src="/svg/fi-rr-search.svg"></img>검색</button>
           </Link>
-          <Link to="/search-name">
-          <button className="intro_btn">병원명 검색</button>
+          <Link to="/intro">
+          <button className="intro_btn"><img className="MainBtnImg_color" src="/svg/fi-rr-info.svg"></img>서비스 소개</button>
           </Link>
         </div>
 

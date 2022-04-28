@@ -5,10 +5,10 @@ import './comments.css';
 import './HospitalDetail.css';
 import './sign.css';
 import './community.css';
+import './img.css';
 import MainPage from './pages/MainPage';
 import Notfound from './pages/Notfound';
-import NewTest from "./pages/NewTest";
-import SearchNmae from "./pages/SearchName";
+import Search from "./pages/Search";
 import HospitalDetail from "./pages/HospitalDetail";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
@@ -29,8 +29,7 @@ class App extends Component {
         <Router>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/search" element={<NewTest />} />
-          <Route path="/search-name" element={<SearchNmae />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/detail" element={<HospitalDetail />} />
           <Route path="/:id" element={<HospitalDetail />} />
           <Route path="/signup" element={<Signup />} />

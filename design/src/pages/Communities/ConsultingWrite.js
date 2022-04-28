@@ -9,9 +9,6 @@ const Post = (props) => {
 
   const AfterSubmit = (e) => {
     e.preventDefault(); //redirect 방지
-    console.log("0번: " + e.target[0].value); //제목
-    console.log("1번: " + e.target[1].value); //내용
-  
     const inputTitle = e.target[0].value;
     const inputDescription = e.target[1].value;
     

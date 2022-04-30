@@ -37,7 +37,7 @@ header {
   color: #809FFF;
   text-align: center;
   border-radius: 1vh;
-  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .2);
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
 }
 
 .menu li {
@@ -66,7 +66,7 @@ ul, li {
   text-align: center;
   vertical-align: middle;
   border-radius: 0 0 3vh 3vh;
-  box-shadow: 3px 3px 7px 3px rgba(0, 0, 0, .1);
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
 }
 
 .MainTopSpan {
@@ -75,6 +75,7 @@ ul, li {
   top: 5vh;
   font-size: 20px;
   font-weight: 600;
+  animation: fadeIn 1s both;
 }
 
 .MainTopSpanSub {
@@ -83,6 +84,7 @@ ul, li {
   top: 5vh;
   font-size: 14px;
   font-weight: 600;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .MainTopSpan2 {
@@ -91,6 +93,7 @@ ul, li {
   top: 7vh;
   font-size: 14px;
   font-weight: 600;
+  animation: fadeIn 1s both;
 }
 
 .MainTopBtn {
@@ -103,6 +106,7 @@ ul, li {
   color: #809FFF;
   border-radius: 2vh;
   cursor: pointer;
+  animation: fadeIn 1s;
 }
 
 .MainTopSearchDiv {
@@ -116,7 +120,7 @@ ul, li {
   height: 6vh;
   border: none;
   border-radius: 1vh;
-  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
   color: #777777;
   text-align: center;
 }
@@ -124,7 +128,7 @@ ul, li {
 .MainTopSubDiv {
   display: inline-block;
   background: white;
-  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
   border-radius: 1vh;
   margin-left: 0.5vh;
 }
@@ -158,7 +162,7 @@ ul, li {
 }
 
 .MainTopSearchDiv button:active {
-  box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, .1);
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
 }
 
 .MainSelection {
@@ -168,10 +172,10 @@ ul, li {
 .MainSelection button {
   width: 15vw;
   height: 30vh;
-  margin: 6vh;
+  margin: 5vh;
   border: none;
   border-radius: 2vh;
-  box-shadow: 3px 3px 7px 3px rgba(0, 0, 0, .1);
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
   color: #7094ff;
   background-color: white;
   font-weight: bold;
@@ -188,11 +192,13 @@ ul, li {
 }
 
 .MainSelection button:hover {
-  box-shadow: 4px 4px 7px 3px rgba(0, 0, 0, .2);
+  width: 17vw;
+  height: 32vh;
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
 }
 
 .MainSelection .search_btn:hover {
-  box-shadow: 4px 4px 7px 3px rgba(0, 0, 0, .2);
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
 }
 
 
@@ -205,7 +211,7 @@ ul, li {
   background: #f7f7f7;
   text-align: center;
   border-radius: 2vh;
-  box-shadow: 3px 4px 10px 3px rgb(0 0 0 / 10%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
   animation: fadeIn 0.7s ease-in-out;
 }
 
@@ -213,12 +219,14 @@ ul, li {
   display: block;
   position: relative;
   top: 6vh;
+  animation: fadeIn 1s both;
 }
 
 .MainMidDiv .MidText {
   position: relative;
   top: 5vh;
   font-size: 22px;
+  animation: fadeIn 1s both;
 }
 
 .MainMidDiv .MidTextEnd {
@@ -235,21 +243,22 @@ ul, li {
   color: white;
   border-radius: 1vh;
   border: none;
-  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
   cursor: pointer;
+  animation: fadeIn 1s both;
 }
 
 .MainMidDiv button:active {
-  box-shadow: 2px 3px 7px 1px rgba(0, 0, 0, .1);
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
 }
 
 .MoveBtn {
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .1);
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
   cursor: pointer;
 }
 
 .MoveBtn:hover {
-  box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, .1);
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
 }
 
 .mainPageLink {
@@ -304,13 +313,13 @@ ul, li {
   border-radius: 1vh;
   margin-left: 0.5vh;
   color: #809FFF;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .1);
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
   cursor: pointer;
 }
 
 
 .IntroBtnDiv button:active {
-  box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, .1);
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
 }
 
 .IntroMoveText {
@@ -330,9 +339,13 @@ ul, li {
 }
 
 .IntroMainText {
-  
+  white-space: pre-wrap;
 }
 
+.IntroMainTextEng {
+  font-family: "Nunito";
+  white-space: pre-wrap;
+}
 
 
 
@@ -342,6 +355,11 @@ ul, li {
 @font-face {
   font-family: Pretendard;
   src: url("./fonts/Pretendard-Medium.ttf");
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url("./fonts/Nunito-Light.ttf");
 }
 
 @keyframes fadeIn {

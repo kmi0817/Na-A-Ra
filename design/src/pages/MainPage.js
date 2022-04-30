@@ -6,7 +6,6 @@ import Footer from "../components/Footer";
 function MainPage({ location, history }) {
     return (
         <>
-        <img className="MainBackImg" src="mainBackground.jpg" />
         <div className="App">
           <MenuBar></MenuBar>
           <div className="MainTopDiv">

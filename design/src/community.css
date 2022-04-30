@@ -4,10 +4,17 @@
     margin: 6vh;
     border: none;
     border-radius: 2vh;
-    box-shadow: 3px 3px 7px 3px rgba(0, 0, 0, .1);
+    box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
     color: #7094ff;
-    background-color: white;
+    background: white;
     font-weight: bold;
+    animation: fadeIn 0.7s ease-in-out;
+    transition: 0.4s;
+}
+
+.CommuBtnDiv button:hover {
+    width: 17vw;
+    height: 32vh;
 }
 
 .OutDiv {
@@ -48,7 +55,7 @@
     border: none;
     background-color: white;
     border-radius: 1vh;
-    box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, .1);
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
 }
 
 .BackBtn {
@@ -57,7 +64,7 @@
     border: none;
     background-color: white;
     border-radius: 1vh;
-    box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, .1);
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
 }
 
 .DetailDiv {

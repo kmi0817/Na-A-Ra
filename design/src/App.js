@@ -6,6 +6,7 @@ import './HospitalDetail.css';
 import './sign.css';
 import './community.css';
 import './img.css';
+import './animation.css';
 import MainPage from './pages/MainPage';
 import Notfound from './pages/Notfound';
 import Search from "./pages/Search";

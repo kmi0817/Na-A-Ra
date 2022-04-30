@@ -1,5 +1,18 @@
+.SeacrchBackground {
+    background-color: aliceblue;
+}
+
 .BackgroundDiv {
+    display: inline-block;
+    width: 90%;
+    position: relative;
+    top: 5vh;
     text-align: center;
+
+    background-color: white;
+    border-radius: 2vh;
+    box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, .1);
+    
 }
 
 .cardDiv {
@@ -242,4 +255,12 @@
     text-align: center;
     border-radius: 1vh;
     box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+}
+
+.SearchBtnActive:active {
+    box-shadow: 3px 3px 7px 1px rgba(0, 0, 0, .2);
+}
+
+.SearchBtnNonActive:active {
+    box-shadow: 3px 3px 7px 1px rgba(0, 0, 0, .2);
 }

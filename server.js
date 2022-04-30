@@ -298,11 +298,12 @@ app.get("/openapi", (req, res) => {
 
 app.get("/checkUser", (req, res) => {
     if (req.session.admin || req.session.user) {
+        console.log(req.session.user['id'])
         res.send({user_id: req.session.user['name'], user_id_id: req.session.user['id']});
     }
     else {
-        res.send({user_id: null});
-    }
+        res.send({user_id: "none", user_id_id: "none"});
+    }//
 })
 
 

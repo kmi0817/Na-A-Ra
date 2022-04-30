@@ -5,6 +5,7 @@ html {
 
 body {
   padding-top: 10vh;
+  font-family: "Pretendard";
 }
 
 header {
@@ -326,4 +327,15 @@ ul, li {
 
 .IntroMainText {
   
+}
+
+
+
+
+
+
+/* font setting */
+@font-face {
+  font-family: Pretendard;
+  src: url("./fonts/Pretendard-Medium.ttf");
 }

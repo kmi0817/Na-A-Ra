@@ -6,9 +6,8 @@ import SigninModal from '../pages/SigninModal';
 import SignupModal from '../pages/SignupModal';
 
 const Header = () => {
-  const [iflogin, setIflogin] = useState(false);
   const navigate = useNavigate();
-
+  const [iflogin, setIflogin] = useState();
   const [modalOpen, setModalOpen] = useState(false);
     const openModal = (e) => {
         setModalOpen(true);
@@ -19,7 +18,7 @@ const Header = () => {
 
   const moveMypage = () => {
     navigate('/mypage');
-  }
+  }//
 
   const [modalOpen2, setModalOpen2] = useState(false);
     const openModal2 = (e) => {
@@ -29,7 +28,39 @@ const Header = () => {
         setModalOpen2(false);
     };
 
+    useEffect(() => {
+      checkUser();
+    }, []);
 
+    const checkUser = () => {
+      axios.get('/checkUser', {
+      })
+      .then(function (response) {
+        if( response.data.user_id_id != "none") {
+          //console.log("user_id_id: " + response.data.user_id_id)
+          //console.log("user_name: " + response.data.user_id)
+          setIflogin(true)
+        }
+        else {
+          console.log("로그인 상태가 아닙니다.")
+          setIflogin(false)
+        }
+      })
+      .catch(function (error) {
+      })
+    }
+
+    const logout = (e) => {
+      axios.post("/process/logout", {
+      })
+      .then(function (response) {
+        alert(response.data.text + "되었습니다.");
+        setIflogin(false)
+      })
+      .catch(function (error) {
+        alert("실패");
+      })
+    };
 
       return (
         <header>
@@ -43,10 +74,10 @@ const Header = () => {
               iflogin === false ? 
               <>
               <li id="HeaderSignin" onClick={e => openModal(e)}>로그인</li>
-              <SigninModal open={modalOpen} close={closeModal} header="로그인" setModalOpen={setModalOpen} autoClose></SigninModal>
+              <SigninModal open={modalOpen} close={closeModal} header="로그인" setModalOpen={setModalOpen} setIflogin={setIflogin} autoClose></SigninModal>
               </>
               :
-              <li id="HeaderSignin">로그아웃</li>
+              <li id="HeaderSignin" onClick={e => logout(e)}>로그아웃</li>
               }
               <li>|</li>
               {

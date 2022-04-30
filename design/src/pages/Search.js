@@ -129,7 +129,8 @@ function NewTest() {
 
 
     return (
-        <div className="BackgroundDiv">
+        <div className="SeacrchBackground">
+            <div className="BackgroundDiv">
             <MenuBar />
             <p className="SearchMainText">Search</p>
             <button className={boolAddr ? 'SearchBtnActive' : 'SearchBtnNonActive'} onClick={e => ChangeAdddr(e)}>주소명 검색</button>
@@ -197,6 +198,7 @@ function NewTest() {
                 }
                 <HospitalsModal open={DmodalOpen} close={closeDModal} data={modalData} autoClose></HospitalsModal>
                 <p className="noneResultText">{listText}</p>
+            </div>
             </div>
             <Footer></Footer>
         </div>

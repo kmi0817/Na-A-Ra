@@ -7,7 +7,6 @@ function Community({ location, history }) {
     return (
         <>
         <div className="App">
-        <img className="boardBack" src="boardBack.jpg"></img>
           <MenuBar></MenuBar>
           <div className="MainTopDiv">
             <span className="MainTopSpan">이곳은 <strong>나아라</strong>의 커뮤니티입니다!</span>

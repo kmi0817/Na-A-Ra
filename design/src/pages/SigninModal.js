@@ -8,6 +8,7 @@ const Post = (props) => {
   const setAddress = props.setAddress;
   const { open, close, header } = props;
   const setModalOpen = props.setModalOpen;
+  const setIflogin = props.setIflogin;
   const navigate = useNavigate();
 
   const onCompletePost = (data) => {
@@ -31,10 +32,12 @@ const Post = (props) => {
       })
       .then(function (response) {
         alert(response.data.text);
+        setIflogin(true)
         setModalOpen(false);
       })
       .catch(function (error) {
-        alert("실패");
+        alert("?실패");
+        console.log(error)
       })
   }
   else {

@@ -40,10 +40,10 @@ const HospitalDetail = () => {
       .catch(function (error) {
         alert("실패");
       })
-  }
-  else {
+    }
+    else {
       alert("입력해주세요.");
-  }
+    }
 }
 
     return (

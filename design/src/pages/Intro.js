@@ -16,15 +16,16 @@ function Intro({ location, history }) {
         
 
         <div className="IntroMainDiv">
-          <span className="IntroMainText">소개 문구가 들어갈 영역입니다.</span>
+          <span className="IntroMainText">저희 <strong>나아라</strong>는 많은 지역을 오가는 현대인들을 위해, 주소만 입력하면 인근의 병원을 출력해주는 서비스입니다.</span>
+          <p>더불어 일반 검색으로는 쉽게 알아보기 힘들었던 병원의 상세정보를 제공하고 있으며, 다양한 사용자들과 토론할 수 있는 커뮤니티 또한 활발히 운영중입니다.</p>
         </div>
 
 
 
         <div className="IntroBtnDiv" id="1">
           <p className="IntroMoveText">위와 같은 <strong>병원 검색 서비스</strong>를 이용하시려면 아래의 버튼을 <strong>클릭</strong>해주세요!</p>
-          <Link to="/newtest">
-            <button className="IntroMoveBtn" href="/newtest">이동하기</button>
+          <Link to="/search">
+            <button className="IntroMoveBtn">이동하기</button>
           </Link>
         </div>
         

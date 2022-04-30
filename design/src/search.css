@@ -17,6 +17,7 @@
 
 .cardDiv {
     text-align: center;
+    height: 45vh;
 }
 
 .SearchMainText {
@@ -35,6 +36,8 @@
     border-radius: 3vh;
     box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
     vertical-align: top;
+
+    animation: fadeIn 0.7s ease-in-out;
 }
 
 .card1:hover {
@@ -176,6 +179,7 @@
 
 .DetailBtn {
     border: none;
+    margin: 1vh;
     background-color: #ffffff;
     color: #7093fc;
     border-radius: 1vh;
@@ -264,3 +268,22 @@
 .SearchBtnNonActive:active {
     box-shadow: 3px 3px 7px 1px rgba(0, 0, 0, .2);
 }
+
+
+
+
+
+
+
+/* animation */
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  
+    to {
+      opacity: 3;
+      transform: none;
+    }
+  }

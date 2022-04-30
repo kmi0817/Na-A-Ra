@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import MenuBar from "../components/MenuBar";
-import '../Test2.css'
 import AddrModal from './AddrModal';
 import HospitalsModal from './HospitalsModal';
 import Footer from "../components/Footer";
@@ -47,7 +46,6 @@ function NewTest() {
 
     const AfterSubmit_Addr = async (e) => {
         e.preventDefault(); //redirect 방지
-        setJsondata()
 
         const addr = address;
         const type = e.target[2].value;
@@ -55,6 +53,8 @@ function NewTest() {
         const filter_addr = e.target[4].value;
 
         if (addr != '' && type != '병원종류') {
+            setJsondata([{}])
+            setLength(0)
             axios( {
                 method: 'get',
                 url: '/newapi?inputAddr=' + addr + '&inputType=' + type + '&inputFilter=' + filter + '&addrFilter=' + filter_addr,
@@ -84,9 +84,10 @@ function NewTest() {
         e.preventDefault(); //redirect 방지
         const hospital_name = e.target[0].value;
         console.log(e.target[0].value);
-        setJsondata()
 
         if (hospital_name != '') {
+            setJsondata([{}])
+            setLength(0)
             axios( {
                 method: 'get',
                 url: '/name-search?hospital_name=' + hospital_name,
@@ -197,7 +198,11 @@ function NewTest() {
                 ))
                 }
                 <HospitalsModal open={DmodalOpen} close={closeDModal} data={modalData} autoClose></HospitalsModal>
-                <p className="noneResultText">{listText}</p>
+                {
+                    datalength === 0 ?
+                    <p className="noneResultText">{listText}</p>
+                    : null
+                }
             </div>
             </div>
             <Footer></Footer>

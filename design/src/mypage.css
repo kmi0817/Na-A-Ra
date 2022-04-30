@@ -1,0 +1,90 @@
+.mypage_Area {
+    margin: 5vh;
+}
+
+.mypage_AreaBtn {
+    width: 15vw;
+    height: 3vw;
+    margin: 0.5vw;
+    border: none;
+    text-align: center;
+    border-radius: 1vh;
+    background-color: white;
+    box-shadow: 1px 1px 7px 1px rgb(0 0 0 / 10%);
+}
+
+.mypage_AreaBtn:active {
+    box-shadow: 2px 3px 7px 3px rgb(0 0 0 / 10%);
+}
+
+.mypage_AreaBtnActive {
+    width: 15vw;
+    height: 3vw;
+    margin: 0.5vw;
+    border: none;
+    text-align: center;
+    border-radius: 1vh;
+    background-color: #809FFF;
+    color: white;
+    box-shadow: 1px 1px 7px 1px rgb(0 0 0 / 10%);
+}
+
+.mypage_AreaBtnActive:active {
+    box-shadow: 2px 3px 7px 3px rgb(0 0 0 / 10%);
+}
+
+
+/* Privacy Area Component */
+.privacy_Div {
+    display: inline-block;
+    width: 70%;
+    height: 50vh;
+    border-radius: 2vh;
+    background-color: white;
+    box-shadow: 3px 4px 10px 3px rgb(0 0 0 / 10%);
+}
+
+
+
+
+
+
+
+/* Review Area Component */
+.review_Div {
+    display: inline-block;
+    width: 70%;
+    border-radius: 2vh;
+    background-color: #f7f7f7;
+    box-shadow: 3px 4px 10px 3px rgb(0 0 0 / 10%);
+}
+
+.review_comment_div {
+    margin: 2vh;
+}
+
+.comment_No {
+    margin: 3vh;
+}
+
+.comment_Desc {
+    margin: 3vh;
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.comment_Data {
+    margin: 3vh;
+}
+
+
+
+
+/* None Area Component */
+.non_Div {
+    display: inline-block;
+    width: 70%;
+    height: 50vh;
+    border-radius: 2vh;
+    background-color: white;
+    box-shadow: 3px 4px 10px 3px rgb(0 0 0 / 10%);
+}

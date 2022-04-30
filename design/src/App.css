@@ -168,7 +168,6 @@ ul, li {
 .MainSelection button {
   width: 15vw;
   height: 30vh;
-
   margin: 6vh;
   border: none;
   border-radius: 2vh;
@@ -176,6 +175,11 @@ ul, li {
   color: #7094ff;
   background-color: white;
   font-weight: bold;
+  cursor : pointer;
+  overflow: hidden;
+  transition : .2s;
+
+  animation: fadeIn 0.7s ease-in-out;
 }
 
 .MainSelection .search_btn {
@@ -183,6 +187,13 @@ ul, li {
   color: white;
 }
 
+.MainSelection button:hover {
+  box-shadow: 4px 4px 7px 3px rgba(0, 0, 0, .2);
+}
+
+.MainSelection .search_btn:hover {
+  box-shadow: 4px 4px 7px 3px rgba(0, 0, 0, .2);
+}
 
 
 .MainMidDiv {
@@ -195,6 +206,7 @@ ul, li {
   text-align: center;
   border-radius: 2vh;
   box-shadow: 3px 4px 10px 3px rgb(0 0 0 / 10%);
+  animation: fadeIn 0.7s ease-in-out;
 }
 
 .MainMidDiv span {
@@ -228,17 +240,7 @@ ul, li {
 }
 
 .MainMidDiv button:active {
-  position: relative;
-  float: right;
-  width: 13vh;
-  height: 7vh;
-  background: #809FFF;
-  color: white;
-  font-weight: bold;
-  border-radius: 1vh;
-  border: none;
-  margin: 0 30vh 0 0;
-  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+  box-shadow: 2px 3px 7px 1px rgba(0, 0, 0, .1);
 }
 
 .MoveBtn {
@@ -291,6 +293,7 @@ ul, li {
 .IntroBtnDiv {
   text-align: center;
   margin: 10vh 0 10vh 0;
+  animation: fadeIn 0.7s ease-in-out;
 }
 
 .IntroBtnDiv button {
@@ -323,6 +326,7 @@ ul, li {
   margin-top: 10vh;
   border-radius: 3vh;
   padding: 3vh;
+  animation: fadeIn 0.7s ease-in-out;
 }
 
 .IntroMainText {
@@ -338,4 +342,16 @@ ul, li {
 @font-face {
   font-family: Pretendard;
   src: url("./fonts/Pretendard-Medium.ttf");
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 3;
+    transform: none;
+  }
 }

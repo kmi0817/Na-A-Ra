@@ -1,14 +1,18 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Communities = require("../models/communities");
 const request = require("request-promise-native");
 const router = express.Router();
+
+// Collections
+const Communities = require("../models/communities");
+const Comments = require("../models/comments");
 
 mongoose.connect("mongodb://localhost/app", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
 
+// 상담게시글 board 페이지
 router.get("/clinics", async (req, res) => {
     const page = Number(req.query.page || 1); // default page is 1, query는 String이므로 Number로 형변환 필요
     const perPage = 5
@@ -26,19 +30,23 @@ router.get("/clinics", async (req, res) => {
     }
 });
 
+// 특정 상담게시글 페이지
 router.get("/clinics/:id", async (req, res) => {
     try {
         const posting = await Communities.findById(req.params.id);
-        res.render("community/post", { category: "clinics", posting: posting });
+        const comments = await Comments.find({ posting: req.params.id }).sort({ _id: -1 });
+        res.render("community/post", { category: "clinics", posting: posting, comments: comments });
     } catch (error) {
         console.log("*** " + error);
     }
 });
 
+// 상담게시글 작성 페이지
 router.get("/clinics-write", async (req, res) => {
     res.render("community/write", { category: "clinics" });
 });
 
+// 상담게시글 등록 처리
 router.post("/clinics-post", async (req, res) => {
     try {
         let posting = new Communities();
@@ -55,6 +63,24 @@ router.post("/clinics-post", async (req, res) => {
     }
 });
 
+// 상담게시글 댓글 등록 처리
+router.post("/clinics/comment-post", async(req, res) => {
+    console.log(req.body.posting_id);
+    try {
+        let comment = new Comments();
+        comment.posting = req.body.posting_id;
+        comment.created_at = new Date();
+        comment.description = req.body.description;
+
+        comment = await comment.save();
+        res.redirect(`/community/clinics/${req.body.posting_id}`);
+    } catch (error) {
+        res.send(`<script>alert("게시글 작성에 문제가 발생했습니다. 관리자에게 문의하세요."); history.go(-1);</script>`);
+        console.log("*** DB 저장 문제: " + error);
+    }
+});
+
+// 질문게시글 board 페이지
 router.get("/questions", async (req, res) => {
     const page = Number(req.query.page || 1); // default page is 1, query는 String이므로 Number로 형변환 필요
     const perPage = 5
@@ -72,19 +98,23 @@ router.get("/questions", async (req, res) => {
     }
 });
 
+// 특정 질문게시글 페이지
 router.get("/questions/:id", async (req, res) => {
     try {
         const posting = await Communities.findById(req.params.id);
-        res.render("community/post", { category: "questions", posting: posting });
+        const comments = await Comments.find({ posting: req.params.id }).sort({ _id: -1 });
+        res.render("community/post", { category: "questions", posting: posting, comments: comments });
     } catch (error) {
         console.log("*** " + error);
     }
 });
 
+// 질문게시글 작성 페이지
 router.get("/questions-write", async (req, res) => {
     res.render("community/write", { category: "questions" });
 });
 
+// 질문게시글 등록 처리
 router.post("/questions-post", async (req, res) => {
     try {
         let posting = new Communities();
@@ -101,5 +131,21 @@ router.post("/questions-post", async (req, res) => {
     }
 });
 
+// 질문게시글 댓글 등록 처리
+router.post("/questions/comment-post", async (req, res) => {
+    console.log(req.body.posting_id);
+    try {
+        let comment = new Comments();
+        comment.posting = req.body.posting_id;
+        comment.created_at = new Date();
+        comment.description = req.body.description;
+
+        comment = await comment.save();
+        res.redirect(`/community/questions/${req.body.posting_id}`);
+    } catch (error) {
+        res.send(`<script>alert("게시글 작성에 문제가 발생했습니다. 관리자에게 문의하세요."); history.go(-1);</script>`);
+        console.log("*** DB 저장 문제: " + error);
+    }
+});
 
 module.exports = router

@@ -141,7 +141,7 @@
             </div>
         </div>
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+        <header class="masthead">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
@@ -169,11 +169,62 @@
         </article>
         <!-- Divider-->
         <hr class="my-4" />
-        <div class="card">
+        <!-- 댓글 작성 -->
+        <form action="/community/<%= category %>/comment-post" method="POST">
+            <div class="form-group">
+                <textarea name="description" id="description" cols="30" rows="5" class="form-control"
+                    placeholder="한 번 작성한 리뷰는 삭제 및 수정이 불가합니다. (5글자 이상부터 등록 가능)"></textarea>
+            </div>
+            <div class=" d-flex justify-content-end">
+                <!-- <input type="hidden" name="writer_id" value=""> -->
+                <input type="hidden" name="posting_id" value="<%= posting._id %>">
+                <span id="description_cnt">(0 / 500)&nbsp;&nbsp;</span>
+                <button id="submit_btn" type="submit" class="btn btn-primary" disabled>완료</button>
+            </div>
+        </form>
+        <script>
+            // 댓글 입력 개수 Count
+            $(document).ready(function () {
+                $("#description").on("keyup", function () {
+                    // key 입력되자마자 몇 글자인지 바로바로 출력
+                    $("#description_cnt").html("(" + $(this).val().length + " / 500)");
+
+                    if ($(this).val().length < 5) {
+                        // 5글자 미만이면 댓글 작성 불가
+                        const btn = document.getElementById("submit_btn");
+                        btn.disabled = true;
+                    } else if ($(this).val().length >= 5) {
+                        // 5글자 이상이면 댓글 작성 가능
+                        const btn = document.getElementById("submit_btn");
+                        btn.disabled = false;
+                    }
+                    if ($(this).val().length > 500) {
+                        // 500 글자 초과하면, 초과한 글자는 자동으로 삭제
+                        $(this).val($(this).val().substring(0, 500));
+                        $("#description_cnt").html("(500 / 500)");
+                    }
+                });
+            });
+        </script>
+        
+        <!-- 댓글 출력 -->
+        <% comments.forEach((comment)=> { %>
+        <div class="card mt-4">
             <div class="card-body">
-                댓글 자리입니다.
+                <div class="card-subtitle text-muted mb-2 row">
+                    <div class="col-md-2 font-weight-bold">
+                        익명
+                    </div>
+                    <div class="col-md-4">
+                        <%= comment.created_at.toLocaleString() %>
+                    </div>
+                </div>
+                <div class="card-text mb-2">
+                    <%= comment.description %>
+                </div>
             </div>
         </div>
+        <% }) %>
     </div>
 </body>
 

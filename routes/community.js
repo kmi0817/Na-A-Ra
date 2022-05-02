@@ -29,7 +29,6 @@ router.get("/clinics", async (req, res) => {
 router.get("/clinics/:id", async (req, res) => {
     try {
         const posting = await Communities.findById(req.params.id);
-        console.log(posting);
         res.render("community/post", { category: "clinics", posting: posting });
     } catch (error) {
         console.log("*** " + error);

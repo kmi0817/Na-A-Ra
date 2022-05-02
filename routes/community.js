@@ -15,7 +15,7 @@ mongoose.connect("mongodb://localhost/app", {
 // 상담게시글 board 페이지
 router.get("/clinics", async (req, res) => {
     const page = Number(req.query.page || 1); // default page is 1, query는 String이므로 Number로 형변환 필요
-    const perPage = 5
+    const perPage = 5;
     try {
         const total = await Communities.countDocuments({ is_deleted: false, community: "clinics" }); // 총 게시글 개수
         const postings = await Communities.find({ is_deleted: false, community: "clinics" })
@@ -65,7 +65,6 @@ router.post("/clinics-post", async (req, res) => {
 
 // 상담게시글 댓글 등록 처리
 router.post("/clinics/comment-post", async(req, res) => {
-    console.log(req.body.posting_id);
     try {
         let comment = new Comments();
         comment.posting = req.body.posting_id;
@@ -83,7 +82,7 @@ router.post("/clinics/comment-post", async(req, res) => {
 // 질문게시글 board 페이지
 router.get("/questions", async (req, res) => {
     const page = Number(req.query.page || 1); // default page is 1, query는 String이므로 Number로 형변환 필요
-    const perPage = 5
+    const perPage = 5;
     try {
         const total = await Communities.countDocuments({ is_deleted: false, community: "questions" }); // 총 게시글 개수
         const postings = await Communities.find({ is_deleted: false, community: "questions" })
@@ -133,7 +132,6 @@ router.post("/questions-post", async (req, res) => {
 
 // 질문게시글 댓글 등록 처리
 router.post("/questions/comment-post", async (req, res) => {
-    console.log(req.body.posting_id);
     try {
         let comment = new Comments();
         comment.posting = req.body.posting_id;

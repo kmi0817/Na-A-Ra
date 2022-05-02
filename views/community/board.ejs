@@ -57,6 +57,15 @@
             </form>
         </nav>
 
+        <% if (locals.user) { %>
+        <button type="button" class="btn btn-success" onclick="location.href='/mypage'">마이페이지</button>
+        
+        <form class="d-inline" action="/process/logout" method="POST">
+            <button type="submit" class="btn btn-outline-success">
+                로그아웃
+            </button>
+        </form>
+        <% } else { %>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
             로그인
@@ -140,6 +149,7 @@
                 </div>
             </div>
         </div>
+        <% } %>
         <!-- Main Content-->
         <div class="container px-4 px-lg-5 my-4">
             <div class="d-flex justify-content-end">

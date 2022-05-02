@@ -57,6 +57,15 @@
             </form>
         </nav>
 
+        <% if (locals.user) { %>
+        <button type="button" class="btn btn-success" onclick="location.href='/mypage'">마이페이지</button>
+        
+        <form class="d-inline" action="/process/logout" method="POST">
+            <button type="submit" class="btn btn-outline-success">
+                로그아웃
+            </button>
+        </form>
+        <% } else { %>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
             로그인
@@ -140,6 +149,7 @@
                 </div>
             </div>
         </div>
+        <% } %>
         <!-- Page Header-->
         <header class="masthead">
             <div class="container position-relative px-4 px-lg-5">
@@ -176,7 +186,7 @@
                     placeholder="한 번 작성한 리뷰는 삭제 및 수정이 불가합니다. (5글자 이상부터 등록 가능)"></textarea>
             </div>
             <div class=" d-flex justify-content-end">
-                <!-- <input type="hidden" name="writer_id" value=""> -->
+                <input type="hidden" name="writer" value="<%= user %>">
                 <input type="hidden" name="posting_id" value="<%= posting._id %>">
                 <span id="description_cnt">(0 / 500)&nbsp;&nbsp;</span>
                 <button id="submit_btn" type="submit" class="btn btn-primary" disabled>완료</button>

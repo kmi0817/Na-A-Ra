@@ -167,15 +167,44 @@
             <!-- Pager -->
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
+                    <li class="page-item">
                         <a class="page-link" id="previous">Previous</a>
                     </li>
                     <% for (var i = 1; i <= totalPages; i++) { %>
-                    <li class="page-item"><a class="page-link" href="/community/<%= category %>?page=<%= i %>"><%= i %></a></li>
+                    <li class="page-item"><a class="page-link" id="page<%= i %>" href="/community/<%= category %>?page=<%= i %>"><%= i %></a></li>
                     <% }; %>
                     <li class="page-item">
                         <a class="page-link" id="next">Next</a>
                     </li>
+                    <script>
+                        const currentPage = Number(new URLSearchParams(location.search).get("page")); // 파라미터에서 현재 페이지 가져오기 (디폴트 페이지: 0)
+
+                        // 선택된 페이지 CSS 변경
+                        const page_btn = document.getElementById(`page${currentPage}`);
+                        page_btn.style.backgroundColor="rgb(0, 123, 255)";
+                        page_btn.style.color = "white";
+
+                        // previous 처리
+                        const previous_btn = document.getElementById("previous");
+                        if (currentPage == 1 || currentPage == 0) {
+                            // 첫 페이지에선 previous 비활성화
+                            previous_btn.removeAttribute("href");
+                        } else {
+                            previous_btn.href = `/community/<%= category %>?page=${currentPage - 1}`;
+                        }
+
+                        // next 처리
+                        const next_btn = document.getElementById("next");
+                        if (<%= totalPages %> > currentPage) {
+                            if (currentPage == 0) // 첫 페이지에서 next 누르면 2쪽으로 이동
+                                next_btn.href = "/community/<%= category %>?page=2";
+                            else
+                                next_btn.href = `/community/<%= category %>?page=${currentPage + 1}`;
+                        } else {
+                            // 마지막 페이지에선 next 비활성화
+                            next_btn.removeAttribute("href");
+                        }
+                    </script>
                 </ul>
             </nav>
         </div>

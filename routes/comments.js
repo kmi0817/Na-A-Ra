@@ -38,6 +38,7 @@ router.post("/write", async(req, res) => {
         comment.writer_id = req.body.writer_id;
         comment.hospital_id = req.body.hospital_id;
         comment.description = req.body.description;
+        comment.created_at = new Date();
 
         comment = await comment.save();
     }

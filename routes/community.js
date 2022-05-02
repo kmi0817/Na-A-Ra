@@ -45,6 +45,7 @@ router.post("/clinics-post", async (req, res) => {
         posting.title = req.body.inputTitle;
         posting.description = req.body.inputDescription;
         posting.community = "clinics";
+        posting.created_at = new Date();
 
         posting = await posting.save();
         res.redirect("/community/clinics");
@@ -83,6 +84,7 @@ router.post("/questions-post", async (req, res) => {
         posting.title = req.body.inputTitle;
         posting.description = req.body.inputDescription;
         posting.community = "questions";
+        posting.created_at = new Date();
 
         posting = await posting.save();
         res.redirect("/community/questions");

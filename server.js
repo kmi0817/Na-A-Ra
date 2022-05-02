@@ -201,6 +201,7 @@ app.post("/process/:type", async(req, res) => {
             user.user_id = req.body.createId;
             user.user_salt = salt;
             user.user_hashedPassword = hashed_password;
+            user.created_at = new Date();
 
             user = await user.save();
             res.redirect("/");

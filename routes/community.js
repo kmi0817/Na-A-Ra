@@ -13,7 +13,7 @@ router.get("/clinics", async (req, res) => {
     const page = Number(req.query.page || 1); // default page is 1, query는 String이므로 Number로 형변환 필요
     const perPage = 5
     try {
-        const total = await Communities.countDocuments({}); // 총 게시글 개수
+        const total = await Communities.countDocuments({ community: "clinics" }); // 총 게시글 개수
         const postings = await Communities.find({ is_deleted: false, community: "clinics" })
                                             .sort({ created_at: -1 }) // 최신 글이 먼저 보이도록 함
                                             .skip(perPage * (page - 1)) // 검색에서 제외할 데이터 개수

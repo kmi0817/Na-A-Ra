@@ -1,16 +1,11 @@
 const mongoose = require("mongoose");
 
 const commentsSchema = new mongoose.Schema({
-    // writer: [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Users",
-    //     required: true,
-    // }],
-    writer: {
-        type: String,
+    writer: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Users",
         required: true,
-        default: "익명"
-    },
+    }],
     posting: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Communities",

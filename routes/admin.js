@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const request = require("request-promise-native");
 const Hospitals = require("../models/hospitals");
-const Comments = require("../models/comments");
+const Reviews = require("../models/reviews");
 const Users = require("../models/users");
 const Reports = require("../models/reports");
 const router = express.Router();
@@ -25,9 +25,9 @@ router.get("/", async (req, res) => {
 
 router.get("/member/:id", async(req, res) => {
     if (req.session.admin) {
-        const comments_results = await Comments.find({ writer_id: req.params.id }).populate({ path: "hospital_id", select: { name: 1 } }).sort({ _id: -1 });
+        const reviews_results = await Reviews.find({ writer_id: req.params.id }).populate({ path: "hospital_id", select: { name: 1 } }).sort({ _id: -1 });
         const reports_results = await Reports.find({ writer_id: req.params.id }).populate({ path: "hospital_id", select: { name: 1 }});
-        res.render("admin/member", { comments_results: comments_results, reports_results: reports_results });
+        res.render("admin/member", { reviews_results: reviews_results, reports_results: reports_results });
     } else {
         res.status(404).send("not found");
     }

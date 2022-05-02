@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Comments = require("../models/comments");
+const Reviews = require("../models/reviews");
 const Hospitals = require("../models/hospitals");
 const router = express.Router();
 
@@ -10,15 +10,15 @@ mongoose.connect("mongodb://localhost/app", {
 });
 
 router.get("/:id", async (req, res) => {
-    const comments = await Comments.find({ hospital_id: req.params.id, is_deleted: false }).populate({ path: "writer_id", select: { user_id: 1 } }).sort({ _id: -1 }); // sorting collection by date (created_at)
+    const reviews = await Reviews.find({ hospital_id: req.params.id, is_deleted: false }).populate({ path: "writer_id", select: { user_id: 1 } }).sort({ _id: -1 }); // sorting collection by date (created_at)
     const hospital = await Hospitals.findById(req.params.id);
 
     if (req.session.admin) {
-        res.render("comments", { comments: comments, hospital: hospital, admin: req.session.admin['id'] });
+        res.render("reviews", { reviews: reviews, hospital: hospital, admin: req.session.admin['id'] });
     } else if (req.session.user) {
-        res.render("comments", { comments: comments, hospital: hospital, user: req.session.user['id'] });
+        res.render("reviews", { reviews: reviews, hospital: hospital, user: req.session.user['id'] });
     } else {
-        res.render("comments", { comments: comments, hospital: hospital });
+        res.render("reviews", { reviews: reviews, hospital: hospital });
     }
 });
 
@@ -34,20 +34,20 @@ router.post("/write", async(req, res) => {
             }
         }
 
-        let comment = new Comments();
-        comment.writer_id = req.body.writer_id;
-        comment.hospital_id = req.body.hospital_id;
-        comment.description = req.body.description;
-        comment.created_at = new Date();
+        let review = new Reviews();
+        review.writer_id = req.body.writer_id;
+        review.hospital_id = req.body.hospital_id;
+        review.description = req.body.description;
+        review.created_at = new Date();
 
-        comment = await comment.save();
+        review = await review.save();
     }
-    res.redirect(`/comments/${req.body.hospital_id}`);
+    res.redirect(`/reviews/${req.body.hospital_id}`);
 });
 
 router.delete("/delete/:id", async(req, res) => {
-    if (req.session.admin) { await Comments.findByIdAndUpdate(req.params.id, { is_deleted: true }); }
-    res.redirect(`/comments/${req.body.hospital_id}`);
+    if (req.session.admin) { await Reviews.findByIdAndUpdate(req.params.id, { is_deleted: true }); }
+    res.redirect(`/reviews/${req.body.hospital_id}`);
 });
 
 module.exports = router;

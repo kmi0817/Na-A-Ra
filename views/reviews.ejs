@@ -22,7 +22,7 @@
             </div>
             <div class="card-body">
                 <% if (locals.admin) { %>
-                <form action="/comments/write" method="POST" onsubmit="if(!confirm('한 번 작성한 리뷰는 삭제 및 수정이 불가합니다.')) {return false; }">
+                <form action="/reviews/write" method="POST" onsubmit="if(!confirm('한 번 작성한 리뷰는 삭제 및 수정이 불가합니다.')) {return false; }">
                     <div class="form-group">
                         <textarea name="description" id="description" cols="30" rows="5" class="form-control" placeholder="한 번 작성한 리뷰는 삭제 및 수정이 불가합니다. (5글자 이상부터 등록 가능)"></textarea>
                     </div>
@@ -34,7 +34,7 @@
                     </div>
                 </form>
                 <% } else if (locals.user) { %>
-                <form action="/comments/write" method="POST" onsubmit="if(!confirm('한 번 작성한 리뷰는 삭제 및 수정이 불가합니다.')) {return false; }">
+                <form action="/reviews/write" method="POST" onsubmit="if(!confirm('한 번 작성한 리뷰는 삭제 및 수정이 불가합니다.')) {return false; }">
                     <div class="form-group">
                         <textarea name="description" id="description" cols="30" rows="5" class="form-control" placeholder="한 번 작성한 리뷰는 삭제 및 수정이 불가합니다. (5글자 이상부터 등록 가능)"></textarea>
                     </div>
@@ -80,18 +80,18 @@
             });
         </script>
         <% } %>
-        <% comments.forEach((comment)=> { %>
+        <% reviews.forEach((review)=> { %>
             <div class="card mt-4">
                 <div class="card-body">
                     <div class="card-subtitle text-muted mb-2 row">
-                        <div class="col-md-2 font-weight-bold"><%= comment.writer_id[0].user_id %></div>
-                        <div class="col-md-4"><%= comment.created_at.toLocaleString() %></div>
+                        <div class="col-md-2 font-weight-bold"><%= review.writer_id[0].user_id %></div>
+                        <div class="col-md-4"><%= review.created_at.toLocaleString() %></div>
                     </div>
                     <div class="card-text mb-2">
-                        <%= comment.description %>
+                        <%= review.description %>
                     </div>
                     <% if (locals.admin) { %>
-                    <form action="/comments/delete/<%= comment._id %>?_method=DELETE" method="POST" class="d-inline d-flex justify-content-end" onsubmit="if(!confirm('댓글을 삭제하시겠습니까?')) {return false; }">
+                    <form action="/reviews/delete/<%= review._id %>?_method=DELETE" method="POST" class="d-inline d-flex justify-content-end" onsubmit="if(!confirm('댓글을 삭제하시겠습니까?')) {return false; }">
                         <input type="hidden" name="hospital_id" value="<%= hospital._id %>">
                         <button type="submit" class="btn btn-danger btn-sm">삭제</button>
                     </form>

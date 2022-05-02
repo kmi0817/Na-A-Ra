@@ -1,6 +1,6 @@
 const express = require("express");
 const adminRouter = require("./routes/admin");
-const commentsRouter = require("./routes/comments");
+const reviewsRouter = require("./routes/reviews");
 const communityRouter = require("./routes/community");
 const mypageRouter = require("./routes/mypage");
 const Hospitals = require("./models/hospitals");
@@ -280,7 +280,7 @@ app.post("/process/:type", async(req, res) => {
 });
 
 app.use("/admin", adminRouter);
-app.use("/comments", commentsRouter);
+app.use("/reviews", reviewsRouter);
 app.use("/community", communityRouter);
 app.use("/mypage", mypageRouter);
 

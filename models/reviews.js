@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const commentsSchema = new mongoose.Schema({
+const reviewsSchema = new mongoose.Schema({
     writer_id: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Users",
@@ -29,4 +29,4 @@ const commentsSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("Comments", commentsSchema);
+module.exports = mongoose.model("Reviews", reviewsSchema);

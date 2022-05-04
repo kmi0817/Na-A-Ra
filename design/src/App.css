@@ -26,6 +26,10 @@ header {
   z-index: 1000;
 }
 
+.MainBackground {
+  background-color: #f7f7fb;
+}
+
 .menuText {
   float: left;
 }
@@ -206,37 +210,49 @@ ul, li {
   position: relative;
   display: inline-block;
   top: 4vh;
-  width: 80%;
+  width: 65vw;
   height: 45vh;
-  background: #f7f7f7;
+  background: white;
   text-align: center;
+  border: 20px solid white;
   border-radius: 2vh;
   box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
+  overflow: hidden;
+  transition : .2s;
   animation: fadeIn 0.7s ease-in-out;
 }
+
+.MainMidDiv:hover {
+  width: 67vw;
+  height: 46vh;
+  border-color: white;
+  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
+}
+
+
 
 .MainMidDiv span {
   display: block;
   position: relative;
-  top: 6vh;
+  top: 8vh;
   animation: fadeIn 1s both;
 }
 
 .MainMidDiv .MidText {
   position: relative;
-  top: 5vh;
+  top: 6vh;
   font-size: 22px;
   animation: fadeIn 1s both;
 }
 
 .MainMidDiv .MidTextEnd {
-  top: 12vh;
+  top: 14vh;
   color: #777777;
 }
 
 .MainMidDiv button {
   position: relative;
-  top: 14vh;
+  top: 16vh;
   width: 12vh;
   height: 5vh;
   background: #809FFF;
@@ -330,7 +346,7 @@ ul, li {
   display: inline-block;
   width: 70%;
   height: 40vh;
-  background-color: #f8f8f8;
+  background-color: #f7f7fb;
   text-align: center;
   margin-top: 10vh;
   border-radius: 3vh;
@@ -372,4 +388,10 @@ ul, li {
     opacity: 3;
     transform: none;
   }
+}
+
+@keyframes AnimationName {
+  0% {background-position: 0% 50%}
+  50% {background-position: 100% 50%}
+  100% {background-position: 0% 50%}
 }

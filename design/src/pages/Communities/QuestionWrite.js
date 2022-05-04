@@ -39,7 +39,7 @@ const Post = (props) => {
   }
 
   return (
-    <div>
+    <div className="WriteSection">
         <MenuBar></MenuBar>
         <div className="MainTopDiv">
           <span className="MainTopSpan">질문게시판 게시글 작성</span>
@@ -47,11 +47,13 @@ const Post = (props) => {
         <section>
           <main>
           <form className="QuestionWriteForm" onSubmit={AfterSubmit}>
-            <input type="text" required name="title" className="inputTitle" id="inputTitle" placeholder="input yout title"></input>
-            <input type="textarea" required name="description" className="inputDescription" id="inputDescription" placeholder="input your Description"></input>
-            <button id="submitBtn" type="submit">완료</button>
+            <input type="text" required name="title" className="WriteInputTitle" id="inputTitle" placeholder="input yout title"></input>
+            <textarea required name="description" className="WriteInputDesc" id="inputDescription" placeholder="input your Description"></textarea>
+            <div>
+            <button id="WriteSubmit" type="submit">완료</button>
+            <button id="WriteCancel" onClick={BacktoPage}>취소</button>
+            </div>
           </form>
-          <button id="submitCancel" onClick={BacktoPage}>취소</button>
           </main>
         </section>
         <Footer></Footer>

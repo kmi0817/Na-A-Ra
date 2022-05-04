@@ -66,7 +66,7 @@ const Question = () => {
           ))
         }
           <Link to="/community/question-write">
-            <button className="WriteBtn">작성</button>
+            <button className="WriteBtn"><img className="WriteBtnImg_color" src="/svg/fi-rr-edit.svg"></img>작성</button>
           </Link>
         </div>
 

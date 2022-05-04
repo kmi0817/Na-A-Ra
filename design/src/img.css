@@ -2,8 +2,9 @@
 /* 메인페이지 css */
 .MainImg {
     position: relative;
-    top: 8vh;
-    width: 3vw;
+    top: 11vh;
+    width: 2vw;
+    min-width: 30px;
     animation: fadeIn 1s both;
   }
   
@@ -21,6 +22,14 @@
     width: 2vw;
     max-width: 50px;
     filter: invert(62%) sepia(48%) saturate(2321%) hue-rotate(198deg) brightness(101%) contrast(101%);
+}
+
+.WriteBtnImg_color{
+    width: 1.3vw;
+    min-width: 15px;
+    max-width: 30px;
+    margin: 5px;
+    filter: invert(76%) sepia(4%) saturate(11%) hue-rotate(351deg) brightness(81%) contrast(85%);
 }
 
 .MainBtnImg_white {

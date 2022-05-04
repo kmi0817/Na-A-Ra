@@ -1,5 +1,7 @@
 .SeacrchBackground {
-    background-color: aliceblue;
+    background: linear-gradient(140deg, white, #cff1ff, #d2e0ff, white);
+    background-size: 400% 400%;
+    animation: AnimationName 5s ease-in-out infinite;
 }
 
 .BackgroundDiv {
@@ -8,7 +10,6 @@
     position: relative;
     top: 5vh;
     text-align: center;
-
     background-color: white;
     border-radius: 2vh;
     box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, .1);
@@ -80,8 +81,8 @@
     border: none;
     margin: 0.5vw;
     text-align: center;
-    color: white;
-    background-color: cornflowerblue;
+    color: black;
+    background-color: #f7f7fb;
     border-radius: 1vh;
     box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
 }
@@ -94,6 +95,7 @@
     text-align: center;
     border-radius: 1vh;
     box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+    background-color: #f7f7fb;
 }
 
 .formBtn {
@@ -104,6 +106,8 @@
     text-align: center;
     border-radius: 1vh;
     box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+    background-color: #809FFF;
+    color: white;
 }
 
 .symptom_level:hover {
@@ -167,6 +171,11 @@
     margin: 0.5vw;
     border-radius: 1vh;
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .1);
+    transition: .2s;
+}
+
+.inputAddr:focus {
+    outline: none;
 }
 
 .AddrBtn {
@@ -176,6 +185,7 @@
     border-radius: 1vh;
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .1);
     border: none;
+    background-color: #f7f7fb;
 }
 
 .DetailBtn {
@@ -260,6 +270,7 @@
     border: none;
     text-align: center;
     border-radius: 1vh;
+    background-color: #f7f7fb;
     box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
 }
 

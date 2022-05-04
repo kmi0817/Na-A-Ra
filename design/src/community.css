@@ -1,3 +1,7 @@
+.CommuBackground {
+    background-color: #f7f7fb;
+}
+
 .CommuBtnDiv button {
     width: 15vw;
     height: 30vh;
@@ -8,6 +12,7 @@
     color: #7094ff;
     background: white;
     font-weight: bold;
+    cursor: pointer;
     animation: fadeIn 0.7s ease-in-out;
     transition: 0.4s;
 }
@@ -87,4 +92,79 @@
 
 .DetailDate {
     color: #a0a0a0;
+}
+
+.QuestionWriteForm {
+    margin: 2vw;
+}
+
+.WriteInputTitle {
+    display: inline-block;
+    border: 1vw solid white;
+    width: 50vw;
+    height: 3vw;
+    margin: 0.5vw;
+    max-width: 600px;
+    max-height: 20px;
+    border-radius: 1vw;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+    font-family: "Nunito";    
+}
+
+.WriteInputTitle:focus {
+    outline: none;
+}
+
+.WriteInputDesc {
+    display: inline-block;
+    border: 1vw solid white;
+    width: 70vw;
+    height: 30vw;
+    margin: 0.5vw;
+    max-width: 700px;
+    max-height: 300px;
+    min-height: 280px;
+    border-radius: 1vw;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+    font-family: "Nunito";
+}
+
+.WriteInputDesc:focus {
+    outline: none;
+}
+
+.WriteSection {
+    background-color: #f7f7f7;
+}
+
+#WriteSubmit {
+    width: 10vw;
+    height: 5vh;
+    border: none;
+    background-color: #809FFF;
+    color: white;
+    border-radius: 1vw;
+    margin: 1vw;
+    max-width: 70px;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+}
+
+#WriteSubmit:active {
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 10%);
+}
+
+#WriteCancel {
+    width: 10vw;
+    height: 5vh;
+    border: none;
+    background-color: #afafaf;
+    color: white;
+    border-radius: 1vw;
+    margin: 1vw;
+    max-width: 70px;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+}
+
+#WriteCancel:active {
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 10%);
 }

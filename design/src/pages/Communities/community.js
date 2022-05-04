@@ -6,21 +6,19 @@ import Footer from "../../components/Footer";
 function Community({ location, history }) {
     return (
         <>
-        <div className="App">
+        <div className="CommuBackground">
           <MenuBar></MenuBar>
           <div className="MainTopDiv">
             <span className="MainTopSpan">이곳은 <strong>나아라</strong>의 커뮤니티입니다!</span>
             <span className="MainTopSpanSub">원하는 유형의 커뮤니티를 선택해주세요.</span>
           </div>
-
-
-
+          
           <div className="CommuBtnDiv" id="1">
           <Link to="/community/consulting">
-            <button className="QMoveBtn" href="/community/consulting">상담게시판</button>
+            <button className="QMoveBtn" href="/community/consulting"><img className="MainBtnImg_color" src="/svg/fi-rr-graduation-cap.svg"></img>상담게시판</button>
           </Link>
           <Link to="/community/question">
-            <button className="CMoveBtn" href="/community/question">질문게시판</button>
+            <button className="CMoveBtn" href="/community/question"><img className="MainBtnImg_color" src="/svg/fi-rr-info.svg"></img>질문게시판</button>
           </Link>
         </div>
         

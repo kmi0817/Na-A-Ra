@@ -38,7 +38,7 @@ router.get("/clinics/:id", async (req, res) => {
     if (req.session.user) {
         try {
             const posting = await Communities.findById(req.params.id);
-            const comments = await Comments.find({ posting: req.params.id }).sort({ _id: -1 });
+            const comments = await Comments.find({ is_deleted: false, posting: req.params.id }).sort({ _id: -1 });
             res.render("community/post", { category: "clinics", posting: posting, comments: comments, user: req.session.user['id'] });
         } catch (error) {
             console.log("*** " + error);
@@ -127,7 +127,7 @@ router.get("/questions/:id", async (req, res) => {
     if (req.session.user) {
         try {
             const posting = await Communities.findById(req.params.id);
-            const comments = await Comments.find({ posting: req.params.id }).sort({ _id: -1 });
+            const comments = await Comments.find({ is_deleted: false, posting: req.params.id }).sort({ _id: -1 });
             res.render("community/post", { category: "questions", posting: posting, comments: comments, user: req.session.user['id'] });
         } catch (error) {
             console.log("*** " + error);
@@ -191,7 +191,7 @@ router.post("/questions/comment-post", async (req, res) => {
 router.delete("/del/:id", async (req, res) => {
     if (req.session.user || req.session.admin) {
         try {
-            await Comments.findByIdAndDelete(req.params.id);
+            await Comments.findByIdAndUpdate(req.params.id, { is_deleted: true });
             res.redirect(`/community/${ req.body.category }/${ req.body.posting_id }`);
         } catch (error) {
             res.send(`<script>alert("게시글 작성에 문제가 발생했습니다. 관리자에게 문의하세요."); history.go(-1);</script>`);

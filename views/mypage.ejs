@@ -218,7 +218,7 @@
                 <div class="card-header" id="headingTwo">
                     <h5 class="mb-0">
                         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            내가 단 댓글
+                            내가 단 리뷰
                         </button>
                     </h5>
                 </div>
@@ -234,12 +234,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% comments_results.forEach((comment, index) => { %>
+                                <% reviews_results.forEach((review, index) => { %>
                                 <tr>
                                     <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
-                                    <td style="font-size: 0.8rem"><a href="/comments/<%= comment.hospital_id[0]._id %>"><%= comment.hospital_id[0].name %></a></td>
-                                    <td style="font-size: 0.8rem"><%= comment.description %></td>
-                                    <td style="font-size: 0.8rem"><%= comment.created_at.toLocaleString() %></td>
+                                    <td style="font-size: 0.8rem"><a href="/reviews/<%= review.hospital_id[0]._id %>"><%= review.hospital_id[0].name %></a></td>
+                                    <td style="font-size: 0.8rem"><%= review.description %></td>
+                                    <td style="font-size: 0.8rem"><%= review.created_at.toLocaleString() %></td>
                                 </tr>
                                 <% }) %>
                             </tbody>
@@ -271,7 +271,7 @@
                                 <% reports_results.forEach((report, index) => { %>
                                 <tr>
                                     <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
-                                    <td style="font-size: 0.8rem"><a href="/comments/<%= report.hospital_id[0]._id %>"><%= report.hospital_id[0].name %></a></td>
+                                    <td style="font-size: 0.8rem"><a href="/reviews/<%= report.hospital_id[0]._id %>"><%= report.hospital_id[0].name %></a></td>
                                     <td style="font-size: 0.8rem"><%= report.created_at.toLocaleString() %></td>
                                     <td style="font-size: 0.8rem"><%= report.is_confirmed %></td>
                                 </tr>

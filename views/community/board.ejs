@@ -160,9 +160,18 @@
                     <% postings.forEach((posting, index)=> { %>
                     <!-- Post preview-->
                     <div class="post-preview">
+                        <% if (locals.user) { %>
+                        <!-- 회원은 특정 게시글 확인 가능 -->
                         <a href="/community/<%= category %>/<%= posting._id %>">
                             <h2 class="post-title"><%= posting.title %></h2>
                         </a>
+                        <% } else { %>
+                        <!-- 비회원은 게시글 확인 불가 -->
+                        <a onclick="alert('로그인이 필요한 서비스입니다.')" style="cursor:pointer">
+                            <h2 class="post-title"><%= posting.title %></h2>
+                        </a>
+                        <% } %>
+
                         <p class="post-meta">
                             Posted at <%= posting.created_at.toLocaleString() %>
                         </p>

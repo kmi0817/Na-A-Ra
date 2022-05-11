@@ -247,25 +247,6 @@ app.post("/process/:type", async(req, res) => {
                 로그아웃
         ************************* */
         req.session.destroy((error) => { res.redirect("/"); });
-    } else if (type == "change-password") {
-        /* *************************
-                비밀번호 변경
-        ************************* */
-        const user = await Users.findOne({ user_id: req.body.input_id });
-        if (user != null) {
-            const computed_password = crypto.pbkdf2Sync(req.body.old_password, user["user_salt"], 190481, 64, "sha512").toString("base64");
-            if (computed_password === user["user_hashedPassword"]) {
-                const salt = crypto.randomBytes(64).toString("base64");
-                const hashed_password = crypto.pbkdf2Sync(req.body.new_password, salt, 190481, 64, "sha512").toString("base64");
-
-                await Users.findOneAndUpdate({ user_id: req.body.input_id }, { user_salt: salt, user_hashedPassword: hashed_password });
-                res.redirect("/mypage");
-            } else {
-                res.send(`<script>alert("일치하는 회원 정보가 없습니다."); history.go(-1);</script>`);
-            }
-        } else {
-            res.send(`<script>alert("일치하는 회원 정보가 없습니다."); history.go(-1);</script>`);
-        }
     } else if (type == "report") {
         /* *************************
                 회원의 병원신고 접수

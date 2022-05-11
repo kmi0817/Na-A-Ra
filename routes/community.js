@@ -63,6 +63,7 @@ router.post("/clinics-post", async (req, res) => {
     if (req.session.user) {
         try {
             let posting = new Communities();
+            posting.writer = req.body.writer;
             posting.title = req.body.inputTitle;
             posting.description = req.body.inputDescription;
             posting.community = "clinics";

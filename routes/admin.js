@@ -1,11 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const request = require("request-promise-native");
+const router = express.Router();
+
+// Collections
 const Hospitals = require("../models/hospitals");
 const Reviews = require("../models/reviews");
 const Users = require("../models/users");
 const Reports = require("../models/reports");
-const router = express.Router();
+const Communities = require("../models/communities");
+const Comments = require("../models/comments");
 
 mongoose.connect("mongodb://localhost/app", {
     useNewUrlParser: true,
@@ -27,7 +31,9 @@ router.get("/member/:id", async(req, res) => {
     if (req.session.admin) {
         const reviews_results = await Reviews.find({ writer_id: req.params.id }).populate({ path: "hospital_id", select: { name: 1 } }).sort({ _id: -1 });
         const reports_results = await Reports.find({ writer_id: req.params.id }).populate({ path: "hospital_id", select: { name: 1 }});
-        res.render("admin/member", { reviews_results: reviews_results, reports_results: reports_results });
+        const communities_results = await Communities.find({ writer: req.params.id }).sort({ _id: -1 });
+        const comments_results = await Comments.find({ writer: req.params.id }).populate({ path: "posting", select: { _id: 1, title: 1 }}).sort({ _id: -1 });
+        res.render("admin/member", { reviews_results: reviews_results, reports_results: reports_results, communities_results: communities_results, comments_results: comments_results });
     } else {
         res.status(404).send("not found");
     }

@@ -187,4 +187,16 @@ router.post("/questions/comment-post", async (req, res) => {
     }
 });
 
+// 댓글 삭제 (질문게시판과 상담게시판 통합)
+router.delete("/del/:id", async (req, res) => {
+    if (req.session.user || req.session.admin) {
+        try {
+            await Comments.findByIdAndDelete(req.params.id);
+            res.redirect(`/community/${ req.body.category }/${ req.body.posting_id }`);
+        } catch (error) {
+            res.send(`<script>alert("게시글 작성에 문제가 발생했습니다. 관리자에게 문의하세요."); history.go(-1);</script>`);
+            console.log("*** 댓글 삭제 문제: " + error);
+        }
+    }
+});
 module.exports = router

@@ -14,8 +14,8 @@ router.get("/", async(req, res) => {
         const home_results = await Users.findById(req.session.user.id);
         const reviews_results = await Reviews.find({ writer_id: req.session.user.id }).populate({ path: "hospital_id", select: { name: 1 }}).sort({ _id: -1 });
         const reports_results = await Reports.find({ writer_id: req.session.user.id }).populate({ path: "hospital_id", select: { name: 1 }});
-        const communities_results = await Communities.find({ writer: req.session.user.id }).sort({ _id: -1 });
-        const comments_results = await Comments.find({ writer: req.session.user.id }).populate({ path: "posting", select: { _id: 1, title: 1, community: 1 } }).sort({ _id: -1 });
+        const communities_results = await Communities.find({ writer: req.session.user.id, is_deleted: false }).sort({ _id: -1 });
+        const comments_results = await Comments.find({ writer: req.session.user.id, is_deleted: false }).populate({ path: "posting", select: { _id: 1, title: 1, community: 1 } }).sort({ _id: -1 });
         res.render("mypage", { home_results: home_results, reviews_results: reviews_results, reports_results: reports_results, communities_results: communities_results, comments_results: comments_results });
     } else {
         res.status(404).send("not found");

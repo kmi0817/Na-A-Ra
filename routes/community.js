@@ -24,7 +24,6 @@ router.get("/clinics", async (req, res) => {
         const totalPages = Math.ceil(total / perPage);
 
         if (req.session.user) {
-            console.log(req.session.user);
             res.render("community/board", { category: "clinics", postings: postings, total: total, totalPages: totalPages, user: req.session.user['id'] });
         } else {
             res.render("community/board", { category: "clinics", postings: postings, total: total, totalPages: totalPages });
@@ -113,7 +112,11 @@ router.get("/questions", async (req, res) => {
             .limit(perPage); // 가져올 포스팅 개수
         const totalPages = Math.ceil(total / perPage);
 
-        res.render("community/board", { category: "questions", postings: postings, total: total, totalPages: totalPages, user: req.session.user['id'] });
+        if (req.session.user) {
+            res.render("community/board", { category: "questions", postings: postings, total: total, totalPages: totalPages, user: req.session.user['id'] });
+        } else {
+            res.render("community/board", { category: "questions", postings: postings, total: total, totalPages: totalPages });
+        }
     } catch (error) {
         console.log("*** " + error);
     }
@@ -121,50 +124,66 @@ router.get("/questions", async (req, res) => {
 
 // 특정 질문게시글 페이지
 router.get("/questions/:id", async (req, res) => {
-    try {
-        const posting = await Communities.findById(req.params.id);
-        const comments = await Comments.find({ posting: req.params.id }).sort({ _id: -1 });
-        res.render("community/post", { category: "questions", posting: posting, comments: comments, user: req.session.user['id'] });
-    } catch (error) {
-        console.log("*** " + error);
+    if (req.session.user) {
+        try {
+            const posting = await Communities.findById(req.params.id);
+            const comments = await Comments.find({ posting: req.params.id }).sort({ _id: -1 });
+            res.render("community/post", { category: "questions", posting: posting, comments: comments, user: req.session.user['id'] });
+        } catch (error) {
+            console.log("*** " + error);
+        }
+    } else {
+        res.status(404).send("not found");
     }
 });
 
 // 질문게시글 작성 페이지
 router.get("/questions-write", async (req, res) => {
-    res.render("community/write", { category: "questions", user: req.session.user['id'] });
+    if (req.session.user) {
+        res.render("community/write", { category: "questions", user: req.session.user['id'] });
+    } else {
+        res.status(404).send("not found");
+    }
 });
 
 // 질문게시글 등록 처리
 router.post("/questions-post", async (req, res) => {
-    try {
-        let posting = new Communities();
-        posting.title = req.body.inputTitle;
-        posting.description = req.body.inputDescription;
-        posting.community = "questions";
-        posting.created_at = new Date();
+    if (req.session.user) {
+            try {
+            let posting = new Communities();
+            posting.title = req.body.inputTitle;
+            posting.description = req.body.inputDescription;
+            posting.community = "questions";
+            posting.created_at = new Date();
 
-        posting = await posting.save();
-        res.redirect("/community/questions");
-    } catch (error) {
-        res.send(`<script>alert("게시글 작성에 문제가 발생했습니다. 관리자에게 문의하세요."); history.go(-1);</script>`);
-        console.log("*** DB 저장 문제: " + error);
+            posting = await posting.save();
+            res.redirect("/community/questions");
+        } catch (error) {
+            res.send(`<script>alert("게시글 작성에 문제가 발생했습니다. 관리자에게 문의하세요."); history.go(-1);</script>`);
+            console.log("*** DB 저장 문제: " + error);
+        }
+    } else {
+        res.status(404).send("not found");
     }
 });
 
 // 질문게시글 댓글 등록 처리
 router.post("/questions/comment-post", async (req, res) => {
-    try {
-        let comment = new Comments();
-        comment.posting = req.body.posting_id;
-        comment.created_at = new Date();
-        comment.description = req.body.description;
+    if (req.session.user) {
+        try {
+            let comment = new Comments();
+            comment.posting = req.body.posting_id;
+            comment.created_at = new Date();
+            comment.description = req.body.description;
 
-        comment = await comment.save();
-        res.redirect(`/community/questions/${req.body.posting_id}`);
-    } catch (error) {
-        res.send(`<script>alert("게시글 작성에 문제가 발생했습니다. 관리자에게 문의하세요."); history.go(-1);</script>`);
-        console.log("*** DB 저장 문제: " + error);
+            comment = await comment.save();
+            res.redirect(`/community/questions/${req.body.posting_id}`);
+        } catch (error) {
+            res.send(`<script>alert("게시글 작성에 문제가 발생했습니다. 관리자에게 문의하세요."); history.go(-1);</script>`);
+            console.log("*** DB 저장 문제: " + error);
+        }
+    } else {
+        res.status(404).send("not found");
     }
 });
 

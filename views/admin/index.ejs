@@ -118,7 +118,7 @@
                                     <th style="font-size: 0.8rem"><%= report.hospital_id[0].sidoCdNm %> <%= report.hospital_id[0].sgguCdNm %></th>
                                     <th style="font-size: 0.8rem"><%= report.writer_id[0].user_id %> <span class="text-muted"><%= report.created_at.toLocaleString() %></span></th>
                                     <th style="font-size: 0.8rem">
-                                        <form class="d-inline" action="/admin/report-confirmed" method="POST">
+                                        <form class="d-inline" action="/admin/report-confirmed?_method=PATCH" method="POST">
                                             <input type="hidden" name="report_id" value="<%= report._id %>">
                                             <input type="hidden" name="hospital_id" value="<%= report.hospital_id[0]._id %>">
                                             <button class="btn btn-outline-danger btn-sm" type="submit">인증하기</button>

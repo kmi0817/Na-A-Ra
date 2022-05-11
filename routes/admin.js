@@ -39,7 +39,7 @@ router.get("/member/:id", async(req, res) => {
     }
 });
 
-router.post("/report-confirmed", async(req, res) => {
+router.patch("/report-confirmed", async(req, res) => {
     if (req.session.admin) {
         await Reports.findByIdAndUpdate(req.body.report_id, { is_confirmed: true });
         const hospital = await Hospitals.findById(req.body.hospital_id, { reports_cnt: 1 });

@@ -22,7 +22,7 @@ router.get("/", async(req, res) => {
     }
 });
 
-router.post("/change-password", async(req, res) => {
+router.patch("/change-password", async(req, res) => {
     const user = await Users.findOne({ user_id: req.body.input_id });
     if (user != null) {
         const computed_password = crypto.pbkdf2Sync(req.body.old_password, user["user_salt"], 190481, 64, "sha512").toString("base64");

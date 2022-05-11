@@ -188,7 +188,7 @@ router.post("/questions/comment-post", async (req, res) => {
 });
 
 // 댓글 삭제 (질문게시판과 상담게시판 통합)
-router.delete("/del/:id", async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
     if (req.session.user || req.session.admin) {
         try {
             await Comments.findByIdAndUpdate(req.params.id, { is_deleted: true });

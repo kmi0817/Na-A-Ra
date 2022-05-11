@@ -228,7 +228,7 @@
                     </div>
                     <% if (comment.writer == user) { %>
                     <div class="col-md-2">
-                        <form action="/community/del/<%= comment._id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="if(!confirm('삭제하시겠습니까?')){return false;}">
+                        <form action="/community/delete/<%= comment._id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="if(!confirm('삭제하시겠습니까?')){return false;}">
                             <input type="submit" class="btn btn-danger" value="삭제">
                             <input type="hidden" value="<%= category %>" name="category">
                             <input type="hidden" value="<%= posting._id %>" name="posting_id">

@@ -44,6 +44,8 @@ router.post("/report-confirmed", async(req, res) => {
     }
 });
 
+// 이하부터 병원API를 데이터베이스에 저장하는 API들
+
 router.get("/json", async (req, res) => {
     if (req.session.admin) {
         const results = await Hospitals.find().limit(50).sort({name: 1});

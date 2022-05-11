@@ -1,16 +1,22 @@
 const express = require("express");
-const Users = require("../models/users");
-const Reviews = require("../models/reviews");
-const Reports = require("../models/reports");
 const crypto = require("crypto");
 const router = express.Router();
+
+// Collections
+const Reviews = require("../models/reviews");
+const Users = require("../models/users");
+const Reports = require("../models/reports");
+const Communities = require("../models/communities");
+const Comments = require("../models/comments");
 
 router.get("/", async(req, res) => {
     if (req.session.user) {
         const home_results = await Users.findById(req.session.user.id);
         const reviews_results = await Reviews.find({ writer_id: req.session.user.id }).populate({ path: "hospital_id", select: { name: 1 }}).sort({ _id: -1 });
         const reports_results = await Reports.find({ writer_id: req.session.user.id }).populate({ path: "hospital_id", select: { name: 1 }});
-        res.render("mypage", { home_results: home_results, reviews_results: reviews_results, reports_results: reports_results });
+        const communities_results = await Communities.find({ writer: req.session.user.id }).sort({ _id: -1 });
+        const comments_results = await Comments.find({ writer: req.session.user.id }).populate({ path: "posting", select: { _id: 1, title: 1, community: 1 } }).sort({ _id: -1 });
+        res.render("mypage", { home_results: home_results, reviews_results: reviews_results, reports_results: reports_results, communities_results: communities_results, comments_results: comments_results });
     } else {
         res.status(404).send("not found");
     }

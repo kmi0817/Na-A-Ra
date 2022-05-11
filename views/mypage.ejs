@@ -281,6 +281,90 @@
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour"
+                            aria-expanded="false" aria-controls="collapseFour">
+                            내가 작성한 게시글
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">내용</th>
+                                    <th scope="col">날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% communities_results.forEach((community, index)=> { %>
+                                    <tr>
+                                        <th scope="row" style="font-size: 0.8rem">
+                                            <%= index + 1 %>
+                                        </th>
+                                        <td style="font-size: 0.8rem"><a href="/community/<%= community.community %>/<%= community._id %>">
+                                                <%= community.title %>
+                                            </a></td>
+                                        <td style="font-size: 0.8rem">
+                                            <%= community.description %>
+                                        </td>
+                                        <td style="font-size: 0.8rem">
+                                            <%= community.created_at.toLocaleString() %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingFive">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive"
+                            aria-expanded="false" aria-controls="collapseFive">
+                            내가 작성한 댓글
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">게시글 제목</th>
+                                    <th scope="col">내용</th>
+                                    <th scope="col">날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% comments_results.forEach((comment, index)=> { %>
+                                    <tr>
+                                        <th scope="row" style="font-size: 0.8rem">
+                                            <%= index + 1 %>
+                                        </th>
+                                        <td style="font-size: 0.8rem"><a href="/community/<%= comment.posting[0].community %>/<%= comment.posting[0]._id %>">
+                                                <%= comment.posting[0].title %>
+                                            </a></td>
+                                        <td style="font-size: 0.8rem">
+                                            <%= comment.description %>
+                                        </td>
+                                        <td style="font-size: 0.8rem">
+                                            <%= comment.created_at.toLocaleString() %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

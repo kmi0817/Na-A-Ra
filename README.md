@@ -26,6 +26,7 @@ npm install method-override
 npm install http
 npm install crypto --save
 npm install express-session --save
+npm install swagger-jsdoc swagger-ui-express --save-dev
 ```
 
 - request-promise-native: used to request to OpenAPI

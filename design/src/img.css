@@ -61,3 +61,11 @@
       transform: none;
     }
   }
+
+  .MainHeaderImg {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 25vh;
+    z-index: 0;
+  }

@@ -17,6 +17,7 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Intro from './pages/Intro';
 import Mypage from './pages/Mypage';
+import Admin from './pages/Admin/Adminpage';
 import Community from './pages/Communities/community';
 import Consulting from './pages/Communities/Consulting';
 import Question from './pages/Communities/Question';
@@ -24,6 +25,7 @@ import QuestionWrite from './pages/Communities/QuestionWrite';
 import ConsultingWrite from './pages/Communities/ConsultingWrite';
 import QuestionDetail from './pages/Communities/QuestionDetail';
 import ConsultingDetail from './pages/Communities/ConsultingDetail';
+import User_data_admin_Detail from './pages/Admin/User_data_admin_Detail';
 
 class App extends Component {
   render() {
@@ -39,6 +41,8 @@ class App extends Component {
           <Route path="/signin" element={<Signin />} />
           <Route path="/intro" element={<Intro />} />
           <Route path="/mypage" element={<Mypage />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/:id" element={<User_data_admin_Detail />} />
 
           <Route path="/community" element={<Community />} />
           <Route path="/community/consulting" element={<Consulting />} />

@@ -9,10 +9,9 @@ function MainPage({ location, history }) {
           <MenuBar></MenuBar>
           <div className="MainBackground">
           <div className="MainTopDiv">
-            <span className="MainTopSpan">어떤 증상을 겪고 계신가요?</span>
-            <Link to="/intro">
-            <button className="MainTopBtn">서비스 소개</button>
-            </Link>
+            <svg className="MainHeaderImg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#809fff" fill-opacity="1" d="M0,128L80,144C160,160,320,192,480,170.7C640,149,800,75,960,53.3C1120,32,1280,64,1360,80L1440,96L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path></svg>
+            <span className="MainTopSpan-1">NaARa</span>
+            <span className="MainTopSpan-2">裸芽羅</span>
           </div>
         
 

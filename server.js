@@ -1,7 +1,7 @@
 const express = require("express");
 const request = require("request");
 const adminRouter = require("./routes/admin");
-const commentsRouter = require("./routes/comments");
+const reviewsRouter = require("./routes/reviews");
 const communityRouter = require("./routes/community");
 const mypageRouter = require("./routes/mypage");
 const methodOverride = require("method-override");
@@ -36,7 +36,7 @@ app.engine("html", require("ejs").renderFile);
 
 // other routes
 app.use("/admin", adminRouter);
-app.use("/comments", commentsRouter);
+app.use("/reviews", reviewsRouter);
 app.use("/community", communityRouter);
 app.use("/mypage", mypageRouter);
 
@@ -197,6 +197,7 @@ app.post("/process/:type", async(req, res) => {
             user.user_id = req.body.createId;
             user.user_salt = salt;
             user.user_hashedPassword = hashed_password;
+            user.created_at = new Date();
             user = await user.save();
             res.send({text: "success"});
         } catch (error) {
@@ -232,7 +233,7 @@ app.post("/process/:type", async(req, res) => {
             res.send({results: "", text: "일치하는 회원 정보가 없습니다."});
         }
     } else if (type == "logout") {
-        req.session.destroy((error) => { res.send({text: "로그아웃"}); });
+        req.session.destroy((error) => { res.send({text: "로그아웃"}); });//
     } else if (type == "change-password") {
         const user = await Users.findOne({ user_id: req.body.input_id });
         if (user != null) {
@@ -242,12 +243,12 @@ app.post("/process/:type", async(req, res) => {
                 const hashed_password = crypto.pbkdf2Sync(req.body.new_password, salt, 190481, 64, "sha512").toString("base64");
 
                 await Users.findOneAndUpdate({ user_id: req.body.input_id }, { user_salt: salt, user_hashedPassword: hashed_password });
-                res.redirect("/mypage");
+                res.send({text: "성공"});
             } else {
-                res.send(`<script>alert("일치하는 회원 정보가 없습니다."); history.go(-1);</script>`);
+                res.send({text: "일치하는 회원 정보가 없습니다."});
             }
         } else {
-            res.send(`<script>alert("일치하는 회원 정보가 없습니다."); history.go(-1);</script>`);
+            res.send({text: "일치하는 회원 정보가 없습니다."});
         }
     } else if (type == "report") {
         let report = new Reports();
@@ -297,12 +298,14 @@ app.get("/openapi", (req, res) => {
 });
 
 app.get("/checkUser", (req, res) => {
-    if (req.session.admin || req.session.user) {
-        console.log(req.session.user['id'])
-        res.send({user_id: req.session.user['name'], user_id_id: req.session.user['id']});
+    if (req.session.admin) {
+        res.send({admin_id: req.session.admin['name'], admin_id_id: req.session.admin['id'], user_id: "", user_id_id: ""});
+    }
+    else if (req.session.user) {
+        res.send({user_id: req.session.user['name'], user_id_id: req.session.user['id'], admin_id: "", admin_id_id: ""});
     }
     else {
-        res.send({user_id: "none", user_id_id: "none"});
+        res.send({user_id: "", user_id_id: "", admin_id: "", admin_id_id: ""});
     }//
 })
 

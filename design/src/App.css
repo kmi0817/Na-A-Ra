@@ -5,7 +5,8 @@ html {
 
 body {
   padding-top: 10vh;
-  font-family: "Pretendard";
+  /*font-family: "Pretendard";*/
+  font-family: "LeferiBaseType-RegularA";
 }
 
 header {
@@ -41,7 +42,7 @@ header {
   color: #809FFF;
   text-align: center;
   border-radius: 1vh;
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
 }
 
 .menu li {
@@ -64,12 +65,12 @@ ul, li {
   top: 0;
   left: 0;
   width: 100%;
-  height: 18vh;
+  height: 15vh;
   background: #809FFF;
   color: white;
   text-align: center;
   vertical-align: middle;
-  border-radius: 0 0 3vh 3vh;
+  /*border-radius: 0 0 3vh 3vh;*/
   box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
 }
 
@@ -80,6 +81,27 @@ ul, li {
   font-size: 20px;
   font-weight: 600;
   animation: fadeIn 1s both;
+  font-family: 'LeferiPoint-BlackObliqueA';
+}
+
+.MainTopSpan-1 {
+  position: relative;
+  display: block;
+  top: 5vh;
+  font-size: 32px;
+  font-weight: 600;
+  animation: fadeIn 1s both;
+  font-family: 'LeferiPoint-BlackObliqueA';
+}
+
+.MainTopSpan-2 {
+  position: relative;
+  top: 5vh;
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  animation: fadeIn 1s both;
+  font-family: 'LeferiPoint-BlackObliqueA';
 }
 
 .MainTopSpanSub {
@@ -174,20 +196,26 @@ ul, li {
 }
 
 .MainSelection button {
-  width: 15vw;
+  width: 18vw;
+  min-width: 100px;
+  max-width: 270px;
   height: 30vh;
-  margin: 5vh;
+  margin: 3vh;
   border: none;
   border-radius: 2vh;
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
   color: #7094ff;
   background-color: white;
   font-weight: bold;
   cursor : pointer;
   overflow: hidden;
-  transition : .2s;
 
+  transition : .2s;
   animation: fadeIn 0.7s ease-in-out;
+
+  position: relative;
+  top: 5vh;
+  z-index: 1;
 }
 
 .MainSelection .search_btn {
@@ -196,37 +224,39 @@ ul, li {
 }
 
 .MainSelection button:hover {
-  width: 17vw;
+  width: 20vw;
   height: 32vh;
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
 }
 
 .MainSelection .search_btn:hover {
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
 }
 
 
 .MainMidDiv {
   position: relative;
   display: inline-block;
-  top: 4vh;
+  top: 10vh;
   width: 65vw;
   height: 45vh;
   background: white;
   text-align: center;
   border: 20px solid white;
   border-radius: 2vh;
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
   overflow: hidden;
   transition : .2s;
   animation: fadeIn 0.7s ease-in-out;
+  font-family: "LeferiBaseType-RegularA";
+  overflow: auto;
 }
 
 .MainMidDiv:hover {
   width: 67vw;
   height: 46vh;
   border-color: white;
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
 }
 
 
@@ -235,19 +265,23 @@ ul, li {
   display: block;
   position: relative;
   top: 8vh;
+  font-size: 0.9em;
   animation: fadeIn 1s both;
 }
 
 .MainMidDiv .MidText {
   position: relative;
   top: 6vh;
-  font-size: 22px;
+  font-size: 1.3em;
   animation: fadeIn 1s both;
+  font-family: "LeferiBaseType-RegularA";
+  font-weight: bold;
 }
 
 .MainMidDiv .MidTextEnd {
   top: 14vh;
   color: #777777;
+  font-size: 0.8em;
 }
 
 .MainMidDiv button {
@@ -376,6 +410,20 @@ ul, li {
 @font-face {
   font-family: Nunito;
   src: url("./fonts/Nunito-Light.ttf");
+}
+
+@font-face {
+  font-family: 'LeferiBaseType-RegularA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiBaseType-RegularA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'LeferiPoint-BlackObliqueA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackObliqueA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @keyframes fadeIn {

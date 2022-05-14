@@ -13,17 +13,16 @@ const HospitalDetail = () => {
   const location = useLocation();
   console.log(location.state)
   const data = location.state.data;
-  const path = "/comments/" + data._id;
+  const path = "/reviews/" + data._id;
 
   useEffect(() => {
     GetData();
   }, []);
 
-  const GetData = (e) => {
+  const GetData = async (e) => {
     axios.get(path, {
     })
     .then(function (response) {
-      alert(response.data.text + "   " + response.data.user_id);
       setUserId(response.data.user_id);
       if (response.data.admin_id) {
         setAdminId(response.data.admin_id);
@@ -36,22 +35,28 @@ const HospitalDetail = () => {
       console.log(response.data.comments)
     })
     .catch(function (error) {
-      alert("회원 아이디 가져오기 요청 실패");
     })
   }
 
   const AfterSubmit = (e) => {
     e.preventDefault(); //redirect 방지
     console.log("0번: " + e.target[0].value); //내용
-    console.log("1번: " + e.target[1].value); //작성자
     console.log("2번: " + e.target[2].value); //병원
-
+    axios.get('/checkUser', {
+    })
+    .then(function (response) {
+      if( response.data.user_id_id !== null) {
+        setUserId(response.data.user_id_id)
+      }
+    })
+    .catch(function (error) {
+    })
     const description = e.target[0].value;
     const writer_id = e.target[1].value;
     const hospital_id = e.target[2].value;
     
     if (e.target[0].value != '') {
-      axios.post("/comments/write", {
+      axios.post("/reviews/write", {
         writer_id: writer_id,
         hospital_id: hospital_id,
         description: description,
@@ -66,7 +71,7 @@ const HospitalDetail = () => {
       })
   }
   else {
-      alert("입력해주세요.");
+      alert("내용을 입력해주세요.");
   }
 }
 

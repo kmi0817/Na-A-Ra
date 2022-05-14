@@ -11,18 +11,27 @@ const Post = (props) => {
     e.preventDefault(); //redirect 방지
     const inputTitle = e.target[0].value;
     const inputDescription = e.target[1].value;
-    
+
     if (e.target[0].value != '') {
-      axios.post("/community/clinics-post", {
-        inputTitle: inputTitle,
-        inputDescription: inputDescription,
+      axios.get('/checkUser', {
       })
       .then(function (response) {
-        alert("게시글이 성공적으로 등록되었습니다. \n목록으로 이동합니다.");
-        navigate('/community/question')
+        if( response.data.user_id_id !== "") {
+          axios.post("/community/questions-post", {
+            writer: response.data.user_id_id,
+            inputTitle: inputTitle,
+            inputDescription: inputDescription,
+          })
+          .then(function (response) {
+            alert("게시글이 성공적으로 등록되었습니다. \n목록으로 이동합니다.");
+            navigate('/community/question')
+          })
+          .catch(function (error) {
+            alert("게시글 등록 실패");
+          })
+        }
       })
       .catch(function (error) {
-        alert("게시글 등록 실패");
       })
     }
     else {

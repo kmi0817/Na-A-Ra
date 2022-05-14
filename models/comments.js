@@ -1,27 +1,26 @@
 const mongoose = require("mongoose");
 
 const commentsSchema = new mongoose.Schema({
-    writer_id: [{
+    writer: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Users",
         required: true,
     }],
-    hospital_id: [{
+    posting: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Hospitals",
-        required: true,
+        ref: "Communities",
+        required: true
     }],
-    description: {
-        type: String,
-        //required: true,
-        minLength: 5,
-        maxLength: 500,
-        default: '테스트 테스트 테스트',
-    },
     created_at: {
         type: Date,
         required: true,
         default: new Date
+    },
+    description: {
+        type: String,
+        required: true,
+        minLength: 5,
+        maxLength: 500
     },
     is_deleted: {
         type: Boolean,

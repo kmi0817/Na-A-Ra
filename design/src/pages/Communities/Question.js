@@ -12,6 +12,8 @@ const Question = () => {
   const [user_id, setUserId] = useState();
   const [admin_id, setAdminId] = useState(null);
   const [postings, setPostings] = useState();
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const navigate = useNavigate();
   let no = 1;
@@ -21,16 +23,14 @@ const Question = () => {
     setDataLength(0)
     setBool(false)
     GetData();
-  }, []);
+  }, [page]);
 
-  const GetData = (e) => {
-    axios.get("/community/clinics", {
-    })
+  const GetData = async (e) => {
+    axios.get("/community/questions", {params: {page: page}})
     .then(function (response) {
-      console.log(response.data.postings)
-      console.log(response.data.postings.length)
       setBool(true)
       setData(response.data.postings);
+      setTotalPages(response.data.totalPages)
       setDataLength(response.data.postings.length);
     })
     .catch(function (error) {
@@ -42,7 +42,39 @@ const Question = () => {
       console.log("value: " + value)
       navigate('/community/question/'+value, { state: {id: value}});
     }
-  
+
+    const writeCheck = (e) => {
+      axios.get('/checkUser', {
+      })
+      .then(function (response) {
+        if( response.data.user_id_id !== null) {
+          navigate('/community/question-write');
+        }
+        else {
+          alert("회원만 작성할 수 있습니다.")
+        }
+      })
+    }
+
+    const downPage = (e) => {
+      if (page >=2) {
+        setPage(page-1)
+        GetData()
+      }
+      else {
+        alert("첫번째 페이지입니다.")
+      }
+    }
+    
+    const upPage = (e) => {
+      if (page < totalPages) {
+        setPage(page+1)
+        GetData()
+      }
+      else {
+        alert("마지막 페이지입니다.")
+      }
+    }
 
     return (
         <>
@@ -59,15 +91,15 @@ const Question = () => {
           getdataLength === 0 ? null :
           getdataBool && getdata.map((data, index) => (
             <div className={index % 2 == 0 ? 'BoardDiv'+ 1 : 'BoardDiv'+ 0}>
-              <span key={index} className="QesDetail_No">{index+1}</span>
+              <span key={index} className="QesDetail_No">{((page-1)*5)+(index+1)}</span>
               <span key={index} className="QuesDetail_Title" onClick={e => openDetail(data._id, e)}>{data.title}</span>
               <span key={index} className="QuesDetail_Date">{data.created_at}</span>
             </div>
           ))
         }
-          <Link to="/community/question-write">
-            <button className="WriteBtn"><img className="WriteBtnImg_color" src="/svg/fi-rr-edit.svg"></img>작성</button>
-          </Link>
+          <button className="pageBtn" onClick={e => downPage(e)}>이전</button>
+          <button className="pageBtn" onClick={e => upPage(e)}>다음</button>
+          <button className="WriteBtn" onClick={e => writeCheck(e)}><img className="WriteBtnImg_color" src="/svg/fi-rr-edit.svg"></img>작성</button>
         </div>
 
         <Footer></Footer>

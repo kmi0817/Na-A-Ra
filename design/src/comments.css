@@ -9,3 +9,34 @@
     font-size: calc(14px + 0.1vw);
     color: #7c7c7c;
 }
+
+.commentsDiv0 {
+    margin: 2vh;
+    background-color: white;
+    border-radius: 1vh;
+    border: 1vh solid white;
+}
+
+.commentsDiv1 {
+    margin: 2vh;
+    border-radius: 1vh;
+    background-color: white;
+    border: 1vh solid white;
+}
+
+.commentsDiv0:hover {
+    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+}
+
+.commentsDiv1:hover {
+    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+}
+
+.DelBtn {
+    width: 3vw;
+    height: 2vw;
+    border: none;
+    color: #777777;
+    border-radius: 1vh;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+}

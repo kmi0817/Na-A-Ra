@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import Comments_none from "./comments_none";
+import Contents_none from "./contents_none";
 
-const Comments_data = () => {
+const Reviews_data = () => {
   const [comments_data, setCommentsData] = useState();
   const [commentsLength, setcommentsLength] = useState(0);
 
@@ -14,7 +14,7 @@ const Comments_data = () => {
     axios.get('/mypage/', {
     })
     .then(function (response) {
-      console.log("comments_results: " + response.data.comments_results[1].hospital_id[0].name)
+      console.log("comments_results: " + response.data.comments_results)
       setCommentsData(response.data.comments_results)
       setcommentsLength(response.data.comments_results.length)
 
@@ -29,7 +29,7 @@ const Comments_data = () => {
         <>
             {
                 commentsLength == 0 ? 
-                <Comments_none></Comments_none> 
+                <Contents_none text="작성된 댓글이 없습니다."></Contents_none> 
                 :
                 <div className="review_Div">
                 {
@@ -47,4 +47,4 @@ const Comments_data = () => {
     );
 }
 
-export default Comments_data;
+export default Reviews_data;

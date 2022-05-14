@@ -1,3 +1,7 @@
+.MypageBackground {
+    background-color: #f7f7fb;
+}
+
 .mypage_Area {
     margin: 5vh;
 }
@@ -10,11 +14,11 @@
     text-align: center;
     border-radius: 1vh;
     background-color: white;
-    box-shadow: 1px 1px 7px 1px rgb(0 0 0 / 10%);
+    box-shadow: 1px 1px 7px 1px rgb(128 159 255 / 10%);
 }
 
 .mypage_AreaBtn:active {
-    box-shadow: 2px 3px 7px 3px rgb(0 0 0 / 10%);
+    box-shadow: 2px 3px 7px 3px rgb(128 159 255 / 10%);
 }
 
 .mypage_AreaBtnActive {
@@ -39,6 +43,7 @@
     display: inline-block;
     width: 70%;
     height: 50vh;
+    border: 20px solid white;
     border-radius: 2vh;
     background-color: white;
     box-shadow: 3px 4px 10px 3px rgb(0 0 0 / 10%);
@@ -54,10 +59,13 @@
 .review_Div {
     display: inline-block;
     width: 70%;
-    min-height: 200px;
+    min-height: 300px;
     border-radius: 2vh;
-    background-color: #f7f7f7;
-    box-shadow: 3px 4px 10px 3px rgb(0 0 0 / 10%)
+    background-color: white;
+    border: 20px solid white;
+    box-shadow: 3px 4px 10px 3px rgb(128 159 255 / 10%);
+    overflow: auto;
+    text-align: left;
 }
 
 .review_comment_div {
@@ -74,9 +82,19 @@
 }
 
 .comment_Data {
-    margin: 3vh;
+    margin: 0 3vh;
+    float: right;
 }
 
+.comment_btn {
+    margin: 0 5vh 0 7vh;
+    float: right;
+    background-color: #f08484;
+    color: white;
+    border-radius: 1vh;
+    border: 3px solid #f08484;
+    font-size: 14px;
+}
 
 
 
@@ -85,7 +103,89 @@
     display: inline-block;
     width: 70%;
     height: 50vh;
+    border: 20px solid white;
     border-radius: 2vh;
     background-color: white;
     box-shadow: 3px 4px 10px 3px rgb(0 0 0 / 10%);
+    overflow: hidden;
+}
+
+.non_img {
+    position: relative;
+    top: 13vh;
+    width: 5vw;
+    max-width: 40px;
+    filter: invert(74%) sepia(20%) saturate(19%) hue-rotate(334deg) brightness(85%) contrast(82%);
+}
+
+.non_text {
+    position: relative;
+    top: 13vh;
+    color: #a1a1a1;
+}
+
+.withdrawalBtn {
+    width: 10vw;
+    height: 5vh;
+    border: none;
+    background-color: #809FFF;
+    color: white;
+    border-radius: 1vw;
+    margin: 1vw;
+    margin-top: 5vw;
+    max-width: 70px;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+}
+
+.privacy_img {
+    position: relative;
+    top: 5vh;
+    width: 5vw;
+    max-width: 40px;
+    filter: invert(74%) sepia(20%) saturate(19%) hue-rotate(334deg) brightness(85%) contrast(82%);
+}
+
+.privacy_text {
+    position: relative;
+    top: 5vh;
+}
+
+.privacy_contents {
+    position: relative;
+    top: 5vh;
+    text-align: left;
+}
+
+.privacy_contents_text {
+    margin: 0 5vh;
+}
+
+.privacy_changePWD {
+    margin: 5vh 5vh;
+    height: 4vh;
+    background-color: #809FFF;
+    border: none;
+    color: white;
+    border-radius: 1vh;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+}
+
+.ACBTN {
+    width: 5vh;
+    height: 3vh;
+    border:none;
+    border-radius: 1vh;
+    background-color: #809FFF;
+    color:white;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+}
+
+.REBTN {
+    width: 5vh;
+    height: 3vh;
+    border:none;
+    border-radius: 1vh;
+    background-color: #f08484;
+    color:white;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
 }

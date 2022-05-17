@@ -31,7 +31,7 @@
     background-color: #ffffff;
     font-size: 14px;
     font-weight: bold;
-    color: #809FFF;
+    color: black;
   }
   
   .modal > section > header button {
@@ -144,26 +144,54 @@
     display: block;
   }
 
+  .Hmodal_Div {
+    text-align: left;
+    width: 95%;
+    background-color: #f7f7fb;
+    border: 10px solid #f7f7fb;
+    border-radius: 1vh;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+  }
+
+  .Hmodal_Div span {
+    margin: 1vh;
+  }
+
   table {
     border: none;
     display: inline-block;
-    margin-top: 2vh;
+    margin-top: 5vh;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+    border-radius: 1vh;
   }
 
   table td{
     border: none;
+    margin: none;
     background-color: white;
+    width: 10vh;
+  }
+
+  table .td0 {
+    background-color: #f7f7fb;
+    height: 4vh;
+    vertical-align: middle;
+    font-weight: bold;
   }
 
   table th {
     border: none;
-    background-color: #e4e4e4;
+    background-color: #f7f7fb;
+    height: 4vh;
+    vertical-align: middle;
   }
 
   .repostsCnt_green {
     font-size: 1vh;
     margin: 1vh;
-    color: rgb(58, 179, 58);
+    color: rgb(30, 187, 30);
   }
 
   .repostsCnt_red {

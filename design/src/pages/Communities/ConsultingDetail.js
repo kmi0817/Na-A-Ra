@@ -121,8 +121,9 @@ const Clinics = () => {
 
     return (
         <>
-          <MenuBar></MenuBar>
           <div className="MypageBackground">
+          <MenuBar></MenuBar>
+          
           <div className="cardDiv">
             {
                 <div className="DetailDiv">

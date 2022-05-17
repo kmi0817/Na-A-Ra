@@ -1,0 +1,28 @@
+.ACBTN {
+    width: 7vh;
+    height: 3.5vh;
+    float: right;
+    border:none;
+    border-radius: 1vh;
+    background-color: #809FFF;
+    color:white;
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
+    margin-left: 5vh;
+}
+
+.REBTN {
+    width: 7vh;
+    height: 3.5vh;
+    float: right;
+    border:none;
+    border-radius: 1vh;
+    background-color: #f08484;
+    color:white;
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
+    margin-right: 5vh;
+}
+
+.admin_report_data {
+    margin: 0 3vh;
+    float: right;
+}

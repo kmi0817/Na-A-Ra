@@ -9,6 +9,7 @@ import './img.css';
 import './animation.css';
 import './mypage.css';
 import './search.css';
+import './admin.css';
 import MainPage from './pages/MainPage';
 import Notfound from './pages/Notfound';
 import Search from "./pages/Search";

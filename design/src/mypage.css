@@ -30,11 +30,11 @@
     border-radius: 1vh;
     background-color: #809FFF;
     color: white;
-    box-shadow: 1px 1px 7px 1px rgb(0 0 0 / 10%);
+    box-shadow: 1px 1px 7px 1px rgb(128 159 255 / 10%);
 }
 
 .mypage_AreaBtnActive:active {
-    box-shadow: 2px 3px 7px 3px rgb(0 0 0 / 10%);
+    box-shadow: 2px 3px 7px 3px rgb(128 159 255 / 10%);
 }
 
 
@@ -46,7 +46,7 @@
     border: 20px solid white;
     border-radius: 2vh;
     background-color: white;
-    box-shadow: 3px 4px 10px 3px rgb(0 0 0 / 10%);
+    box-shadow: 3px 4px 10px 3px rgb(128 159 255 / 10%);
 }
 
 
@@ -106,7 +106,7 @@
     border: 20px solid white;
     border-radius: 2vh;
     background-color: white;
-    box-shadow: 3px 4px 10px 3px rgb(0 0 0 / 10%);
+    box-shadow: 3px 4px 10px 3px rgb(128 159 255 / 10%);
     overflow: hidden;
 }
 
@@ -134,7 +134,7 @@
     margin: 1vw;
     margin-top: 5vw;
     max-width: 70px;
-    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
 }
 
 .privacy_img {
@@ -167,25 +167,5 @@
     border: none;
     color: white;
     border-radius: 1vh;
-    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
-}
-
-.ACBTN {
-    width: 5vh;
-    height: 3vh;
-    border:none;
-    border-radius: 1vh;
-    background-color: #809FFF;
-    color:white;
-    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
-}
-
-.REBTN {
-    width: 5vh;
-    height: 3vh;
-    border:none;
-    border-radius: 1vh;
-    background-color: #f08484;
-    color:white;
-    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
 }

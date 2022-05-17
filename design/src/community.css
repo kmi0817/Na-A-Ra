@@ -5,6 +5,16 @@
 .CommuBtnDiv {
     position: relative;
     z-index: 10;
+    margin-bottom: 23vh;
+}
+
+.CommuBtnDiv span {
+    display: block;
+    color: gray;
+}
+
+.CommuBtnDiv img {
+    margin-bottom: 1vh;
 }
 
 .CommuBtnDiv button {

@@ -104,8 +104,7 @@ const Question = () => {
             <button className="pageBtn" onClick={e => upPage(e)}>다음</button>
             <button className="WriteBtn" onClick={e => writeCheck(e)}><img className="WriteBtnImg_color" src="/svg/fi-rr-edit.svg"></img></button>
           </div>
-            
-        
+          
 
         <Footer></Footer>
         </>

@@ -97,11 +97,14 @@ const Question = () => {
             </div>
           ))
         }
-          <button className="pageBtn" onClick={e => downPage(e)}>이전</button>
+        </div>
+        <div className="BtnDiv">
+         <button className="pageBtn" onClick={e => downPage(e)}>이전</button>
           <button className="pageBtn" onClick={e => upPage(e)}>다음</button>
           <button className="WriteBtn" onClick={e => writeCheck(e)}><img className="WriteBtnImg_color" src="/svg/fi-rr-edit.svg"></img>작성</button>
         </div>
 
+        
         <Footer></Footer>
         </>
     );

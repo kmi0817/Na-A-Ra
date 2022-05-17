@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom'
 import MenuBar from '../components/MenuBar'
 import Footer from "../components/Footer";
 
-function Intro({ location, history }) {
+function Intro() {
     return (
         <>
-        <div className="App">
+        <div className="MainBackground">
           <MenuBar></MenuBar>
           <div className="MainTopDiv">
+            <svg className="MainHeaderImg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#809fff" fill-opacity="1" d="M0,128L80,144C160,160,320,192,480,170.7C640,149,800,75,960,53.3C1120,32,1280,64,1360,80L1440,96L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path></svg>
             <span className="MainTopSpan">병원 검색 서비스</span>
             <span className="MainTopSpan2">단국대학교 소프트웨어학과 박경미, 황예진</span>
           </div>
-        </div>
         
 
         <div className="IntroMainDiv">
@@ -31,6 +31,7 @@ function Intro({ location, history }) {
         </div>
         
         <Footer></Footer>
+        </div>
         </>
     );
 }

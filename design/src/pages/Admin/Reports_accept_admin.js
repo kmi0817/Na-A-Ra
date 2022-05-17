@@ -31,26 +31,26 @@ const Reviews_data = () => {
                     <div className="review_comment_div">
                         <span className="comment_No">1</span>
                         <span className="comment_Desc">라미체성형외과의원</span>
-                        <span className="comment_Data">hyj3463</span>
-                        <button className="ACBTN">승인</button><button className="REBTN">거절</button>
+                        <button className="REBTN">거절</button><button className="ACBTN">승인</button>
+                        <span className="admin_report_data">hyj3463</span>
                     </div>
                     <div className="review_comment_div">
                         <span className="comment_No">2</span>
                         <span className="comment_Desc">송파길신경외과의원</span>
-                        <span className="comment_Data">hyj3463@naver.com</span>
-                        <button className="ACBTN">승인</button><button className="REBTN">거절</button>
+                        <button className="REBTN">거절</button><button className="ACBTN">승인</button>
+                        <span className="admin_report_data">hyj3463@naver.com</span>
                     </div>
                     <div className="review_comment_div">
                         <span className="comment_No">3</span>
                         <span className="comment_Desc">잠실대항장문서울외과의원</span>
-                        <span className="comment_Data">hyj3463@naver.com</span>
-                        <button className="ACBTN">승인</button><button className="REBTN">거절</button>
+                        <button className="REBTN">거절</button><button className="ACBTN">승인</button>
+                        <span className="admin_report_data">hyj3463@naver.com</span>
                     </div>
                     <div className="review_comment_div">
                         <span className="comment_No">4</span>
                         <span className="comment_Desc">참외과 참소아청소년과의원</span>
-                        <span className="comment_Data">nmg3463</span>
-                        <button className="ACBTN">승인</button><button className="REBTN">거절</button>
+                        <button className="REBTN">거절</button><button className="ACBTN">승인</button>
+                        <span className="admin_report_data">nmg3463</span>
                     </div>
                 </div>
         </>

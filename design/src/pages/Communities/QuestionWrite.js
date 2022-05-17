@@ -48,7 +48,7 @@ const Post = (props) => {
   }
 
   return (
-    <div className="WriteSection">
+    <div className="MainBackground">
         <MenuBar></MenuBar>
         <div className="MainTopDiv">
           <span className="MainTopSpan">질문게시판 게시글 작성</span>

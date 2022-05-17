@@ -16,10 +16,10 @@ function Community({ location, history }) {
           
           <div className="CommuBtnDiv" id="1">
           <Link to="/community/consulting">
-            <button className="QMoveBtn" href="/community/consulting"><img className="MainBtnImg_color" src="/svg/fi-rr-graduation-cap.svg"></img>상담게시판</button>
+            <button className="QMoveBtn" href="/community/consulting"><img className="MainBtnImg_color" src="/svg/fi-rr-graduation-cap.svg"></img><span>상담게시판</span></button>
           </Link>
           <Link to="/community/question">
-            <button className="CMoveBtn" href="/community/question"><img className="MainBtnImg_color" src="/svg/fi-rr-info.svg"></img>질문게시판</button>
+            <button className="CMoveBtn" href="/community/question"><img className="MainBtnImg_color" src="/svg/fi-rr-info.svg"></img><span>질문게시판</span></button>
           </Link>
         </div>
         

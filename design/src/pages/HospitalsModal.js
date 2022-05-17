@@ -59,42 +59,50 @@ const Post = (props) => {
             </button>
           </header>
           <main>
-            <span className="Hmodal_type_code">분류: {data.type_code}</span>
-            <span className="Hmodal_addr">위치: {data.addr} ({data.postNo})</span>
-            <span className="Hmodal_telno">전화번호: {data.telno}</span>
-            <span className="Hmodal_url">홈페이지: {data.hospUrl ? data.hospUrl : <span className="noneAddr">(주소 미입력)</span>}</span>
-            <span className="Hmodal_estbDd">개설일자: {data.estbDd}</span>
-            <span className="Hmodal_drTotCnt">총 의사수: {data.drTotCnt}</span>
-
+            <div className="Hmodal_Div">
+              <span className="Hmodal_type_code">분류: {data.type_code}</span>
+              <span className="Hmodal_addr">위치: {data.addr} ({data.postNo})</span>
+              <span className="Hmodal_telno">전화번호: {data.telno}</span>
+              <span className="Hmodal_url">홈페이지: {data.hospUrl != null ? data.hospUrl : <span className="noneAddr">none</span>}</span>
+              <span className="Hmodal_estbDd">개설일자: {data.estbDd}</span>
+              <span className="Hmodal_drTotCnt">총 의사수: {data.drTotCnt}</span>
+            </div>
 
             <table className="Hmodal_table" border="1">
-              <th>명칭</th>
-              <th>인원</th>
-              <th>명칭</th>
-              <th>인원</th>
-              <th>명칭</th>
-              <th>인원</th>
-              <th>명칭</th>
-              <th>인원</th>
+              <th></th>
+              <th>일반의</th>
+              <th>인턴</th>
+              <th>레지던트</th>
+              <th>전문의</th>
               <tr>
-                <td>치과일반의</td>
+                <td className="td0">치과</td>
                 <td>{data.detyGdrCnt}</td>
-                <td>치과인턴</td>
+
                 <td>{data.detyIntnCnt}</td>
-                <td>치과레지던트</td>
+
                 <td>{data.detyResdntCnt}</td>
-                <td>치과전문의</td>
+
                 <td>{data.detySdrCnt}</td>
               </tr>
               <tr>
-                <td>의과일반의</td>
+                <td className="td0">의과</td>
                 <td>{data.mdeptGdrCnt}</td>
-                <td>의과인턴</td>
+
                 <td>{data.mdeptIntnCnt}</td>
-                <td>의과레지던트</td>
+
                 <td>{data.mdeptResdntCnt}</td>
-                <td>의과전문의</td>
+
                 <td>{data.mdeptSdrCnt}</td>
+              </tr>
+              <tr>
+                <td className="td0">한방</td>
+                <td>{data.cmdcIntnCnt}</td>
+
+                <td>{data.cmdcIntnCnt}</td>
+
+                <td>{data.cmdcResdntCnt}</td>
+
+                <td>{data.cmdcSdrCnt}</td>
               </tr>
             </table>
           </main>

@@ -17,13 +17,13 @@ function MainPage({ location, history }) {
 
         <div className="MainSelection">
           <Link to="/community">
-          <button className="community_btn"><img className="MainBtnImg_color" src="/svg/fi-rr-users-alt.svg"></img>커뮤니티</button>
+          <button className="community_btn"><img className="MainBtnImg_color" src="/svg/fi-rr-users-alt.svg"></img><span>커뮤니티</span></button>
           </Link>
           <Link to="/search">
-          <button className="search_btn"><img className="MainBtnImg_white" src="/svg/fi-rr-search.svg"></img>검색</button>
+          <button className="search_btn"><img className="MainBtnImg_white" src="/svg/fi-rr-search.svg"></img><span>검색</span></button>
           </Link>
           <Link to="/intro">
-          <button className="intro_btn"><img className="MainBtnImg_color" src="/svg/fi-rr-info.svg"></img>서비스 소개</button>
+          <button className="intro_btn"><img className="MainBtnImg_color" src="/svg/fi-rr-info.svg"></img><span>서비스 소개</span></button>
           </Link>
         </div>
 

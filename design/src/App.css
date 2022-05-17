@@ -71,7 +71,7 @@ ul, li {
   text-align: center;
   vertical-align: middle;
   /*border-radius: 0 0 3vh 3vh;*/
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
 }
 
 .MainTopSpan {
@@ -146,7 +146,7 @@ ul, li {
   height: 6vh;
   border: none;
   border-radius: 1vh;
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
   color: #777777;
   text-align: center;
 }
@@ -154,7 +154,7 @@ ul, li {
 .MainTopSubDiv {
   display: inline-block;
   background: white;
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
   border-radius: 1vh;
   margin-left: 0.5vh;
 }
@@ -188,11 +188,19 @@ ul, li {
 }
 
 .MainTopSearchDiv button:active {
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
 }
 
 .MainSelection {
 
+}
+
+.MainSelection span {
+  display: block;
+}
+
+.MainSelection img {
+  margin-bottom: 1vh;
 }
 
 .MainSelection button {
@@ -293,22 +301,22 @@ ul, li {
   color: white;
   border-radius: 1vh;
   border: none;
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
   cursor: pointer;
   animation: fadeIn 1s both;
 }
 
 .MainMidDiv button:active {
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
 }
 
 .MoveBtn {
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
   cursor: pointer;
 }
 
 .MoveBtn:hover {
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
 }
 
 .mainPageLink {
@@ -351,7 +359,7 @@ ul, li {
 /* Intro css */
 .IntroBtnDiv {
   text-align: center;
-  margin: 10vh 0 10vh 0;
+  margin: 5vh 0 10vh 0;
   animation: fadeIn 0.7s ease-in-out;
 }
 
@@ -363,13 +371,13 @@ ul, li {
   border-radius: 1vh;
   margin-left: 0.5vh;
   color: #809FFF;
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
   cursor: pointer;
 }
 
 
 .IntroBtnDiv button:active {
-  box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
 }
 
 .IntroMoveText {
@@ -380,12 +388,19 @@ ul, li {
   display: inline-block;
   width: 70%;
   height: 40vh;
-  background-color: #f7f7fb;
+  background-color: white;
   text-align: center;
-  margin-top: 10vh;
+  margin-top: 8vh;
   border-radius: 3vh;
   padding: 3vh;
   animation: fadeIn 0.7s ease-in-out;
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
+  position: relative;
+  z-index: 10;
+}
+
+.IntroMainDiv:hover {
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
 }
 
 .IntroMainText {

@@ -12,7 +12,7 @@
     text-align: center;
     background-color: white;
     border-radius: 2vh;
-    box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, .1);
+    box-shadow: 3px 3px 10px 1px rgba(128, 159, 255, .1);
     
 }
 
@@ -36,7 +36,7 @@
     margin: 3vh;
     padding: 3vh;
     border-radius: 3vh;
-    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+    box-shadow: 1px 1px 7px 1px rgba(128, 159, 255, .1);
     vertical-align: top;
 
     animation: fadeIn 0.7s ease-in-out;
@@ -49,7 +49,7 @@
     margin: 3vh;
     padding: 3vh;
     border-radius: 3vh;
-    box-shadow: 1px 1px 7px 3px rgba(0, 0, 0, .1);
+    box-shadow: 1px 1px 7px 3px rgba(128, 159, 255, .1);
     vertical-align: top;
 }
 
@@ -84,7 +84,8 @@
     color: black;
     background-color: #f7f7fb;
     border-radius: 1vh;
-    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+    outline: none;
+    box-shadow: 1px 1px 7px 1px rgba(128, 159, 255, .1);
 }
 
 .symptom {
@@ -94,8 +95,14 @@
     border: none;
     text-align: center;
     border-radius: 1vh;
-    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+    box-shadow: 1px 1px 7px 1px rgba(128, 159, 255, .1);
     background-color: #f7f7fb;
+    outline: none;
+}
+
+.symptom:hover {
+    color: white;
+    background-color: cornflowerblue;
 }
 
 .formBtn {
@@ -105,7 +112,7 @@
     border: none;
     text-align: center;
     border-radius: 1vh;
-    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+    box-shadow: 1px 1px 7px 1px rgba(128, 159, 255, .1);
     background-color: #809FFF;
     color: white;
     cursor: grab;
@@ -120,7 +127,7 @@
     color: white;
     background-color: cornflowerblue;
     border-radius: 1vh;
-    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .2);
+    box-shadow: 1px 1px 7px 1px rgba(128, 159, 255, .2);
 }
 
 .symptom:hover {
@@ -130,7 +137,7 @@
     border: none;
     text-align: center;
     border-radius: 1vh;
-    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .2);
+    box-shadow: 1px 1px 7px 1px rgba(128, 159, 255, .2);
 }
 
 .formBtn:hover {
@@ -140,7 +147,7 @@
     border: none;
     text-align: center;
     border-radius: 1vh;
-    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .2);
+    box-shadow: 1px 1px 7px 1px rgba(128, 159, 255, .2);
 }
 
 .noneResultText {
@@ -154,7 +161,7 @@
     background-color: #809FFF;
     color: white;
     border-radius: 1vh;
-    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+    box-shadow: 1px 1px 7px 1px rgba(128, 159, 255, .1);
 }
 
 .CallBtn:hover {
@@ -162,7 +169,7 @@
     background-color: #7093fc;
     color: white;
     border-radius: 1vh;
-    box-shadow: 1px 1px 7px 3px rgba(0, 0, 0, .1);
+    box-shadow: 1px 1px 7px 3px rgba(128, 159, 255, .1);
 }
 
 .inputAddr {
@@ -171,7 +178,7 @@
     border: none;
     margin: 0.5vw;
     border-radius: 1vh;
-    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .1);
+    box-shadow: 1px 1px 3px 1px rgba(128, 159, 255, .1);
     transition: .2s;
 }
 
@@ -184,7 +191,7 @@
     border: none;
     margin: 0.5vw 0.5vw 0.5vw 0;
     border-radius: 1vh;
-    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .1);
+    box-shadow: 1px 1px 3px 1px rgba(128, 159, 255, .1);
     border: none;
     background-color: #f7f7fb;
 }
@@ -195,7 +202,7 @@
     background-color: #ffffff;
     color: #7093fc;
     border-radius: 1vh;
-    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+    box-shadow: 1px 1px 7px 1px rgba(128, 159, 255, .1);
 }
 
 .DetailBtn:hover {
@@ -203,7 +210,7 @@
     background-color: #ffffff;
     color: #7093fc;
     border-radius: 1vh;
-    box-shadow: 1px 1px 7px 3px rgba(0, 0, 0, .1);
+    box-shadow: 1px 1px 7px 3px rgba(128, 159, 255, .1);
 }
 
 .commentsForm {
@@ -217,14 +224,14 @@
     height: 5vh;
     border: none;
     border-radius: 2vh;
-    box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
+    box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
     padding: 1.5vh;
     resize: none;
 }
 
 #description:focus {
     outline: none;
-    box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 10%);
+    box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
 }
 
 .SubmitBtnDiv {
@@ -242,11 +249,11 @@
     border-radius: 1vw;
     margin: 1vw;
     max-width: 70px;
-    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
 }
 
 #submitBtn:active {
-    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 10%);
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 10%);
 }
 
 .commentsNoneText {
@@ -260,7 +267,7 @@
     border: none;
     text-align: center;
     border-radius: 1vh;
-    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+    box-shadow: 1px 1px 7px 1px rgba(128, 159, 255, .1);
     background-color: #809FFF;
     color: white;
 }
@@ -273,15 +280,15 @@
     text-align: center;
     border-radius: 1vh;
     background-color: #f7f7fb;
-    box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .1);
+    box-shadow: 1px 1px 7px 1px rgba(128, 159, 255, .1);
 }
 
 .SearchBtnActive:active {
-    box-shadow: 3px 3px 7px 1px rgba(0, 0, 0, .2);
+    box-shadow: 3px 3px 7px 1px rgba(128, 159, 255, .2);
 }
 
 .SearchBtnNonActive:active {
-    box-shadow: 3px 3px 7px 1px rgba(0, 0, 0, .2);
+    box-shadow: 3px 3px 7px 1px rgba(128, 159, 255, .2);
 }
 
 

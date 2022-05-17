@@ -38,6 +38,23 @@ app.engine("html", require("ejs").renderFile);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 // routes
+/**
+ * @swagger
+ * paths:
+ *  /:
+ *      get:
+ *          tags: [ 검색 ]
+ *          description: 주소명/병원명 검색 페이지
+ *          parameters:
+ *          -   name: "search_type"
+ *              in: "path"
+ *              description: 주소명 검색 혹은 병원명 검색 선택
+ *              required: fasle
+ *              type: "string"
+ *          responses:
+ *              '200':
+ *              description: A successful response
+ */
 app.get("/", async (req, res) => {
     const search_type = req.query.search_type;
 

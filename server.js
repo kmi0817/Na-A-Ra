@@ -1,19 +1,26 @@
 const express = require("express");
-const adminRouter = require("./routes/admin");
-const reviewsRouter = require("./routes/reviews");
-const communityRouter = require("./routes/community");
-const mypageRouter = require("./routes/mypage");
-const Hospitals = require("./models/hospitals");
-const Users = require("./models/users");
-const Reports = require("./models/reports");
 const methodOverride = require("method-override");
 const http = require("http");
 const crypto = require("crypto");
 const expressSession = require("express-session");
 
+// Router
+const adminRouter = require("./routes/admin");
+const reviewsRouter = require("./routes/reviews");
+const communityRouter = require("./routes/community");
+const mypageRouter = require("./routes/mypage");
+
+// Models
+const Hospitals = require("./models/hospitals");
+const Users = require("./models/users");
+const Reports = require("./models/reports");
+
+const { swaggerUi, specs } = require("./swagger/swagger");
+
 const app = express();
 const server = http.createServer(app);
 
+app.use(express.json());
 app.use(express.urlencoded({ extended: false })); // enable to use req.body.(input field)
 app.use(expressSession({
     secret: "secretKey",
@@ -27,6 +34,8 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 app.use(methodOverride('_method'));
 app.engine("html", require("ejs").renderFile);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 // routes
 app.get("/", async (req, res) => {

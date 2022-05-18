@@ -9,6 +9,25 @@ mongoose.connect("mongodb://localhost/app", {
     useUnifiedTopology: true
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /reviews/{id}:
+ *      get:
+ *          tags: [ 병원 리뷰 ]
+ *          description: id에 해당하는 병원의 리뷰 페이지
+ *          parameters:
+ *          -   name: "id"
+ *              in: "path"
+ *              description: 병원의 ObjectId
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.get("/:id", async (req, res) => {
     const reviews = await Reviews.find({ hospital_id: req.params.id, is_deleted: false }).populate({ path: "writer_id", select: { user_id: 1 } }).sort({ _id: -1 }); // sorting collection by date (created_at)
     const hospital = await Hospitals.findById(req.params.id);
@@ -22,6 +41,35 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /reviews/write:
+ *      post:
+ *          tags: [ 병원 리뷰 ]
+ *          description: id에 해당하는 병원에 리뷰 작성
+ *          parameters:
+ *          -   name: "writer_id"
+ *              in: "formData"
+ *              description: 로그인한 회원의 ObjectId
+ *              required: true
+ *              type: "string"
+ *          -   name: "hospital_id"
+ *              in: "formData"
+ *              description: 리뷰를 작성할 병원의 ObjectId
+ *              required: true
+ *              type: "string"
+ *          -   name: "description"
+ *              in: "formData"
+ *              description: 리뷰 내용
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.post("/write", async(req, res) => {
     if (req.session.admin || req.session.user) {
         const banned_words = ["시발", "씨발", "씨팔", "ㅅㅂ", "썅", "등신", "병신", "븅신", "븅딱", "좆", "개새끼", "년", "애미", "애비",
@@ -45,6 +93,25 @@ router.post("/write", async(req, res) => {
     res.redirect(`/reviews/${req.body.hospital_id}`);
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /reviews/delete/{id}:
+ *      delete:
+ *          tags: [ 병원 리뷰 ]
+ *          description: id에 해당하는 리뷰 삭제
+ *          parameters:
+ *          -   name: "id"
+ *              in: "path"
+ *              description: 관리자의 작성한 리뷰 삭제
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.delete("/delete/:id", async(req, res) => {
     if (req.session.admin) { await Reviews.findByIdAndUpdate(req.params.id, { is_deleted: true }); }
     res.redirect(`/reviews/${req.body.hospital_id}`);

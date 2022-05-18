@@ -16,6 +16,19 @@ mongoose.connect("mongodb://localhost/app", {
     useUnifiedTopology: true
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /admin/withdrawal:
+ *      get:
+ *          tags: [ 관리자 ]
+ *          description: 관리자 페이지
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.get("/", async (req, res) => {
     if (req.session.admin) {
         const users = await Users.find().sort({ _id: -1 });
@@ -27,6 +40,25 @@ router.get("/", async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /admin/member/{id}:
+ *      get:
+ *          tags: [ 관리자 ]
+ *          description: id에 해당하는 회원의 상세 페이지
+ *          parameters:
+ *              name: "id"
+ *              in: "path"
+ *              description: 회원의 ObjectId
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.get("/member/:id", async(req, res) => {
     if (req.session.admin) {
         const reviews_results = await Reviews.find({ writer_id: req.params.id }).populate({ path: "hospital_id", select: { name: 1 } }).sort({ _id: -1 });
@@ -39,6 +71,30 @@ router.get("/member/:id", async(req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /admin/report-confirmed:
+ *      post:
+ *          tags: [ 관리자 ]
+ *          description: 회원의 비밀번호 변경하기
+ *          parameters:
+ *          -   name: "report_id"
+ *              in: "formData"
+ *              description: 접수한 신고의 ObjectId
+ *              required: true
+ *              type: "string"
+ *          -   name: "hospital_id"
+ *              in: "formData"
+ *              description: 신고된 병원의 ObjectId
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.patch("/report-confirmed", async(req, res) => {
     if (req.session.admin) {
         await Reports.findByIdAndUpdate(req.body.report_id, { is_confirmed: true });
@@ -61,6 +117,19 @@ router.get("/json", async (req, res) => {
     }
 })
 
+/**
+ * @swagger
+ * paths:
+ *  /admin/hospitals:
+ *      get:
+ *          tags: [ 관리자 ]
+ *          description: 각 병원 데이터 가져오는 버튼 있는 페이지
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.get("/hospitals", async (req, res) => {
     if (req.session.admin) {
         const results = await Hospitals.find().limit(50).sort({name: 1});
@@ -70,6 +139,25 @@ router.get("/hospitals", async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /admin/hospitals/{id}:
+ *      get:
+ *          tags: [ 관리자 ]
+ *          description: id에 해당하는 병원의 상세 페이지
+ *          parameters:
+ *          -   name: "id"
+ *              in: "path"
+ *              description: 병원 ObjectId
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.get("/hospitals/:id", async(req, res) => {
     if (req.session.admin) {
         const results = await Hospitals.findOne({ _id: req.params.id });
@@ -82,6 +170,25 @@ router.get("/hospitals/:id", async(req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /admin/hospitals/{id}:
+ *      delete:
+ *          tags: [ 관리자 ]
+ *          description: id에 해당하는 병원 삭제
+ *          parameters:
+ *          -   name: "id"
+ *              in: "path"
+ *              description: 병원 ObjectId
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.delete("/hospitals/:id", async(req, res) => {
     if (req.session.admin) {
         await Hospitals.findByIdAndDelete({ _id: req.params.id });
@@ -91,6 +198,25 @@ router.delete("/hospitals/:id", async(req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /admin/hospitals/{zipCd}:
+ *      post:
+ *          tags: [ 관리자 ]
+ *          description: zipCd에 해당하는 병원 목록 저장
+ *          parameters:
+ *          -   name: "zipCd"
+ *              in: "path"
+ *              description: 병원 종류; 종합병원2010, 병원2030, 요양병원2040, 치과2050, 한방2060, 의원2070, 보건기관2080, 조산원2090
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.post("/hospitals/:zipCd", async (req, res) => {
     if (req.session.admin) {
         const _url = 'http://apis.data.go.kr/B551182/hospInfoService1/getHospBasisList1';

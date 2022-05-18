@@ -45,15 +45,11 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
  *      get:
  *          tags: [ 검색 ]
  *          description: 주소명/병원명 검색 페이지
- *          parameters:
- *          -   name: "search_type"
- *              in: "path"
- *              description: 주소명 검색 혹은 병원명 검색 선택
- *              required: fasle
- *              type: "string"
  *          responses:
- *              '200':
- *              description: A successful response
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
  */
 app.get("/", async (req, res) => {
     const search_type = req.query.search_type;
@@ -212,6 +208,25 @@ app.get("/", async (req, res) => {
 
 app.get("/test", (req, res) => { res.render("test"); });
 
+/**
+ * @swagger
+ * paths:
+ *  /process/{type}:
+ *      get:
+ *          tags: [ 처리 ]
+ *          description: type에 따라 회원가입, 로그인/로그아웃, 병원신고 접수 처리
+ *          parameters:
+ *          -   name: "type"
+ *              in: "path"
+ *              description: signup, login/logout, report
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 app.post("/process/:type", async(req, res) => {
     const type = req.params.type;
 

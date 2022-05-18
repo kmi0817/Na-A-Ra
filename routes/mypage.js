@@ -9,6 +9,19 @@ const Reports = require("../models/reports");
 const Communities = require("../models/communities");
 const Comments = require("../models/comments");
 
+/**
+ * @swagger
+ * paths:
+ *  /mypage:
+ *      get:
+ *          tags: [ 마이페이지 ]
+ *          description: 기본 마이페이지 화면
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.get("/", async(req, res) => {
     if (req.session.user) {
         const home_results = await Users.findById(req.session.user.id);
@@ -22,6 +35,35 @@ router.get("/", async(req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /community/change-password:
+ *      patch:
+ *          tags: [ 마이페이지 ]
+ *          description: 회원의 비밀번호 변경하기
+ *          parameters:
+ *          -   name: "input_id"
+ *              in: "formData"
+ *              description: 회원의 아이디
+ *              required: true
+ *              type: "string"
+ *          -   name: "old_password"
+ *              in: "formData"
+ *              description: 원래 비밀번호
+ *              required: true
+ *              type: "password"
+ *          -   name: "new_password"
+ *              in: "formData"
+ *              description: 변경할 비밀번호
+ *              required: true
+ *              type: "password"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.patch("/change-password", async(req, res) => {
     const user = await Users.findOne({ user_id: req.body.input_id });
     if (user != null) {
@@ -40,6 +82,35 @@ router.patch("/change-password", async(req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /community/withdrawal:
+ *      post:
+ *          tags: [ 마이페이지 ]
+ *          description: 회원의 비밀번호 변경하기
+ *          parameters:
+ *          -   name: "_id"
+ *              in: "formData"
+ *              description: 회원의 ObjectId
+ *              required: true
+ *              type: "string"
+ *          -   name: "withdrawal_id"
+ *              in: "formData"
+ *              description: 회원 아이디
+ *              required: true
+ *              type: "string"
+ *          -   name: "withdrawal_password"
+ *              in: "formData"
+ *              description: 회원 비밀번호
+ *              required: true
+ *              type: "password"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.post("/withdrawal", async(req, res) => {
     if (req.session.user) {
         const user = await Users.findById(req.body._id);

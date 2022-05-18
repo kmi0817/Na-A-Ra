@@ -23,7 +23,7 @@
     margin: 6vh;
     border: none;
     border-radius: 2vh;
-    box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 8%);
+    box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
     color: #7094ff;
     background: white;
     font-weight: bold;
@@ -39,11 +39,11 @@
 
 .OutDiv {
     display: inline-block;
-    width: 80%;
+    width: 60%;
     text-align: center;
     margin-top: 5vh;
     text-align: left;
-    box-shadow: 0.6em 0.6em 1.2em rgb(0 0 0 / 5%);
+    box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 5%);
     border-radius: 1vh;
 }
 
@@ -81,7 +81,7 @@
     border: none;
     background-color: white;
     border-radius: 1vh;
-    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
 }
 
 .BackBtn {
@@ -90,17 +90,21 @@
     border: none;
     background-color: white;
     border-radius: 1vh;
-    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
+    position: relative;
+    top: 10vh;
 }
 
 .DetailDiv {
-    margin-top: 10vh;
     height: 50vh;
 }
 
 .DetailTitle {
     font-size: 20px;
     font-weight: bold;
+    margin: 0;
+    position: relative;
+    top: 5vh;
 }
 
 .DetailDesc {
@@ -109,11 +113,18 @@
     height: 30vh;
     background-color: white;
     border: 2vw solid white;
-    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 5%);
+    border-radius: 1vh;
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 5%);
+    position: relative;
+    top: 5vh;
+    text-align: left;
+    color: #666666;
 }
 
 .DetailDate {
     color: #a0a0a0;
+    position: relative;
+    top: 5vh;
 }
 
 .QuestionWriteForm {
@@ -207,3 +218,52 @@
     background-color: #f7f7fb;
     color: #5a5a5a;
 }
+
+.Commu_table {
+    border: none;
+    display: inline-block;
+    margin-top: 5vh;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+    border-radius: 1vh;
+    position: relative;
+    z-index: 10;
+}
+
+.Commu_table td{
+    border: none;
+    margin: none;
+    background-color: white;
+    width: 70vh;
+    height: 6vh;
+    vertical-align: middle;
+    position: relative;
+  }
+
+.Commu_table .td0 {
+    width: 15vh;
+    height: 4vh;
+    vertical-align: middle;
+    background-color: #f7f7fb;
+    font-weight: bold;
+  }
+
+.Commu_table .td1{
+    width: 70vh;
+    cursor: pointer;
+  }
+
+.Commu_table .td2{
+    width: 50vh;
+    color: #888888;
+  }
+
+.Commu_table th {
+    border: none;
+    background-color: #f7f7fb;
+    height: 5vh;
+    vertical-align: middle;
+    font-weight: normal;
+    color: #888888;
+  }

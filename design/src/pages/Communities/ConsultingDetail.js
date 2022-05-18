@@ -120,7 +120,6 @@ const Clinics = () => {
   }
 
     return (
-        <>
           <div className="MypageBackground">
           <MenuBar></MenuBar>
           
@@ -165,7 +164,6 @@ const Clinics = () => {
           
           <Footer></Footer>
           </div>
-        </>
     );
 }
 

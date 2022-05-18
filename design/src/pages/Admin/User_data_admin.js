@@ -17,7 +17,7 @@ const Reviews_data = () => {
     axios.get('/admin/', {
     })
     .then(function (response) {
-      console.log("user_results: " + response.data.users)
+      console.log("user_results: " + response.data.users[0]._id)
       setuserData(response.data.users)
       setuserLength(response.data.users.length)
 
@@ -27,8 +27,8 @@ const Reviews_data = () => {
     })
   }
 
-  const openDetail = (value, e) => {
-    navigate('/admin/'+value, { state: {user_id: value}});
+  const openDetail = (value1, value2, e) => {
+    navigate('/admin/'+value2, { state: {user_id: value1, _id: value2}});
   }
 
 
@@ -40,16 +40,23 @@ const Reviews_data = () => {
                 <Contents_none text="가입된 회원이 없습니다."></Contents_none> 
                 :
                 <div className="review_Div">
-                {
-                user_data.map((data,index) => (
-                    <div className="review_comment_div">
-                        <span key={index} className="comment_No">{index+1}</span>
-                        <span key={index} className="comment_Desc" onClick={e => openDetail(data._id, e)}>{data.user_id}</span>
-                        <span key={index} className="comment_Data">{data.created_at}</span>
-                        <span key={index} className="comment_Data">{data.is_admin ? "관리자" : "회원"}</span>
-                    </div>
-                ))
-                }
+                  <table className="admin_table" border="1">
+                    <th></th>
+                    <th>사용자</th>
+                    <th>가입일자</th>
+                    <th>권한</th>
+
+                  {
+                    user_data.map((data,index) => (
+                      <tr>
+                      <td key={index} className="admin_td0">{index+1}</td>
+                      <td key={index} className="admin_td1" onClick={e => openDetail(data.user_id, data._id, e)}>{data.user_id}</td>
+                      <td key={index} className="admin_td2">{data.created_at}</td>
+                      <td key={index} className="admin_td3"><span className={data.is_admin ? "admin" : "signuser"}>{data.is_admin ? "관리자" : "회원"}</span></td>
+                    </tr>
+                    )) 
+                  }
+                  </table>
                 </div>
             }
         </>

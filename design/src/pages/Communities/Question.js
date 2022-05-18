@@ -81,23 +81,29 @@ const Question = () => {
         <div className="App">
           <MenuBar></MenuBar>
           <div className="MainTopDiv">
+            <svg className="MainHeaderImg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#809fff" fill-opacity="1" d="M0,128L80,144C160,160,320,192,480,170.7C640,149,800,75,960,53.3C1120,32,1280,64,1360,80L1440,96L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path></svg>
             <span className="MainTopSpan">질문게시판</span>
             <span className="MainTopSpan2">모든 사용자들이 증상에 대해 자유롭게 토론하고 의견을 나눌 수 있는 곳</span>
           </div>
         </div>
 
-        <div className="OutDiv">
-        {
-          getdataLength === 0 ? null :
-          getdataBool && getdata.map((data, index) => (
-            <div className={index % 2 == 0 ? 'BoardDiv'+ 1 : 'BoardDiv'+ 0}>
-              <span key={index} className="QesDetail_No">{((page-1)*5)+(index+1)}</span>
-              <span key={index} className="QuesDetail_Title" onClick={e => openDetail(data._id, e)}>{data.title}</span>
-              <span key={index} className="QuesDetail_Date">{data.created_at}</span>
-            </div>
-          ))
-        }
-        </div>
+        <table className="Commu_table" border="1">
+              <th></th>
+              <th>제목</th>
+              <th>작성일자</th>
+              {
+                getdataLength === 0 ? null :
+                getdataBool && getdata.map((data, index) => (
+                  <tr>
+                    <td key={index} className="td0">{((page-1)*5)+(index+1)}</td>
+                    <td key={index} className="td1" onClick={e => openDetail(data._id, e)}>{data.title}</td>
+                    <td key={index} className="td2">{data.created_at}</td>
+                  </tr>
+                ))
+              }
+        </table>
+
+
         <div className="BtnDiv">
          <button className="pageBtn" onClick={e => downPage(e)}>이전</button>
           <button className="pageBtn" onClick={e => upPage(e)}>다음</button>

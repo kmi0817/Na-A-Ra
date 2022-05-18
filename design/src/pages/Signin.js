@@ -53,7 +53,7 @@ const HospitalDetail = () => {
             <span className="MainTopSpan">로그인</span>
           </div>
           
-          <form onSubmit={AfterSubmit} className="commentsForm">
+          <form onSubmit={AfterSubmit} className="signForm">
             <input type="text" required name="inputId" id="inputId" placeholder="ID" minlength="5" maxlength="20"></input>
             <input type="password" required name="inputPassword" id="inputPassword" placeholder="Password" minlength="7"></input>
             <button id="submitBtn" type="submit">완료</button>

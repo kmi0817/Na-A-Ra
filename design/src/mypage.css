@@ -42,7 +42,7 @@
 .privacy_Div {
     display: inline-block;
     width: 70%;
-    height: 50vh;
+    height: 40vh;
     border: 20px solid white;
     border-radius: 2vh;
     background-color: white;
@@ -65,7 +65,7 @@
     border: 20px solid white;
     box-shadow: 3px 4px 10px 3px rgb(128 159 255 / 10%);
     overflow: auto;
-    text-align: left;
+    text-align: center;
 }
 
 .review_comment_div {
@@ -86,7 +86,17 @@
     float: right;
 }
 
-.comment_btn {
+.comment_btn_yes {
+    margin: 0 5vh 0 7vh;
+    float: right;
+    background-color: #809FFF;
+    color: white;
+    border-radius: 1vh;
+    border: 3px solid #809FFF;
+    font-size: 14px;
+}
+
+.comment_btn_no {
     margin: 0 5vh 0 7vh;
     float: right;
     background-color: #f08484;
@@ -128,32 +138,32 @@
     width: 10vw;
     height: 5vh;
     border: none;
-    background-color: #809FFF;
+    background-color: #e94848;
     color: white;
     border-radius: 1vw;
     margin: 1vw;
-    margin-top: 5vw;
+    margin-top: 1vw;
     max-width: 70px;
     box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
 }
 
 .privacy_img {
     position: relative;
-    top: 5vh;
-    width: 5vw;
+    top: 1vh;
+    width: 4vw;
+    min-width: 30px;
     max-width: 40px;
     filter: invert(74%) sepia(20%) saturate(19%) hue-rotate(334deg) brightness(85%) contrast(82%);
 }
 
 .privacy_text {
     position: relative;
-    top: 5vh;
 }
 
 .privacy_contents {
     position: relative;
     top: 5vh;
-    text-align: left;
+    text-align: center;
 }
 
 .privacy_contents_text {
@@ -161,11 +171,138 @@
 }
 
 .privacy_changePWD {
-    margin: 5vh 5vh;
-    height: 4vh;
-    background-color: #809FFF;
+    width: 20vw;
+    height: 5vh;
     border: none;
+    background-color: #809FFF;
     color: white;
-    border-radius: 1vh;
+    border-radius: 1vw;
+    margin: 1vw;
+    margin-top: 1vw;
+    max-width: 100px;
     box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
+}
+
+
+.privacy_btnDiv {
+    text-align: center;
+}
+
+.mypage_table {
+    border: none;
+    display: inline-block;
+    margin-top: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+    border-radius: 1vh;
+    text-align: center;
+    position: relative;
+    top: -3vh;
+}
+
+.mypage_table .td0 {
+    background-color: #f7f7fb;
+    width: 15vh;
+    height: 6vh;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.mypage_table td {
+    border: none;
+    width: 50vh;
+}
+
+.mypageReports_table {
+    border: none;
+    display: inline-block;
+    margin-top: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 0%);
+    border-radius: 1vh;
+    text-align: center;
+    position: relative;
+}
+
+.mypageReports_table th {
+    font-weight: normal;
+}
+
+.mypageReports_table .td0 {
+    width: 10vh;
+    font-weight: normal;
+}
+
+.mypageReports_table .td1 {
+    width: 40vh;
+}
+
+.mypageReports_table .td2 {
+    width: 40vh;
+    height: 5vh;
+}
+
+.mypageReports_table .td3 {
+    width: 20vh;
+    color: #888888;
+}
+
+/* review */
+.mypageReports_table .review_td0 {
+    width: 15vh;
+    font-weight: normal;
+}
+
+.mypageReports_table .review_td1 {
+    width: 60vh;
+    text-align: left;
+}
+
+.mypageReports_table .review_td2 {
+    width: 50vh;
+    height: 5vh;
+    text-align: left;
+    color: #888888;
+}
+
+/* board */
+.mypageReports_table .board_td0 {
+    width: 15vh;
+    font-weight: normal;
+}
+
+.mypageReports_table .board_td1 {
+    width: 20vh;
+}
+
+.mypageReports_table .board_td2 {
+    width: 40vh;
+    height: 5vh;
+    text-align: left;
+}
+
+.mypageReports_table .board_td3 {
+    width: 40vh;
+    text-align: left;
+    color: #888888;
+}
+
+/* comments */
+.mypageReports_table .comments_td0 {
+    width: 15vh;
+    font-weight: normal;
+}
+
+.mypageReports_table .comments_td1 {
+    width: 60vh;
+    text-align: left;
+}
+
+.mypageReports_table .comments_td2 {
+    width: 40vh;
+    height: 5vh;
+    text-align: left;
+    color: #888888;
 }

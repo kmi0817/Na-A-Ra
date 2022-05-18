@@ -11,48 +11,46 @@ const Reviews_data = () => {
   }, []);
 
   const LoadData = async() => {
-    axios.get('/mypage/', {
+    axios.get('/admin/', {
     })
     .then(function (response) {
-      console.log("Reports_results: " + response.data.Reports_results)
-      setReportsData(response.data.Reports_results)
-      setReportsLength(response.data.reports_results.length)
+      //writer_id, hospital_id, _id, created_at
+      setReportsData(response.data.reports)
+      setReportsLength(response.data.reports.length)
+      console.log(JSON.stringify(response.data.reports[0]))
 
     })
     .catch(function (error) {
-      console.log("can't load server's data.")
+      console.log(error)
     })
   }
 
 
     return (
         <>
+            {
+              ReportsLength == 0 ?
+              <Contents_none text="병원 리스트가 없습니다."></Contents_none> 
+              :
                 <div className="review_Div">
-                    <div className="review_comment_div">
-                        <span className="comment_No">1</span>
-                        <span className="comment_Desc">라미체성형외과의원</span>
-                        <button className="REBTN">거절</button><button className="ACBTN">승인</button>
-                        <span className="admin_report_data">hyj3463</span>
-                    </div>
-                    <div className="review_comment_div">
-                        <span className="comment_No">2</span>
-                        <span className="comment_Desc">송파길신경외과의원</span>
-                        <button className="REBTN">거절</button><button className="ACBTN">승인</button>
-                        <span className="admin_report_data">hyj3463@naver.com</span>
-                    </div>
-                    <div className="review_comment_div">
-                        <span className="comment_No">3</span>
-                        <span className="comment_Desc">잠실대항장문서울외과의원</span>
-                        <button className="REBTN">거절</button><button className="ACBTN">승인</button>
-                        <span className="admin_report_data">hyj3463@naver.com</span>
-                    </div>
-                    <div className="review_comment_div">
-                        <span className="comment_No">4</span>
-                        <span className="comment_Desc">참외과 참소아청소년과의원</span>
-                        <button className="REBTN">거절</button><button className="ACBTN">승인</button>
-                        <span className="admin_report_data">nmg3463</span>
-                    </div>
+                  <table className="admin_table" border="1">
+                    <th></th>
+                    <th>병원</th>
+                    <th>신고일자</th>
+                    <th>승인/거절</th>
+                  {
+                    Reports_data.map((data, index) => (
+                      <tr>
+                        <td key={index} className="adminReport_td0">{index+1}</td>
+                        <td key={index} className="adminReport_td1">{data.hospital_id[0].name}</td>
+                        <td key={index} className="adminReport_td3">{data.created_at}</td>
+                        <td key={index} className="adminReport_td2"><button key={index} className="REBTN">거절</button><button className="ACBTN">승인</button></td>
+                      </tr>
+                    ))
+                  }
+                </table>
                 </div>
+            }
         </>
     );
 }

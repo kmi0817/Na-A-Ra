@@ -13,7 +13,8 @@
     background-color: white;
     border-radius: 2vh;
     box-shadow: 3px 3px 10px 1px rgba(128, 159, 255, .1);
-    
+    transition : .2s;
+    animation: fadeIn 0.7s ease-in-out;    
 }
 
 .cardDiv {
@@ -215,7 +216,9 @@
 
 .commentsForm {
     text-align: center;
-    margin: 5vw;
+    margin: 5vh;
+    position: relative;
+    top: 10vh;
 }
 
 #description {
@@ -258,6 +261,7 @@
 
 .commentsNoneText {
     color: #777777;
+    margin: 23vh;
 }
 
 .SearchBtnActive {

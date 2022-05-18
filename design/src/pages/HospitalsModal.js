@@ -77,31 +77,22 @@ const Post = (props) => {
               <tr>
                 <td className="td0">치과</td>
                 <td>{data.detyGdrCnt}</td>
-
                 <td>{data.detyIntnCnt}</td>
-
                 <td>{data.detyResdntCnt}</td>
-
                 <td>{data.detySdrCnt}</td>
               </tr>
               <tr>
                 <td className="td0">의과</td>
                 <td>{data.mdeptGdrCnt}</td>
-
                 <td>{data.mdeptIntnCnt}</td>
-
                 <td>{data.mdeptResdntCnt}</td>
-
                 <td>{data.mdeptSdrCnt}</td>
               </tr>
               <tr>
                 <td className="td0">한방</td>
                 <td>{data.cmdcIntnCnt}</td>
-
                 <td>{data.cmdcIntnCnt}</td>
-
                 <td>{data.cmdcResdntCnt}</td>
-
                 <td>{data.cmdcSdrCnt}</td>
               </tr>
             </table>

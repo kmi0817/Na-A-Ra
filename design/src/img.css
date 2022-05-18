@@ -69,3 +69,12 @@
     top: 25vh;
     z-index: 0;
   }
+
+  .MainHeaderImg2 {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
+    transform: scale(-1);
+  }

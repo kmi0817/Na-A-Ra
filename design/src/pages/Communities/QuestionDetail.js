@@ -85,19 +85,41 @@ const Question = () => {
     setText(e.target.value)
   }
 
+  const DeleteComments = (value, e) => {
+    if ( window.confirm("댓글을 삭제하시겠습니까?")) {
+      axios.delete("/community/delete/" + value, {
+      })
+      .then(function (response) {
+        if (response.data.text == "성공") {
+          alert("댓글이 삭제되었습니다.")
+          GetData();
+        }
+        else {
+          alert(response.data.text)
+        }
+      })
+      .catch(function (error) {
+        alert("댓글 삭제 실패");
+        console.log(error)
+      })
+  }
+  else {
+      alert("취소했습니다.");
+  }
+  }
+
     return (
-        <>
+        <div className="MypageBackground">
           <MenuBar></MenuBar>
           <div className="cardDiv">
             {
                 <div className="DetailDiv">
                     <p className="DetailTitle">{data.title}</p>
-                    <p className="DetailDate">{data.writer}</p>
                     <p className="DetailDate">{data.created_at}</p>
                     <p className="DetailDesc">{data.description}</p>
                 </div>
             }
-            <button className="BackBtn" onClick={BacktoPage}>이전으로</button>
+            <button className="BackBtn" onClick={BacktoPage}>이전</button>
           </div>
           
 
@@ -109,18 +131,17 @@ const Question = () => {
             </div>
           </form>
 
-          <div className="BoardComments">
+          <div className="OutDiv">
           {
               commentsLength === 0 ? 
                 <p className="commentsNoneText">등록된 댓글이 없습니다.</p>
               :
               comments.map((data, id) => (
                   <div className={id % 2 == 0 ? 'commentsDiv'+ 0 : 'commentsDiv'+ 1}>
-                      <p key={id} className="writer_id">{data.writer}</p>
                       <p key={id} className="description">{data.description}</p>
                       <p key={id} className="description">{data.created_at}</p>
-                      {admin_id !== null ?
-                        <button>삭제</button>
+                      { user_id !== data.writer ?
+                        <button className="DelBtn" onClick={e => DeleteComments(data._id, e)}>삭제</button>
                       :
                         null
                       }
@@ -131,7 +152,7 @@ const Question = () => {
           </div>
 
           <Footer></Footer>
-        </>
+        </div>
     );
 }
 

@@ -7,9 +7,9 @@ import Reviews_data from "../components/mypageComponents/reviews_data";
 import Boards_data from "../components/mypageComponents/board_data";
 import Comments_data from "../components/mypageComponents/comments_data";
 import Comments_privacy from "../components/mypageComponents/comments_privacy";
-import Withdrawal from "./Withdrawal";
 
 const Mypage = () => {
+  const [boolMain, setBoolMain] = useState(false);
   const [boolReports, setBoolReports] = useState(false);
   const [boolReviews, setBoolReviews] = useState(false);
   const [boolBoards, setBoolBoards] = useState(false);
@@ -27,25 +27,36 @@ const Mypage = () => {
   useEffect(() => {
   }, []);
 
+  const MainArea = async (e) => {
+    setBoolMain(!(boolMain))
+    setBoolReviews(false)
+    setBoolBoards(false)
+    setBoolComments(false)
+  }
+
   const ReportsArea = async (e) => {
+    setBoolMain(false)
     setBoolReports(!(boolReports))
     setBoolReviews(false)
     setBoolBoards(false)
     setBoolComments(false)
   }
   const ReviewArea = async (e) => {
+    setBoolMain(false)
     setBoolReports(false)
     setBoolReviews(!(boolReviews))
     setBoolBoards(false)
     setBoolComments(false)
   }
   const BoardsArea = async (e) => {
+    setBoolMain(false)
     setBoolReports(false)
     setBoolReviews(false)
     setBoolBoards(!(boolBoards))
     setBoolComments(false)
   }
   const CommentsArea = async (e) => {
+    setBoolMain(false)
     setBoolReports(false)
     setBoolReviews(false)
     setBoolBoards(false)
@@ -61,6 +72,7 @@ const Mypage = () => {
           </div>
 
           <div className="mypage_Area">
+          <button className={boolMain ? 'mypage_AreaBtnActive' : 'mypage_AreaBtn'} onClick={e => MainArea(e)}>회원 정보</button>
             <button className={boolReports ? 'mypage_AreaBtnActive' : 'mypage_AreaBtn'} onClick={e => ReportsArea(e)}>신고 병원</button>
             <button className={boolReviews ? 'mypage_AreaBtnActive' : 'mypage_AreaBtn'} onClick={e => ReviewArea(e)}>작성 리뷰</button>
             <button className={boolBoards ? 'mypage_AreaBtnActive' : 'mypage_AreaBtn'} onClick={e => BoardsArea(e)}>작성 게시글</button>
@@ -97,12 +109,6 @@ const Mypage = () => {
             : 
             <Comments_privacy></Comments_privacy>
           }
-
-          <div>
-            <button className="withdrawalBtn" onClick={e => openModal(e)}>회원 탈퇴</button>
-            <Withdrawal open={modalOpen} close={closeModal} header="회원탈퇴" setModalOpen={setModalOpen} autoClose></Withdrawal>
-          </div>
-
           <Footer></Footer>
         </div>
     );

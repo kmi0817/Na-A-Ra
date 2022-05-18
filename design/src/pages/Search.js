@@ -131,8 +131,8 @@ function NewTest() {
 
     return (
         <div className="SeacrchBackground">
-            <div className="BackgroundDiv">
             <MenuBar />
+            <div className="BackgroundDiv">
             <p className="SearchMainText">Search</p>
             <button className={boolAddr ? 'SearchBtnActive' : 'SearchBtnNonActive'} onClick={e => ChangeAdddr(e)}>주소명 검색</button>
             <button className={boolName ? 'SearchBtnActive' : 'SearchBtnNonActive'} onClick={e => ChangeName(e)}>병원명 검색</button>
@@ -141,7 +141,7 @@ function NewTest() {
                 boolAddr ?
             <form onSubmit={AfterSubmit_Addr} >
                     <div className="SearchSection">
-                        <input value={address} className="inputAddr"></input>
+                        <input value={address} className="inputAddr" placeholder="주소 검색 버튼을 클릭해주세요!"></input>
                         <button type="button" className="AddrBtn" onClick={openModal}>주소 검색</button>
                         <AddrModal open={modalOpen} close={closeModal} header="주소 검색" address={address} setAddress={setAddress} setModalOpen={setModalOpen} autoClose></AddrModal>
                         <select name="inputType" className="symptom_level">
@@ -173,7 +173,7 @@ function NewTest() {
             {
                 boolName  ? 
                 <form onSubmit={AfterSubmit_Name}>
-                    <input className="inputAddr"></input>
+                    <input className="inputAddr" placeholder="병원명을 입력해주세요"></input>
                     <button type="submit" className="formBtn">검색</button>
                 </form>
                 : null

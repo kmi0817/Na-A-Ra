@@ -32,17 +32,22 @@ const Reviews_data = () => {
                 <Contents_none text="신고한 내역이 없습니다."></Contents_none>
                 :
                 <div className="review_Div">
-                {
-                reports_data.map((data,index) => (
-                    <div className="review_comment_div">
-                        <span key={index} className="comment_No">{index+1}</span>
-                        <span key={index} className="comment_Desc">{data.hospital_id[0].name}</span>
-                        <span key={index} className="comment_btn">{data.if_confirmed ? "승인" : "비승인"}</span>
-                        <span key={index} className="comment_Data">{data.created_at}</span>
-                        
-                    </div>
-                ))
-                }
+                  <table className="mypageReports_table" border="1">
+                    <th></th>
+                    <th>내용</th>
+                    <th>작성일자</th>
+                    <th>승인여부</th>
+                  {
+                    reports_data.map((data,index) => (
+                    <tr>
+                      <td key={index} className="td0">{index+1}</td>
+                      <td key={index} className="td1">{data.hospital_id[0].name}</td>
+                      <td key={index} className="td2">{data.created_at}</td>
+                      <td key={index} className="td3"><span className={data.if_confirmed ? "comment_btn_yes" : "comment_btn_no"}>{data.if_confirmed ? "승인" : "비승인"}</span></td>
+                    </tr>
+                    ))
+                  }
+                  </table>
                 </div>
             }
         </>

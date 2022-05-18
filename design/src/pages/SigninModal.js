@@ -36,7 +36,7 @@ const Post = (props) => {
         setModalOpen(false);
       })
       .catch(function (error) {
-        alert("?실패");
+        alert("요청 실패");
         console.log(error)
       })
   }
@@ -54,7 +54,7 @@ const Post = (props) => {
             <button className="close" onClick={close}>&times;</button>
           </header>
           <main>
-          <form className="commentsForm" onSubmit={AfterSubmit}>
+          <form className="signForm" onSubmit={AfterSubmit}>
             <input type="text" required name="inputId" class="form-control" id="inputId" placeholder="ID" minlength="5" maxlength="20"></input>
             <input type="password" required name="inputPassword" class="form-control" id="inputPassword" placeholder="Password" minlength="7"></input>
             <button id="submitBtn" type="submit">완료</button>

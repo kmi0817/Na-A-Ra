@@ -14,6 +14,7 @@ const Reviews_data = () => {
     axios.get('/admin/', {
     })
     .then(function (response) {
+      console.log(JSON.stringify(response.data.hospitals))
       setHospitalsData(response.data.hospitals)
       setHospitalsLength(response.data.hospitals.length)
 

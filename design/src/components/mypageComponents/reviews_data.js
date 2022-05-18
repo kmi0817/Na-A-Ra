@@ -32,15 +32,20 @@ const Reviews_data = () => {
                 <Contents_none text="작성된 리뷰가 없습니다."></Contents_none> 
                 :
                 <div className="review_Div">
-                {
-                reviews_data.map((data,index) => (
-                    <div className="review_comment_div">
-                        <span key={index} className="comment_No">{index+1}</span>
-                        <span key={index} className="comment_Desc">{data.description}</span>
-                        <span key={index} className="comment_Data">{data.created_at}</span>
-                    </div>
-                ))
-                }
+                  <table className="mypageReports_table" border="1">
+                    <th></th>
+                    <th>내용</th>
+                    <th>작성일자</th>
+                  {
+                    reviews_data.map((data,index) => (
+                      <tr>
+                        <td key={index} className="review_td0">{index+1}</td>
+                        <td key={index} className="review_td1">{data.description}</td>
+                        <td key={index} className="review_td2">{data.created_at}</td>
+                      </tr>
+                    ))
+                  }
+                  </table>
                 </div>
             }
         </>

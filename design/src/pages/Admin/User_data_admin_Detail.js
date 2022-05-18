@@ -16,6 +16,7 @@ const Reviews_data = () => {
   const [user_comments, setuserComments] = useState();
   const [userLength, setuserLength] = useState(0);
   const [user_id, setuserId] = useState();
+  const [_id, set_id] = useState();
   const location = useLocation();
 
   const [boolReviews, setBoolReviews] = useState(false);
@@ -24,24 +25,10 @@ const Reviews_data = () => {
   const [boolComments, setBoolComments] = useState(false);
 
   useEffect(() => {
-    LoadData();
     console.log(location.state.user_id)
-    setuserId(location.state.user_id);
+    setuserId(location.state.user_id)
+    set_id(location.state._id)
   }, []);
-
-  const LoadData = async() => {
-    axios.get('/admin/member' + location.state.id, {
-    })
-    .then(function (response) {
-      setuserReviews(response.data.reviews_results)
-      setuserReports(response.data.reports_results)
-      setuserCommunities(response.data.communities_results)
-      setuserComments(response.data.comments_results)
-    })
-    .catch(function (error) {
-      console.log("can't load server's data.")
-    })
-  }
 
   const ReviewsArea = async (e) => {
     setBoolReviews(!(boolReviews))
@@ -88,27 +75,33 @@ const Reviews_data = () => {
 
                 {
                   boolReviews ?
-                  <Reviews_data_admin user_id={user_id}></Reviews_data_admin>
+                  <Reviews_data_admin user_id={user_id} _id={_id}></Reviews_data_admin>
                   : 
                   null
                 }
                 {
                   boolReports ?
-                  <Reports_data_admin user_id={user_id}></Reports_data_admin>
+                  <Reports_data_admin user_id={user_id} _id={_id}></Reports_data_admin>
                   : 
                   null
                 }
                 {
                   boolCommunities ?
-                  <Communities_data_admin user_id={user_id}></Communities_data_admin>
+                  <Communities_data_admin user_id={user_id} _id={_id}></Communities_data_admin>
                   : 
                   null
                 }
                 {
                   boolComments ?
-                  <Comments_data_admin user_id={user_id}></Comments_data_admin>
+                  <Comments_data_admin user_id={user_id} _id={_id}></Comments_data_admin>
                   : 
                   null
+                }
+                {
+                  boolReviews || boolReports || boolCommunities || boolComments ?
+                  null
+                  :
+                  <Contents_none text="확인하고자 하는 메뉴를 클릭해주세요."></Contents_none> 
                 }
           <Footer></Footer>
         </div>

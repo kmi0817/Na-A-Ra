@@ -35,6 +35,7 @@ function MainPage({ location, history }) {
           <span className="MidTextEnd">※ 전문가가 아니더라도 서비스 향상과 관련한 피드백도 환영합니다!</span>
           <button>도움주기</button>
         </div>
+        
         <Footer></Footer>
         </div>
         </>

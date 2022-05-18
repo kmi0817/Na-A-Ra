@@ -77,7 +77,7 @@ router.get("/users/:user_id", async(req, res) => {
  * @swagger
  * paths:
  *  /admin/confirm-report:
- *      post:
+ *      patch:
  *          tags: [ 관리자 ]
  *          summary: "Confirm a report received by a user"
  *          description: 회원이 접수한 병원 신고내역을 승인

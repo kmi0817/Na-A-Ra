@@ -46,7 +46,7 @@
                                 <% users.forEach((user, index) => { %>
                                 <tr>
                                     <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
-                                    <td style="font-size: 0.8rem"><a href="#" onclick="window.open('/admin/member/<%= user._id %>', '_blank', 'width=600 height=600')"><%= user.user_id %></a></td>
+                                    <td style="font-size: 0.8rem"><a href="#" onclick="window.open('/admin/users/<%= user._id %>', '_blank', 'width=600 height=600')"><%= user.user_id %></a></td>
                                     <td style="font-size: 0.8rem"><%= user.created_at %></td>
                                     <td style="font-size: 0.8rem"><%= user.is_admin %></td>
                                 </tr>
@@ -118,7 +118,7 @@
                                     <th style="font-size: 0.8rem"><%= report.hospital_id[0].sidoCdNm %> <%= report.hospital_id[0].sgguCdNm %></th>
                                     <th style="font-size: 0.8rem"><%= report.writer_id[0].user_id %> <span class="text-muted"><%= report.created_at.toLocaleString() %></span></th>
                                     <th style="font-size: 0.8rem">
-                                        <form class="d-inline" action="/admin/report-confirmed?_method=PATCH" method="POST">
+                                        <form class="d-inline" action="/admin/confirm-report?_method=PATCH" method="POST">
                                             <input type="hidden" name="report_id" value="<%= report._id %>">
                                             <input type="hidden" name="hospital_id" value="<%= report.hospital_id[0]._id %>">
                                             <button class="btn btn-outline-danger btn-sm" type="submit">인증하기</button>

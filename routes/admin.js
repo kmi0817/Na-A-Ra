@@ -19,9 +19,10 @@ mongoose.connect("mongodb://localhost/app", {
 /**
  * @swagger
  * paths:
- *  /admin/withdrawal:
+ *  /admin:
  *      get:
  *          tags: [ 관리자 ]
+ *          summary: "Get admin's page"
  *          description: 관리자 페이지
  *          responses:
  *              "200":
@@ -43,9 +44,10 @@ router.get("/", async (req, res) => {
 /**
  * @swagger
  * paths:
- *  /admin/member/{id}:
+ *  /admin/users/{user_id}:
  *      get:
  *          tags: [ 관리자 ]
+ *          summary: "Get a specific user's detail page"
  *          description: id에 해당하는 회원의 상세 페이지
  *          parameters:
  *              name: "id"
@@ -59,13 +61,13 @@ router.get("/", async (req, res) => {
  *              "400":
  *                  description: Not Found
  */
-router.get("/member/:id", async(req, res) => {
+router.get("/users/:user_id", async(req, res) => {
     if (req.session.admin) {
-        const reviews_results = await Reviews.find({ writer_id: req.params.id }).populate({ path: "hospital_id", select: { name: 1 } }).sort({ _id: -1 });
-        const reports_results = await Reports.find({ writer_id: req.params.id }).populate({ path: "hospital_id", select: { name: 1 }});
-        const communities_results = await Communities.find({ writer: req.params.id }).sort({ _id: -1 });
-        const comments_results = await Comments.find({ writer: req.params.id }).populate({ path: "posting", select: { _id: 1, title: 1 }}).sort({ _id: -1 });
-        res.render("admin/member", { reviews_results: reviews_results, reports_results: reports_results, communities_results: communities_results, comments_results: comments_results });
+        const reviews_results = await Reviews.find({ writer_id: req.params.user_id }).populate({ path: "hospital_id", select: { name: 1 } }).sort({ _id: -1 });
+        const reports_results = await Reports.find({ writer_id: req.params.user_id }).populate({ path: "hospital_id", select: { name: 1 }});
+        const communities_results = await Communities.find({ writer: req.params.user_id }).sort({ _id: -1 });
+        const comments_results = await Comments.find({ writer: req.params.user_id }).populate({ path: "posting", select: { _id: 1, title: 1 }}).sort({ _id: -1 });
+        res.render("admin/user", { reviews_results: reviews_results, reports_results: reports_results, communities_results: communities_results, comments_results: comments_results });
     } else {
         res.status(404).send("not found");
     }
@@ -74,10 +76,11 @@ router.get("/member/:id", async(req, res) => {
 /**
  * @swagger
  * paths:
- *  /admin/report-confirmed:
+ *  /admin/confirm-report:
  *      post:
  *          tags: [ 관리자 ]
- *          description: 회원의 비밀번호 변경하기
+ *          summary: "Confirm a report received by a user"
+ *          description: 회원이 접수한 병원 신고내역을 승인
  *          parameters:
  *          -   name: "report_id"
  *              in: "formData"
@@ -95,7 +98,7 @@ router.get("/member/:id", async(req, res) => {
  *              "400":
  *                  description: Not Found
  */
-router.patch("/report-confirmed", async(req, res) => {
+router.patch("/confirm-report", async(req, res) => {
     if (req.session.admin) {
         await Reports.findByIdAndUpdate(req.body.report_id, { is_confirmed: true });
         const hospital = await Hospitals.findById(req.body.hospital_id, { reports_cnt: 1 });
@@ -123,6 +126,7 @@ router.get("/json", async (req, res) => {
  *  /admin/hospitals:
  *      get:
  *          tags: [ 관리자 ]
+ *          summary: "Get a database page"
  *          description: 각 병원 데이터 가져오는 버튼 있는 페이지
  *          responses:
  *              "200":
@@ -142,9 +146,10 @@ router.get("/hospitals", async (req, res) => {
 /**
  * @swagger
  * paths:
- *  /admin/hospitals/{id}:
+ *  /admin/hospitals/{hospital_id}:
  *      get:
  *          tags: [ 관리자 ]
+ *          summary: "Get a specific hospital's detail page"
  *          description: id에 해당하는 병원의 상세 페이지
  *          parameters:
  *          -   name: "id"
@@ -158,7 +163,7 @@ router.get("/hospitals", async (req, res) => {
  *              "400":
  *                  description: Not Found
  */
-router.get("/hospitals/:id", async(req, res) => {
+router.get("/hospitals/:hospital_id", async(req, res) => {
     if (req.session.admin) {
         const results = await Hospitals.findOne({ _id: req.params.id });
         if (results == null)
@@ -173,9 +178,10 @@ router.get("/hospitals/:id", async(req, res) => {
 /**
  * @swagger
  * paths:
- *  /admin/hospitals/{id}:
+ *  /admin/hospitals/{hospital_id}:
  *      delete:
  *          tags: [ 관리자 ]
+ *          summary: "Delete a specific hospital from database"
  *          description: id에 해당하는 병원 삭제
  *          parameters:
  *          -   name: "id"
@@ -189,7 +195,7 @@ router.get("/hospitals/:id", async(req, res) => {
  *              "400":
  *                  description: Not Found
  */
-router.delete("/hospitals/:id", async(req, res) => {
+router.delete("/hospitals/:hospital_id", async(req, res) => {
     if (req.session.admin) {
         await Hospitals.findByIdAndDelete({ _id: req.params.id });
         res.redirect("/admin/hospitals");
@@ -204,6 +210,7 @@ router.delete("/hospitals/:id", async(req, res) => {
  *  /admin/hospitals/{zipCd}:
  *      post:
  *          tags: [ 관리자 ]
+ *          summary: "Save list of hospitals that have the same zipCd in database"
  *          description: zipCd에 해당하는 병원 목록 저장
  *          parameters:
  *          -   name: "zipCd"

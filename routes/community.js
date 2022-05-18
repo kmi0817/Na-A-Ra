@@ -18,6 +18,7 @@ mongoose.connect("mongodb://localhost/app", {
  *  /community/clinics:
  *      get:
  *          tags: [ 커뮤니티 ]
+ *          summary: "Get a clinics board page"
  *          description: 상담 게시판
  *          responses:
  *              "200":
@@ -50,9 +51,10 @@ router.get("/clinics", async (req, res) => {
 /**
  * @swagger
  * paths:
- *  /community/clinics/{id}:
+ *  /community/clinics/{posting_id}:
  *      get:
  *          tags: [ 커뮤니티 ]
+ *          summary: "Get a specific clinics posting page"
  *          description: 특정 상담 게시글
  *          parameters:
  *          -   name: "id"
@@ -66,11 +68,11 @@ router.get("/clinics", async (req, res) => {
  *              "400":
  *                  description: Not Found
  */
-router.get("/clinics/:id", async (req, res) => {
+router.get("/clinics/:posting_id", async (req, res) => {
     if (req.session.user) {
         try {
-            const posting = await Communities.findById(req.params.id);
-            const comments = await Comments.find({ is_deleted: false, posting: req.params.id }).sort({ _id: -1 });
+            const posting = await Communities.findById(req.params.posting_id);
+            const comments = await Comments.find({ is_deleted: false, posting: req.params.posting_id }).sort({ _id: -1 });
             res.render("community/post", { category: "clinics", posting: posting, comments: comments, user: req.session.user['id'] });
         } catch (error) {
             console.log("*** " + error);
@@ -87,6 +89,7 @@ router.get("/clinics/:id", async (req, res) => {
  *  /community/clinics-write:
  *      get:
  *          tags: [ 커뮤니티 ]
+ *          summary: "Get a wrtie page"
  *          description: 상담 게시글 작성 페이지
  *          responses:
  *              "200":
@@ -106,9 +109,10 @@ router.get("/clinics-write", async (req, res) => {
 /**
  * @swagger
  * paths:
- *  /community/clinics-post:
+ *  /community/clinics-write:
  *      post:
  *          tags: [ 커뮤니티 ]
+ *          summary: "Create a new clinics posting in database"
  *          description: 상담 게시글 작성
  *          parameters:
  *          -   name: "writer"
@@ -132,7 +136,7 @@ router.get("/clinics-write", async (req, res) => {
  *              "400":
  *                  description: Not Found
  */
-router.post("/clinics-post", async (req, res) => {
+router.post("/clinics-write", async (req, res) => {
     if (req.session.user) {
         try {
             let posting = new Communities();
@@ -157,9 +161,10 @@ router.post("/clinics-post", async (req, res) => {
 /**
  * @swagger
  * paths:
- *  /community/clinics/comment-post:
+ *  /community/clinics/comment:
  *      post:
  *          tags: [ 커뮤니티 ]
+ *          summary: "Create a new comment in database"
  *          description: 특정 상담 게시글에 댓글 작성
  *          parameters:
  *          -   name: "writer"
@@ -183,7 +188,7 @@ router.post("/clinics-post", async (req, res) => {
  *              "400":
  *                  description: Not Found
  */
-router.post("/clinics/comment-post", async(req, res) => {
+router.post("/clinics/comment", async(req, res) => {
     if (req.session.user) {
         try {
             let comment = new Comments();
@@ -210,6 +215,7 @@ router.post("/clinics/comment-post", async(req, res) => {
  *  /community/questions:
  *      get:
  *          tags: [ 커뮤니티 ]
+ *          summary: "Get a questions board page"
  *          description: 질문 게시판
  *          responses:
  *              "200":
@@ -242,10 +248,11 @@ router.get("/questions", async (req, res) => {
 /**
  * @swagger
  * paths:
- *  /community/questions/{id}:
+ *  /community/questions/{posting_id}:
  *      get:
  *          tags: [ 커뮤니티 ]
  *          description: 특정 질문 게시글
+ *          summary: "Get a specific questions posting page"
  *          parameters:
  *          -   name: "id"
  *              in: "path"
@@ -258,11 +265,11 @@ router.get("/questions", async (req, res) => {
  *              "400":
  *                  description: Not Found
  */
-router.get("/questions/:id", async (req, res) => {
+router.get("/questions/:posting_id", async (req, res) => {
     if (req.session.user) {
         try {
-            const posting = await Communities.findById(req.params.id);
-            const comments = await Comments.find({ is_deleted: false, posting: req.params.id }).sort({ _id: -1 });
+            const posting = await Communities.findById(req.params.posting_id);
+            const comments = await Comments.find({ is_deleted: false, posting: req.params.posting_id }).sort({ _id: -1 });
             res.render("community/post", { category: "questions", posting: posting, comments: comments, user: req.session.user['id'] });
         } catch (error) {
             console.log("*** " + error);
@@ -279,6 +286,7 @@ router.get("/questions/:id", async (req, res) => {
  *  /community/questions-write:
  *      get:
  *          tags: [ 커뮤니티 ]
+ *          summary: "Get a wrtie page"
  *          description: 질문 게시글 작성 페이지
  *          responses:
  *              "200":
@@ -298,9 +306,10 @@ router.get("/questions-write", async (req, res) => {
 /**
  * @swagger
  * paths:
- *  /community/questions-post:
+ *  /community/questions-write:
  *      post:
  *          tags: [ 커뮤니티 ]
+ *          summary: "Create a new questions posting in database"
  *          description: 상담 게시글 작성
  *          parameters:
  *          -   name: "writer"
@@ -324,7 +333,7 @@ router.get("/questions-write", async (req, res) => {
  *              "400":
  *                  description: Not Found
  */
-router.post("/questions-post", async (req, res) => {
+router.post("/questions-write", async (req, res) => {
     if (req.session.user) {
             try {
             let posting = new Communities();
@@ -348,9 +357,10 @@ router.post("/questions-post", async (req, res) => {
 /**
  * @swagger
  * paths:
- *  /community/questions/comment-post:
+ *  /community/questions/comment:
  *      post:
  *          tags: [ 커뮤니티 ]
+ *          summary: "Create a new comment in database"
  *          description: 특정 상담 게시글에 댓글 작성
  *          parameters:
  *          -   name: "writer"
@@ -374,7 +384,7 @@ router.post("/questions-post", async (req, res) => {
  *              "400":
  *                  description: Not Found
  */
-router.post("/questions/comment-post", async (req, res) => {
+router.post("/questions/comment", async (req, res) => {
     if (req.session.user) {
         try {
             let comment = new Comments();
@@ -397,7 +407,7 @@ router.post("/questions/comment-post", async (req, res) => {
 /**
  * @swagger
  * paths:
- *  /community/delete/{comment_id}:
+ *  /community/{comment_id}:
  *      delete:
  *          tags: [ 커뮤니티 ]
  *          description: 특정 상담 게시글에 댓글 작성
@@ -413,7 +423,7 @@ router.post("/questions/comment-post", async (req, res) => {
  *              "400":
  *                  description: Not Found
  */
-router.delete("/delete/:comment_id", async (req, res) => {
+router.delete("/:comment_id", async (req, res) => {
     if (req.session.user || req.session.admin) {
         try {
             await Comments.findByIdAndUpdate(req.params.comment_id, { is_deleted: true });

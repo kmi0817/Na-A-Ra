@@ -15,6 +15,7 @@ const Comments = require("../models/comments");
  *  /mypage:
  *      get:
  *          tags: [ 마이페이지 ]
+ *          summary: "Get a mypage page"
  *          description: 기본 마이페이지 화면
  *          responses:
  *              "200":
@@ -38,9 +39,10 @@ router.get("/", async(req, res) => {
 /**
  * @swagger
  * paths:
- *  /community/change-password:
+ *  /mypage/change-password:
  *      patch:
  *          tags: [ 마이페이지 ]
+ *          summary: "Change password"
  *          description: 회원의 비밀번호 변경하기
  *          parameters:
  *          -   name: "input_id"
@@ -85,9 +87,10 @@ router.patch("/change-password", async(req, res) => {
 /**
  * @swagger
  * paths:
- *  /community/withdrawal:
- *      post:
+ *  /mypage/withdrawal:
+ *      delete:
  *          tags: [ 마이페이지 ]
+ *          summary: "Withdraw"
  *          description: 회원의 비밀번호 변경하기
  *          parameters:
  *          -   name: "_id"
@@ -111,7 +114,7 @@ router.patch("/change-password", async(req, res) => {
  *              "400":
  *                  description: Not Found
  */
-router.post("/withdrawal", async(req, res) => {
+router.delete("/withdrawal", async(req, res) => {
     if (req.session.user) {
         const user = await Users.findById(req.body._id);
         if (user['user_id'] === req.body.withdrawal_id) {

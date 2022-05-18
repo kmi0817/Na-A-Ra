@@ -227,14 +227,14 @@ app.get("/test", (req, res) => { res.render("test"); });
  *              in: "formData"
  *              description: 입력 비밀번호
  *              required: true
- *              type: "password"
+ *              type: "string"
  *          responses:
  *              "200":
  *                  description: A successful response
  *              "400":
  *                  description: Not Found
  */
-app.post("signup", async(req, res) => {
+app.post("/signup", async(req, res) => {
     try {
         const salt = crypto.randomBytes(64).toString("base64");
         const hashed_password = crypto.pbkdf2Sync(req.body.createPassword, salt, 190481, 64, "sha512").toString("base64");
@@ -275,14 +275,14 @@ app.post("signup", async(req, res) => {
  *              in: "formData"
  *              description: 입력 비밀번호
  *              required: true
- *              type: "password"
+ *              type: "string"
  *          responses:
  *              "200":
  *                  description: A successful response
  *              "400":
  *                  description: Not Found
  */
-app.post("login", async(req, res) => {
+app.post("/login", async(req, res) => {
     const results = await Users.findOne({ user_id: req.body.inputId, is_withdrawn: false });
 
     if (results != null) {
@@ -324,7 +324,7 @@ app.post("login", async(req, res) => {
  *              "400":
  *                  description: Not Found
  */
-app.delete("logout", async(req, res) => {
+app.delete("/logout", async(req, res) => {
     req.session.destroy((error) => { res.redirect("/"); });
 });
 
@@ -353,7 +353,7 @@ app.delete("logout", async(req, res) => {
  *              "400":
  *                  description: Not Found
  */
-app.post("report", async(req, res) => {
+app.post("/report", async(req, res) => {
     let report = new Reports();
     report.writer_id = req.body.writer_id;
     report.hospital_id = req.body.hospital_id;

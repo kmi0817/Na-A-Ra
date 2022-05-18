@@ -368,11 +368,10 @@ app.use("/community", communityRouter);
 app.use("/mypage", mypageRouter);
 
 // web server
-server.listen(3000, () => {
-    // port: 3000 app success
-    console.log("localhost:3000 OK");
-});
-// const server = app.listen(3000, () => {
+// server.listen(3000, () => {
 //     // port: 3000 app success
 //     console.log("localhost:3000 OK");
-// })
+// });
+server.listen(3001, '220.149.235.76', () => {
+    console.log('http://220.149.235.76:3001 OK');
+});

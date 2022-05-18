@@ -41,7 +41,7 @@
         <% if (locals.admin) { %>
         <a href="/admin" class="btn btn-danger">관리자 페이지</a>
         
-        <form class="d-inline" action="/process/logout" method="POST">
+        <form class="d-inline" action="/logout?_method=DELETE" method="POST">
             <button type="submit" class="btn btn-outline-danger">
                 로그아웃
             </button>
@@ -49,7 +49,7 @@
         <% } else if (locals.user) { %>
         <button type="button" class="btn btn-success" onclick="location.href='/mypage'">마이페이지</button>
         
-        <form class="d-inline" action="/process/logout" method="POST">
+        <form class="d-inline" action="/logout?_method=DELETE" method="POST">
             <button type="submit" class="btn btn-outline-success">
                 로그아웃
             </button>
@@ -70,7 +70,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="/process/login" method="POST">
+                    <form action="/login" method="POST">
                         <div class="modal-body">
                             <div class="form-group row">
                                 <label for="inputId" class="col-sm-2 col-form-label">아이디</label>
@@ -109,7 +109,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="/process/signup" method="POST">
+                    <form action="/signup" method="POST">
                         <div class="modal-body">
                             <div class="form-group row">
                                 <label for="createId" class="col-sm-2 col-form-label">아이디</label>
@@ -360,7 +360,7 @@
                                     <% if (locals.admin) { %>
                                     <button type="button" class="btn btn-warning text-white" onclick="alert('관리자는 병원을 신고할 수 없습니다.')">신고하기</button>
                                     <% } else if (locals.user) { %>
-                                    <form class="d-inline" action="/process/report" method="POST" onsubmit="if(!confirm('한 번 신고한 내역은 취소할 수 없습니다.')) { return false; }">
+                                    <form class="d-inline" action="/report" method="POST" onsubmit="if(!confirm('한 번 신고한 내역은 취소할 수 없습니다.')) { return false; }">
                                         <input type="hidden" name="hospital_id" value="<%= result._id %>">
                                         <input type="hidden" name="writer_id" value="<%= user %>">
                                         <button type="submit" class="btn btn-warning text-white">신고하기</button>

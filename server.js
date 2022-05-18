@@ -44,6 +44,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
  *  /:
  *      get:
  *          tags: [ 검색 ]
+ *          summary: "Get main page"
  *          description: 주소명/병원명 검색 페이지
  *          responses:
  *              "200":
@@ -211,14 +212,139 @@ app.get("/test", (req, res) => { res.render("test"); });
 /**
  * @swagger
  * paths:
- *  /process/{type}:
- *      get:
+ *  /signup:
+ *      post:
  *          tags: [ 처리 ]
- *          description: type에 따라 회원가입, 로그인/로그아웃, 병원신고 접수 처리
+ *          summary: "Create a user in database"
+ *          description: 회원가입 처리
  *          parameters:
- *          -   name: "type"
- *              in: "path"
- *              description: signup, login/logout, report
+ *          -   name: "createId"
+ *              in: "formData"
+ *              description: 입력 아이디
+ *              required: true
+ *              type: "string"
+ *          -   name: "createPassword"
+ *              in: "formData"
+ *              description: 입력 비밀번호
+ *              required: true
+ *              type: "password"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
+app.post("signup", async(req, res) => {
+    try {
+        const salt = crypto.randomBytes(64).toString("base64");
+        const hashed_password = crypto.pbkdf2Sync(req.body.createPassword, salt, 190481, 64, "sha512").toString("base64");
+
+        let user = new Users();
+        user.user_id = req.body.createId;
+        user.user_salt = salt;
+        user.user_hashedPassword = hashed_password;
+        user.created_at = new Date();
+
+        user = await user.save();
+        res.redirect("/");
+    } catch (error) {
+        if (error.code === 11000) {
+            res.send(`<script>alert("이미 존재하는 아이디입니다."); history.go(-1);</script>`);
+        } else {
+            res.send(`<script>alert("회원가입에 문제가 발생했습니다. 관리자에게 문의하세요."); history.go(-1);</script>`);
+            console.log("*** DB 저장 문제: " + error);
+        }
+    }
+});
+
+/**
+ * @swagger
+ * paths:
+ *  /login:
+ *      post:
+ *          tags: [ 처리 ]
+ *          summary: "Login"
+ *          description: 로그인 세션 생성
+ *          parameters:
+ *          -   name: "inputId"
+ *              in: "formData"
+ *              description: 입력 아이디
+ *              required: true
+ *              type: "string"
+ *          -   name: "inputPassword"
+ *              in: "formData"
+ *              description: 입력 비밀번호
+ *              required: true
+ *              type: "password"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
+app.post("login", async(req, res) => {
+    const results = await Users.findOne({ user_id: req.body.inputId, is_withdrawn: false });
+
+    if (results != null) {
+        const computed_password = crypto.pbkdf2Sync(req.body.inputPassword, results["user_salt"], 190481, 64, "sha512").toString("base64");
+
+        if (computed_password == results['user_hashedPassword']) {
+            if (results["is_admin"]) {
+                req.session.admin = {
+                    id: results["_id"],
+                    name: req.body.inputId,
+                    authorized: true
+                };
+            } else {
+                // session save
+                req.session.user = {
+                    id: results["_id"],
+                    name: req.body.inputId,
+                    authorized: true
+                };
+            }
+            res.redirect("/");
+        }
+    } else {
+        res.send(`<script>alert("일치하는 회원 정보가 없습니다."); history.go(-1);</script>`);
+    }
+});
+
+/**
+ * @swagger
+ * paths:
+ *  /logout:
+ *      delete:
+ *          tags: [ 처리 ]
+ *          summary: "Logout"
+ *          description: 로그인 세션 파괴
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
+app.delete("logout", async(req, res) => {
+    req.session.destroy((error) => { res.redirect("/"); });
+});
+
+/**
+ * @swagger
+ * paths:
+ *  /report:
+ *      post:
+ *          tags: [ 처리 ]
+ *          summary: "Report a hospital in a databse"
+ *          description: 회원의 병원 신고를 접수함
+ *          parameters:
+ *          -   name: "writer_id"
+ *              in: "formData"
+ *              description: 신고하는 회원 아이디
+ *              required: true
+ *              type: "string"
+ *          -   name: "hospital_id"
+ *              in: "formData"
+ *              description: 신고하는 병원의 ObjectId
  *              required: true
  *              type: "string"
  *          responses:
@@ -227,78 +353,13 @@ app.get("/test", (req, res) => { res.render("test"); });
  *              "400":
  *                  description: Not Found
  */
-app.post("/process/:type", async(req, res) => {
-    const type = req.params.type;
+app.post("report", async(req, res) => {
+    let report = new Reports();
+    report.writer_id = req.body.writer_id;
+    report.hospital_id = req.body.hospital_id;
 
-    if (type == "signup") {
-        /* *************************
-                회원가입
-        ************************* */
-        try {
-            const salt = crypto.randomBytes(64).toString("base64");
-            const hashed_password = crypto.pbkdf2Sync(req.body.createPassword, salt, 190481, 64, "sha512").toString("base64");
-
-            let user = new Users();
-            user.user_id = req.body.createId;
-            user.user_salt = salt;
-            user.user_hashedPassword = hashed_password;
-            user.created_at = new Date();
-
-            user = await user.save();
-            res.redirect("/");
-        } catch (error) {
-            if (error.code === 11000) {
-                res.send(`<script>alert("이미 존재하는 아이디입니다."); history.go(-1);</script>`);
-            } else {
-                res.send(`<script>alert("회원가입에 문제가 발생했습니다. 관리자에게 문의하세요."); history.go(-1);</script>`);
-                console.log("*** DB 저장 문제: " + error);
-            }
-        }
-    } else if (type == "login") {
-        /* *************************
-                로그인
-        ************************* */
-        const results = await Users.findOne({ user_id: req.body.inputId, is_withdrawn: false });
-
-        if (results != null) {
-            const computed_password = crypto.pbkdf2Sync(req.body.inputPassword, results["user_salt"], 190481, 64, "sha512").toString("base64");
-
-            if (computed_password == results['user_hashedPassword']) {
-                if (results["is_admin"]) {
-                    req.session.admin = {
-                        id: results["_id"],
-                        name: req.body.inputId,
-                        authorized: true
-                    };
-                } else {
-                    // session save
-                    req.session.user = {
-                        id: results["_id"],
-                        name: req.body.inputId,
-                        authorized: true
-                    };
-                }
-                res.redirect("/");
-            }
-        } else {
-            res.send(`<script>alert("일치하는 회원 정보가 없습니다."); history.go(-1);</script>`);
-        }
-    } else if (type == "logout") {
-        /* *************************
-                로그아웃
-        ************************* */
-        req.session.destroy((error) => { res.redirect("/"); });
-    } else if (type == "report") {
-        /* *************************
-                회원의 병원신고 접수
-        ************************* */
-        let report = new Reports();
-        report.writer_id = req.body.writer_id;
-        report.hospital_id = req.body.hospital_id;
-
-        report = await report.save();
-        res.send(`<script>alert("신고가 접수되었습니다. 관리자 확인 후 신고횟수에 반영됩니다."); history.go(-1);</script>`);
-    }
+    report = await report.save();
+    res.send(`<script>alert("신고가 접수되었습니다. 관리자 확인 후 신고횟수에 반영됩니다."); history.go(-1);</script>`);
 });
 
 app.use("/admin", adminRouter);

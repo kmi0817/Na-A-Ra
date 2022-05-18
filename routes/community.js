@@ -410,6 +410,7 @@ router.post("/questions/comment", async (req, res) => {
  *  /community/{comment_id}:
  *      delete:
  *          tags: [ 커뮤니티 ]
+ *          summary: "Delete a comment in database"
  *          description: 특정 상담 게시글에 댓글 작성
  *          parameters:
  *          -   name: "comment_id"

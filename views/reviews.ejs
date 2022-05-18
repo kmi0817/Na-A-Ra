@@ -91,7 +91,7 @@
                         <%= review.description %>
                     </div>
                     <% if (locals.admin) { %>
-                    <form action="/reviews/delete/<%= review._id %>?_method=DELETE" method="POST" class="d-inline d-flex justify-content-end" onsubmit="if(!confirm('댓글을 삭제하시겠습니까?')) {return false; }">
+                    <form action="/reviews/<%= review._id %>?_method=DELETE" method="POST" class="d-inline d-flex justify-content-end" onsubmit="if(!confirm('댓글을 삭제하시겠습니까?')) {return false; }">
                         <input type="hidden" name="hospital_id" value="<%= hospital._id %>">
                         <button type="submit" class="btn btn-danger btn-sm">삭제</button>
                     </form>

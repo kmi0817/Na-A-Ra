@@ -12,9 +12,10 @@ mongoose.connect("mongodb://localhost/app", {
 /**
  * @swagger
  * paths:
- *  /reviews/{id}:
+ *  /reviews/{hospital_id}:
  *      get:
  *          tags: [ 병원 리뷰 ]
+ *          summary: "Get a review page"
  *          description: id에 해당하는 병원의 리뷰 페이지
  *          parameters:
  *          -   name: "id"
@@ -28,8 +29,8 @@ mongoose.connect("mongodb://localhost/app", {
  *              "400":
  *                  description: Not Found
  */
-router.get("/:id", async (req, res) => {
-    const reviews = await Reviews.find({ hospital_id: req.params.id, is_deleted: false }).populate({ path: "writer_id", select: { user_id: 1 } }).sort({ _id: -1 }); // sorting collection by date (created_at)
+router.get("/:hospital_id", async (req, res) => {
+    const reviews = await Reviews.find({ hospital_id: req.params.hospital_id, is_deleted: false }).populate({ path: "writer_id", select: { user_id: 1 } }).sort({ _id: -1 }); // sorting collection by date (created_at)
     const hospital = await Hospitals.findById(req.params.id);
 
     if (req.session.admin) {
@@ -47,6 +48,7 @@ router.get("/:id", async (req, res) => {
  *  /reviews/write:
  *      post:
  *          tags: [ 병원 리뷰 ]
+ *          summary: "Create a review in database"
  *          description: id에 해당하는 병원에 리뷰 작성
  *          parameters:
  *          -   name: "writer_id"
@@ -96,9 +98,10 @@ router.post("/write", async(req, res) => {
 /**
  * @swagger
  * paths:
- *  /reviews/delete/{id}:
+ *  /reviews/{review_id}:
  *      delete:
  *          tags: [ 병원 리뷰 ]
+ *          summary: "Delete a review in database"
  *          description: id에 해당하는 리뷰 삭제
  *          parameters:
  *          -   name: "id"
@@ -112,8 +115,8 @@ router.post("/write", async(req, res) => {
  *              "400":
  *                  description: Not Found
  */
-router.delete("/delete/:id", async(req, res) => {
-    if (req.session.admin) { await Reviews.findByIdAndUpdate(req.params.id, { is_deleted: true }); }
+router.delete("/:review_id", async(req, res) => {
+    if (req.session.admin) { await Reviews.findByIdAndUpdate(req.params.review_id, { is_deleted: true }); }
     res.redirect(`/reviews/${req.body.hospital_id}`);
 });
 

@@ -3,7 +3,9 @@
 ### 1. Intro
  #### 사용자가 입력한 주소 인근 병원들의 자세한 정보 및 다른 사람의 평가를 고려해 본인에게 적합한 병원을 선택할 수 있는 서비스.
  
- 본 프로젝트는 공공데이터포털의 [건강보험심사평가원_병원정보서비스](data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15001698)에서 제공하는 openAPI를 기반으로 제작.
+ 공공데이터포털의 [건강보험심사평가원_병원정보서비스](data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15001698)에서 제공하는 openAPI를 기반으로 제작되었으며, 
+ 
+ [나아라](https://github.com/kmi0817/NaARa)의 Front-end를 ***React.js***로 변경한 프로젝트입니다.
 
 Field | Tools
 --- | ---

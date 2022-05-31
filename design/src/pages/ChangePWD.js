@@ -21,7 +21,7 @@ const Post = (props) => {
     const new_password_check = e.target[3].value
     
   if ( window.confirm("새 비밀번호로 변경됩니다. \n변경하시겠습니까?") && e.target[0].value != '' && e.target[1].value != '') {
-      axios.post("/process/change-password", {
+      axios.patch("/mypage/change-password", {
         input_id: input_id,
         old_password: old_password,
         new_password: new_password,

@@ -13,7 +13,7 @@ const Reviews_data = (props) => {
   }, []);
 
   const LoadData = async() => {
-    axios.get('/admin/member/' + props_id, {
+    axios.get('/admin/users/' + props_id, {
     })
     .then(function (response) {
       console.log("신고 데이터: " + JSON.stringify(response.data.reports_results[0]))

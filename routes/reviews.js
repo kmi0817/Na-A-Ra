@@ -9,6 +9,27 @@ mongoose.connect("mongodb://localhost/app", {
     useUnifiedTopology: true
 });
 
+
+/**
+ * @swagger
+ * paths:
+ *  /reviews/{hospital_id}:
+ *      get:
+ *          tags: [ 병원 리뷰 ]
+ *          summary: "Get a review page"
+ *          description: id에 해당하는 병원의 리뷰 페이지
+ *          parameters:
+ *          -   name: "id"
+ *              in: "path"
+ *              description: 병원의 ObjectId
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.get("/:id", async (req, res) => {
     //const comments = await Comments.find({ hospital_id: req.params.id, is_deleted: false }).sort({ _id: -1 });
     const reviews = await Reviews.find({ hospital_id: req.params.id, is_deleted: false }).populate({ path: "writer_id", select: { user_id: 1 } }).sort({ _id: -1 });
@@ -22,6 +43,36 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /reviews/write:
+ *      post:
+ *          tags: [ 병원 리뷰 ]
+ *          summary: "Create a review in database"
+ *          description: id에 해당하는 병원에 리뷰 작성
+ *          parameters:
+ *          -   name: "writer_id"
+ *              in: "formData"
+ *              description: 로그인한 회원의 ObjectId
+ *              required: true
+ *              type: "string"
+ *          -   name: "hospital_id"
+ *              in: "formData"
+ *              description: 리뷰를 작성할 병원의 ObjectId
+ *              required: true
+ *              type: "string"
+ *          -   name: "description"
+ *              in: "formData"
+ *              description: 리뷰 내용
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.post("/write", async(req, res) => {
     var writer_id = String(req.body.writer_id);
     const hospital_id = String(req.body.hospital_id);
@@ -51,7 +102,27 @@ router.post("/write", async(req, res) => {
     }
 });
 
-router.delete("/delete/:id", async(req, res) => {
+/**
+ * @swagger
+ * paths:
+ *  /reviews/{review_id}:
+ *      delete:
+ *          tags: [ 병원 리뷰 ]
+ *          summary: "Delete a review in database"
+ *          description: id에 해당하는 리뷰 삭제
+ *          parameters:
+ *          -   name: "id"
+ *              in: "path"
+ *              description: 관리자의 작성한 리뷰 삭제
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
+router.delete("/:id", async(req, res) => {
     if (req.session.admin) { await Comments.findByIdAndUpdate(req.params.id, { is_deleted: true }); }
     res.redirect(`/reviews/${req.body.hospital_id}`);
 });

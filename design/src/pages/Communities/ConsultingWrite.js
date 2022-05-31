@@ -17,7 +17,7 @@ const Post = (props) => {
       })
       .then(function (response) {
         if( response.data.user_id_id !== "") {
-          axios.post("/community/clinics-post", {
+          axios.post("/community/clinics-write", {
             writer: response.data.user_id_id,
             inputTitle: inputTitle,
             inputDescription: inputDescription,

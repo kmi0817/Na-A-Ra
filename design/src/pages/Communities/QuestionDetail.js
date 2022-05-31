@@ -17,7 +17,7 @@ const Question = () => {
   const [admin_id, setAdminId] = useState(null);
   const [comments, setcomments] = useState();
   const [commentsLength, setLength] = useState(0);
-  const path = "/community/questions/comment-post";
+  const path = "/community/questions/comment";
   const data_path = "/community/questions/" + data_id;
 
   useEffect(async () => {
@@ -87,7 +87,7 @@ const Question = () => {
 
   const DeleteComments = (value, e) => {
     if ( window.confirm("댓글을 삭제하시겠습니까?")) {
-      axios.delete("/community/delete/" + value, {
+      axios.delete("/community/" + value, {
       })
       .then(function (response) {
         if (response.data.text == "성공") {

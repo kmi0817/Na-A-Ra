@@ -19,7 +19,7 @@ const ReportsSubmit = (e) => {
       console.log("아이디: " + input_user_id)
       console.log("병원: " + input_hospital_id)
 
-      axios.post("/process/report", {
+      axios.post("/report", {
         writer_id: input_user_id,
         hospital_id: input_hospital_id,
       })

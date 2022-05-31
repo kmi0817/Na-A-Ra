@@ -62,7 +62,7 @@ const Header = () => {
     }
 
     const logout = (e) => {
-      axios.post("/process/logout", {
+      axios.post("/logout", {
       })
       .then(function (response) {
         alert(response.data.text + "되었습니다.");

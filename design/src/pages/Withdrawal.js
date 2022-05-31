@@ -17,7 +17,7 @@ const Post = (props) => {
     const withdrawal_password = e.target[1].value;
     
   if ( window.confirm("탈퇴하시면 동일한 아이디로 재가입이 불가능합니다. \n탈퇴하시겠습니까?") && e.target[0].value != '' && e.target[1].value != '') {
-      axios.post("/mypage/withdrawal", {
+      axios.delete("/mypage/withdrawal", {
         withdrawal_id: withdrawal_id,
         withdrawal_password: withdrawal_password,
       })

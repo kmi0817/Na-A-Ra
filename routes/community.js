@@ -12,6 +12,20 @@ mongoose.connect("mongodb://localhost/app", {
 });
 
 // 상담게시글 board 페이지
+/**
+ * @swagger
+ * paths:
+ *  /community/clinics:
+ *      get:
+ *          tags: [ 커뮤니티 ]
+ *          summary: "Get a clinics board page"
+ *          description: 상담 게시판
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.get("/clinics", async (req, res) => {
     const page = Number(req.query.page || 1); // default page is 1, query는 String이므로 Number로 형변환 필요
     const perPage = 5;
@@ -35,6 +49,26 @@ router.get("/clinics", async (req, res) => {
 });
 
 // 특정 상담게시글 페이지
+/**
+ * @swagger
+ * paths:
+ *  /community/clinics/{posting_id}:
+ *      get:
+ *          tags: [ 커뮤니티 ]
+ *          summary: "Get a specific clinics posting page"
+ *          description: 특정 상담 게시글
+ *          parameters:
+ *          -   name: "id"
+ *              in: "path"
+ *              description: 가져올 특정 게시글의 ObjectId
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.get("/clinics/:id", async (req, res) => {
     if (true) {
         try {
@@ -55,6 +89,21 @@ router.get("/clinics/:id", async (req, res) => {
 });
 
 // 상담게시글 작성 페이지
+// 상담게시글 작성 페이지
+/**
+ * @swagger
+ * paths:
+ *  /community/clinics-write:
+ *      get:
+ *          tags: [ 커뮤니티 ]
+ *          summary: "Get a wrtie page"
+ *          description: 상담 게시글 작성 페이지
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.get("/clinics-write", async (req, res) => {
     if (req.session.user) {
         res.send({ category: "clinics", user: req.session.user['id'] });
@@ -64,7 +113,37 @@ router.get("/clinics-write", async (req, res) => {
 });
 
 // 상담게시글 등록 처리
-router.post("/clinics-post", async (req, res) => {
+/**
+ * @swagger
+ * paths:
+ *  /community/clinics-write:
+ *      post:
+ *          tags: [ 커뮤니티 ]
+ *          summary: "Create a new clinics posting in database"
+ *          description: 상담 게시글 작성
+ *          parameters:
+ *          -   name: "writer"
+ *              in: "formData"
+ *              description: 게시글 작성자의 ObejctId
+ *              required: true
+ *              type: "string"
+ *          -   name: "inputTitle"
+ *              in: "formData"
+ *              description: 게시글 제목
+ *              required: true
+ *              type: "string"
+ *          -   name: "description"
+ *              in: "formData"
+ *              description: 게시글 내용
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
+router.post("/clinics-write", async (req, res) => {
     if (req.session.user) {
         try {
             let posting = new Communities();
@@ -86,7 +165,37 @@ router.post("/clinics-post", async (req, res) => {
 });
 
 // 상담게시글 댓글 등록 처리
-router.post("/clinics/comment-post", async(req, res) => {
+/**
+ * @swagger
+ * paths:
+ *  /community/clinics/comment:
+ *      post:
+ *          tags: [ 커뮤니티 ]
+ *          summary: "Create a new comment in database"
+ *          description: 특정 상담 게시글에 댓글 작성
+ *          parameters:
+ *          -   name: "writer"
+ *              in: "formData"
+ *              description: 게시글 작성자의 ObejctId
+ *              required: true
+ *              type: "string"
+ *          -   name: "posting_id"
+ *              in: "formData"
+ *              description: 게시글 제목의 ObejctId
+ *              required: true
+ *              type: "string"
+ *          -   name: "description"
+ *              in: "formData"
+ *              description: 게시글 내용
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
+router.post("/clinics/comment", async(req, res) => {
     if (req.session.user) {
         try {
             let comment = new Comments();
@@ -107,6 +216,20 @@ router.post("/clinics/comment-post", async(req, res) => {
 });
 
 // 질문게시글 board 페이지
+/**
+ * @swagger
+ * paths:
+ *  /community/questions:
+ *      get:
+ *          tags: [ 커뮤니티 ]
+ *          summary: "Get a questions board page"
+ *          description: 질문 게시판
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.get("/questions", async (req, res) => {
     const page = Number(req.query.page || 1); // default page is 1, query는 String이므로 Number로 형변환 필요
     const perPage = 5;
@@ -131,6 +254,26 @@ router.get("/questions", async (req, res) => {
 });
 
 // 특정 질문게시글 페이지
+/**
+ * @swagger
+ * paths:
+ *  /community/questions/{posting_id}:
+ *      get:
+ *          tags: [ 커뮤니티 ]
+ *          description: 특정 질문 게시글
+ *          summary: "Get a specific questions posting page"
+ *          parameters:
+ *          -   name: "id"
+ *              in: "path"
+ *              description: 가져올 특정 게시글의 ObjectId
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.get("/questions/:id", async (req, res) => {
     try {
         const posting = await Communities.findById(req.params.id);
@@ -147,12 +290,56 @@ router.get("/questions/:id", async (req, res) => {
 });
 
 // 질문게시글 작성 페이지
+/**
+ * @swagger
+ * paths:
+ *  /community/questions-write:
+ *      get:
+ *          tags: [ 커뮤니티 ]
+ *          summary: "Get a wrtie page"
+ *          description: 질문 게시글 작성 페이지
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 router.get("/questions-write", async (req, res) => {
     res.send({ category: "questions", user: req.session.user['id'] });
 });
 
 // 질문게시글 등록 처리
-router.post("/questions-post", async (req, res) => {
+/**
+ * @swagger
+ * paths:
+ *  /community/questions-write:
+ *      post:
+ *          tags: [ 커뮤니티 ]
+ *          summary: "Create a new questions posting in database"
+ *          description: 상담 게시글 작성
+ *          parameters:
+ *          -   name: "writer"
+ *              in: "formData"
+ *              description: 게시글 작성자의 ObejctId
+ *              required: true
+ *              type: "string"
+ *          -   name: "inputTitle"
+ *              in: "formData"
+ *              description: 게시글 제목
+ *              required: true
+ *              type: "string"
+ *          -   name: "description"
+ *              in: "formData"
+ *              description: 게시글 내용
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
+router.post("/questions-write", async (req, res) => {
     try {
         let posting = new Communities();
         posting.writer = req.body.writer;
@@ -170,7 +357,37 @@ router.post("/questions-post", async (req, res) => {
 });
 
 // 질문게시글 댓글 등록 처리
-router.post("/questions/comment-post", async (req, res) => {
+/**
+ * @swagger
+ * paths:
+ *  /community/questions/comment:
+ *      post:
+ *          tags: [ 커뮤니티 ]
+ *          summary: "Create a new comment in database"
+ *          description: 특정 상담 게시글에 댓글 작성
+ *          parameters:
+ *          -   name: "writer"
+ *              in: "formData"
+ *              description: 게시글 작성자의 ObejctId
+ *              required: true
+ *              type: "string"
+ *          -   name: "posting_id"
+ *              in: "formData"
+ *              description: 게시글 제목의 ObejctId
+ *              required: true
+ *              type: "string"
+ *          -   name: "description"
+ *              in: "formData"
+ *              description: 게시글 내용
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
+router.post("/questions/comment", async (req, res) => {
     try {
         let comment = new Comments();
         comment.writer = req.body.writer;
@@ -186,7 +403,28 @@ router.post("/questions/comment-post", async (req, res) => {
     }
 });
 
-router.delete("/delete/:id", async (req, res) => {
+// 댓글 삭제 (질문게시판과 상담게시판 통합)
+/**
+ * @swagger
+ * paths:
+ *  /community/{comment_id}:
+ *      delete:
+ *          tags: [ 커뮤니티 ]
+ *          summary: "Delete a comment in database"
+ *          description: 특정 상담 게시글에 댓글 작성
+ *          parameters:
+ *          -   name: "comment_id"
+ *              in: "path"
+ *              description: 삭제할 댓글의 ObejctId
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
+router.delete("/:id", async (req, res) => {
     if (req.session.user || req.session.admin) {
         try {
             await Comments.findByIdAndUpdate(req.params.id, { is_deleted: true });

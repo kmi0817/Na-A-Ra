@@ -43,6 +43,20 @@ app.use("/mypage", mypageRouter);
 
 
 // routes
+/**
+ * @swagger
+ * paths:
+ *  /newapi:
+ *      get:
+ *          tags: [ 검색 ]
+ *          summary: "Get main page"
+ *          description: 주소명 검색 페이지
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 app.get("/newapi", async (req, res) => {
     const inputAddr = req.query.inputAddr;
     const inputType = req.query.inputType;
@@ -152,6 +166,20 @@ app.get("/newapi", async (req, res) => {
 });
 
 //병원명 검색
+/**
+ * @swagger
+ * paths:
+ *  /name-search:
+ *      get:
+ *          tags: [ 검색 ]
+ *          summary: "Get main page"
+ *          description: 병원명 검색 페이지
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
 app.get("/name-search", async(req, res) => {
         // 입력된 병원 이름 가져오기
         const hospital_name = req.query.hospital_name;
@@ -233,7 +261,7 @@ app.post("/process/:type", async(req, res) => {
             res.send({results: "", text: "일치하는 회원 정보가 없습니다."});
         }
     } else if (type == "logout") {
-        req.session.destroy((error) => { res.send({text: "로그아웃"}); });//
+        req.session.destroy((error) => { res.send({text: "로그아웃"}); });
     } else if (type == "change-password") {
         const user = await Users.findOne({ user_id: req.body.input_id });
         if (user != null) {
@@ -259,6 +287,162 @@ app.post("/process/:type", async(req, res) => {
         res.send({text: "신고가 접수되었습니다. 관리자 확인 후 신고횟수에 반영됩니다."});
     }
 });
+
+
+/**
+ * @swagger
+ * paths:
+ *  /signup:
+ *      post:
+ *          tags: [ 처리 ]
+ *          summary: "Create a user in database"
+ *          description: 회원가입 처리
+ *          parameters:
+ *          -   name: "createId"
+ *              in: "formData"
+ *              description: 입력 아이디
+ *              required: true
+ *              type: "string"
+ *          -   name: "createPassword"
+ *              in: "formData"
+ *              description: 입력 비밀번호
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
+ app.post("/signup", async(req, res) => {
+    try {
+        const salt = crypto.randomBytes(64).toString("base64");
+        const hashed_password = crypto.pbkdf2Sync(req.body.createPassword, salt, 190481, 64, "sha512").toString("base64");
+
+        let user = new Users();
+        user.user_id = req.body.createId;
+        user.user_salt = salt;
+        user.user_hashedPassword = hashed_password;
+        user.created_at = new Date();
+
+        user = await user.save();
+        res.send({text: "success"});
+    } catch (error) {
+        if (error.code === 11000) {
+            res.send({text: "exist"});
+        } else {
+            res.send({text: "error"});
+            console.log("*** DB 저장 문제: " + error);
+        }
+    }
+});
+
+/**
+ * @swagger
+ * paths:
+ *  /login:
+ *      post:
+ *          tags: [ 처리 ]
+ *          summary: "Login"
+ *          description: 로그인 세션 생성
+ *          parameters:
+ *          -   name: "inputId"
+ *              in: "formData"
+ *              description: 입력 아이디
+ *              required: true
+ *              type: "string"
+ *          -   name: "inputPassword"
+ *              in: "formData"
+ *              description: 입력 비밀번호
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
+ app.post("/login", async(req, res) => {
+    const results = await Users.findOne({ user_id: req.body.inputId, is_withdrawn: false });
+
+    if (results != null) {
+        const computed_password = crypto.pbkdf2Sync(req.body.inputPassword, results["user_salt"], 190481, 64, "sha512").toString("base64");
+
+        if (computed_password == results['user_hashedPassword']) {
+            if (results["is_admin"]) {
+                req.session.admin = {
+                    id: results["_id"],
+                    name: req.body.inputId,
+                    authorized: true
+                };
+            } else {
+                // session save
+                req.session.user = {
+                    id: results["_id"],
+                    name: req.body.inputId,
+                    authorized: true
+                };
+            }
+            res.send({text: "로그인 성공"});
+        }
+    } else {
+        res.send({results: "", text: "일치하는 회원 정보가 없습니다."});
+    }
+});
+
+/**
+ * @swagger
+ * paths:
+ *  /logout:
+ *      delete:
+ *          tags: [ 처리 ]
+ *          summary: "Logout"
+ *          description: 로그인 세션 파괴
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
+app.delete("/logout", async(req, res) => {
+    req.session.destroy((error) => { res.send({text: "로그아웃"}); });
+});
+
+/**
+ * @swagger
+ * paths:
+ *  /report:
+ *      post:
+ *          tags: [ 처리 ]
+ *          summary: "Report a hospital in a databse"
+ *          description: 회원의 병원 신고를 접수함
+ *          parameters:
+ *          -   name: "writer_id"
+ *              in: "formData"
+ *              description: 신고하는 회원 아이디
+ *              required: true
+ *              type: "string"
+ *          -   name: "hospital_id"
+ *              in: "formData"
+ *              description: 신고하는 병원의 ObjectId
+ *              required: true
+ *              type: "string"
+ *          responses:
+ *              "200":
+ *                  description: A successful response
+ *              "400":
+ *                  description: Not Found
+ */
+app.post("/report", async(req, res) => {
+    let report = new Reports();
+    report.writer_id = req.body.writer_id;
+    report.hospital_id = req.body.hospital_id;
+
+    report = await report.save();
+    res.send({text: "신고가 접수되었습니다. 관리자 확인 후 신고횟수에 반영됩니다."});
+});
+
+
 
 app.get("/openapi", (req, res) => {
     // OpenAPI

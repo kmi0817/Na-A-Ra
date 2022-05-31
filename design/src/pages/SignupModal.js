@@ -17,7 +17,7 @@ const Post = (props) => {
     console.log(createPassword)
     
     if (e.target[0].value !== '') {
-      axios.post("/process/signup", {
+      axios.post("/signup", {
         createId: createId,
         createPassword: createPassword,
       })

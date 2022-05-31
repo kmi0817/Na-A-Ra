@@ -26,7 +26,7 @@ const Post = (props) => {
     const inputPassword = e.target[1].value;
     
     if (e.target[0].value != '') {
-      axios.post("/process/login", {
+      axios.post("/login", {
         inputId: inputId,
         inputPassword: inputPassword,
       })

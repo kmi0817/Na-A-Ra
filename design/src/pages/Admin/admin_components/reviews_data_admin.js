@@ -14,7 +14,7 @@ const Reviews_data = (props) => {
   }, []);
 
   const LoadData = async() => {
-    axios.get('/admin/member/' + props_id, {
+    axios.get('/admin/users/' + props_id, {
     })
     .then(function (response) {
       setuserReviews(response.data.reviews_results)

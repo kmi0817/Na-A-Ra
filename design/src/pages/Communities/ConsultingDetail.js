@@ -17,7 +17,7 @@ const Clinics = () => {
   const [admin_id, setAdminId] = useState(null);
   const [comments, setcomments] = useState();
   const [commentsLength, setLength] = useState(0);
-  const path = "/community/clinics/comment-post";
+  const path = "/community/clinics/comment";
   const data_path = "/community/clinics/" + data_id;
   
   useEffect(() => {
@@ -98,7 +98,7 @@ const Clinics = () => {
 
   const DeleteComments = (value, e) => {
     if ( window.confirm("댓글을 삭제하시겠습니까?")) {
-      axios.delete("/community/delete/" + value, {
+      axios.delete("/delete/" + value, {
       })
       .then(function (response) {
         if (response.data.text == "성공") {

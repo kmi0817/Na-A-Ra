@@ -43,6 +43,10 @@ npm install swagger-jsdoc swagger-ui-express --save-dev
 
 > ##### node_modules (directory)
 >
+> ##### swagger (directory)
+> 
+> > swagger.js
+>
 > ##### models (directory)
 >
 > > comments.js

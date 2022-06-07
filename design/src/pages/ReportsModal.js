@@ -13,7 +13,7 @@ const ReportsSubmit = (e) => {
   axios.get('/checkUser', {
   })
   .then(function (response) {
-    if( response.data.user_id_id !== null) {
+    if( response.data.user_id_id !== "") {
       const input_user_id = data2;
       const input_hospital_id = data;
       console.log("아이디: " + input_user_id)
@@ -28,7 +28,7 @@ const ReportsSubmit = (e) => {
         setModalOpen(false);
       })
       .catch(function (error) {
-        alert("신고 실패");
+        alert("처리에 문제가 발생했습니다. 관리자에게 문의해주세요.");
       })
     }
     else {

@@ -14,14 +14,27 @@ const Reviews_data = () => {
     axios.get('/admin/', {
     })
     .then(function (response) {
-      //writer_id, hospital_id, _id, created_at
       setReportsData(response.data.reports)
       setReportsLength(response.data.reports.length)
-      console.log(JSON.stringify(response.data.reports[0]))
+      console.log(JSON.stringify(response.data.reports))
 
     })
     .catch(function (error) {
       console.log(error)
+    })
+  }
+
+  const AcceptReport = (report_id, hospital_id, e) => {
+    axios.post('/admin/confirm-report', {
+      report_id: report_id,
+      hospital_id: hospital_id,
+    })
+    .then(function (response) {
+      alert(response.data.text)
+      LoadData();
+    })
+    .catch(function (error) {
+      alert("승인 실패" + error)
     })
   }
 
@@ -44,7 +57,7 @@ const Reviews_data = () => {
                         <td key={index} className="adminReport_td0">{index+1}</td>
                         <td key={index} className="adminReport_td1">{data.hospital_id[0].name}</td>
                         <td key={index} className="adminReport_td3">{data.created_at}</td>
-                        <td key={index} className="adminReport_td2"><button key={index} className="REBTN">거절</button><button className="ACBTN">승인</button></td>
+                        <td key={index} className="adminReport_td2"><button key={index} className="REBTN">거절</button><button className="ACBTN" onClick={e => AcceptReport(data._id, data.hospital_id[0]._id, e)}>승인</button></td>
                       </tr>
                     ))
                   }

@@ -17,6 +17,7 @@
     "ejs": "^3.1.6",
     "express": "^4.17.2",
     "express-session": "^1.17.2",
+    "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
     "http-proxy-middleware": "^2.0.1",
     "jsdom": "^19.0.0",
@@ -24,11 +25,15 @@
     "method-override": "^3.0.0",
     "mongoose": "^6.1.7",
     "password": "^0.1.1",
+    "path": "^0.12.7",
+    "querystring": "^0.2.1",
     "react-native": "^0.67.1",
     "react-router-dom": "^6.2.1",
     "request": "^2.88.2",
     "request-promise-native": "^1.0.9",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "stream": "^0.0.2",
+    "zlib": "^1.0.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.15",

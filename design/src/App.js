@@ -14,8 +14,6 @@ import MainPage from './pages/MainPage';
 import Notfound from './pages/Notfound';
 import Search from "./pages/Search";
 import HospitalDetail from "./pages/HospitalDetail";
-import Signin from "./pages/Signin";
-import Signup from "./pages/Signup";
 import Intro from './pages/Intro';
 import Mypage from './pages/Mypage';
 import Admin from './pages/Admin/Adminpage';
@@ -38,8 +36,6 @@ class App extends Component {
           <Route path="/search" element={<Search />} />
           <Route path="/detail" element={<HospitalDetail />} />
           <Route path="/:id" element={<HospitalDetail />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/signin" element={<Signin />} />
           <Route path="/intro" element={<Intro />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/admin" element={<Admin />} />

@@ -71,8 +71,9 @@ const HospitalDetail = () => {
             description: description,
           })
           .then(function (response) {
-            alert(response.data.text);
+            alert("리뷰가 작성되었습니다.");
             console.log(response.data.comments)
+            setText('')
             GetData();
           })
           .catch(function (error) {

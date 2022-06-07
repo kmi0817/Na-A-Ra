@@ -60,9 +60,9 @@ const Header = () => {
       .catch(function (error) {
       })
     }
-
+//
     const logout = (e) => {
-      axios.post("/logout", {
+      axios.delete("/logout", {
       })
       .then(function (response) {
         alert(response.data.text + "되었습니다.");

@@ -40,7 +40,8 @@ app.use("/reviews", reviewsRouter);
 app.use("/community", communityRouter);
 app.use("/mypage", mypageRouter);
 
-
+const { swaggerUi, specs } = require("./swagger/swagger");
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 // routes
 /**

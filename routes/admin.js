@@ -99,11 +99,13 @@ router.get("/users/:id", async(req, res) => {
  *                  description: Not Found
  */
 router.post("/confirm-report", async(req, res) => {
+    report_id = String(req.body.report_id);
+    hospital_id = String(req.body.hospital_id);
     if (req.session.admin) {
-        await Reports.findByIdAndUpdate(req.body.report_id, { is_confirmed: true });
-        const hospital = await Hospitals.findById(req.body.hospital_id, { reports_cnt: 1 });
-        await Hospitals.findByIdAndUpdate(req.body.hospital_id, { reports_cnt: hospital["reports_cnt"] + 1 });
-        res.redirect("/admin");
+        await Reports.findByIdAndUpdate(report_id, { is_confirmed: true });
+        const hospital = await Hospitals.findById(hospital_id, { reports_cnt: 1 });
+        await Hospitals.findByIdAndUpdate(hospital_id, { reports_cnt: hospital["reports_cnt"] + 1 });
+        res.send({text: "승인되었습니다."});
     } else {
         res.status(404).send("not found");
     }

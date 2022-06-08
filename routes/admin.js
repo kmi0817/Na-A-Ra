@@ -10,7 +10,7 @@ const Reports = require("../models/reports");
 const Communities = require("../models/communities");
 const Comments = require("../models/comments");
 
-mongoose.connect("mongodb://localhost/app", {
+mongoose.connect("mongodb://localhost/naara", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

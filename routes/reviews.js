@@ -4,7 +4,7 @@ const Reviews = require("../models/reviews");
 const Hospitals = require("../models/hospitals");
 const router = express.Router();
 
-mongoose.connect("mongodb://localhost/app", {
+mongoose.connect("mongodb://localhost/naara", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

@@ -13,11 +13,11 @@ const Post = (props) => {
     const inputDescription = e.target[1].value;
 
     if (e.target[0].value != '') {
-      axios.get('/checkUser', {
+      axios.get('http://220.149.235.76:3001/checkUser', {
       })
       .then(function (response) {
         if( response.data.user_id_id !== "") {
-          axios.post("/community/questions-write", {
+          axios.post("http://220.149.235.76:3001/community/questions-write", {
             writer: response.data.user_id_id,
             inputTitle: inputTitle,
             inputDescription: inputDescription,

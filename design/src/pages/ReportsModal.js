@@ -10,7 +10,7 @@ const Post = (props) => {
 
 
 const ReportsSubmit = (e) => {
-  axios.get('/checkUser', {
+  axios.get('http://220.149.235.76:3001/checkUser', {
   })
   .then(function (response) {
     if( response.data.user_id_id !== "") {
@@ -19,7 +19,7 @@ const ReportsSubmit = (e) => {
       console.log("아이디: " + input_user_id)
       console.log("병원: " + input_hospital_id)
 
-      axios.post("/report", {
+      axios.post("http://220.149.235.76:3001/report", {
         writer_id: input_user_id,
         hospital_id: input_hospital_id,
       })

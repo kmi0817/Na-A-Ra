@@ -11,7 +11,7 @@ const Reviews_data = () => {
   }, []);
 
   const LoadData = async() => {
-    axios.get('/admin/', {
+    axios.get('http://220.149.235.76:3001/admin/', {
     })
     .then(function (response) {
       setReportsData(response.data.reports)
@@ -25,7 +25,7 @@ const Reviews_data = () => {
   }
 
   const AcceptReport = (report_id, hospital_id, e) => {
-    axios.post('/admin/confirm-report', {
+    axios.post('http://220.149.235.76:3001/admin/confirm-report', {
       report_id: report_id,
       hospital_id: hospital_id,
     })

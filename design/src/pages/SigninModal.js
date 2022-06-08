@@ -26,7 +26,7 @@ const Post = (props) => {
     const inputPassword = e.target[1].value;
     
     if (e.target[0].value != '') {
-      axios.post("/login", {
+      axios.post("http://220.149.235.76:3001/login", {
         inputId: inputId,
         inputPassword: inputPassword,
       })

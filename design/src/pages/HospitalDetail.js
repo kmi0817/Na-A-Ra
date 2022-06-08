@@ -14,7 +14,7 @@ const HospitalDetail = () => {
   const location = useLocation();
   console.log(location.state)
   const data = location.state.data;
-  const path = "/reviews/" + data._id;
+  const path = "http://220.149.235.76:3001/reviews/" + data._id;
 
   useEffect(() => {
     CheckUser();
@@ -41,7 +41,7 @@ const HospitalDetail = () => {
   }
 
   const CheckUser = async (e) => {
-    axios.get('/checkUser', {
+    axios.get('http://220.149.235.76:3001/checkUser', {
     })
     .then(function (response) {
       if( response.data.user_id_id !== null) {
@@ -54,7 +54,7 @@ const HospitalDetail = () => {
     e.preventDefault(); //redirect 방지
     console.log("0번: " + e.target[0].value); //내용
     console.log("2번: " + e.target[2].value); //병원
-    axios.get('/checkUser', {
+    axios.get('http://220.149.235.76:3001/checkUser', {
     })
     .then(function (response) {
       if( response.data.user_id_id !== '') {
@@ -65,7 +65,7 @@ const HospitalDetail = () => {
         const hospital_id = e.target[2].value;
     
         if (e.target[0].value != '') {
-          axios.post("/reviews/write", {
+          axios.post("http://220.149.235.76:3001/reviews/write", {
             writer_id: writer_id,
             hospital_id: hospital_id,
             description: description,

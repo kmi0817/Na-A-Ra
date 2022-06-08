@@ -17,8 +17,8 @@ const Question = () => {
   const [admin_id, setAdminId] = useState(null);
   const [comments, setcomments] = useState();
   const [commentsLength, setLength] = useState(0);
-  const path = "/community/questions/comment";
-  const data_path = "/community/questions/" + data_id;
+  const path = "http://220.149.235.76:3001/community/questions/comment";
+  const data_path = "http://220.149.235.76:3001/community/questions/" + data_id;
 
   useEffect(async () => {
     setDataId(location.state.id);
@@ -47,7 +47,7 @@ const Question = () => {
     const posting_id = location.state.id;
 
     if (e.target[0].value != '') {
-      axios.get('/checkUser', {
+      axios.get('http://220.149.235.76:3001/checkUser', {
       })
       .then(function (response) {
         if( response.data.user_id_id != "") {
@@ -87,7 +87,7 @@ const Question = () => {
 
   const DeleteComments = (value, e) => {
     if ( window.confirm("댓글을 삭제하시겠습니까?")) {
-      axios.delete("/community/" + value, {
+      axios.delete("http://220.149.235.76:3001/community/" + value, {
       })
       .then(function (response) {
         if (response.data.text == "성공") {

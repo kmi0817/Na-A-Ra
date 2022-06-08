@@ -26,7 +26,7 @@ const Question = () => {
   }, [page]);
 
   const GetData = async (e) => {
-    axios.get("/community/clinics", {params: {page: page}})
+    axios.get("http://220.149.235.76:3001/community/clinics", {params: {page: page}})
     .then(function (response) {
       setBool(true)
       setData(response.data.postings);
@@ -43,7 +43,7 @@ const Question = () => {
     }
 
     const writeCheck = (e) => {
-      axios.get('/checkUser', {
+      axios.get('http://220.149.235.76:3001/checkUser', {
       })
       .then(function (response) {
         if( response.data.user_id_id !== null) {

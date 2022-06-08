@@ -11,7 +11,7 @@ const Reviews_data = () => {
   }, []);
 
   const LoadData = async() => {
-    axios.get('/admin/', {
+    axios.get('http://220.149.235.76:3001/admin/', {
     })
     .then(function (response) {
       console.log(JSON.stringify(response.data.hospitals))

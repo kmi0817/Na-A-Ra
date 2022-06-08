@@ -17,7 +17,7 @@ const Post = (props) => {
     console.log(createPassword)
     
     if (e.target[0].value !== '') {
-      axios.post("/signup", {
+      axios.post("http://220.149.235.76:3001/signup", {
         createId: createId,
         createPassword: createPassword,
       })

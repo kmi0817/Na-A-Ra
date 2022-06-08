@@ -30,7 +30,7 @@ const Comments_privacy = () => {
   }, []);
 
   const LoadData = async() => {
-    axios.get('/mypage/', {
+    axios.get('http://220.149.235.76:3001/mypage/', {
     })
     .then(function (response) {
       sethomeData(response.data.home_results)

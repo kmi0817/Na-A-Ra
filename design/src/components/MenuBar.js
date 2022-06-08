@@ -40,7 +40,7 @@ const Header = () => {
     }, []);
 
     const checkUser = async () => {
-      axios.get('/checkUser', {
+      axios.get('http://220.149.235.76:3001/checkUser', {
       })
       .then(function (response) {
         if( response.data.user_id_id != "" && response.data.admin_id_id == "") { //일반 사용자면
@@ -62,7 +62,7 @@ const Header = () => {
     }
 //
     const logout = (e) => {
-      axios.delete("/logout", {
+      axios.delete("http://220.149.235.76:3001/logout", {
       })
       .then(function (response) {
         alert(response.data.text + "되었습니다.");

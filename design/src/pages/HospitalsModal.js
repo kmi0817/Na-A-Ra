@@ -20,7 +20,7 @@ const Post = (props) => {
   }
 
     const openModal = (value, e) => {
-      axios.get('/checkUser', {
+      axios.get('http://220.149.235.76:3001/checkUser', {
       })
       .then(function (response) {
         if( response.data.user_id_id !== undefined || response.data.user_id_id !== null) {

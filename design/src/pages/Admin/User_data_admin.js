@@ -14,7 +14,7 @@ const Reviews_data = () => {
   }, []);
 
   const LoadData = async() => {
-    axios.get('/admin/', {
+    axios.get('http://220.149.235.76:3001/admin/', {
     })
     .then(function (response) {
       console.log("user_results: " + response.data.users[0]._id)

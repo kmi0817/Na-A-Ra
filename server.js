@@ -9,7 +9,7 @@ const crypto = require("crypto");
 const expressSession = require("express-session");
 const ObjectId = require('mongodb').ObjectId;
 const request = require("request-promise-native");
-
+const cors = require('cors');
 
 //model
 const Users = require("./models/users");
@@ -43,6 +43,7 @@ app.use("/mypage", mypageRouter);
 const { swaggerUi, specs } = require("./swagger/swagger");
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
+app.use(cors());
 // routes
 /**
  * @swagger
@@ -482,7 +483,7 @@ app.get("/openapi", (req, res) => {
     );
 });
 
-app.get("/checkUser", (req, res) => {
+app.get("/api/checkUser", (req, res) => {
     if (req.session.admin) {
         res.send({admin_id: req.session.admin['name'], admin_id_id: req.session.admin['id'], user_id: "", user_id_id: ""});
     }
@@ -575,8 +576,6 @@ app.post("/admin/hospitals_data/:zipCd", async (req, res) => {
             }
         });
         res.redirect("/admin/hospitals_data");
-    } else {
-        res.status(404).send("not found");
     }
 });
 

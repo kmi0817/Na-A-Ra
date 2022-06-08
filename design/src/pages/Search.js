@@ -57,7 +57,7 @@ function NewTest() {
             setLength(0)
             axios( {
                 method: 'get',
-                url: '/newapi?inputAddr=' + addr + '&inputType=' + type + '&inputFilter=' + filter + '&addrFilter=' + filter_addr,
+                url: 'http://220.149.235.76:3001/newapi?inputAddr=' + addr + '&inputType=' + type + '&inputFilter=' + filter + '&addrFilter=' + filter_addr,
             })
             .then(response => {
                 console.log("데이터 : " + response.data.results);
@@ -90,7 +90,7 @@ function NewTest() {
             setLength(0)
             axios( {
                 method: 'get',
-                url: '/name-search?hospital_name=' + hospital_name,
+                url: 'http://220.149.235.76:3001/name-search?hospital_name=' + hospital_name,
             })
             .then(response => {
                 console.log("데이터 받아왔어요! : " + response.data.results);

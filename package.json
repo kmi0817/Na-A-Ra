@@ -19,7 +19,7 @@
     "express-session": "^1.17.2",
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
-    "http-proxy-middleware": "^2.0.1",
+    "http-proxy-middleware": "^2.0.6",
     "jsdom": "^19.0.0",
     "marked": "^4.0.10",
     "method-override": "^3.0.0",

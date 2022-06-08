@@ -501,7 +501,7 @@ app.get("/checkUser", (req, res) => {
 
 
 // web server
-const server = app.listen(port, () => {
+const server = app.listen(3001, '220.149.235.76', () => {
     // port: 3000 app success
-    console.log("localhost on port: " + port);
+    console.log("220.149.235.76:3001");
 })

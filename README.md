@@ -1,21 +1,40 @@
 ## 나아라 NaARa
 
-### 1. Intro
+### 1. Info
  #### 사용자가 입력한 주소 인근 병원들의 자세한 정보 및 다른 사람의 평가를 고려해 본인에게 적합한 병원을 선택할 수 있는 서비스.
  
  공공데이터포털의 [건강보험심사평가원_병원정보서비스](https://www.data.go.kr/data/15001698/openapi.do)에서 제공하는 openAPI를 기반으로 제작되었으며, 
  
- [나아라](https://github.com/kmi0817/NaARa)의 Front-end를 ***React.js***로 변경한 프로젝트입니다.
+ 기존 제가 템플릿 엔진과 Express로 만들었던 풀 스택 프로젝트인 [나아라](https://github.com/kmi0817/Na-A-Ra/tree/template-engine)에서 프론트엔드 팀원이 프론트를 React로 변경한 프로젝트입니다.
 
 Field | Tools
 --- | ---
-Client **(ME)** | React.js
-Server | Node.js
+Client | React.js
+Server ***(ME)*** | Node.js
 Database | mongoDB
 Co-work | Github, Slack
 
 
-### 2. Main function
+### 2. Start
+- Server Starts (port: 3001)
+```shell
+git clone -b express-react https://github.com/kmi0817/Na-A-Ra.git
+cd Na-A-Ra
+npm install
+npm start
+```
+
+- Client Starts (port: 3000)
+```shell
+cd design
+npm start
+```
+
+### 3.Architecture
+![나아라](https://user-images.githubusercontent.com/62174395/236385060-05d5cb74-d53e-45dd-8e00-c96b906205d3.svg)
+
+
+### 4. Main function
 1) **병원 정보**
 * 주소명/병원명을 이용한 인근 병원 검색 기능
 * 검색된 병원의 상세정보 확인 기능
@@ -28,34 +47,3 @@ Co-work | Github, Slack
 3) **로그 추적**
 * 회원은 마이페이지를 통해 자신의 기록(리뷰, 신고, 게시글, 댓글) 확인 가능
 * 관리자는 관리자페이지를 통해 회원들의 기록(리뷰, 신고, 게시글, 댓글)과 병원 관리 가능
-
-
-### 3. Start
-```shell
-git clone https://github.com/YejinHwang-D/Hospital-recommendation.git
-cd Hospital-recommendation
-npm install
-npm start
-```
-server (port: 3001) start
-```shell
-cd design
-npm start
-```
-client (port: 3000) start
-
-### 4. More information
-프로젝트에 대한 더 자세한 설명은 [여기](https://rattle-show-e64.notion.site/0ff7f503634f48cf99b0282788516a2f)를 참고해주세요!
-
-
-### 5. 추가된 기획
-기존 프로젝트의 기획력이 부족했다는 생각이 들어 병원 검색 외에도 실제 서비스되었을 때 장점이 될만한 서비스를 추가하고자 디자인을 새롭게 변경함과 동시에 병원 예약 서비스를 추가로 기획.
-- 병원 사업자 등록
-    - 기존 관리자와 일반 회원으로 나뉘던 권한에서 사업자 권한을 추가합니다. 회원가입시 선택할 수 있습니다.
-- 병원 예약 서비스
-    - 병원을 검색하면 나오는 카드에서 [전화 걸기] 버튼이 [진료 예약] 버튼으로 변경됩니다. 일반 회원 로그인 후 해당 버튼을 클릭하면 진료 예약이 가능한 시간대가 출력되며, 정보 입력 후 예약 신청이 가능합니다.
-- 병원 사업자 페이지
-    - 사업자 로그인 시 일반 회원의 마이페이지에서 병원 예약 관련 탭이 추가됩니다.
-    - 병원 예약 관련 탭은 총 두가지로, 예약 신청 승인/거절 탭과 예약 스케줄링 캘린더 탭입니다.
-- 마이페이지 예약 내역
-    - 일반 회원으로 진료 예약을 신청했다면 내역을 마이페이지에서 확인할 수 있습니다. 예약이 확정됐다면 예약 내역 탭 상단에 [확정된 예약] 영역이 활성화되며 다가오는 예약을 관리할 수 있습니다.

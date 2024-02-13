@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>나아라</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        a {
+            text-decoration: none;
+            color: rgb(63, 63, 63);
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <div class="container">
+        <nav class="navbar navbar-light bg-light justify-content-between">
+            <a class="navbar-brand" href="/">나아라</a>
+            <form class="form-inline">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button"><a href="/">검색하기</a></button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        커뮤니티
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/community/clinics">상담게시판</a>
+                        <a class="dropdown-item" href="/community/questions">질문게시판</a>
+                    </div>
+                </div>
+            </form>
+        </nav>
+
+        <% if (locals.admin) { %>
+        <a href="/admin" class="btn btn-danger">관리자 페이지</a>
+        
+        <form class="d-inline" action="/logout?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-outline-danger">
+                로그아웃
+            </button>
+        </form>
+        <% } else if (locals.user) { %>
+        <button type="button" class="btn btn-success" onclick="location.href='/mypage'">마이페이지</button>
+        
+        <form class="d-inline" action="/logout?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-outline-success">
+                로그아웃
+            </button>
+        </form>
+        <% } else { %>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+            로그인
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">로그인</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/login" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="inputId" class="col-sm-2 col-form-label">아이디</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required name="inputId" class="form-control" id="inputId" placeholder="ID" minlength="5" maxlength="20">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
+                                <div class="col-sm-10">
+                                    <input type="password" required name="inputPassword" class="form-control" id="inputPassword" placeholder="Password" minlength="7">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                            <button type="submit" class="btn btn-primary">완료</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#signupModal">
+            회원가입
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="signupModalLabel">회원가입</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/signup" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="createId" class="col-sm-2 col-form-label">아이디</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required name="createId" class="form-control" id="createId" placeholder="ID" minlength="5" maxlength="20">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="createPassword" class="col-sm-2 col-form-label">비밀번호</label>
+                                <div class="col-sm-10">
+                                    <input type="password" required name="createPassword" class="form-control" id="createPassword" placeholder="Password" minlength="7">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                            <button type="submit" class="btn btn-primary">완료</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+        <div class="card mt-4">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">주소 검색</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">병원명 검색</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div class="card-body">
+                        <form method="GET">
+                            <!-- Kakao API start -->
+                            <div class="form-group row">
+                                <label for="sample4_roadAddress" class="col-sm-2 col-form-label">도로명 주소</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="inputAddr" class="form-control" id="sample4_roadAddress" placeholder="도로명주소" required>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="button" class="btn btn-outline-info" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+                                </div>
+                            </div>
+                            <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                            <script>
+                                //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+                                function sample4_execDaumPostcode() {
+                                    new daum.Postcode({
+                                        oncomplete: function (data) {
+                                            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                                            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                                            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                            var roadAddr = data.roadAddress; // 도로명 주소 변수
+                                            var extraRoadAddr = ''; // 참고 항목 변수
+
+                                            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                                                extraRoadAddr += data.bname;
+                                            }
+                                            // 건물명이 있고, 공동주택일 경우 추가한다.
+                                            if (data.buildingName !== '' && data.apartment === 'Y') {
+                                                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                                            }
+                                            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                            if (extraRoadAddr !== '') {
+                                                extraRoadAddr = ' (' + extraRoadAddr + ')';
+                                            }
+
+                                            // 주소 정보를 해당 필드에 넣는다.
+                                            document.getElementById("sample4_roadAddress").value = roadAddr;
+                                        }
+                                    }).open();
+                                }
+                            </script>
+                            <!-- Kakao API end -->
+                            <div class="form-group">
+                                <div class="row">
+                                    <legend class="col-form-label col-sm-2 pt-0">병원 종류</legend>
+                                    <div class="col-sm-8">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="이비인후과" required>
+                                            <label class="form-check-label" for="inlineRadio1">이비인후과</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="내과">
+                                            <label class="form-check-label" for="inlineRadio2">내과</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="외과">
+                                            <label class="form-check-label" for="inlineRadio3">외과</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="정형외과">
+                                            <label class="form-check-label" for="inlineRadio4">정형외과</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="안과">
+                                            <label class="form-check-label" for="inlineRadio5">안과</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio6" value="치과">
+                                            <label class="form-check-label" for="inlineRadio6">치과</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio7" value="피부과">
+                                            <label class="form-check-label" for="inlineRadio7">피부과</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio8" value="한의원">
+                                            <label class="form-check-label" for="inlineRadio8">한의원</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="inputType" type="radio" name="inlineRadioOptions" id="inlineRadio9" value="가정의학">
+                                            <label class="form-check-label" for="inlineRadio9">가정의학과</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <legend class="col-form-label col-sm-2 pt-0">검색 필터</legend>
+                                    <div class="col-sm-8">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="inputFilter" type="radio" id="inlineCheckbox1" value="all" required>
+                                            <label class="form-check-label" for="inlineCheckbox1">전체보기</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="inputFilter" type="radio" id="inlineCheckbox2" value="infant">
+                                            <label class="form-check-label" for="inlineCheckbox2">소아과 보기</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <legend class="col-form-label col-sm-2 pt-0">주소 필터</legend>
+                                    <div class="col-sm-8">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="addrFilter" type="radio" id="inlineCheckbox3" value="lo" required>
+                                            <label class="form-check-label" for="inlineCheckbox3">-로 단위</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="addrFilter" type="radio" id="inlineCheckbox4" value="gu">
+                                            <label class="form-check-label" for="inlineCheckbox4">-구 단위</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <input type="hidden" value="road_search" name="search_type">
+                                        <button type="submit" class="d-inline btn btn-info">검색</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div class="card-body">
+                        <form method="GET">
+                            <div class="form-group row">
+                                <label for="hospital_search" class="col-sm-2 col-form-label">병원 이름</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="hospital_name" class="form-control" id="hospital_search" placeholder="병원명" required>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="hidden" value="name_search" name="search_type">
+                                    <button type="submit" class="d-inline btn btn-info">검색</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <% if (results) { %>
+        <div class="card mt-4">
+            <div class="card-body">
+            <% if (Array.isArray(results)) { %>
+                <% results.forEach((result, index)=> { %>
+                <div class="row">
+                    <h4 class="col-md-8 card-title">
+                        <a href="/test/?left=<%= result.coord[1] %>&right=<%= result.coord[0] %>">
+                            <%= result.name %>
+                        </a>
+                    </h4>
+                    <button class="col-md-2 btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter<%= index %>" style="cursor: pointer">
+                        자세히 보기
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter<%= index %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle<%= index %>" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle<%= index %>">
+                                        <%= result.name %>
+                                    </h5>
+                                    <div class="text-danger" style="font-size: 0.75rem">
+                                        &#9888; 신고횟수 <%= result.reports_cnt %>
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-2">주소</div>
+                                        <div class="col-md-10">
+                                            <%= result.addr %>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">번호</div>
+                                        <div class="col-md-4">
+                                            <%= result.telno %>
+                                        </div>
+                                        <div class="col-md-2">의사 수</div>
+                                        <div class="col-md-4">
+                                            <%= result.drTotCnt %>명
+                                        </div>
+                                    </div>
+                                    <div id="map<%= index %>" style="width:100%;height:350px;"></div>
+                                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9366bbe70b91ad10596a2fbc0e5fc13b"></script>
+                                    <script>
+                                        var mapContainer = document.getElementById('map<%= index %>'), // 지도를 표시할 div 
+                                            mapOption = {
+                                                center: new kakao.maps.LatLng(<%= result.coord[1] %>, <%= result.coord[0] %>), // 지도의 중심좌표
+                                                level: 1 // 지도의 확대 레벨
+                                            };
+                                        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+                                        // 마커가 표시될 위치입니다 
+                                        var markerPosition = new kakao.maps.LatLng(<%= result.coord[1] %>, <%= result.coord[0] %>);
+                                        // 마커를 생성합니다
+                                        var marker = new kakao.maps.Marker({ position: markerPosition });
+                                        // 마커가 지도 위에 표시되도록 설정합니다
+                                        marker.setMap(map);
+                                        // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+                                        // marker.setMap(null);    
+                                    </script>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                    <% if (locals.admin) { %>
+                                    <button type="button" class="btn btn-warning text-white" onclick="alert('관리자는 병원을 신고할 수 없습니다.')">신고하기</button>
+                                    <% } else if (locals.user) { %>
+                                    <form class="d-inline" action="/report" method="POST" onsubmit="if(!confirm('한 번 신고한 내역은 취소할 수 없습니다.')) { return false; }">
+                                        <input type="hidden" name="hospital_id" value="<%= result._id %>">
+                                        <input type="hidden" name="writer_id" value="<%= user %>">
+                                        <button type="submit" class="btn btn-warning text-white">신고하기</button>
+                                    </form>
+                                    <% } %>
+                                    <a href="/reviews/<%= result._id %>" target="_blank">
+                                        <button type="button" class="btn btn-primary">리뷰 보기</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="col-md-2 btn btn-outline-success" onclick="copyHospitalName_naverAPI_popup('<%= result.name %>')">길찾기</button>
+                </div>
+                <div class="card-subtitle text-muted mb-2">
+                    <%= result.type_code %>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 card-text mb-2">
+                        주소: <%= result.addr %>
+                    </div>
+                    <div class="col-md-4 card-text mb-2">
+                        번호: <%= result.telno %>
+                    </div>
+                </div>
+                <% }); %>
+            <% } else { %>
+            <div class="card-text mb-2">
+                <h4><%= results %></h4>
+            </div>
+            <% } %>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <br>
+
+    <script>
+        function copyHospitalName_naverAPI_popup(hospital_name) {
+            navigator.clipboard.writeText(hospital_name);
+
+            let width = 1000;
+            let height = 600;
+            let top = (window.innerHeight - height) / 2 + screenY;
+            let left = (window.innerWidth - width) / 2 + screenX;
+
+            let spec = `width=${width}, height=${height}, top=${top}, left=${left}`;
+            window.open('https://map.naver.com/v5/directions/-/-/-/transit?c=14105669.4948920,4517401.3924641,9,0,0,0,dh', '네이버 지도', spec);
+        }
+
+        // get querystring and set form values as searched
+        const URLSearch = new URLSearchParams(location.search); // get querystring
+        document.getElementById("sample4_roadAddress").value = URLSearch.get("inputAddr"); // set Addr
+        // set inputType checked
+        let inputTypes = document.getElementsByName("inputType");
+        inputTypes.forEach((el) => {
+            if (el.value === URLSearch.get("inputType"))
+                el.checked = true;
+        });
+        // set inputFilter checked
+        let inputFilters = document.getElementsByName("inputFilter");
+        inputFilters.forEach((el) => {
+            if (el.value === URLSearch.get("inputFilter"))
+                el.checked = true;
+        });
+
+        let addrFilters = document.getElementsByName("addrFilter");
+        addrFilters.forEach((el) => {
+            if (el.value === URLSearch.get("addrFilter"))
+                el.checked = true;
+        });
+    </script>
+</body>
+
+</html>

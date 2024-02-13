@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>나아라</title>
+
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+        rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../css/styles.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <style>
+        a {
+            text-decoration: none;
+            color: rgb(63, 63, 63);
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <div class="container">
+        <nav class="navbar navbar-light bg-light justify-content-between">
+            <a class="navbar-brand" href="/">나아라 <%= category %></a>
+            <form class="form-inline">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button"><a href="/">검색하기</a></button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        커뮤니티
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/community/clinics">상담게시판</a>
+                        <a class="dropdown-item" href="/community/questions">질문게시판</a>
+                    </div>
+                </div>
+            </form>
+        </nav>
+
+        <% if (locals.user) { %>
+        <button type="button" class="btn btn-success" onclick="location.href='/mypage'">마이페이지</button>
+        
+        <form class="d-inline" action="/process/logout" method="POST">
+            <button type="submit" class="btn btn-outline-success">
+                로그아웃
+            </button>
+        </form>
+        <% } else { %>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+            로그인
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">로그인</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/process/login" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="inputId" class="col-sm-2 col-form-label">아이디</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required name="inputId" class="form-control" id="inputId"
+                                        placeholder="ID" minlength="5" maxlength="20">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
+                                <div class="col-sm-10">
+                                    <input type="password" required name="inputPassword" class="form-control"
+                                        id="inputPassword" placeholder="Password" minlength="7">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                            <button type="submit" class="btn btn-primary">완료</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#signupModal">
+            회원가입
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="signupModalLabel">회원가입</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/process/signup" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="createId" class="col-sm-2 col-form-label">아이디</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required name="createId" class="form-control" id="createId"
+                                        placeholder="ID" minlength="5" maxlength="20">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="createPassword" class="col-sm-2 col-form-label">비밀번호</label>
+                                <div class="col-sm-10">
+                                    <input type="password" required name="createPassword" class="form-control"
+                                        id="createPassword" placeholder="Password" minlength="7">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                            <button type="submit" class="btn btn-primary">완료</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <% } %>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5 my-4">
+            <div class="d-flex justify-content-end">
+                <a href="/community/<%= category %>-write" class="btn btn-outline-dark">작성</a>
+            </div>
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <% postings.forEach((posting, index)=> { %>
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <% if (locals.user) { %>
+                        <!-- 회원은 특정 게시글 확인 가능 -->
+                        <a href="/community/<%= category %>/<%= posting._id %>">
+                            <h2 class="post-title"><%= posting.title %></h2>
+                        </a>
+                        <% } else { %>
+                        <!-- 비회원은 게시글 확인 불가 -->
+                        <a onclick="alert('로그인이 필요한 서비스입니다.')" style="cursor:pointer">
+                            <h2 class="post-title"><%= posting.title %></h2>
+                        </a>
+                        <% } %>
+
+                        <p class="post-meta">
+                            Posted at <%= posting.created_at.toLocaleString() %>
+                        </p>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <% }) %>
+                </div>
+            </div>
+            <!-- Pager -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" id="previous">Previous</a>
+                    </li>
+                    <% for (var i = 1; i <= totalPages; i++) { %>
+                    <li class="page-item"><a class="page-link" id="page<%= i %>" href="/community/<%= category %>?page=<%= i %>"><%= i %></a></li>
+                    <% }; %>
+                    <li class="page-item">
+                        <a class="page-link" id="next">Next</a>
+                    </li>
+                    <script>
+                        const currentPage = Number(new URLSearchParams(location.search).get("page")); // 파라미터에서 현재 페이지 가져오기 (디폴트 페이지: 0)
+
+                        // 선택된 페이지 CSS 변경
+                        const page_btn = document.getElementById(`page${currentPage}`);
+                        page_btn.style.backgroundColor="rgb(0, 123, 255)";
+                        page_btn.style.color = "white";
+
+                        // previous 처리
+                        const previous_btn = document.getElementById("previous");
+                        if (currentPage == 1 || currentPage == 0) {
+                            // 첫 페이지에선 previous 비활성화
+                            previous_btn.removeAttribute("href");
+                        } else {
+                            previous_btn.href = `/community/<%= category %>?page=${currentPage - 1}`;
+                        }
+
+                        // next 처리
+                        const next_btn = document.getElementById("next");
+                        if (<%= totalPages %> > currentPage) {
+                            if (currentPage == 0) // 첫 페이지에서 next 누르면 2쪽으로 이동
+                                next_btn.href = "/community/<%= category %>?page=2";
+                            else
+                                next_btn.href = `/community/<%= category %>?page=${currentPage + 1}`;
+                        } else {
+                            // 마지막 페이지에선 next 비활성화
+                            next_btn.removeAttribute("href");
+                        }
+                    </script>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</body>
+
+</html>

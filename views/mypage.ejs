@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>나아라 - 마이페이지</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        a {
+            text-decoration: none;
+            color: rgb(63, 63, 63);
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <div class="container">
+        <h2 class="mb-4"><a href="/">나아라</a></h2>
+
+        <form class="d-inline" action="/process/logout" method="POST">
+            <button type="submit" class="btn btn-outline-success">
+                로그아웃
+            </button>
+        </form>
+
+        <!-- Modal -->
+        <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="signupModalLabel">회원가입</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/process/signup" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="createId" class="col-sm-2 col-form-label">아이디</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required name="createId" class="form-control" id="createId"
+                                        placeholder="ID" minlength="5" maxlength="20">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="createPassword" class="col-sm-2 col-form-label">비밀번호</label>
+                                <div class="col-sm-10">
+                                    <input type="password" required name="createPassword" class="form-control"
+                                        id="createPassword" placeholder="Password" minlength="7">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                            <button type="submit" class="btn btn-primary">완료</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div id="accordion" class="my-4">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            기본정보
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label for="created_at" class="col-sm-2 col-form-label">가입일시</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" id="created_at" value="<%= home_results.created_at %>">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="user_id" class="col-sm-2 col-form-label">아이디</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" id="user_id" value="<%= home_results.user_id %>">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="user_password" class="col-sm-2 col-form-label">비밀번호</label>
+                            <!-- Button trigger modal -->
+                            <button type="button" id="user_password" class="btn btn-success" data-toggle="modal" data-target="#passwordModal">
+                                비밀번호 변경
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="passwordModalLabel">비밀번호 변경</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="/mypage/change-password?_method=PATCH" method="POST">
+                                            <div class="modal-body">
+                                                <div class="form-group row">
+                                                    <label for="input_id" class="col-sm-4 col-form-label">아이디</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" required name="input_id" class="form-control" id="input_id" placeholder="ID" minlength="5" maxlength="20">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="old_password" class="col-sm-4 col-form-label">기존 비밀번호</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="password" required name="old_password" class="form-control" id="old_password" minlength="7">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="new_password" class="col-sm-4 col-form-label">새 비밀번호</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="password" required name="new_password" class="form-control" id="new_password" minlength="7">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="new_password_check" class="col-sm-4 col-form-label">새 비밀번호 확인</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="password" required name="new_password_check" class="form-control" id="new_password_check" minlength="7">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                                                <button type="submit" id="submit_btn" class="btn btn-primary" disabled>완료</button>
+                                            </div>
+                                        </form>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $("#new_password_check").on("keyup", function () {
+                                                    if ($("#new_password").val() === $(this).val()) {
+                                                        document.getElementById("submit_btn").disabled = false;
+                                                    } else {
+                                                        document.getElementById("submit_btn").disabled = true;
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="withdrawal" class="col-sm-2 col-form-label">회원탈퇴</label>
+                            <!-- Button trigger modal -->
+                            <button type="button" id="withdrawal" class="btn btn-danger" data-toggle="modal" data-target="#withdrawalModal">
+                                탈퇴하기
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="withdrawalModal" tabindex="-1" role="dialog" aria-labelledby="withdrawalModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="withdrawalModalLabel">회원 탈퇴하기</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="/mypage/withdrawal?_method=DELETE" method="POST" onsubmit="if(!confirm('회원을 탈퇴하시겠습니까?')) {return false; }">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <p>회원 탈퇴를 희망하시면 아래 본인 아이디와 비밀번호를 입력해주세요.</p>
+                                                    <p>회원 탈퇴 시 동일한 아이디로 가입이 불가능합니다.</p>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="withdrawal_id" class="col-sm-3 col-form-label">아이디</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" required name="withdrawal_id" class="form-control" id="withdrawal_id" placeholder="ID" minlength="5" maxlength="20">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="withdrawal_password" class="col-sm-3 col-form-label">비밀번호</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="password" required name="withdrawal_password" class="form-control" id="withdrawal_password" minlength="7">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="hidden" name="_id" value="<%= home_results._id %>">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                                                <button type="submit" class="btn btn-primary">완료</button>
+                                            </div>
+                                        </form>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $("#new_password_check").on("keyup", function () {
+                                                    if ($("#new_password").val() === $(this).val()) {
+                                                        document.getElementById("submit_btn").disabled = false;
+                                                    } else {
+                                                        document.getElementById("submit_btn").disabled = true;
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            내가 단 리뷰
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">병원이름</th>
+                                    <th scope="col">내용</th>
+                                    <th scope="col">날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% reviews_results.forEach((review, index) => { %>
+                                <tr>
+                                    <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
+                                    <td style="font-size: 0.8rem"><a href="/reviews/<%= review.hospital_id[0]._id %>"><%= review.hospital_id[0].name %></a></td>
+                                    <td style="font-size: 0.8rem"><%= review.description %></td>
+                                    <td style="font-size: 0.8rem"><%= review.created_at.toLocaleString() %></td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                            aria-expanded="false" aria-controls="collapseThree">
+                            내가 신고한 병원
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">병원이름</th>
+                                    <th scope="col">날짜</th>
+                                    <th scope="col">승인여부</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% reports_results.forEach((report, index) => { %>
+                                <tr>
+                                    <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
+                                    <td style="font-size: 0.8rem"><a href="/reviews/<%= report.hospital_id[0]._id %>"><%= report.hospital_id[0].name %></a></td>
+                                    <td style="font-size: 0.8rem"><%= report.created_at.toLocaleString() %></td>
+                                    <td style="font-size: 0.8rem"><%= report.is_confirmed %></td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour"
+                            aria-expanded="false" aria-controls="collapseFour">
+                            내가 작성한 게시글
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">내용</th>
+                                    <th scope="col">날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% communities_results.forEach((community, index)=> { %>
+                                    <tr>
+                                        <th scope="row" style="font-size: 0.8rem">
+                                            <%= index + 1 %>
+                                        </th>
+                                        <td style="font-size: 0.8rem"><a href="/community/<%= community.community %>/<%= community._id %>">
+                                                <%= community.title %>
+                                            </a></td>
+                                        <td style="font-size: 0.8rem">
+                                            <%= community.description %>
+                                        </td>
+                                        <td style="font-size: 0.8rem">
+                                            <%= community.created_at.toLocaleString() %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingFive">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive"
+                            aria-expanded="false" aria-controls="collapseFive">
+                            내가 작성한 댓글
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">게시글 제목</th>
+                                    <th scope="col">내용</th>
+                                    <th scope="col">날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% comments_results.forEach((comment, index)=> { %>
+                                    <tr>
+                                        <th scope="row" style="font-size: 0.8rem">
+                                            <%= index + 1 %>
+                                        </th>
+                                        <td style="font-size: 0.8rem"><a href="/community/<%= comment.posting[0].community %>/<%= comment.posting[0]._id %>">
+                                                <%= comment.posting[0].title %>
+                                            </a></td>
+                                        <td style="font-size: 0.8rem">
+                                            <%= comment.description %>
+                                        </td>
+                                        <td style="font-size: 0.8rem">
+                                            <%= comment.created_at.toLocaleString() %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

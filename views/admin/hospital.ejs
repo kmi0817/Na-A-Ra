@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>admin</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .info-table {
+            -webit-box-flex: 1;
+            flex: 1 1 auto;
+            margin: 0;
+            color: #212529;
+            text-align: left;
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        .info-table td {
+            border: 1px solid rgba(0,0,0,.125);
+            padding: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="mb-4"><a href="/admin">Admin</a></h2>
+        <h1 class="mb-1"><%= results.name %></h1>
+        <div class="row text-muted mb-2">
+            <div class="col"><%= results.type_code %></div>
+            <div class="col"><%= results.hospUrl %></div>
+            <div class="col">[<%= results.coord %>]</div>
+        </div>
+        <div class="card-text mb-2">
+            <br>
+            <table class="info-table">
+                <tr>
+                    <td>주소</td>
+                    <td colspan="3"><%= results.addr %> <%= results.postNo %></td>
+                </tr>
+                <tr>
+                    <td>전화번호</td>
+                    <td><%= results.telno %></td>
+                    <td>개설일자</td>
+                    <td><%= results.estbDd %></td>
+                </tr>
+                <tr>
+                    <td class="text-danger">신고횟수</td>
+                    <td class="text-danger"><%= results.reports_cnt %></td>
+                    <td>의사총수</td>
+                    <td><%= results.drTotCnt %></td>
+                </tr>
+                <tr>
+                    <td>의과일반의 인원수</td>
+                    <td><%= results.mdeptGdrCnt %></td>
+                    <td>의과인턴 인원수</td>
+                    <td><%= results.mdeptIntnCnt %></td>
+                </tr>
+                <tr>
+                    <td>의과레지던트 인원수</td>
+                    <td><%= results.mdeptResdntCnt %></td>
+                    <td>의과전문의 인원수</td>
+                    <td><%= results.mdeptSdrCnt %></td>
+                </tr>
+                <tr>
+                    <td>치과일반의 인원수</td>
+                    <td><%= results.detyGdrCnt %></td>
+                    <td>치과인턴 인원수</td>
+                    <td><%= results.detyIntnCnt %></td>
+                </tr>
+                <tr>
+                    <td>치과레지던트 인원수</td>
+                    <td><%= results.detyResdntCnt %></td>
+                    <td>치과전문의 인원수</td>
+                    <td><%= results.detySdrCnt %></td>
+                </tr>
+                <tr>
+                    <td>한방일반의 인원수</td>
+                    <td><%= results.cmdcGdrCnt %></td>
+                    <td>한방인턴 인원수</td>
+                    <td><%= results.cmdcIntnCnt %></td>
+                </tr>
+                <tr>
+                    <td>한방레지던트 인원수</td>
+                    <td><%= results.cmdcResdntCnt %></td>
+                    <td>한방전문의 인원수</td>
+                    <td><%= results.cmdcSdrCnt %></td>
+                </tr>
+            </table>
+        </div>
+        <a href="/admin/hospitals" class="btn btn-outline-dark">이전 페이지</a>
+        <a href="/admin/hospitals/<%= results._id %>" class="btn btn-outline-info">수정</a>
+        <form action="/admin/hospitals/<%= results._id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="if(!confirm('해당 병원 데이터를 삭제하시겠습니까?')){return false;}">
+            <button type="submit" class="btn btn-outline-danger">삭제</button>
+        </form>
+    </div>
+</body>
+
+</html>

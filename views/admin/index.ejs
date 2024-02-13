@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>나아라 - admin</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <br>
+    <div class="container">
+        <h2 class="mb-4"><a href="/admin">관리자 페이지</a></h2>
+        <a href="/" class="btn btn-dark">메인 페이지</a>
+        <a href="/admin/hospitals" class="btn btn-info">데이터베이스</a>
+
+        <br>
+        <div id="accordion" class="my-4">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            회원관리
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">아이디</th>
+                                    <th scope="col">가입일시</th>
+                                    <th scope="col">관리자 여부</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% users.forEach((user, index) => { %>
+                                <tr>
+                                    <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
+                                    <td style="font-size: 0.8rem"><a href="#" onclick="window.open('/admin/users/<%= user._id %>', '_blank', 'width=600 height=600')"><%= user.user_id %></a></td>
+                                    <td style="font-size: 0.8rem"><%= user.created_at %></td>
+                                    <td style="font-size: 0.8rem"><%= user.is_admin %></td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="false" aria-controls="collapseTwo">
+                            병원신고 현황
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">병원이름</th>
+                                    <th scope="col">위치</th>
+                                    <th scope="col">#신고횟수</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% hospitals.forEach((hospital, index) => { %>
+                                <tr>
+                                    <th style="font-size: 0.8rem"><%= index + 1 %></th>
+                                    <th style="font-size: 0.8rem"><a href="/admin/hospitals/<%= hospital._id %>"><%= hospital.name %></a></th>
+                                    <th style="font-size: 0.8rem"><%= hospital.sidoCdNm %> <%= hospital.sgguCdNm %></th>
+                                    <th scope="row" style="font-size: 0.8rem"><%= hospital.reports_cnt %></th>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        병원신고 접수관리 (영수증 확인)
+                    </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">병원이름</th>
+                                    <th scope="col">위치</th>
+                                    <th scope="col">신고정보</th>
+                                    <th scope="col">영수증 인증</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% reports.forEach((report, index) => { %>
+                                <tr>
+                                    <th scope="row" style="font-size: 0.8rem"><%= index + 1 %></th>
+                                    <th style="font-size: 0.8rem"><a href="/admin/hospitals/<%= report.hospital_id[0]._id %>"><%= report.hospital_id[0].name %></a></th>
+                                    <th style="font-size: 0.8rem"><%= report.hospital_id[0].sidoCdNm %> <%= report.hospital_id[0].sgguCdNm %></th>
+                                    <th style="font-size: 0.8rem"><%= report.writer_id[0].user_id %> <span class="text-muted"><%= report.created_at.toLocaleString() %></span></th>
+                                    <th style="font-size: 0.8rem">
+                                        <form class="d-inline" action="/admin/confirm-report?_method=PATCH" method="POST">
+                                            <input type="hidden" name="report_id" value="<%= report._id %>">
+                                            <input type="hidden" name="hospital_id" value="<%= report.hospital_id[0]._id %>">
+                                            <button class="btn btn-outline-danger btn-sm" type="submit">인증하기</button>
+                                        </form>
+                                    </th>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</body>
+</html>

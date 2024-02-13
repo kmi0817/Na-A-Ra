@@ -1,0 +1,47 @@
+#inputId {
+    border: 1vw solid white;
+    width: 15vw;
+    height: 3vw;
+    margin: 0.5vw;
+    max-width: 100px;
+    max-height: 10px;
+    border-radius: 1vw;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+}
+
+#inputPassword {
+    border: 1vw solid white;
+    width: 20vw;
+    height: 3vw;
+    margin: 0.5vw;
+    max-width: 130px;
+    max-height: 10px;
+    border-radius: 1vw;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+}
+
+#createId {
+    border: 1vw solid rgb(232, 240, 254);
+    width: 15vw;
+    height: 3vw;
+    margin: 0.5vw;
+    max-width: 150px;
+    max-height: 20px;
+    border-radius: 1vw;
+}
+
+#createPassword {
+    border: 1vw solid rgb(232, 240, 254);
+    width: 20vw;
+    height: 3vw;
+    margin: 0.5vw;
+    max-width: 200px;
+    max-height: 20px;
+    border-radius: 1vw;
+}
+
+.signForm {
+    text-align: center;
+    margin: 5vh;
+    position: relative;
+}

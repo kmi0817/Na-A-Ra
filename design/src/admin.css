@@ -1,0 +1,187 @@
+.ACBTN {
+    width: 7vh;
+    height: 3.5vh;
+    float: right;
+    border:none;
+    border-radius: 1vh;
+    background-color: #809FFF;
+    color:white;
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
+    margin-left: 5vh;
+}
+
+.REBTN {
+    width: 7vh;
+    height: 3.5vh;
+    float: right;
+    border:none;
+    border-radius: 1vh;
+    background-color: #f08484;
+    color:white;
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
+    margin-right: 5vh;
+}
+
+.admin_report_data {
+    margin: 0 3vh;
+    float: right;
+}
+
+
+
+.admin_table {
+    border: none;
+    display: inline-block;
+    margin-top: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 0%);
+    border-radius: 1vh;
+    text-align: center;
+    position: relative;
+}
+
+.admin_table .td0 {
+    background-color: #f7f7fb;
+    width: 15vh;
+    height: 6vh;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.admin_table td {
+    border: none;
+    width: 50vh;
+}
+
+
+.admin_table th {
+    font-weight: normal;
+}
+
+.admin_table .admin_td0 {
+    width: 15vh;
+    font-weight: normal;
+}
+
+.admin_table .admin_td1 {
+    width: 50vh;
+    text-align: left;
+}
+
+.admin_table .admin_td2 {
+    width: 50vh;
+    height: 5vh;
+    text-align: left;
+    color: #888888;
+}
+
+.admin_table .admin_td3 {
+    width: 20vh;
+    text-align: left;
+}
+
+/* User Reviews */
+.admin_table .adminReview_td0 {
+    width: 15vh;
+    font-weight: normal;
+}
+
+.admin_table .adminReview_td1 {
+    width: 30vh;
+    text-align: left;
+}
+
+.admin_table .adminReview_td2 {
+    width: 60vh;
+    height: 5vh;
+    text-align: left;
+}
+
+.admin_table .adminReview_td3 {
+    width: 40vh;
+    text-align: left;
+    color: #888888;
+}
+
+/* Admin Reports */
+.admin_table .adminReport_td0 {
+    width: 15vh;
+    font-weight: normal;
+}
+
+.admin_table .adminReport_td1 {
+    width: 40vh;
+    text-align: left;
+}
+
+.admin_table .adminReport_td2 {
+    width: 30vh;
+    height: 5vh;
+    text-align: left;
+}
+
+.admin_table .adminReport_td3 {
+    width: 40vh;
+    text-align: left;
+    color: #888888;
+}
+
+.admin_table .admin_date {
+    width: 40vh;
+    height: 5vh;
+    text-align: left;
+    color: #888888;
+}
+
+.admin_table .adminComments_desc {
+    width: 70vh;
+    text-align: left;
+}
+
+.signuser{
+    margin: 0 5vh 0 7vh;
+    float: right;
+    background-color: #809FFF;
+    color: white;
+    border-radius: 1vh;
+    border: 3px solid #809FFF;
+    font-size: 14px;
+}
+
+.admin {
+    margin: 0 5vh 0 7vh;
+    float: right;
+    background-color: #f08484;
+    color: white;
+    border-radius: 1vh;
+    border: 3px solid #f08484;
+    font-size: 14px;
+}
+
+.ACBTN_check {
+    display: inline-block;
+    width: 7vh;
+    height: 3.5vh;
+    border:none;
+    border-radius: 1vh;
+    background-color: #809FFF;
+    color:white;
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
+}
+
+.REBTN_check {
+    display: inline-block;
+    width: 7vh;
+    height: 3.5vh;
+    border:none;
+    border-radius: 1vh;
+    background-color: #f08484;
+    color:white;
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
+}
+
+.admin_table .adminBtn_td3 {
+    text-align: center;
+    width: 30vh;
+}

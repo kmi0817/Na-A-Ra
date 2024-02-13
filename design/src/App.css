@@ -1,0 +1,460 @@
+html {
+  scroll-behavior: smooth;
+  text-align: center;
+}
+
+body {
+  padding-top: 10vh;
+  /*font-family: "Pretendard";*/
+  font-family: "LeferiBaseType-RegularA";
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10vh;
+  padding: 0 2rem 0 2rem;
+
+  font-size: max(1vw, 12px);
+  color: white;
+  background: #809FFF;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.MainBackground {
+  background-color: #f7f7fb;
+}
+
+.menuText {
+  float: left;
+}
+
+.menu {
+  margin: 0;
+  padding: 0;
+  background: white;
+  color: #809FFF;
+  text-align: center;
+  border-radius: 1vh;
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
+}
+
+.menu li {
+  margin: 1.5vh 0 1.5vh 0;
+  display: inline-block;
+}
+
+.menu #HeaderSignin, #HeaderSignup {
+  margin: 1.5vh 2.5vh 1.5vh 2.5vh;
+  display: inline-block;
+  cursor: pointer;
+  color: #5f87ff;
+}
+
+ul, li {
+  list-style: none;
+}
+
+.MainTopDiv {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15vh;
+  background: #809FFF;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  /*border-radius: 0 0 3vh 3vh;*/
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
+}
+
+.MainTopSpan {
+  position: relative;
+  display: block;
+  top: 5vh;
+  font-size: 20px;
+  font-weight: 600;
+  animation: fadeIn 1s both;
+  font-family: 'LeferiPoint-BlackObliqueA';
+}
+
+.MainTopSpan-1 {
+  position: relative;
+  display: block;
+  top: 5vh;
+  font-size: 32px;
+  font-weight: 600;
+  animation: fadeIn 1s both;
+  font-family: 'LeferiPoint-BlackObliqueA';
+}
+
+.MainTopSpan-2 {
+  position: relative;
+  top: 5vh;
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  animation: fadeIn 1s both;
+  font-family: 'LeferiPoint-BlackObliqueA';
+}
+
+.MainTopSpanSub {
+  position: relative;
+  display: block;
+  top: 5vh;
+  font-size: 14px;
+  font-weight: 600;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.MainTopSpan2 {
+  position: relative;
+  display: block;
+  top: 7vh;
+  font-size: 14px;
+  font-weight: 600;
+  animation: fadeIn 1s both;
+}
+
+.MainTopBtn {
+  position: relative;
+  top: 6vh;
+  width: 15vh;
+  height: 3vh;
+  border: none;
+  background: white;
+  color: #809FFF;
+  border-radius: 2vh;
+  cursor: pointer;
+  animation: fadeIn 1s;
+}
+
+.MainTopSearchDiv {
+  position: relative;
+  text-align: center;
+  top: -2vh;
+}
+
+.MainTopSearchDiv .MainTopSelect {
+  width: 12vh;
+  height: 6vh;
+  border: none;
+  border-radius: 1vh;
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
+  color: #777777;
+  text-align: center;
+}
+
+.MainTopSubDiv {
+  display: inline-block;
+  background: white;
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
+  border-radius: 1vh;
+  margin-left: 0.5vh;
+}
+
+.MainTopSearchDiv input {
+  width: 35vh;
+  height: 4vh;
+  border: 1vh solid white;
+  border-radius: 1vh;
+  color: #777777;
+}
+
+.MainTopSearchDiv input:focus {
+  width: 35vh;
+  height: 4vh;
+  border: 1vh solid white;
+  border-radius: 1vh;
+  outline: none;
+  color: #809FFF;
+  font-weight: bold;
+}
+
+.MainTopSearchDiv button {
+  width: 20vh;
+  height: 5vh;
+  border: none;
+  background: white;
+  border-radius: 1vh;
+  margin-left: 0.5vh;
+  color: #809FFF;
+}
+
+.MainTopSearchDiv button:active {
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
+}
+
+.MainSelection {
+
+}
+
+.MainSelection span {
+  display: block;
+}
+
+.MainSelection img {
+  margin-bottom: 1vh;
+}
+
+.MainSelection button {
+  width: 18vw;
+  min-width: 100px;
+  max-width: 270px;
+  height: 30vh;
+  margin: 3vh;
+  border: none;
+  border-radius: 2vh;
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
+  color: #7094ff;
+  background-color: white;
+  font-weight: bold;
+  cursor : pointer;
+  overflow: hidden;
+
+  transition : .2s;
+  animation: fadeIn 0.7s ease-in-out;
+
+  position: relative;
+  top: 5vh;
+  z-index: 1;
+}
+
+.MainSelection .search_btn {
+  background: linear-gradient(140deg, #73D4FF,#809FFF);
+  color: white;
+}
+
+.MainSelection button:hover {
+  width: 20vw;
+  height: 32vh;
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
+}
+
+.MainSelection .search_btn:hover {
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
+}
+
+
+.MainMidDiv {
+  position: relative;
+  display: inline-block;
+  top: 10vh;
+  width: 65vw;
+  height: 45vh;
+  background: white;
+  text-align: center;
+  border: 20px solid white;
+  border-radius: 2vh;
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
+  overflow: hidden;
+  transition : .2s;
+  animation: fadeIn 0.7s ease-in-out;
+  font-family: "LeferiBaseType-RegularA";
+  overflow: auto;
+}
+
+.MainMidDiv:hover {
+  width: 67vw;
+  height: 46vh;
+  border-color: white;
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
+}
+
+
+
+.MainMidDiv span {
+  display: block;
+  position: relative;
+  top: 8vh;
+  font-size: 0.9em;
+  animation: fadeIn 1s both;
+}
+
+.MainMidDiv .MidText {
+  position: relative;
+  top: 6vh;
+  font-size: 1.3em;
+  animation: fadeIn 1s both;
+  font-family: "LeferiBaseType-RegularA";
+  font-weight: bold;
+}
+
+.MainMidDiv .MidTextEnd {
+  top: 14vh;
+  color: #777777;
+  font-size: 0.8em;
+}
+
+.MainMidDiv button {
+  position: relative;
+  top: 16vh;
+  width: 12vh;
+  height: 5vh;
+  background: #809FFF;
+  color: white;
+  border-radius: 1vh;
+  border: none;
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
+  cursor: pointer;
+  animation: fadeIn 1s both;
+}
+
+.MainMidDiv button:active {
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
+}
+
+.MoveBtn {
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
+  cursor: pointer;
+}
+
+.MoveBtn:hover {
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
+}
+
+.mainPageLink {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+.footer {
+  /*position: fixed;*/
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10vh;
+  padding: 0 2rem 0 2rem;
+
+  font-size: max(1vw, 12px);
+  color: white;
+  background: #809FFF;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  border-radius: 3vh 3vh 0 0;
+
+  margin-top: 20vh;
+}
+
+.footerText {
+  font-size: max(1vw, 10px);
+}
+
+/* Error Page css */
+.errorsection {
+  text-align: center;
+}
+
+
+/* Intro css */
+.IntroBtnDiv {
+  text-align: center;
+  margin: 5vh 0 10vh 0;
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+.IntroBtnDiv button {
+  width: 20vh;
+  height: 5vh;
+  border: none;
+  background: white;
+  border-radius: 1vh;
+  margin-left: 0.5vh;
+  color: #809FFF;
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
+  cursor: pointer;
+}
+
+
+.IntroBtnDiv button:active {
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
+}
+
+.IntroMoveText {
+  color: #809FFF;
+}
+
+.IntroMainDiv {
+  display: inline-block;
+  width: 70%;
+  height: 40vh;
+  background-color: white;
+  text-align: center;
+  margin-top: 8vh;
+  border-radius: 3vh;
+  padding: 3vh;
+  animation: fadeIn 0.7s ease-in-out;
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 8%);
+  position: relative;
+  z-index: 10;
+}
+
+.IntroMainDiv:hover {
+  box-shadow: 0.6em 0.6em 1.2em rgb(128 159 255 / 10%);
+}
+
+.IntroMainText {
+  white-space: pre-wrap;
+}
+
+.IntroMainTextEng {
+  font-family: "Nunito";
+  white-space: pre-wrap;
+}
+
+
+
+
+
+/* font setting */
+@font-face {
+  font-family: Pretendard;
+  src: url("./fonts/Pretendard-Medium.ttf");
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url("./fonts/Nunito-Light.ttf");
+}
+
+@font-face {
+  font-family: 'LeferiBaseType-RegularA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiBaseType-RegularA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'LeferiPoint-BlackObliqueA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackObliqueA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 3;
+    transform: none;
+  }
+}
+
+@keyframes AnimationName {
+  0% {background-position: 0% 50%}
+  50% {background-position: 100% 50%}
+  100% {background-position: 0% 50%}
+}

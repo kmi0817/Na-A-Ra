@@ -1,0 +1,80 @@
+
+/* 메인페이지 css */
+.MainImg {
+    position: relative;
+    top: 11vh;
+    width: 2vw;
+    min-width: 30px;
+    animation: fadeIn 1s both;
+  }
+  
+.MainBackImg {
+    position: absolute;
+    z-index: -1;
+    top: 300px;
+    left: 0;
+    width: 100%;
+    opacity: 60%;
+    display: none;
+}
+
+.MainBtnImg_color {
+    width: 2vw;
+    max-width: 50px;
+    filter: invert(62%) sepia(48%) saturate(2321%) hue-rotate(198deg) brightness(101%) contrast(101%);
+}
+
+.WriteBtnImg_color{
+    width: 1.3vw;
+    min-width: 15px;
+    max-width: 30px;
+    margin: 5px;
+    filter: invert(76%) sepia(4%) saturate(11%) hue-rotate(351deg) brightness(81%) contrast(85%);
+}
+
+.MainBtnImg_white {
+    width: 2vw;
+    max-width: 50px;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(61deg) brightness(106%) contrast(101%);
+}
+
+
+/* 커뮤니티 선택 페이지 */
+.boardBack {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-height: 100%;
+    opacity: 50%;
+}
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  
+    to {
+      opacity: 3;
+      transform: none;
+    }
+  }
+
+  .MainHeaderImg {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 25vh;
+    z-index: 0;
+  }
+
+  .MainHeaderImg2 {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
+    transform: scale(-1);
+  }

@@ -1,0 +1,308 @@
+.MypageBackground {
+    background-color: #f7f7fb;
+}
+
+.mypage_Area {
+    margin: 5vh;
+}
+
+.mypage_AreaBtn {
+    width: 15vw;
+    height: 3vw;
+    margin: 0.5vw;
+    border: none;
+    text-align: center;
+    border-radius: 1vh;
+    background-color: white;
+    box-shadow: 1px 1px 7px 1px rgb(128 159 255 / 10%);
+}
+
+.mypage_AreaBtn:active {
+    box-shadow: 2px 3px 7px 3px rgb(128 159 255 / 10%);
+}
+
+.mypage_AreaBtnActive {
+    width: 15vw;
+    height: 3vw;
+    margin: 0.5vw;
+    border: none;
+    text-align: center;
+    border-radius: 1vh;
+    background-color: #809FFF;
+    color: white;
+    box-shadow: 1px 1px 7px 1px rgb(128 159 255 / 10%);
+}
+
+.mypage_AreaBtnActive:active {
+    box-shadow: 2px 3px 7px 3px rgb(128 159 255 / 10%);
+}
+
+
+/* Privacy Area Component */
+.privacy_Div {
+    display: inline-block;
+    width: 70%;
+    height: 40vh;
+    border: 20px solid white;
+    border-radius: 2vh;
+    background-color: white;
+    box-shadow: 3px 4px 10px 3px rgb(128 159 255 / 10%);
+}
+
+
+
+
+
+
+
+/* Review Area Component */
+.review_Div {
+    display: inline-block;
+    width: 70%;
+    min-height: 300px;
+    border-radius: 2vh;
+    background-color: white;
+    border: 20px solid white;
+    box-shadow: 3px 4px 10px 3px rgb(128 159 255 / 10%);
+    overflow: auto;
+    text-align: center;
+}
+
+.review_comment_div {
+    margin: 2vh;
+}
+
+.comment_No {
+    margin: 3vh;
+}
+
+.comment_Desc {
+    margin: 3vh;
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.comment_Data {
+    margin: 0 3vh;
+    float: right;
+}
+
+.comment_btn_yes {
+    margin: 0 5vh 0 7vh;
+    float: right;
+    background-color: #809FFF;
+    color: white;
+    border-radius: 1vh;
+    border: 3px solid #809FFF;
+    font-size: 14px;
+}
+
+.comment_btn_no {
+    margin: 0 5vh 0 7vh;
+    float: right;
+    background-color: #f08484;
+    color: white;
+    border-radius: 1vh;
+    border: 3px solid #f08484;
+    font-size: 14px;
+}
+
+
+
+/* None Area Component */
+.non_Div {
+    display: inline-block;
+    width: 70%;
+    height: 50vh;
+    border: 20px solid white;
+    border-radius: 2vh;
+    background-color: white;
+    box-shadow: 3px 4px 10px 3px rgb(128 159 255 / 10%);
+    overflow: hidden;
+}
+
+.non_img {
+    position: relative;
+    top: 13vh;
+    width: 5vw;
+    max-width: 40px;
+    filter: invert(74%) sepia(20%) saturate(19%) hue-rotate(334deg) brightness(85%) contrast(82%);
+}
+
+.non_text {
+    position: relative;
+    top: 13vh;
+    color: #a1a1a1;
+}
+
+.withdrawalBtn {
+    width: 10vw;
+    height: 5vh;
+    border: none;
+    background-color: #e94848;
+    color: white;
+    border-radius: 1vw;
+    margin: 1vw;
+    margin-top: 1vw;
+    max-width: 70px;
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
+}
+
+.privacy_img {
+    position: relative;
+    top: 1vh;
+    width: 4vw;
+    min-width: 30px;
+    max-width: 40px;
+    filter: invert(74%) sepia(20%) saturate(19%) hue-rotate(334deg) brightness(85%) contrast(82%);
+}
+
+.privacy_text {
+    position: relative;
+}
+
+.privacy_contents {
+    position: relative;
+    top: 5vh;
+    text-align: center;
+}
+
+.privacy_contents_text {
+    margin: 0 5vh;
+}
+
+.privacy_changePWD {
+    width: 20vw;
+    height: 5vh;
+    border: none;
+    background-color: #809FFF;
+    color: white;
+    border-radius: 1vw;
+    margin: 1vw;
+    margin-top: 1vw;
+    max-width: 100px;
+    box-shadow: 0.3em 0.3em 1.2em rgb(128 159 255 / 8%);
+}
+
+
+.privacy_btnDiv {
+    text-align: center;
+}
+
+.mypage_table {
+    border: none;
+    display: inline-block;
+    margin-top: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 8%);
+    border-radius: 1vh;
+    text-align: center;
+    position: relative;
+    top: -3vh;
+}
+
+.mypage_table .td0 {
+    background-color: #f7f7fb;
+    width: 15vh;
+    height: 6vh;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.mypage_table td {
+    border: none;
+    width: 50vh;
+}
+
+.mypageReports_table {
+    border: none;
+    display: inline-block;
+    margin-top: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-shadow: 0.3em 0.3em 1.2em rgb(0 0 0 / 0%);
+    border-radius: 1vh;
+    text-align: center;
+    position: relative;
+}
+
+.mypageReports_table th {
+    font-weight: normal;
+}
+
+.mypageReports_table .td0 {
+    width: 10vh;
+    font-weight: normal;
+}
+
+.mypageReports_table .td1 {
+    width: 40vh;
+}
+
+.mypageReports_table .td2 {
+    width: 40vh;
+    height: 5vh;
+}
+
+.mypageReports_table .td3 {
+    width: 20vh;
+    color: #888888;
+}
+
+/* review */
+.mypageReports_table .review_td0 {
+    width: 15vh;
+    font-weight: normal;
+}
+
+.mypageReports_table .review_td1 {
+    width: 60vh;
+    text-align: left;
+}
+
+.mypageReports_table .review_td2 {
+    width: 50vh;
+    height: 5vh;
+    text-align: left;
+    color: #888888;
+}
+
+/* board */
+.mypageReports_table .board_td0 {
+    width: 15vh;
+    font-weight: normal;
+}
+
+.mypageReports_table .board_td1 {
+    width: 20vh;
+}
+
+.mypageReports_table .board_td2 {
+    width: 40vh;
+    height: 5vh;
+    text-align: left;
+}
+
+.mypageReports_table .board_td3 {
+    width: 40vh;
+    text-align: left;
+    color: #888888;
+}
+
+/* comments */
+.mypageReports_table .comments_td0 {
+    width: 15vh;
+    font-weight: normal;
+}
+
+.mypageReports_table .comments_td1 {
+    width: 60vh;
+    text-align: left;
+}
+
+.mypageReports_table .comments_td2 {
+    width: 40vh;
+    height: 5vh;
+    text-align: left;
+    color: #888888;
+}
